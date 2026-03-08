@@ -69,3 +69,18 @@ Google Analytics is integrated. Replace `GA_MEASUREMENT_ID` in `index.html` with
 - React Router (navigation)
 - CSS custom properties
 - Google Analytics (free tier)
+
+## To-Do
+
+- Add image files to `public/images/` with the following filenames:
+  - hero-image-1.jpg
+  - hero-image-2.jpg
+  - hero-image-3.jpg
+  - studio.jpg
+  - project-1.jpg to project-7.jpg
+  - testimonial-1.jpg to testimonial-3.jpg
+  - studio-about.jpg
+- Replace placeholder images with actual portfolio images
+- Update Google Analytics measurement ID in `index.html`
+- Deploy to production (AWS S3 + CloudFront as described above)
+- Test all links and functionality

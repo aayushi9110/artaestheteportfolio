@@ -91,9 +91,9 @@ const Home = () => {
         </div>
         <div className="hero-r">
           <div className="h-img-grid">
-            <div className="h-img"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80" alt="" className="prlx" data-s=".04"/></div>
-            <div className="h-img"><img src="https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=700&q=80" alt="" className="prlx" data-s=".07"/></div>
-            <div className="h-img"><img src="https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?w=700&q=80" alt="" className="prlx" data-s=".03"/></div>
+            <div className="h-img"><img src="/images/hero-image-1.jpg" alt="" className="prlx" data-s=".04"/></div>
+            <div className="h-img"><img src="/images/hero-image-2.jpg" alt="" className="prlx" data-s=".07"/></div>
+            <div className="h-img"><img src="/images/hero-image-3.jpg" alt="" className="prlx" data-s=".03"/></div>
           </div>
         </div>
       </section>
@@ -119,7 +119,7 @@ const Home = () => {
 
       <section className="philosophy" id="about-strip">
         <div className="ph-img rl">
-          <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=900&q=80" alt="Studio"/>
+          <img src="/images/studio.jpg" alt="Studio"/>
         </div>
         <div className="ph-content rr">
           <span className="sec-label">Our Philosophy</span>
@@ -147,7 +147,7 @@ const Home = () => {
         <div className="port-grid" id="hPortGrid">
           <div className="pi" data-cat="interior" data-proj="amber" onClick={() => goProject('amber')}>
             <div className="pi-img">
-              <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?w=900&q=80" alt=""/>
+              <img src="/images/project-1.jpg" alt=""/>
             </div>
             <div className="pi-ov">
               <span className="pi-cat">Interior Design</span>
@@ -161,7 +161,7 @@ const Home = () => {
           </div>
           <div className="pi" data-cat="art" data-proj="earth" onClick={() => goProject('earth')}>
             <div className="pi-img">
-              <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=900&q=80" alt=""/>
+              <img src="/images/project-2.jpg" alt=""/>
             </div>
             <div className="pi-ov">
               <span className="pi-cat">Fine Art Curation</span>
@@ -175,7 +175,7 @@ const Home = () => {
           </div>
           <div className="pi" data-cat="interior" data-proj="nordic" onClick={() => goProject('nordic')}>
             <div className="pi-img">
-              <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=700&q=80" alt=""/>
+              <img src="/images/project-3.jpg" alt=""/>
             </div>
             <div className="pi-ov">
               <span className="pi-cat">Interior Design</span>
@@ -189,7 +189,7 @@ const Home = () => {
           </div>
           <div className="pi" data-cat="art" data-proj="sienna" onClick={() => goProject('sienna')}>
             <div className="pi-img">
-              <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=700&q=80" alt=""/>
+              <img src="/images/project-4.jpg" alt=""/>
             </div>
             <div className="pi-ov">
               <span className="pi-cat">Fine Art</span>
@@ -203,7 +203,7 @@ const Home = () => {
           </div>
           <div className="pi" data-cat="interior" data-proj="terra" onClick={() => goProject('terra')}>
             <div className="pi-img">
-              <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=80" alt=""/>
+              <img src="/images/project-5.jpg" alt=""/>
             </div>
             <div className="pi-ov">
               <span className="pi-cat">Interior Design</span>
@@ -217,7 +217,7 @@ const Home = () => {
           </div>
           <div className="pi" data-cat="art" data-proj="clay" onClick={() => goProject('clay')}>
             <div className="pi-img">
-              <img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=700&q=80" alt=""/>
+              <img src="/images/project-6.jpg" alt=""/>
             </div>
             <div className="pi-ov">
               <span className="pi-cat">Fine Art</span>
@@ -231,7 +231,7 @@ const Home = () => {
           </div>
           <div className="pi" data-cat="interior" data-proj="linen" onClick={() => goProject('linen')}>
             <div className="pi-img">
-              <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=700&q=80" alt=""/>
+              <img src="/images/project-7.jpg" alt=""/>
             </div>
             <div className="pi-ov">
               <span className="pi-cat">Interior Design</span>
@@ -318,7 +318,7 @@ const Home = () => {
             <blockquote>They didn't just design our home — they gave us a place we finally feel like ourselves in. Every object chosen with care, every corner considered.</blockquote>
             <div className="tc-info">
               <div className="tc-av">
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt=""/>
+                <img src="/images/testimonial-1.jpg" alt=""/>
               </div>
               <div>
                 <div className="tc-name">Isabelle R.</div>
@@ -331,7 +331,7 @@ const Home = () => {
             <blockquote>The virtual consultation was shockingly thorough. Over a video call, they designed our living room — and the result was more beautiful than we imagined.</blockquote>
             <div className="tc-info">
               <div className="tc-av">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt=""/>
+                <img src="/images/testimonial-2.jpg" alt=""/>
               </div>
               <div>
                 <div className="tc-name">Marcus T.</div>
@@ -344,7 +344,7 @@ const Home = () => {
             <blockquote>They understood exactly what I couldn't articulate. The warmth, the textures, the light — it feels like the house has always been this way.</blockquote>
             <div className="tc-info">
               <div className="tc-av">
-                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt=""/>
+                <img src="/images/testimonial-3.jpg" alt=""/>
               </div>
               <div>
                 <div className="tc-name">Nadia O.</div>
