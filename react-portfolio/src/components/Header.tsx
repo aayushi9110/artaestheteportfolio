@@ -25,7 +25,8 @@ const Header = () => {
   return (
     <>
       <nav id="nav" className={isStuck ? 'stuck' : ''}>
-        <Link to="/" className="n-logo" onClick={() => goTo('/')}>
+        <Link to="/" className="n-logo" onClick={() => goTo('/')}> 
+          <img src="/images/logos/artAesthete.png" alt="Logo" style={{height: '32px', marginRight: '8px', verticalAlign: 'middle'}} />
           Art <span>Aesthete</span>
         </Link>
         <ul className="n-links">

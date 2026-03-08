@@ -42,6 +42,12 @@ nav.stuck{background:rgba(250,247,242,.95);backdrop-filter:blur(20px);padding:15
 .n-ham{display:none;background:none;border:none;cursor:none;flex-direction:column;gap:5px;padding:4px}
 .n-ham span{display:block;width:22px;height:1.5px;background:var(--dark);transition:all .35s}
 
+/* Mobile Nav */
+#mob-nav{position:fixed;top:0;left:0;right:0;bottom:0;background:var(--dark);z-index:499;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px}
+#mob-nav a,#mob-nav button{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--cream);text-decoration:none;background:none;border:none;cursor:none;transition:color .3s}
+#mob-nav a:hover,#mob-nav button:hover{color:var(--gold)}
+#mob-nav button:last-child{font-size:1.5rem;margin-top:20px}
+
 /* ═══ PAGE SYSTEM ═══ */
 .pg{display:none}
 .pg.on{display:block}

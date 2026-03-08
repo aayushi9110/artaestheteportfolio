@@ -6,6 +6,7 @@ const Footer = () => {
       <div className="ft-grid">
         <div>
           <Link to="/" className="n-logo ft-logo">
+            <img src="/images/logos/artAesthetewh.png" alt="Logo" style={{height: '32px', marginRight: '8px', verticalAlign: 'middle'}} />
             Art <span>Aesthete</span>
           </Link>
           <p className="ft-about">
