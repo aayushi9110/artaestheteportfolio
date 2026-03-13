@@ -3,18 +3,18 @@ frontend:
   phases:
     install:
       commands:
-        - echo "Current directory before cd: $(pwd)"
+        - 'echo "Current directory before cd: $(pwd)"'
         - cd react-portfolio
-        - echo "Current directory after cd: $(pwd)"
+        - 'echo "Current directory after cd: $(pwd)"'
         - ls -la
-        - echo "Checking for package.json:"
+        - 'echo "Checking for package.json:"'
         - ls -la package.json
         - npm ci
     build:
       commands:
-        - echo "Build phase - Current directory: $(pwd)"
+        - 'echo "Build phase - Current directory: $(pwd)"'
         - cd react-portfolio
-        - echo "Build phase - Directory after cd: $(pwd)"
+        - 'echo "Build phase - Directory after cd: $(pwd)"'
         - ls -la
         - npm run build
   artifacts:
