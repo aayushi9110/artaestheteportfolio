@@ -1,0 +1,17 @@
+version: 1
+frontend:
+  phases:
+    install:
+      commands:
+        - cd react-portfolio
+        - npm ci
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: react-portfolio/dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - react-portfolio/node_modules/**/*
