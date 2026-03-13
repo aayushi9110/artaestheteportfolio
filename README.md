@@ -84,3 +84,4 @@ Google Analytics is integrated. Replace `GA_MEASUREMENT_ID` in `index.html` with
 - Update Google Analytics measurement ID in `index.html`
 - Deploy to production (AWS S3 + CloudFront as described above)
 - Test all links and functionality
+- Separate components into the folders with respective CSS
