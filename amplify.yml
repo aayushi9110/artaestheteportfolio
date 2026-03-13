@@ -4,7 +4,7 @@ frontend:
     install:
       commands:
         - 'echo "Current directory before cd: $(pwd)"'
-        - cd react-portfolio
+        - 'cd react-portfolio'
         - 'echo "Current directory after cd: $(pwd)"'
         - ls -la
         - 'echo "Checking for package.json:"'
@@ -16,7 +16,7 @@ frontend:
         - cd react-portfolio
         - 'echo "Build phase - Directory after cd: $(pwd)"'
         - ls -la
-        - npm run build
+        - 'npm run build'
   artifacts:
     baseDirectory: react-portfolio/dist
     files:
