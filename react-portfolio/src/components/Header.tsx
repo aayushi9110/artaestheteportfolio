@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [isStuck, setIsStuck] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
+  // @ts-ignore - location will be used for active link styling
+  const _location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,7 +21,7 @@ const Header = () => {
 
   const goTo = (path: string) => {
     closeMobileMenu();
-    // Navigate using React Router
+    navigate(path);
   };
 
   return (

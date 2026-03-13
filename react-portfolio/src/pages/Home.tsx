@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     // Add reveal animations
     const observer = new IntersectionObserver(
@@ -43,10 +44,6 @@ const Home = () => {
     };
   }, []);
 
-  const go = (path: string) => {
-    // Navigation handled by React Router
-  };
-
   const fpHome = (filter: string, button: HTMLElement) => {
     // Filter portfolio items
     document.querySelectorAll('.pfb').forEach(btn => btn.classList.remove('act'));
@@ -64,7 +61,7 @@ const Home = () => {
   };
 
   const goProject = (id: string) => {
-    // Navigate to case study
+    navigate(`/case-study/${id}`);
   };
 
   return (
