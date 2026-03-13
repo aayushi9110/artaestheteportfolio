@@ -508,6 +508,7 @@ nav.stuck{background:rgba(250,247,242,.95);backdrop-filter:blur(20px);padding:15
   nav.stuck{padding:13px 36px}
   .n-links{display:none}
   .n-ham{display:flex}
+  .n-book{display:none}
   .hero{grid-template-columns:1fr;min-height:auto}
   .hero-l{padding:110px 36px 60px}
   .hero-r{min-height:60vw}
