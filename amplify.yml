@@ -13,8 +13,6 @@ frontend:
     build:
       commands:
         - 'echo "Build phase - Current directory: $(pwd)"'
-        - cd react-portfolio
-        - 'echo "Build phase - Directory after cd: $(pwd)"'
         - ls -la
         - 'npm run build'
   artifacts:
