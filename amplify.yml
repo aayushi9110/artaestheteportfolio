@@ -20,5 +20,5 @@ frontend:
     files:
       - '**/*'
   cache:
-    paths:
+    paths: 
       - react-portfolio/node_modules/**/*

@@ -29,7 +29,11 @@ const Header = () => {
       <nav id="nav" className={isStuck ? 'stuck' : ''}>
         <Link to="/" className="n-logo" onClick={() => goTo('/')}> 
           <img src="/images/logos/artAesthete.png" alt="Logo" style={{height: '32px', marginRight: '8px', verticalAlign: 'middle'}} />
-          Art <span>Aesthete</span>
+          Art 
+          <span>Aesthete
+            <span className='byaayushi'> By Aayushi</span>
+          </span>
+          
         </Link>
         <ul className="n-links">
           <li><Link to="/portfolio" onClick={() => goTo('/portfolio')}>Portfolio</Link></li>
@@ -49,9 +53,10 @@ const Header = () => {
           <span></span><span></span><span></span>
         </button>
       </nav>
+      <div className="shadow-top"></div>
 
       {/* Mobile Nav Overlay */}
-      {isMobileMenuOpen && (
+      {isMobileMenuOpen && ( 
         <div id="mob-nav">
           <Link to="/" onClick={() => goTo('/')}>Home</Link>
           <Link to="/portfolio" onClick={() => goTo('/portfolio')}>Portfolio</Link>
