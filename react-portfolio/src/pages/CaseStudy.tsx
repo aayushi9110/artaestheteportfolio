@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 type Deliverable = {
@@ -216,6 +216,9 @@ const CaseStudy = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const project = PROJECTS[id || ''] || PROJECTS.amber;
+  const [comparePosition, setComparePosition] = useState(50);
+  const [isAutoSliding, setIsAutoSliding] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -236,6 +239,54 @@ const CaseStudy = () => {
     return () => observer.disconnect();
   }, [id]);
 
+  useEffect(() => {
+    setComparePosition(50);
+    setHasInteracted(false);
+  }, [id]);
+
+  useEffect(() => {
+    if (hasInteracted) {
+      setIsAutoSliding(false);
+      return;
+    }
+
+    const steps = [18, 82, 26, 74, 50];
+    let stepIndex = 0;
+    const stepIntervalMs = 1700;
+    let intervalId: number | undefined;
+
+    setIsAutoSliding(true);
+
+    const startTimeout = window.setTimeout(() => {
+      setComparePosition(steps[stepIndex]);
+      stepIndex = (stepIndex + 1) % steps.length;
+
+      intervalId = window.setInterval(() => {
+        setComparePosition(steps[stepIndex]);
+        stepIndex = (stepIndex + 1) % steps.length;
+      }, stepIntervalMs);
+    }, 1100);
+
+    return () => {
+      window.clearTimeout(startTimeout);
+      if (intervalId !== undefined) {
+        window.clearInterval(intervalId);
+      }
+    };
+  }, [id, hasInteracted]);
+
+  const markInteracted = () => {
+    if (!hasInteracted) {
+      setHasInteracted(true);
+      setIsAutoSliding(false);
+    }
+  };
+
+  const handleCompareChange = (value: number) => {
+    markInteracted();
+    setComparePosition(value);
+  };
+
   return (
     <div id="pg-case-study" className="pg on">
       <div className="cs-hero">
@@ -253,8 +304,31 @@ const CaseStudy = () => {
       </div>
       <div className="cs-body">
         <div className="cs-ba">
-          <div className="cs-ba-panel"><img src={project.before} alt="Before"/><div className="cs-ba-lbl">Before</div></div>
-          <div className="cs-ba-panel"><img src={project.after} alt="After"/><div className="cs-ba-lbl">After</div></div>
+          <div className={`cs-ba-compare ${isAutoSliding ? 'auto-sliding' : ''}`}>
+            <img className="cs-ba-img" src={project.before} alt="Before" />
+            <div className="cs-ba-after" style={{ width: `${comparePosition}%` }}>
+              <img className="cs-ba-img" src={project.after} alt="After" />
+            </div>
+
+            <div className="cs-ba-divider" style={{ left: `${comparePosition}%` }} aria-hidden="true">
+              <span className="cs-ba-handle">↔</span>
+            </div>
+
+            <div className="cs-ba-lbl cs-ba-lbl-left">Before</div>
+            <div className="cs-ba-lbl cs-ba-lbl-right">After</div>
+
+            <input
+              className="cs-ba-range"
+              type="range"
+              min={0}
+              max={100}
+              value={comparePosition}
+              onChange={(e) => handleCompareChange(Number(e.target.value))}
+              onPointerDown={markInteracted}
+              onKeyDown={markInteracted}
+              aria-label="Before and after comparison slider"
+            />
+          </div>
         </div>
         <div className="cs-overview reveal">
           <div className="cs-overview-txt">
