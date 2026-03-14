@@ -1,0 +1,24 @@
+nav.subpage:not(.stuck) .n-logo {
+	color: var(--linen);
+}
+
+nav.subpage:not(.stuck) .n-links a {
+	color: var(--linen);
+}
+
+nav.subpage:not(.stuck) .n-links a::after {
+	background: var(--linen);
+}
+
+nav.subpage:not(.stuck) .n-links a:hover {
+	color: var(--gold);
+}
+
+nav.subpage:not(.stuck) .n-ham span {
+	background: var(--linen);
+}
+
+nav.subpage:not(.stuck) .byaayushi {
+	color: var(--linen);
+	opacity: 0.75;
+}

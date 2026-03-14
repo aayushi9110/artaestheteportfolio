@@ -27,7 +27,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 
 /* ═══ NAV ═══ */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:26px 60px;transition:all .5s cubic-bezier(.77,0,.175,1)}
-nav.stuck{background:rgba(250,247,242,.95);backdrop-filter:blur(20px);padding:15px 60px;border-bottom:1px solid var(--sand)}
+nav.stuck{background:rgba(250,247,242,.95);backdrop-filter:blur(20px);padding:15px 60px;border-bottom:1px solid var(--sand);box-shadow:0px 0px 75px -20px #81776e}
 .n-logo{
    font-family:'Cormorant Garamond',serif;
    font-size:1.45rem;

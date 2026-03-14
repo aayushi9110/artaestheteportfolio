@@ -5,9 +5,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 const Header = () => {
   const [isStuck, setIsStuck] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  // @ts-ignore - location will be used for active link styling
-  const _location = useLocation();
+  const location = useLocation();
   const navigate = useNavigate();
+  const isSubPage = location.pathname !== '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,7 +27,7 @@ const Header = () => {
 
   return (
     <>
-      <nav id="nav" className={isStuck ? 'stuck' : ''}>
+      <nav id="nav" className={`${isStuck ? 'stuck' : ''} ${isSubPage ? 'subpage' : ''}`.trim()}>
         <Link to="/" className="n-logo" onClick={() => goTo('/')}> 
           <img src="/images/logos/artAesthete.png" alt="Logo" style={{height: '32px', marginRight: '8px', verticalAlign: 'middle'}} />
           Art 

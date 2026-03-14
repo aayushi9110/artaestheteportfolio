@@ -37,6 +37,7 @@ function App() {
           <Route path="/process" element={<Process />} />
           <Route path="/virtual" element={<Virtual />} />
           <Route path="/book" element={<Book />} />
+          <Route path="/case-study/:id" element={<CaseStudy />} />
           <Route path="/project/:id" element={<CaseStudy />} />
         </Routes>
         <Footer />
