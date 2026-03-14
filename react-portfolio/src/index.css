@@ -197,7 +197,13 @@ nav.stuck{background:rgba(250,247,242,.95);backdrop-filter:blur(20px);padding:15
 .pfb{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;padding:9px 16px;border:1px solid var(--sand);background:transparent;color:var(--taupe);cursor:none;transition:all .3s;font-weight:300;font-family:'Jost',sans-serif}
 .pfb.act,.pfb:hover{background:var(--terra);border-color:var(--terra);color:var(--warm)}
 .port-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:270px;gap:7px}
-.pi{position:relative;overflow:hidden;cursor:none;clip-path:inset(0 100% 0 0);transition:clip-path 0s}
+.pi{
+   position:relative;
+   overflow:hidden;
+   cursor:none;
+   /* clip-path:inset(0 100% 0 0); */
+   transition:clip-path 0s;
+}
 .pi.revealed{clip-path:inset(0 0% 0 0);transition:clip-path .85s cubic-bezier(.77,0,.175,1)}
 .pi:nth-child(1){grid-column:span 5;grid-row:span 2}
 .pi:nth-child(2){grid-column:span 7}
@@ -540,7 +546,10 @@ nav.stuck{background:rgba(250,247,242,.95);backdrop-filter:blur(20px);padding:15
   .n-book{display:none}
   .scroll-cue{display: none}
   .hero{grid-template-columns:1fr;min-height:auto}
-  .hero-l{padding:110px 36px 60px}
+  .hero-l{
+      padding:110px 36px 60px;
+      overflow-y: hidden;
+   }
   .hero-r{min-height:60vw}
   .philosophy{grid-template-columns:1fr}
   .ph-img{min-height:50vw}
