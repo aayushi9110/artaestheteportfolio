@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import './Header.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
+const STUCK_BREAKPOINT = 1100;
+
 const Header = () => {
   const [isStuck, setIsStuck] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -17,12 +19,19 @@ const Header = () => {
   const isBookActive = pathname === '/book';
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsStuck(window.scrollY > 50);
+    const updateStuckState = () => {
+      const shouldStickForViewport = window.innerWidth <= STUCK_BREAKPOINT;
+      setIsStuck(shouldStickForViewport || window.scrollY > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    updateStuckState();
+    window.addEventListener('scroll', updateStuckState);
+    window.addEventListener('resize', updateStuckState);
+
+    return () => {
+      window.removeEventListener('scroll', updateStuckState);
+      window.removeEventListener('resize', updateStuckState);
+    };
   }, []);
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);

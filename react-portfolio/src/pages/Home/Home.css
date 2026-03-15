@@ -62,7 +62,7 @@
 }
 
 .hero-punch {
-  font-size: 0.67rem;
+  font-size: 1rem;
   letter-spacing: 0.35em;
   text-transform: uppercase;
   color: var(--terra);
@@ -116,9 +116,9 @@
 
 .hero-desc {
   font-weight: 300;
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.88;
-  color: var(--taupe);
+  color: var(--taupe-grey);
   max-width: 380px;
   margin-top: 26px;
   opacity: 0;
@@ -321,16 +321,18 @@
   justify-content: center;
   padding: 35px 68px 40px 60px;
   position: relative;
+  top: -60px;
+  height: 108%;
   overflow: hidden;
 }
 
 .ph-content::before {
   content: '"';
   position: absolute;
-  top: 24px;
+  top: 80px;
   left: 48px;
   font-family: "Cormorant Garamond", serif;
-  font-size: 8.5rem;
+  font-size: 6.5rem;
   font-weight: 300;
   color: var(--sand);
   opacity: 0.35;
@@ -354,9 +356,9 @@
 
 .ph-content p {
   font-weight: 300;
-  font-size: 0.88rem;
-  line-height: 1.9;
-  color: var(--taupe);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--taupe-grey);
   margin-bottom: 13px;
 }
 
@@ -394,7 +396,7 @@
 }
 
 .pfb {
-  font-size: 0.66rem;
+  font-size: 0.9rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   padding: 9px 16px;
@@ -403,7 +405,7 @@
   color: var(--taupe);
   cursor: none;
   transition: all 0.3s;
-  font-weight: 300;
+  font-weight: 400;
   font-family: "Jost", sans-serif;
 }
 
@@ -693,6 +695,10 @@
     min-height: auto;
   }
 
+  .hero-punch {
+    font-size: 0.9rem;
+  }
+
   .hero-l {
     padding: 110px 36px 60px;
     overflow-y: hidden;
@@ -747,7 +753,11 @@
 
 @media (max-width: 640px) {
   .hero-l {
-    padding: 75px 22px 12px;
+    padding: 95px 22px 12px;
+  }
+
+  .hero-punch {
+    font-size: 0.75rem;
   }
 
   .scroll-cue {

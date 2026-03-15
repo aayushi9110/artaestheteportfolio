@@ -9,6 +9,7 @@
   --dark: #2c1f14;
   --sage: #7a8c6e;
   --taupe: #9e8e7a;
+  --taupe-grey: #5f574e;
   --linen: #ede3d4;
   --gold: #c9a96e;
 }
@@ -216,7 +217,7 @@ body::before {
 }
 
 .btn-ghost {
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--dark);
@@ -469,6 +470,9 @@ body::before {
   .cta-strip {
     padding: 72px 36px;
   }
+  .sec-label {
+    font-size: .9rem;
+  }
 }
 
 @media (max-width: 640px) {
@@ -476,5 +480,8 @@ body::before {
     padding: 60px 20px;
     flex-direction: column;
     text-align: center;
+  }
+  .sec-label {
+    font-size: .75rem;
   }
 }
