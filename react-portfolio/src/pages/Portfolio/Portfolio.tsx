@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Portfolio.css';
 
@@ -110,6 +110,11 @@ const Portfolio = () => {
   const navigate = useNavigate();
   const [tab, setTab] = useState<'interiors' | 'fineart'>('interiors');
   const [activeItem, setActiveItem] = useState<GalleryItem | null>(null);
+  const [featuredIndex, setFeaturedIndex] = useState(0);
+  const [isFeaturedHovered, setIsFeaturedHovered] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+
+  const featuredItems = tab === 'interiors' ? interiorItems : fineArtItems;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -129,6 +134,20 @@ const Portfolio = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    setFeaturedIndex(0);
+  }, [tab]);
+
+  useEffect(() => {
+    if (isFeaturedHovered || featuredItems.length <= 1) {
+      return;
+    }
+    const id = window.setInterval(() => {
+      setFeaturedIndex((prev) => (prev + 1) % featuredItems.length);
+    }, 5000);
+    return () => window.clearInterval(id);
+  }, [isFeaturedHovered, tab, featuredItems.length]);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -165,7 +184,7 @@ const Portfolio = () => {
               <path d="M12 5H2M2 5L6 1M2 5l4 4"/>
             </svg> Back
           </button>
-          <span className="sec-label gold">Selected Works</span>
+          {/* <span className="sec-label gold gall-loc">Selected Works</span> */}
           <h1>A curated collection<br/>of <em>spaces & stories</em></h1>
         </div>
       </div>
@@ -173,6 +192,97 @@ const Portfolio = () => {
         <div className="gall-tabs">
           <button className={`gtab ${tab === 'interiors' ? 'act' : ''}`} onClick={() => setTab('interiors')}>All Interiors</button>
           <button className={`gtab ${tab === 'fineart' ? 'act' : ''}`} onClick={() => setTab('fineart')}>Fine Art Gallery</button>
+        </div>
+
+        <div
+          className="pf-carousel"
+          onMouseEnter={() => setIsFeaturedHovered(true)}
+          onMouseLeave={() => setIsFeaturedHovered(false)}
+        >
+          <div
+            className="pf-carousel-images"
+            onTouchStart={(e) => {
+              touchStartX.current = e.touches[0].clientX;
+              setIsFeaturedHovered(true);
+            }}
+            onTouchEnd={(e) => {
+              if (touchStartX.current === null) return;
+              const diff = touchStartX.current - e.changedTouches[0].clientX;
+              if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                  setFeaturedIndex((prev) => (prev + 1) % featuredItems.length);
+                } else {
+                  setFeaturedIndex((prev) => (prev - 1 + featuredItems.length) % featuredItems.length);
+                }
+              }
+              touchStartX.current = null;
+              setIsFeaturedHovered(false);
+            }}
+          >
+            {featuredItems.map((item, i) => (
+              <div
+                key={`${item.title}-slide`}
+                className={`pf-carousel-slide ${featuredIndex === i ? 'active' : ''}`.trim()}
+                aria-hidden={featuredIndex !== i}
+              >
+                <img
+                  src={item.src}
+                  alt={item.title}
+                  className="pf-carousel-img"
+                  onClick={() => setActiveItem(item)}
+                />
+              </div>
+            ))}
+            <button
+              className="pf-carousel-nav pf-carousel-prev"
+              onClick={() => setFeaturedIndex((prev) => (prev - 1 + featuredItems.length) % featuredItems.length)}
+              aria-label="Previous project"
+            >‹</button>
+            <button
+              className="pf-carousel-nav pf-carousel-next"
+              onClick={() => setFeaturedIndex((prev) => (prev + 1) % featuredItems.length)}
+              aria-label="Next project"
+            >›</button>
+          </div>
+
+          <div className="pf-carousel-info">
+            <div className="pf-carousel-panels">
+              {featuredItems.map((item, i) => (
+                <div
+                  key={`${item.title}-panel`}
+                  className={`pf-carousel-panel ${featuredIndex === i ? 'active' : ''}`.trim()}
+                  aria-hidden={featuredIndex !== i}
+                >
+                  <span className="sec-label pf-sec-loc">{item.category}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.details}</p>
+                  <div className="pf-carousel-actions">
+                    {item.caseStudyId && (
+                      <button className="btn-tr" onClick={() => navigate(`/case-study/${item.caseStudyId}`)}>
+                        <span>View Case Study</span>
+                      </button>
+                    )}
+                    <button className="pf-quick-view" onClick={() => setActiveItem(item)}>
+                      Quick View
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="pf-carousel-footer">
+              <div className="pf-carousel-dots">
+                {featuredItems.map((_, i) => (
+                  <button
+                    key={`dot-${i}`}
+                    className={`pf-carousel-dot ${featuredIndex === i ? 'active' : ''}`.trim()}
+                    onClick={() => setFeaturedIndex(i)}
+                    aria-label={`Go to project ${i + 1}`}
+                  />
+                ))}
+              </div>
+              <span className="pf-carousel-count">{featuredIndex + 1} / {featuredItems.length}</span>
+            </div>
+          </div>
         </div>
 
         <div className={`gall-section ${tab === 'interiors' ? 'on' : ''}`}>
