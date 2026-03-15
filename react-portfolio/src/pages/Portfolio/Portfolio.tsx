@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Portfolio.css';
 
 type GalleryItem = {
   src: string;
@@ -43,14 +44,14 @@ const interiorItems: GalleryItem[] = [
     category: 'Interior Design · Dubai',
     title: 'The Sand Suite',
     details: 'A hospitality-inspired suite using tonal stone colors, sculptural lighting, and clean material transitions.',
-    caseStudyId: 'amber'
+    caseStudyId: 'sand'
   },
   {
     src: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80',
     category: 'Virtual Design · Sydney',
     title: 'Coastal Calm Living Room',
     details: 'An airy living space designed around flow, sunlight, and a calm palette that supports everyday family routines.',
-    caseStudyId: 'terra'
+    caseStudyId: 'coastal'
   }
 ];
 

@@ -1,0 +1,492 @@
+/* Virtual page */
+.vc-hero {
+  min-height: 55vh;
+  background: var(--dark);
+  display: flex;
+  align-items: flex-end;
+  padding: 140px 60px 72px;
+  position: relative;
+  overflow: hidden;
+}
+
+.vc-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1400&q=80")
+    center/cover;
+  opacity: 0.17;
+}
+
+.vc-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    var(--dark) 0%,
+    rgba(44, 31, 20, 0.38) 100%
+  );
+}
+
+.vc-hero-c {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+}
+
+.vc-hero-c h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.08;
+}
+
+.vc-hero-c h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.vc-hero-c p {
+  font-weight: 300;
+  font-size: 0.92rem;
+  line-height: 1.85;
+  color: rgba(245, 239, 228, 0.5);
+  max-width: 530px;
+  margin-top: 20px;
+}
+
+.vc-body {
+  padding: 90px 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.vc-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+  margin-bottom: 90px;
+}
+
+.vc-intro-txt h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.9rem, 3vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--dark);
+  margin-top: 16px;
+  margin-bottom: 18px;
+}
+
+.vc-intro-txt h2 em {
+  font-style: italic;
+  color: var(--terra);
+}
+
+.vc-intro-txt p {
+  font-weight: 300;
+  font-size: 0.88rem;
+  line-height: 1.9;
+  color: var(--taupe);
+  margin-bottom: 12px;
+}
+
+.vc-intro-img {
+  overflow: hidden;
+}
+
+.vc-intro-img img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.vc-intro-img:hover img {
+  transform: scale(1.04);
+}
+
+.vc-del-hdr {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.vc-del-hdr h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  font-weight: 300;
+  color: var(--dark);
+  margin-top: 14px;
+}
+
+.vc-del-hdr h2 em {
+  font-style: italic;
+  color: var(--terra);
+}
+
+.vc-del-hdr p {
+  font-weight: 300;
+  font-size: 0.88rem;
+  color: var(--taupe);
+  max-width: 480px;
+  margin: 14px auto 0;
+  line-height: 1.8;
+}
+
+.vc-del-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-bottom: 80px;
+}
+
+.vd {
+  background: var(--linen);
+  padding: 44px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.38s;
+  cursor: default;
+}
+
+.vd::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--terra), var(--gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.48s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.vd:hover {
+  background: var(--cream);
+}
+
+.vd:hover::after {
+  transform: scaleX(1);
+}
+
+.vd-n {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2.9rem;
+  font-weight: 300;
+  color: rgba(181, 99, 58, 0.16);
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+.vd-ico {
+  font-size: 1.55rem;
+  margin-bottom: 16px;
+  display: block;
+  transition: transform 0.32s;
+}
+
+.vd:hover .vd-ico {
+  transform: scale(1.12) rotate(-3deg);
+}
+
+.vd h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--dark);
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+
+.vd p {
+  font-weight: 300;
+  font-size: 0.82rem;
+  line-height: 1.85;
+  color: var(--taupe);
+  margin-bottom: 14px;
+}
+
+.vd ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vd ul li {
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--taupe);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.45;
+}
+
+.vd ul li::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--terra);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.addons-sec {
+  background: var(--dark);
+  padding: 80px 60px;
+  margin: 0 -60px 80px;
+}
+
+.addons-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.addons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.ao {
+  background: rgba(255, 255, 255, 0.022);
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  padding: 30px 26px;
+  transition: background 0.35s;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+.ao::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(181, 99, 58, 0.06), transparent);
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.ao:hover {
+  background: rgba(181, 99, 58, 0.05);
+}
+
+.ao:hover::before {
+  opacity: 1;
+}
+
+.ao-ico {
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.ao:hover .ao-ico {
+  transform: scale(1.1);
+}
+
+.ao h4 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 7px;
+}
+
+.ao p {
+  font-weight: 300;
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: rgba(245, 239, 228, 0.4);
+}
+
+.vc-pkgs h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.9rem, 3vw, 2.7rem);
+  font-weight: 300;
+  color: var(--dark);
+  margin-top: 14px;
+  margin-bottom: 44px;
+}
+
+.vc-pkgs h2 em {
+  font-style: italic;
+  color: var(--terra);
+}
+
+.pkg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-bottom: 80px;
+}
+
+.pkg {
+  border: 1px solid var(--sand);
+  padding: 40px 32px;
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color 0.35s,
+    background 0.35s;
+  cursor: default;
+}
+
+.pkg::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--terra);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.pkg:hover,
+.pkg.feat {
+  border-color: var(--terra);
+  background: var(--linen);
+}
+
+.pkg:hover::after,
+.pkg.feat::after {
+  transform: scaleX(1);
+}
+
+.pkg-badge {
+  display: inline-block;
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: var(--terra);
+  color: var(--cream);
+  padding: 4px 10px;
+  margin-bottom: 14px;
+}
+
+.pkg-name {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--dark);
+  margin-bottom: 5px;
+}
+
+.pkg-desc {
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: var(--taupe);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.pkg-incl {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 28px;
+}
+
+.pkg-incl li {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--dark);
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  line-height: 1.45;
+}
+
+.pkg-incl li::before {
+  content: "✓";
+  color: var(--terra);
+  font-size: 0.72rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.pkg-cta {
+  font-size: 0.64rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terra);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: none;
+  font-family: "Jost", sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: gap 0.3s;
+  padding: 0;
+}
+
+.pkg-cta:hover {
+  gap: 14px;
+}
+
+@media (max-width: 1100px) {
+  .vc-body {
+    padding: 60px 36px;
+  }
+
+  .vc-intro {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .vc-del-grid,
+  .addons-grid,
+  .pkg-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .addons-sec {
+    margin: 0 -36px 80px;
+    padding: 60px 36px;
+  }
+
+  .vc-hero {
+    padding-left: 36px;
+    padding-right: 36px;
+  }
+
+  .addons-inner {
+    max-width: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .vc-body {
+    padding: 60px 20px;
+  }
+
+  .vc-del-grid,
+  .addons-grid,
+  .pkg-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .addons-sec {
+    margin: 0 -20px 80px;
+    padding: 60px 20px;
+  }
+
+  .vc-hero {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

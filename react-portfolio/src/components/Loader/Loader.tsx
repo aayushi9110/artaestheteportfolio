@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import './Loader.css';
 
 const Loader = () => {
   useEffect(() => {

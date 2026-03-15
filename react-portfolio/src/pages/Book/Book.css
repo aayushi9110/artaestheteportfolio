@@ -1,0 +1,371 @@
+/* Book page */
+.book-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.book-l {
+  background: var(--dark);
+  padding: 100px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.book-l::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80")
+    center/cover;
+  opacity: 0.12;
+}
+
+.book-l::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--dark) 50%,
+    rgba(44, 31, 20, 0.6) 100%
+  );
+}
+
+.book-l-c {
+  position: relative;
+  z-index: 2;
+}
+
+.book-l-c h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.12;
+  margin-top: 16px;
+  margin-bottom: 20px;
+}
+
+.book-l-c h2 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.book-l-c p {
+  font-weight: 300;
+  font-size: 0.87rem;
+  line-height: 1.88;
+  color: rgba(245, 239, 228, 0.5);
+  margin-bottom: 36px;
+  max-width: 380px;
+}
+
+.book-faq {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 36px;
+}
+
+.bfaq-item {
+  border-top: 1px solid rgba(245, 239, 228, 0.08);
+  padding-top: 18px;
+}
+
+.bfaq-item h5 {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245, 239, 228, 0.6);
+  margin-bottom: 6px;
+  font-weight: 400;
+}
+
+.bfaq-item p {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: rgba(245, 239, 228, 0.35);
+  line-height: 1.7;
+}
+
+.book-r {
+  background: var(--warm);
+  padding: 100px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.bk-prog {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 48px;
+}
+
+.bk-step-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--sand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: var(--taupe);
+  transition: all 0.4s;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  background: var(--warm);
+}
+
+.bk-step-dot.act {
+  background: var(--terra);
+  border-color: var(--terra);
+  color: var(--warm);
+}
+
+.bk-step-dot.done {
+  background: var(--dark);
+  border-color: var(--dark);
+  color: var(--warm);
+}
+
+.bk-step-line {
+  flex: 1;
+  height: 1px;
+  background: var(--sand);
+  position: relative;
+}
+
+.bk-step-line.done::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--dark);
+  transform-origin: left;
+  animation: lineGrow 0.4s ease forwards;
+}
+
+@keyframes lineGrow {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.bk-form-step {
+  display: none;
+}
+
+.bk-form-step.on {
+  display: block;
+}
+
+.bk-q {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.7rem;
+  font-weight: 400;
+  color: var(--dark);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.bk-sub {
+  font-weight: 300;
+  font-size: 0.85rem;
+  color: var(--taupe);
+  margin-bottom: 32px;
+  line-height: 1.65;
+}
+
+.bk-opts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.bk-opt {
+  border: 1.5px solid var(--sand);
+  padding: 16px 18px;
+  background: transparent;
+  cursor: none;
+  text-align: left;
+  transition: all 0.3s;
+  font-family: "Jost", sans-serif;
+}
+
+.bk-opt.sel {
+  border-color: var(--terra);
+  background: rgba(181, 99, 58, 0.06);
+}
+
+.bk-opt .opt-icon {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.bk-opt h4 {
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+
+.bk-opt p {
+  font-weight: 300;
+  font-size: 0.74rem;
+  color: var(--taupe);
+  line-height: 1.5;
+}
+
+.bk-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 18px;
+}
+
+.bk-field label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  font-weight: 400;
+}
+
+.bk-field input,
+.bk-field textarea,
+.bk-field select {
+  background: var(--linen);
+  border: 1px solid var(--sand);
+  padding: 13px 16px;
+  font-family: "Jost", sans-serif;
+  font-size: 0.86rem;
+  font-weight: 300;
+  color: var(--dark);
+  outline: none;
+  transition: border-color 0.3s;
+  width: 100%;
+  resize: none;
+}
+
+.bk-field input:focus,
+.bk-field textarea:focus,
+.bk-field select:focus {
+  border-color: var(--terra);
+}
+
+.bk-field select {
+  cursor: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239E8E7A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+.bk-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.bk-back-btn {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  background: none;
+  border: none;
+  cursor: none;
+  font-family: "Jost", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s;
+}
+
+.bk-back-btn:hover {
+  color: var(--dark);
+}
+
+.bk-success {
+  display: none;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.bk-success h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--dark);
+  margin-bottom: 14px;
+}
+
+.bk-success h3 em {
+  font-style: italic;
+  color: var(--terra);
+}
+
+.bk-success p {
+  font-weight: 300;
+  font-size: 0.88rem;
+  color: var(--taupe);
+  line-height: 1.8;
+  max-width: 400px;
+  margin: 0 auto 28px;
+}
+
+.bk-success .check {
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--terra);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  color: var(--terra);
+  font-size: 1.5rem;
+}
+
+@media (max-width: 1100px) {
+  .book-page {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .book-l {
+    padding: 100px 36px 60px;
+    min-height: 50vh;
+  }
+
+  .book-r {
+    padding: 60px 36px 80px;
+  }
+}
+
+@media (max-width: 640px) {
+  .book-l,
+  .book-r {
+    padding: 80px 20px 52px;
+  }
+
+  .bk-opts {
+    grid-template-columns: 1fr;
+  }
+}

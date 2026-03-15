@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import './CaseStudy.css';
 
 type Deliverable = {
   icon: string;
@@ -129,6 +130,60 @@ const PROJECTS: Record<string, Project> = {
       'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=700&q=80'
     ],
     captions: ['Living room - morning light', 'Dining area', 'Bookcase wall', 'Master bedroom detail', 'Entrance hall']
+  },
+  sand: {
+    title: 'The Sand Suite',
+    location: 'Dubai, UAE - In-Person',
+    tags: ['Interior Design', 'Suite Design', 'Hospitality Residential'],
+    heroBg: 'https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?w=1400&q=80',
+    before: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    after: 'https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?w=800&q=80',
+    overviewHeading: 'A Dubai suite designed with calm, sand-toned luxury',
+    overviewP1: 'The client wanted a suite that felt elevated yet restful - a space inspired by boutique hospitality but grounded enough for everyday living. The original layout felt disjointed and visually busy, with too many competing finishes.',
+    overviewP2: 'We rebuilt the room around tonal harmony: soft plaster hues, sculptural lighting, warm stone accents, and tailored upholstery. The result is a balanced suite with quiet drama and clear material rhythm.',
+    deliverables: [
+      { icon: '01', text: 'Concept Board - Sand & Stone Palette' },
+      { icon: '02', text: 'Suite Layout & Functional Zoning' },
+      { icon: '03', text: 'Furniture, Lighting & Finish Specification' },
+      { icon: '04', text: 'Built-In Joinery Direction' },
+      { icon: '05', text: 'Styling & Art Placement Plan' },
+      { icon: '06', text: 'Final Installation Walkthrough' }
+    ],
+    images: [
+      'https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?w=700&q=80',
+      'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=700&q=80',
+      'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=700&q=80',
+      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=700&q=80',
+      'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=700&q=80'
+    ],
+    captions: ['Suite - overall reveal', 'Bedroom corner', 'Seating zone detail', 'Material and lighting balance', 'Final styling pass']
+  },
+  coastal: {
+    title: 'Coastal Calm Living Room',
+    location: 'Sydney, Australia - Virtual Design',
+    tags: ['Interior Design', 'Virtual Consultation', 'Living Room'],
+    heroBg: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1400&q=80',
+    before: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    after: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80',
+    overviewHeading: 'A Sydney living room shaped around breeze, light, and daily ease',
+    overviewP1: 'This apartment had an exceptional view but the interior was not supporting it. Heavy furniture blocked movement, and the layout made the room feel smaller than it was. The brief asked for a living space that felt open, calm, and naturally bright from morning to evening.',
+    overviewP2: 'We rebalanced the room using a low-profile seating plan, pale timber accents, and soft-textured layers that reflect natural light. The final space feels airy and grounded at the same time, with a layout designed for both quiet mornings and family evenings.',
+    deliverables: [
+      { icon: '01', text: 'Light-Led Concept & Moodboard' },
+      { icon: '02', text: 'Living Room Layout Replan' },
+      { icon: '03', text: 'Furniture & Decor Selections' },
+      { icon: '04', text: 'Color and Textile Palette' },
+      { icon: '05', text: 'Shopping List with Direct Links' },
+      { icon: '06', text: 'Styling & Placement Guide' }
+    ],
+    images: [
+      'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=700&q=80',
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=700&q=80',
+      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=700&q=80',
+      'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=700&q=80',
+      'https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?w=700&q=80'
+    ],
+    captions: ['Living room - final reveal', 'Sofa and circulation detail', 'Natural timber accents', 'Layered textures at sunset', 'Styling and finish balance']
   },
   earth: {
     title: 'Earth Tones Series',

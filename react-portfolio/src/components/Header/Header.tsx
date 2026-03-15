@@ -8,6 +8,13 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isSubPage = location.pathname !== '/';
+  const pathname = location.pathname;
+  const isHomeActive = pathname === '/';
+  const isPortfolioActive = pathname === '/portfolio' || pathname.startsWith('/case-study/') || pathname.startsWith('/project/');
+  const isProcessActive = pathname === '/process';
+  const isAboutActive = pathname === '/about';
+  const isVirtualActive = pathname === '/virtual';
+  const isBookActive = pathname === '/book';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +35,7 @@ const Header = () => {
   return (
     <>
       <nav id="nav" className={`${isStuck ? 'stuck' : ''} ${isSubPage ? 'subpage' : ''}`.trim()}>
-        <Link to="/" className="n-logo" onClick={() => goTo('/')}> 
+        <Link to="/" className={`n-logo ${isHomeActive ? 'active' : ''}`.trim()} onClick={() => goTo('/')}> 
           <img src="/images/logos/artAesthete.png" alt="Logo" style={{height: '32px', marginRight: '8px', verticalAlign: 'middle'}} />
           Art 
           <span>Aesthete
@@ -37,12 +44,12 @@ const Header = () => {
           
         </Link>
         <ul className="n-links">
-          <li><Link to="/portfolio" onClick={() => goTo('/portfolio')}>Portfolio</Link></li>
-          <li><Link to="/process" onClick={() => goTo('/process')}>Process</Link></li>
-          <li><Link to="/about" onClick={() => goTo('/about')}>About</Link></li>
-          <li><Link to="/virtual" onClick={() => goTo('/virtual')}>Virtual Consult</Link></li>
+          <li><Link to="/portfolio" className={isPortfolioActive ? 'active' : ''} onClick={() => goTo('/portfolio')}>Portfolio</Link></li>
+          <li><Link to="/process" className={isProcessActive ? 'active' : ''} onClick={() => goTo('/process')}>Process</Link></li>
+          <li><Link to="/about" className={isAboutActive ? 'active' : ''} onClick={() => goTo('/about')}>About</Link></li>
+          <li><Link to="/virtual" className={isVirtualActive ? 'active' : ''} onClick={() => goTo('/virtual')}>Virtual Consult</Link></li>
         </ul>
-        <button className="n-book" onClick={() => goTo('/book')}>
+        <button className={`n-book ${isBookActive ? 'active' : ''}`.trim()} onClick={() => goTo('/book')}>
           <span>Book Consultation</span>
         </button>
         <button
@@ -59,12 +66,12 @@ const Header = () => {
       {/* Mobile Nav Overlay */}
       {isMobileMenuOpen && ( 
         <div id="mob-nav">
-          <Link to="/" onClick={() => goTo('/')}>Home</Link>
-          <Link to="/portfolio" onClick={() => goTo('/portfolio')}>Portfolio</Link>
-          <Link to="/process" onClick={() => goTo('/process')}>Process</Link>
-          <Link to="/about" onClick={() => goTo('/about')}>About</Link>
-          <Link to="/virtual" onClick={() => goTo('/virtual')}>Virtual Consult</Link>
-          <button onClick={() => goTo('/book')}>Book Consultation</button>
+          <Link to="/" className={isHomeActive ? 'active' : ''} onClick={() => goTo('/')}>Home</Link>
+          <Link to="/portfolio" className={isPortfolioActive ? 'active' : ''} onClick={() => goTo('/portfolio')}>Portfolio</Link>
+          <Link to="/process" className={isProcessActive ? 'active' : ''} onClick={() => goTo('/process')}>Process</Link>
+          <Link to="/about" className={isAboutActive ? 'active' : ''} onClick={() => goTo('/about')}>About</Link>
+          <Link to="/virtual" className={isVirtualActive ? 'active' : ''} onClick={() => goTo('/virtual')}>Virtual Consult</Link>
+          <button className={isBookActive ? 'active' : ''} onClick={() => goTo('/book')}>Book Consultation</button>
           <button onClick={closeMobileMenu}>✕</button>
         </div>
       )}
