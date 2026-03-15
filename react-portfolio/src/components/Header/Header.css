@@ -52,13 +52,13 @@ nav.stuck {
 }
 
 .n-links a {
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--dark);
   text-decoration: none;
   position: relative;
-  font-weight: 300;
+  font-weight: 400;
   transition: color 0.3s;
   cursor: none;
 }

@@ -272,6 +272,9 @@ const CaseStudy = () => {
   const { id } = useParams();
   const project = PROJECTS[id || ''] || PROJECTS.amber;
   const [comparePosition, setComparePosition] = useState(50);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [isCarouselHovered, setIsCarouselHovered] = useState(false);
+  const [expandedImageIndex, setExpandedImageIndex] = useState<number | null>(null);
   const [isAutoSliding, setIsAutoSliding] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
 
@@ -296,6 +299,9 @@ const CaseStudy = () => {
 
   useEffect(() => {
     setComparePosition(50);
+    setActiveImageIndex(0);
+    setExpandedImageIndex(null);
+    setIsCarouselHovered(false);
     setHasInteracted(false);
   }, [id]);
 
@@ -342,6 +348,50 @@ const CaseStudy = () => {
     setComparePosition(value);
   };
 
+  const totalImages = project.images.length;
+
+  useEffect(() => {
+    if (totalImages <= 1 || isCarouselHovered || expandedImageIndex !== null) {
+      return;
+    }
+
+    const autoRotateId = window.setInterval(() => {
+      setActiveImageIndex((prev) => (prev + 1) % totalImages);
+    }, 3000);
+
+    return () => window.clearInterval(autoRotateId);
+  }, [id, totalImages, isCarouselHovered, expandedImageIndex]);
+
+  useEffect(() => {
+    if (expandedImageIndex === null) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setExpandedImageIndex(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [expandedImageIndex]);
+
+  const goToImage = (index: number) => {
+    if (index < 0 || index >= totalImages) {
+      return;
+    }
+    setActiveImageIndex(index);
+  };
+
+  const showPrevImage = () => {
+    setActiveImageIndex((prev) => (prev - 1 + totalImages) % totalImages);
+  };
+
+  const showNextImage = () => {
+    setActiveImageIndex((prev) => (prev + 1) % totalImages);
+  };
+
   return (
     <div id="pg-case-study" className="pg on">
       <div className="cs-hero">
@@ -350,7 +400,6 @@ const CaseStudy = () => {
           <button className="page-back" onClick={() => navigate('/portfolio')}>
             <svg width="13" height="9" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5H2M2 5L6 1M2 5l4 4"/></svg> Back to Portfolio
           </button>
-          <div className="cs-loc">{project.location}</div>
           <h1>{project.title}</h1>
           <div className="cs-tags">
             {project.tags.map((tag) => <span key={tag} className="cs-tag">{tag}</span>)}
@@ -358,6 +407,7 @@ const CaseStudy = () => {
         </div>
       </div>
       <div className="cs-body">
+        <div className="cs-loc">{project.location}</div>
         <div className="cs-ba">
           <div className={`cs-ba-compare ${isAutoSliding ? 'auto-sliding' : ''}`}>
             <img className="cs-ba-img" src={project.before} alt="Before" />
@@ -405,15 +455,80 @@ const CaseStudy = () => {
         <div className="cs-gallery reveal">
           <span className="sec-label">Final Result</span>
           <h3>The finished space</h3>
-          <div className="cs-gall-grid">
-            {project.images.map((img, i) => (
-              <div className="cg-item" key={`${img}-${i}`}>
-                <img src={img} alt=""/>
-                <div className="cg-cap"><span>{project.captions[i] || ''}</span></div>
-              </div>
-            ))}
+          <div className="cs-carousel">
+            <div
+              className="cs-carousel-frame"
+              onMouseEnter={() => setIsCarouselHovered(true)}
+              onMouseLeave={() => setIsCarouselHovered(false)}
+            >
+              {project.images.map((img, i) => (
+                <div
+                  key={`${img}-${i}`}
+                  className={`cs-carousel-slide ${activeImageIndex === i ? 'active' : ''}`.trim()}
+                  aria-hidden={activeImageIndex !== i}
+                >
+                  <img
+                    className="cs-carousel-image"
+                    src={img}
+                    alt={`${project.title} - final result ${i + 1}`}
+                    onClick={() => setExpandedImageIndex(i)}
+                  />
+                  <div className="cs-carousel-overlay">
+                    <span>{project.captions[i] || ''}</span>
+                  </div>
+                </div>
+              ))}
+              <button
+                className="cs-carousel-nav cs-carousel-prev"
+                onClick={showPrevImage}
+                aria-label="Show previous final result image"
+              >
+                ‹
+              </button>
+              <button
+                className="cs-carousel-nav cs-carousel-next"
+                onClick={showNextImage}
+                aria-label="Show next final result image"
+              >
+                ›
+              </button>
+            </div>
+
+            <div className="cs-carousel-thumbs" aria-label="Final result thumbnails">
+              {project.images.map((img, i) => (
+                <button
+                  key={`thumb-${img}-${i}`}
+                  className={`cs-carousel-thumb ${activeImageIndex === i ? 'active' : ''}`.trim()}
+                  onClick={() => goToImage(i)}
+                  aria-label={`Show final result thumbnail ${i + 1}`}
+                  aria-current={activeImageIndex === i ? 'true' : undefined}
+                >
+                  <img src={img} alt="" />
+                </button>
+              ))}
+            </div>
           </div>
         </div>
+        {expandedImageIndex !== null && (
+          <div className="cs-lightbox" onClick={() => setExpandedImageIndex(null)}>
+            <button
+              className="cs-lightbox-close"
+              aria-label="Close expanded image"
+              onClick={() => setExpandedImageIndex(null)}
+            >
+              ✕
+            </button>
+            <img
+              className="cs-lightbox-image"
+              src={project.images[expandedImageIndex]}
+              alt={`${project.title} - expanded final result ${expandedImageIndex + 1}`}
+              onClick={(e) => e.stopPropagation()}
+            />
+            <div className="cs-lightbox-cap" onClick={(e) => e.stopPropagation()}>
+              {project.captions[expandedImageIndex] || ''}
+            </div>
+          </div>
+        )}
         <div style={{ textAlign: 'center', padding: '72px 0 20px' }}>
           <p style={{ fontWeight: 300, fontSize: '.88rem', color: 'var(--taupe)', marginBottom: '24px' }}>Inspired by this project?</p>
           <button className="btn-tr" onClick={() => navigate('/book')}><span>Start Your Project</span></button>
