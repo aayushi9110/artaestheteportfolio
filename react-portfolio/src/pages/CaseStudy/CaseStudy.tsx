@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './CaseStudy.css';
 
+type CaseStudyProps = {
+  showBeforeAfter?: boolean;
+};
+
 type Deliverable = {
   icon: string;
   text: string;
@@ -267,7 +271,7 @@ const PROJECTS: Record<string, Project> = {
   }
 };
 
-const CaseStudy = () => {
+const CaseStudy = ({ showBeforeAfter = true }: CaseStudyProps) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const project = PROJECTS[id || ''] || PROJECTS.amber;
@@ -306,6 +310,10 @@ const CaseStudy = () => {
   }, [id]);
 
   useEffect(() => {
+    if (!showBeforeAfter) {
+      return;
+    }
+
     if (hasInteracted) {
       setIsAutoSliding(false);
       return;
@@ -334,7 +342,7 @@ const CaseStudy = () => {
         window.clearInterval(intervalId);
       }
     };
-  }, [id, hasInteracted]);
+  }, [id, hasInteracted, showBeforeAfter]);
 
   const markInteracted = () => {
     if (!hasInteracted) {
@@ -407,34 +415,36 @@ const CaseStudy = () => {
         </div>
       </div>
       <div className="cs-body">
-        <div className="cs-loc">{project.location}</div>
-        <div className="cs-ba">
-          <div className={`cs-ba-compare ${isAutoSliding ? 'auto-sliding' : ''}`}>
-            <img className="cs-ba-img" src={project.before} alt="Before" />
-            <div className="cs-ba-after" style={{ width: `${comparePosition}%` }}>
-              <img className="cs-ba-img" src={project.after} alt="After" />
+        {showBeforeAfter && (<div className="cs-loc">{project.location}</div>)}
+        {showBeforeAfter && (
+          <div className="cs-ba">
+            <div className={`cs-ba-compare ${isAutoSliding ? 'auto-sliding' : ''}`}>
+              <img className="cs-ba-img" src={project.before} alt="Before" />
+              <div className="cs-ba-after" style={{ width: `${comparePosition}%` }}>
+                <img className="cs-ba-img" src={project.after} alt="After" />
+              </div>
+
+              <div className="cs-ba-divider" style={{ left: `${comparePosition}%` }} aria-hidden="true">
+                <span className="cs-ba-handle">↔</span>
+              </div>
+
+              <div className="cs-ba-lbl cs-ba-lbl-left">Before</div>
+              <div className="cs-ba-lbl cs-ba-lbl-right">After</div>
+
+              <input
+                className="cs-ba-range"
+                type="range"
+                min={0}
+                max={100}
+                value={comparePosition}
+                onChange={(e) => handleCompareChange(Number(e.target.value))}
+                onPointerDown={markInteracted}
+                onKeyDown={markInteracted}
+                aria-label="Before and after comparison slider"
+              />
             </div>
-
-            <div className="cs-ba-divider" style={{ left: `${comparePosition}%` }} aria-hidden="true">
-              <span className="cs-ba-handle">↔</span>
-            </div>
-
-            <div className="cs-ba-lbl cs-ba-lbl-left">Before</div>
-            <div className="cs-ba-lbl cs-ba-lbl-right">After</div>
-
-            <input
-              className="cs-ba-range"
-              type="range"
-              min={0}
-              max={100}
-              value={comparePosition}
-              onChange={(e) => handleCompareChange(Number(e.target.value))}
-              onPointerDown={markInteracted}
-              onKeyDown={markInteracted}
-              aria-label="Before and after comparison slider"
-            />
           </div>
-        </div>
+        )}
         <div className="cs-overview reveal">
           <div className="cs-overview-txt">
             <span className="sec-label">Project Overview</span>

@@ -116,6 +116,11 @@ const Portfolio = () => {
 
   const featuredItems = tab === 'interiors' ? interiorItems : fineArtItems;
 
+  const getStoryPath = (id: string, category: string) => {
+    const isFineArt = category.toLowerCase().includes('art');
+    return isFineArt ? `/fine-art-story/${id}` : `/interior-story/${id}`;
+  };
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -258,7 +263,7 @@ const Portfolio = () => {
                   <p>{item.details}</p>
                   <div className="pf-carousel-actions">
                     {item.caseStudyId && (
-                      <button className="btn-tr" onClick={() => navigate(`/case-study/${item.caseStudyId}`)}>
+                      <button className="btn-tr" onClick={() => navigate(getStoryPath(item.caseStudyId!, item.category))}>
                         <span>View Case Study</span>
                       </button>
                     )}
@@ -333,7 +338,7 @@ const Portfolio = () => {
                 <button
                   className="btn-tr"
                   onClick={() => {
-                    navigate(`/case-study/${activeItem.caseStudyId}`);
+                    navigate(getStoryPath(activeItem.caseStudyId!, activeItem.category));
                     setActiveItem(null);
                   }}
                 >

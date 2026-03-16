@@ -12,7 +12,12 @@ const Header = () => {
   const isSubPage = location.pathname !== '/';
   const pathname = location.pathname;
   const isHomeActive = pathname === '/';
-  const isPortfolioActive = pathname === '/portfolio' || pathname.startsWith('/case-study/') || pathname.startsWith('/project/');
+  const isPortfolioActive =
+    pathname === '/portfolio' ||
+    pathname.startsWith('/interior-story/') ||
+    pathname.startsWith('/fine-art-story/') ||
+    pathname.startsWith('/case-study/') ||
+    pathname.startsWith('/project/');
   const isProcessActive = pathname === '/process';
   const isAboutActive = pathname === '/about';
   const isVirtualActive = pathname === '/virtual';
