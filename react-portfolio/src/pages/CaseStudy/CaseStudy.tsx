@@ -157,7 +157,10 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
           <div className="cs-ba">
             <div className={`cs-ba-compare ${isAutoSliding ? 'auto-sliding' : ''}`}>
               <img className="cs-ba-img" src={project.afterImageUrl} alt="After" />
-              <div className="cs-ba-after" style={{ width: `${comparePosition}%` }}>
+              <div
+                className="cs-ba-after"
+                style={{ clipPath: `inset(0 ${100 - comparePosition}% 0 0)` }}
+              >
                 <img className="cs-ba-img" src={project.beforeImageUrl} alt="Before" />
               </div>
 

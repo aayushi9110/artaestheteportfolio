@@ -108,7 +108,7 @@
 
 .cs-ba-compare {
   position: relative;
-  height: 440px;
+  height: 100%;
   overflow: hidden;
   background: var(--dark);
 }
@@ -124,15 +124,14 @@
 
 .cs-ba-after {
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
+  inset: 0;
   overflow: hidden;
 }
 
 .cs-ba-after .cs-ba-img {
-  width: 100vw;
-  max-width: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .cs-ba-divider {
@@ -156,7 +155,7 @@
 }
 
 .cs-ba-compare.auto-sliding .cs-ba-after {
-  transition: width 1.3s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: clip-path 1.3s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 .cs-ba-compare.auto-sliding .cs-ba-divider {
@@ -522,7 +521,7 @@
   }
 
   .cs-ba-compare {
-    height: 390px;
+    height: 90%;
   }
 
   .cs-ba-handle {
@@ -557,7 +556,7 @@
   }
 
   .cs-ba-compare {
-    height: 300px;
+    height: 80%;
   }
 
   .cs-ba-handle {
