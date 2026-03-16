@@ -100,7 +100,7 @@ export const PROJECTS: Record<string, Project> = {
   },
   nordic: {
     storyType: 'interior',
-    isSelectedForHome: true,
+    isSelectedForHome: false,
     homeVisibilityPriority: 3,
     title: 'Warm Nordic Study',
     location: 'Mayfair, London - In-Person',
@@ -138,7 +138,7 @@ export const PROJECTS: Record<string, Project> = {
     tagLabels: ['Interior Design', 'Office Design', 'Workspace', 'Bo Concept'],
     heroImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[2],
     beforeImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[9],
-    afterImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[3],
+    afterImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[7],
     overviewTitle: 'A placeholder office concept built from BoConcept reference imagery',
     overviewTextPrimary: 'This project entry is currently using placeholder copy while the final office case study details are being prepared. The image gallery is sourced from the BoConcept office reference set in the public images folder.',
     overviewTextSecondary: 'Use this record as the central place to replace placeholder text, tags, captions, and story content once the office project narrative and deliverables are confirmed.',
@@ -225,7 +225,7 @@ export const PROJECTS: Record<string, Project> = {
   },
   coastal: {
     storyType: 'interior',
-    isSelectedForHome: true,
+    isSelectedForHome: false,
     homeVisibilityPriority: 6,
     title: 'Coastal Calm Living Room',
     location: 'Sydney, Australia - Virtual Design',
@@ -255,7 +255,7 @@ export const PROJECTS: Record<string, Project> = {
   },
   earth: {
     storyType: 'fine-art',
-    isSelectedForHome: true,
+    isSelectedForHome: false,
     homeVisibilityPriority: 7,
     title: 'Earth Tones Series',
     location: 'Gallery Commission - New York',
@@ -285,7 +285,7 @@ export const PROJECTS: Record<string, Project> = {
   },
   sienna: {
     storyType: 'fine-art',
-    isSelectedForHome: true,
+    isSelectedForHome: false,
     homeVisibilityPriority: 8,
     title: 'Sienna Abstract',
     location: 'Mixed Media - London Commission',
@@ -315,7 +315,7 @@ export const PROJECTS: Record<string, Project> = {
   },
   clay: {
     storyType: 'fine-art',
-    isSelectedForHome: true,
+    isSelectedForHome: false,
     homeVisibilityPriority: 9,
     title: 'Clay Forms',
     location: 'Ceramic Sculpture - Brooklyn Studio',

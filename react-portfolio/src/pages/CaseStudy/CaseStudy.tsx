@@ -156,9 +156,9 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
         {showInteriorView && (
           <div className="cs-ba">
             <div className={`cs-ba-compare ${isAutoSliding ? 'auto-sliding' : ''}`}>
-              <img className="cs-ba-img" src={project.beforeImageUrl} alt="Before" />
-              <div className="cs-ba-afterImageUrl" style={{ width: `${comparePosition}%` }}>
-                <img className="cs-ba-img" src={project.afterImageUrl} alt="After" />
+              <img className="cs-ba-img" src={project.afterImageUrl} alt="After" />
+              <div className="cs-ba-after" style={{ width: `${comparePosition}%` }}>
+                <img className="cs-ba-img" src={project.beforeImageUrl} alt="Before" />
               </div>
 
               <div className="cs-ba-divider" style={{ left: `${comparePosition}%` }} aria-hidden="true">
@@ -177,7 +177,7 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
                 onChange={(e) => handleCompareChange(Number(e.target.value))}
                 onPointerDown={markInteracted}
                 onKeyDown={markInteracted}
-                aria-label="Before and afterImageUrl comparison slider"
+                aria-label="Before and after comparison slider"
               />
             </div>
           </div>
@@ -230,14 +230,22 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
               ))}
               <button
                 className="cs-carousel-nav cs-carousel-prev"
-                onClick={showPrevImage}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  showPrevImage();
+                }}
                 aria-label="Show previous final result image"
               >
                 ‹
               </button>
               <button
                 className="cs-carousel-nav cs-carousel-next"
-                onClick={showNextImage}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  showNextImage();
+                }}
                 aria-label="Show next final result image"
               >
                 ›
