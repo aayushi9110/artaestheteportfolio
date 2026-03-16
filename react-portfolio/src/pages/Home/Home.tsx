@@ -131,7 +131,7 @@ const Home = () => {
         <div className="ph-content rr">
           <span className="sec-label">Philosophy</span>
           <h2>Art is not <em>decoration</em>.<br/>It is conversation.</h2>
-          <p>Founded by creative director Elara Voss, Art Aesthete was born from the belief that the spaces we inhabit shape who we are. We bring together painters, architects, and curators under one vision.</p>
+          <p>Founded by creative director Aayushi Shah, Art Aesthete was born from the belief that the spaces we inhabit shape who we are. We bring together painters, architects, and curators under one vision.</p>
           <p>Every project begins not with a brief, but with a story — yours. We listen, we feel, we translate emotion into form, texture, and light. The result is never just a beautiful room. It is a place where you recognise yourself.</p>
           <div style={{marginTop: '32px'}}>
             <Link to="/about" className="btn-ghost">My Story <span className="circ"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg></span></Link>
