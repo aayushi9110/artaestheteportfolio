@@ -50,23 +50,19 @@ const WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS = [
 ];
 
 const WESTELM_MID_CENTURY_MODERN_IMAGE_URLS = [
-  '/images/WestElm/midCenturyModern/firefly-geminiflash-cabinet-books-edit.png',
-  '/images/WestElm/midCenturyModern/firefly-mix-single-picture.png',
-  '/images/WestElm/midCenturyModern/firefly-move-tree-right-sofa.png',
-  '/images/WestElm/midCenturyModern/westelm-dining-project-1-chandelier.png',
-  '/images/WestElm/midCenturyModern/westelm-dining-project-1.png',
   '/images/WestElm/midCenturyModern/westelm-living-dining-project-1.png',
+  '/images/WestElm/midCenturyModern/westelm-dining-project-1-chandelier.png',
+  '/images/WestElm/midCenturyModern/westelm-great-room.png',
+  '/images/WestElm/midCenturyModern/westelm-project-living-view-2.png',
   '/images/WestElm/midCenturyModern/westelm-living-project-1.png',
-  '/images/WestElm/midCenturyModern/westelm-living-project-view-2.png',
-  '/images/WestElm/midCenturyModern/westelm-living-project.png',
-  '/images/WestElm/midCenturyModern/westelm-project-living-view-2.png'
+  '/images/WestElm/midCenturyModern/westelm-living-project.png'  
 ];
 
 export const PROJECTS: Record<string, Project> = {
   amber: {
     storyType: 'interior',
     isSelectedForHome: true,
-    homeVisibilityPriority: 4,
+    homeVisibilityPriority: 5,
     title: 'The Amber Salon',
     location: 'New York, NY - Virtual Design',
     tagLabels: ['Interior Design', 'Virtual Consultation', 'Living Room'],
@@ -96,7 +92,7 @@ export const PROJECTS: Record<string, Project> = {
   terra: {
     storyType: 'interior',
     isSelectedForHome: true,
-    homeVisibilityPriority: 2,
+    homeVisibilityPriority: 4,
     title: 'Terracotta Living - Coastal Calm',
     location: 'Malibu, California - Virtual Design',
     tagLabels: ['Interior Design', 'Virtual Consultation', 'Living Room', 'Bedroom'],
@@ -126,7 +122,7 @@ export const PROJECTS: Record<string, Project> = {
   nordic: {
     storyType: 'interior',
     isSelectedForHome: false,
-    homeVisibilityPriority: 3,
+    homeVisibilityPriority: 99,
     title: 'Warm Nordic Study',
     location: 'Mayfair, London - In-Person',
     tagLabels: ['Interior Design', 'Home Office', 'In-Person'],
@@ -190,8 +186,8 @@ export const PROJECTS: Record<string, Project> = {
   },
   contemporaryLiving: {
     storyType: 'interior',
-    isSelectedForHome: false,
-    homeVisibilityPriority: 97,
+    isSelectedForHome: true,
+    homeVisibilityPriority: 3,
     title: 'West Elm Contemporary Living',
     location: 'Placeholder Location - Interior Styling',
     tagLabels: ['Interior Design', 'Contemporary Living', 'West Elm'],
@@ -226,14 +222,14 @@ export const PROJECTS: Record<string, Project> = {
   },
   midCenturyModern: {
     storyType: 'interior',
-    isSelectedForHome: false,
-    homeVisibilityPriority: 98,
-    title: 'West Elm Mid-Century Modern',
+    isSelectedForHome: true,
+    homeVisibilityPriority: 2,
+    title: 'Mid-Century Modern',
     location: 'Placeholder Location - Interior Styling',
-    tagLabels: ['Interior Design', 'Mid-Century Modern', 'West Elm'],
-    heroImageUrl: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS[8],
+    tagLabels: ['Interior Design', 'Mid-Century Modern', 'West Elm', 'Living', 'Dining'],
+    heroImageUrl: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS[0],
     beforeImageUrl: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS[0],
-    afterImageUrl: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS[8],
+    afterImageUrl: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS[4],
     overviewTitle: 'A mid-century modern concept built from West Elm reference imagery',
     overviewTextPrimary: 'This project entry currently uses placeholder content while the final West Elm mid-century modern case study is being prepared. The gallery is driven by the local midCenturyModern image set.',
     overviewTextSecondary: 'Use this record to centralize the final transformation copy, deliverables, and caption details once the project is ready to publish.',
@@ -254,16 +250,13 @@ export const PROJECTS: Record<string, Project> = {
       'Mid-century modern reference 4',
       'Mid-century modern reference 5',
       'Mid-century modern reference 6',
-      'Mid-century modern reference 7',
-      'Mid-century modern reference 8',
-      'Mid-century modern reference 9',
-      'Mid-century modern reference 10'
+      'Mid-century modern reference 7'
     ]
   },
   linen: {
     storyType: 'interior',
     isSelectedForHome: true,
-    homeVisibilityPriority: 5,
+    homeVisibilityPriority: 6,
     title: 'Linen & Oak',
     location: 'Paris, France - In-Person',
     tagLabels: ['Interior Design', 'Living Room', 'Dining', 'In-Person'],
@@ -323,7 +316,7 @@ export const PROJECTS: Record<string, Project> = {
   coastal: {
     storyType: 'interior',
     isSelectedForHome: false,
-    homeVisibilityPriority: 6,
+    homeVisibilityPriority: 99,
     title: 'Coastal Calm Living Room',
     location: 'Sydney, Australia - Virtual Design',
     tagLabels: ['Interior Design', 'Virtual Consultation', 'Living Room'],
