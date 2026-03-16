@@ -93,7 +93,7 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
     setComparePosition(value);
   };
 
-  const totalImages = project.images.length;
+  const totalImages = project.galleryImageUrls.length;
 
   useEffect(() => {
     if (totalImages <= 1 || isCarouselHovered || expandedImageIndex !== null) {
@@ -140,14 +140,14 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
   return (
     <div id="pg-case-study" className="pg on">
       <div className="cs-hero">
-        <div className="cs-hero-bg" style={{ backgroundImage: `url(${project.heroBg})` }}></div>
+        <div className="cs-hero-bg" style={{ backgroundImage: `url(${project.heroImageUrl})` }}></div>
         <div className="cs-hero-c">
           <button className="page-back" onClick={() => navigate('/portfolio')}>
             <svg width="13" height="9" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5H2M2 5L6 1M2 5l4 4"/></svg> Back to Portfolio
           </button>
           <h1>{project.title}</h1>
-          <div className="cs-tags">
-            {project.tags.map((tag) => <span key={tag} className="cs-tag">{tag}</span>)}
+          <div className="cs-tagLabels">
+            {project.tagLabels.map((tag) => <span key={tag} className="cs-tag">{tag}</span>)}
           </div>
         </div>
       </div>
@@ -156,9 +156,9 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
         {showInteriorView && (
           <div className="cs-ba">
             <div className={`cs-ba-compare ${isAutoSliding ? 'auto-sliding' : ''}`}>
-              <img className="cs-ba-img" src={project.before} alt="Before" />
-              <div className="cs-ba-after" style={{ width: `${comparePosition}%` }}>
-                <img className="cs-ba-img" src={project.after} alt="After" />
+              <img className="cs-ba-img" src={project.beforeImageUrl} alt="Before" />
+              <div className="cs-ba-afterImageUrl" style={{ width: `${comparePosition}%` }}>
+                <img className="cs-ba-img" src={project.afterImageUrl} alt="After" />
               </div>
 
               <div className="cs-ba-divider" style={{ left: `${comparePosition}%` }} aria-hidden="true">
@@ -177,7 +177,7 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
                 onChange={(e) => handleCompareChange(Number(e.target.value))}
                 onPointerDown={markInteracted}
                 onKeyDown={markInteracted}
-                aria-label="Before and after comparison slider"
+                aria-label="Before and afterImageUrl comparison slider"
               />
             </div>
           </div>
@@ -185,16 +185,16 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
         <div className="cs-overview reveal">
           <div className="cs-overview-txt">
             <span className="sec-label">Project Overview</span>
-            <h3>{project.overviewHeading}</h3>
-            <p>{project.overviewP1}</p>
-            <p>{project.overviewP2}</p>
+            <h3>{project.overviewTitle}</h3>
+            <p>{project.overviewTextPrimary}</p>
+            <p>{project.overviewTextSecondary}</p>
           </div>
           {showInteriorView && (
-            <div className="cs-deliverables">
+            <div className="cs-deliverableItems">
               <span className="sec-label">Deliverables</span>
               <h3>What we provided</h3>
               <ul className="cs-dl-list">
-                {project.deliverables.map((item) => (
+                {project.deliverableItems.map((item) => (
                   <li key={item.text}><span className="dl-ico">{item.icon}</span>{item.text}</li>
                 ))}
               </ul>
@@ -211,7 +211,7 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
               onMouseEnter={() => setIsCarouselHovered(true)}
               onMouseLeave={() => setIsCarouselHovered(false)}
             >
-              {project.images.map((img, i) => (
+              {project.galleryImageUrls.map((img, i) => (
                 <div
                   key={`${img}-${i}`}
                   className={`cs-carousel-slide ${activeImageIndex === i ? 'active' : ''}`.trim()}
@@ -224,7 +224,7 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
                     onClick={() => setExpandedImageIndex(i)}
                   />
                   <div className="cs-carousel-overlay">
-                    <span>{project.captions[i] || ''}</span>
+                    <span>{project.galleryCaptions[i] || ''}</span>
                   </div>
                 </div>
               ))}
@@ -245,7 +245,7 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
             </div>
 
             <div className="cs-carousel-thumbs" aria-label="Final result thumbnails">
-              {project.images.map((img, i) => (
+              {project.galleryImageUrls.map((img, i) => (
                 <button
                   key={`thumb-${img}-${i}`}
                   className={`cs-carousel-thumb ${activeImageIndex === i ? 'active' : ''}`.trim()}
@@ -270,12 +270,12 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
             </button>
             <img
               className="cs-lightbox-image"
-              src={project.images[expandedImageIndex]}
+              src={project.galleryImageUrls[expandedImageIndex]}
               alt={`${project.title} - expanded final result ${expandedImageIndex + 1}`}
               onClick={(e) => e.stopPropagation()}
             />
             <div className="cs-lightbox-cap" onClick={(e) => e.stopPropagation()}>
-              {project.captions[expandedImageIndex] || ''}
+              {project.galleryCaptions[expandedImageIndex] || ''}
             </div>
           </div>
         )}

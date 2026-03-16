@@ -7,7 +7,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const homeSelectedWorks = Object.entries(PROJECTS)
-    .filter(([, project]) => project.selectedForHomeFlag)
+    .filter(([, project]) => project.isSelectedForHome)
     .map(([id, project]) => ({ id, project }));
 
   useEffect(() => {
@@ -99,9 +99,9 @@ const Home = () => {
         </div>
         <div className="hero-r">
           <div className="h-img-grid">
-            <div className="h-img"><img src="/images/hero-image-1.jpg" alt="" className="prlx" data-s=".04"/></div>
-            <div className="h-img"><img src="/images/hero-image-2.jpg" alt="" className="prlx" data-s=".07"/></div>
-            <div className="h-img"><img src="/images/hero-image-3.jpg" alt="" className="prlx" data-s=".03"/></div>
+            <div className="h-img"><img src="/galleryImageUrls/hero-image-1.jpg" alt="" className="prlx" data-s=".04"/></div>
+            <div className="h-img"><img src="/galleryImageUrls/hero-image-2.jpg" alt="" className="prlx" data-s=".07"/></div>
+            <div className="h-img"><img src="/galleryImageUrls/hero-image-3.jpg" alt="" className="prlx" data-s=".03"/></div>
           </div>
         </div>
       </section>
@@ -127,7 +127,7 @@ const Home = () => {
 
       <section className="philosophy" id="about-strip">
         <div className="ph-img rl">
-          <img src="/images/studio.jpg" alt="Studio"/>
+          <img src="/galleryImageUrls/studio.jpg" alt="Studio"/>
         </div>
         <div className="ph-content rr">
           <span className="sec-label">Philosophy</span>
@@ -164,10 +164,10 @@ const Home = () => {
                 onClick={() => goProject(id, cardType)}
               >
                 <div className="pi-img">
-                  <img src={project.images[0]} alt={project.title}/>
+                  <img src={project.galleryImageUrls[0]} alt={project.title}/>
                 </div>
                 <div className="pi-ov">
-                  <span className="pi-cat">{project.tags[0]}</span>
+                  <span className="pi-cat">{project.tagLabels[0]}</span>
                   <span className="pi-title">{project.title}</span>
                   <div className="pi-arr">
                     <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -253,7 +253,7 @@ const Home = () => {
             <blockquote>They didn't just design our home — they gave us a place we finally feel like ourselves in. Every object chosen with care, every corner considered.</blockquote>
             <div className="tc-info">
               <div className="tc-av">
-                <img src="/images/testimonial-1.jpg" alt=""/>
+                <img src="/galleryImageUrls/testimonial-1.jpg" alt=""/>
               </div>
               <div>
                 <div className="tc-name">Isabelle R.</div>
@@ -266,7 +266,7 @@ const Home = () => {
             <blockquote>The virtual consultation was shockingly thorough. Over a video call, they designed our living room — and the result was more beautiful than we imagined.</blockquote>
             <div className="tc-info">
               <div className="tc-av">
-                <img src="/images/testimonial-2.jpg" alt=""/>
+                <img src="/galleryImageUrls/testimonial-2.jpg" alt=""/>
               </div>
               <div>
                 <div className="tc-name">Marcus T.</div>
@@ -279,7 +279,7 @@ const Home = () => {
             <blockquote>They understood exactly what I couldn't articulate. The warmth, the textures, the light — it feels like the house has always been this way.</blockquote>
             <div className="tc-info">
               <div className="tc-av">
-                <img src="/images/testimonial-3.jpg" alt=""/>
+                <img src="/galleryImageUrls/testimonial-3.jpg" alt=""/>
               </div>
               <div>
                 <div className="tc-name">Nadia O.</div>
