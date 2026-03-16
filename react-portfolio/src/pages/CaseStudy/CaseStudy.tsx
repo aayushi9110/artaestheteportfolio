@@ -452,19 +452,22 @@ const CaseStudy = ({ showBeforeAfter = true }: CaseStudyProps) => {
             <p>{project.overviewP1}</p>
             <p>{project.overviewP2}</p>
           </div>
-          <div className="cs-deliverables">
-            <span className="sec-label">Deliverables</span>
-            <h3>What we provided</h3>
-            <ul className="cs-dl-list">
-              {project.deliverables.map((item) => (
-                <li key={item.text}><span className="dl-ico">{item.icon}</span>{item.text}</li>
-              ))}
-            </ul>
-          </div>
+          {showBeforeAfter && (
+            <div className="cs-deliverables">
+              <span className="sec-label">Deliverables</span>
+              <h3>What we provided</h3>
+              <ul className="cs-dl-list">
+                {project.deliverables.map((item) => (
+                  <li key={item.text}><span className="dl-ico">{item.icon}</span>{item.text}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
         <div className="cs-gallery reveal">
-          <span className="sec-label">Final Result</span>
-          <h3>The finished space</h3>
+          {showBeforeAfter && ( <span className="sec-label">Final Result</span> )}
+          {showBeforeAfter && ( <h3>The finished space</h3> )}
+          {!showBeforeAfter && ( <h3>The finished Artwork</h3> )}
           <div className="cs-carousel">
             <div
               className="cs-carousel-frame"
