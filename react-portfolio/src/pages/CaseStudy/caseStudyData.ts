@@ -37,7 +37,7 @@ const BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS = [
 ];
 
 const WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS = [
-  '/images/WestElm/contemporaryLiving/westelm-details.png',
+  '/images/WestElm/contemporaryLiving/westelm-details.png' ,
   '/images/WestElm/contemporaryLiving/westelm-dining-1.png',
   '/images/WestElm/contemporaryLiving/westelm-dining-pa-phone.png',
   '/images/WestElm/contemporaryLiving/westelm-dining.png',
