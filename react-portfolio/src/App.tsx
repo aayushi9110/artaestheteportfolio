@@ -5,7 +5,6 @@ import Portfolio from './pages/Portfolio/Portfolio';
 import Process from './pages/Process/Process';
 import Virtual from './pages/Virtual/Virtual';
 import Book from './pages/Book/Book';
-import CaseStudy from './pages/CaseStudy/CaseStudy';
 import InteriorStory from './pages/InteriorStory/InteriorStory';
 import FineArtStory from './pages/FineArtStory/FineArtStory';
 import Header from './components/Header';
