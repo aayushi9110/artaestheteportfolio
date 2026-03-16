@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { PROJECTS } from '../CaseStudy/caseStudyData.ts';
 import './Portfolio.css';
 
 type GalleryItem = {
@@ -116,9 +117,9 @@ const Portfolio = () => {
 
   const featuredItems = tab === 'interiors' ? interiorItems : fineArtItems;
 
-  const getStoryPath = (id: string, category: string) => {
-    const isFineArt = category.toLowerCase().includes('art');
-    return isFineArt ? `/fine-art-story/${id}` : `/interior-story/${id}`;
+  const getStoryPath = (id: string) => {
+    const project = PROJECTS[id];
+    return project?.storyType === 'fine-art' ? `/fine-art-story/${id}` : `/interior-story/${id}`;
   };
 
   useEffect(() => {
@@ -263,7 +264,7 @@ const Portfolio = () => {
                   <p>{item.details}</p>
                   <div className="pf-carousel-actions">
                     {item.caseStudyId && (
-                      <button className="btn-tr" onClick={() => navigate(getStoryPath(item.caseStudyId!, item.category))}>
+                      <button className="btn-tr" onClick={() => navigate(getStoryPath(item.caseStudyId!))}>
                         <span>View Case Study</span>
                       </button>
                     )}
@@ -338,7 +339,7 @@ const Portfolio = () => {
                 <button
                   className="btn-tr"
                   onClick={() => {
-                    navigate(getStoryPath(activeItem.caseStudyId!, activeItem.category));
+                    navigate(getStoryPath(activeItem.caseStudyId!));
                     setActiveItem(null);
                   }}
                 >

@@ -5,6 +5,7 @@ import Portfolio from './pages/Portfolio/Portfolio';
 import Process from './pages/Process/Process';
 import Virtual from './pages/Virtual/Virtual';
 import Book from './pages/Book/Book';
+import { PROJECTS } from './pages/CaseStudy/caseStudyData.ts';
 import InteriorStory from './pages/InteriorStory/InteriorStory';
 import FineArtStory from './pages/FineArtStory/FineArtStory';
 import Header from './components/Header';
@@ -25,8 +26,8 @@ function ScrollToTop() {
 
 function StoryRouteResolver() {
   const { id = '' } = useParams();
-  const fineArtIds = new Set(['earth', 'sienna', 'clay']);
-  const target = fineArtIds.has(id) ? `/fine-art-story/${id}` : `/interior-story/${id}`;
+  const project = PROJECTS[id];
+  const target = project?.storyType === 'fine-art' ? `/fine-art-story/${id}` : `/interior-story/${id}`;
 
   return <Navigate to={target} replace />;
 }
