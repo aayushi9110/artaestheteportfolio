@@ -18,6 +18,7 @@ const Home = () => {
 
   const homeSelectedWorks = Object.entries(PROJECTS)
     .filter(([, project]) => project.isSelectedForHome)
+    .sort(([, projectA], [, projectB]) => projectA.homeVisibilityPriority - projectB.homeVisibilityPriority)
     .map(([id, project]) => ({ id, project }));
 
   useEffect(() => {

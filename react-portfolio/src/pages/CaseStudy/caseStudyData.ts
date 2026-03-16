@@ -8,6 +8,7 @@ export type Deliverable = {
 export type Project = {
   storyType: StoryType;
   isSelectedForHome: boolean;
+  homeVisibilityPriority: number;
   title: string;
   location: string;
   tagLabels: string[];
@@ -39,6 +40,7 @@ export const PROJECTS: Record<string, Project> = {
   amber: {
     storyType: 'interior',
     isSelectedForHome: true,
+    homeVisibilityPriority: 4,
     title: 'The Amber Salon',
     location: 'New York, NY - Virtual Design',
     tagLabels: ['Interior Design', 'Virtual Consultation', 'Living Room'],
@@ -68,6 +70,7 @@ export const PROJECTS: Record<string, Project> = {
   terra: {
     storyType: 'interior',
     isSelectedForHome: true,
+    homeVisibilityPriority: 2,
     title: 'Terracotta Living - Coastal Calm',
     location: 'Malibu, California - Virtual Design',
     tagLabels: ['Interior Design', 'Virtual Consultation', 'Living Room', 'Bedroom'],
@@ -97,6 +100,7 @@ export const PROJECTS: Record<string, Project> = {
   nordic: {
     storyType: 'interior',
     isSelectedForHome: true,
+    homeVisibilityPriority: 3,
     title: 'Warm Nordic Study',
     location: 'Mayfair, London - In-Person',
     tagLabels: ['Interior Design', 'Home Office', 'In-Person'],
@@ -124,11 +128,12 @@ export const PROJECTS: Record<string, Project> = {
     ],
     galleryCaptions: ['Study - full view', 'Shelving detail', 'Reading corner', 'Desk at the window', 'Art placement']
   },
-  offices: {
+  homeOffices: {
     storyType: 'interior',
     isSelectedForHome: true,
-    title: 'BoConcept Office Concept',
-    location: 'Placeholder Location - In-Person',
+    homeVisibilityPriority: 1,
+    title: 'BoConcept Home Office Decor',
+    location: 'San Jose, California - Home office of the dreams - Virtual',
     tagLabels: ['Interior Design', 'Office Design', 'Workspace', 'Bo Concept'],
     heroImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[3],
     beforeImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[0],
@@ -160,6 +165,7 @@ export const PROJECTS: Record<string, Project> = {
   linen: {
     storyType: 'interior',
     isSelectedForHome: true,
+    homeVisibilityPriority: 5,
     title: 'Linen & Oak',
     location: 'Paris, France - In-Person',
     tagLabels: ['Interior Design', 'Living Room', 'Dining', 'In-Person'],
@@ -189,6 +195,7 @@ export const PROJECTS: Record<string, Project> = {
   sand: {
     storyType: 'interior',
     isSelectedForHome: false,
+    homeVisibilityPriority: 99,
     title: 'The Sand Suite',
     location: 'Dubai, UAE - In-Person',
     tagLabels: ['Interior Design', 'Suite Design', 'Hospitality Residential'],
@@ -218,6 +225,7 @@ export const PROJECTS: Record<string, Project> = {
   coastal: {
     storyType: 'interior',
     isSelectedForHome: true,
+    homeVisibilityPriority: 6,
     title: 'Coastal Calm Living Room',
     location: 'Sydney, Australia - Virtual Design',
     tagLabels: ['Interior Design', 'Virtual Consultation', 'Living Room'],
@@ -247,6 +255,7 @@ export const PROJECTS: Record<string, Project> = {
   earth: {
     storyType: 'fine-art',
     isSelectedForHome: true,
+    homeVisibilityPriority: 7,
     title: 'Earth Tones Series',
     location: 'Gallery Commission - New York',
     tagLabels: ['Fine Art', 'Oil on Linen', 'Commissioned'],
@@ -276,6 +285,7 @@ export const PROJECTS: Record<string, Project> = {
   sienna: {
     storyType: 'fine-art',
     isSelectedForHome: true,
+    homeVisibilityPriority: 8,
     title: 'Sienna Abstract',
     location: 'Mixed Media - London Commission',
     tagLabels: ['Fine Art', 'Mixed Media', 'Commission'],
@@ -305,6 +315,7 @@ export const PROJECTS: Record<string, Project> = {
   clay: {
     storyType: 'fine-art',
     isSelectedForHome: true,
+    homeVisibilityPriority: 9,
     title: 'Clay Forms',
     location: 'Ceramic Sculpture - Brooklyn Studio',
     tagLabels: ['Fine Art', 'Ceramic', 'Sculptural'],
