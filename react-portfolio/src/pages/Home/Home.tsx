@@ -3,6 +3,16 @@ import { Link, useNavigate } from 'react-router-dom';
 import { PROJECTS } from '../CaseStudy/caseStudyData.ts';
 import './Home.css';
 
+const MARQUEE_ITEMS = [
+  'Interior Design',
+  'Virtual Consultation',
+  'Fine Art Curation',
+  'Color Consultancy',
+  'Space Planning',
+  'E-Design Packages',
+  'Bespoke Styling',
+];
+
 const Home = () => {
   const navigate = useNavigate();
 
@@ -108,20 +118,9 @@ const Home = () => {
 
       <div className="marq">
         <div className="marq-track">
-          <span className="marq-item">Interior Design</span>
-          <span className="marq-item">Virtual Consultation</span>
-          <span className="marq-item">Fine Art Curation</span>
-          <span className="marq-item">Color Consultancy</span>
-          <span className="marq-item">Space Planning</span>
-          <span className="marq-item">E-Design Packages</span>
-          <span className="marq-item">Bespoke Styling</span>
-          <span className="marq-item">Interior Design</span>
-          <span className="marq-item">Virtual Consultation</span>
-          <span className="marq-item">Fine Art Curation</span>
-          <span className="marq-item">Color Consultancy</span>
-          <span className="marq-item">Space Planning</span>
-          <span className="marq-item">E-Design Packages</span>
-          <span className="marq-item">Bespoke Styling</span>
+          {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
+            <span key={i} className="marq-item">{item}</span>
+          ))}
         </div>
       </div>
 
