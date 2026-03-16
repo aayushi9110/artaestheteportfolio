@@ -7,6 +7,7 @@ export type Deliverable = {
 
 export type Project = {
   storyType: StoryType;
+  selectedForHomeFlag: boolean;
   title: string;
   location: string;
   tags: string[];
@@ -24,6 +25,7 @@ export type Project = {
 export const PROJECTS: Record<string, Project> = {
   amber: {
     storyType: 'interior',
+    selectedForHomeFlag: true,
     title: 'The Amber Salon',
     location: 'New York, NY - Virtual Design',
     tags: ['Interior Design', 'Virtual Consultation', 'Living Room'],
@@ -52,6 +54,7 @@ export const PROJECTS: Record<string, Project> = {
   },
   terra: {
     storyType: 'interior',
+    selectedForHomeFlag: true,
     title: 'Terracotta Living - Coastal Calm',
     location: 'Malibu, California - Virtual Design',
     tags: ['Interior Design', 'Virtual Consultation', 'Living Room', 'Bedroom'],
@@ -80,6 +83,7 @@ export const PROJECTS: Record<string, Project> = {
   },
   nordic: {
     storyType: 'interior',
+    selectedForHomeFlag: true,
     title: 'Warm Nordic Study',
     location: 'Mayfair, London - In-Person',
     tags: ['Interior Design', 'Home Office', 'In-Person'],
@@ -108,6 +112,7 @@ export const PROJECTS: Record<string, Project> = {
   },
   linen: {
     storyType: 'interior',
+    selectedForHomeFlag: true,
     title: 'Linen & Oak',
     location: 'Paris, France - In-Person',
     tags: ['Interior Design', 'Living Room', 'Dining', 'In-Person'],
@@ -136,6 +141,7 @@ export const PROJECTS: Record<string, Project> = {
   },
   sand: {
     storyType: 'interior',
+    selectedForHomeFlag: false,
     title: 'The Sand Suite',
     location: 'Dubai, UAE - In-Person',
     tags: ['Interior Design', 'Suite Design', 'Hospitality Residential'],
@@ -164,6 +170,7 @@ export const PROJECTS: Record<string, Project> = {
   },
   coastal: {
     storyType: 'interior',
+    selectedForHomeFlag: true,
     title: 'Coastal Calm Living Room',
     location: 'Sydney, Australia - Virtual Design',
     tags: ['Interior Design', 'Virtual Consultation', 'Living Room'],
@@ -192,6 +199,7 @@ export const PROJECTS: Record<string, Project> = {
   },
   earth: {
     storyType: 'fine-art',
+    selectedForHomeFlag: true,
     title: 'Earth Tones Series',
     location: 'Gallery Commission - New York',
     tags: ['Fine Art', 'Oil on Linen', 'Commissioned'],
@@ -220,6 +228,7 @@ export const PROJECTS: Record<string, Project> = {
   },
   sienna: {
     storyType: 'fine-art',
+    selectedForHomeFlag: true,
     title: 'Sienna Abstract',
     location: 'Mixed Media - London Commission',
     tags: ['Fine Art', 'Mixed Media', 'Commission'],
@@ -248,6 +257,7 @@ export const PROJECTS: Record<string, Project> = {
   },
   clay: {
     storyType: 'fine-art',
+    selectedForHomeFlag: true,
     title: 'Clay Forms',
     location: 'Ceramic Sculpture - Brooklyn Studio',
     tags: ['Fine Art', 'Ceramic', 'Sculptural'],

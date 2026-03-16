@@ -1,9 +1,15 @@
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { PROJECTS } from '../CaseStudy/caseStudyData.ts';
 import './Home.css';
 
 const Home = () => {
   const navigate = useNavigate();
+
+  const homeSelectedWorks = Object.entries(PROJECTS)
+    .filter(([, project]) => project.selectedForHomeFlag)
+    .map(([id, project]) => ({ id, project }));
+
   useEffect(() => {
     // Add reveal animations
     const observer = new IntersectionObserver(
@@ -147,104 +153,31 @@ const Home = () => {
           </div>
         </div>
         <div className="port-grid" id="hPortGrid">
-          <div className="pi" data-cat="interior" data-proj="amber" onClick={() => goProject('amber', 'interior')}>
-            <div className="pi-img">
-              <img src="/images/project-1.jpg" alt=""/>
-            </div>
-            <div className="pi-ov">
-              <span className="pi-cat">Interior Design</span>
-              <span className="pi-title">The Amber Salon</span>
-              <div className="pi-arr">
-                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M2 10L10 2M10 2H4M10 2v6"/>
-                </svg>
+          {homeSelectedWorks.map(({ id, project }) => {
+            const cardType = project.storyType === 'fine-art' ? 'art' : 'interior';
+            return (
+              <div
+                key={id}
+                className="pi"
+                data-cat={cardType}
+                data-proj={id}
+                onClick={() => goProject(id, cardType)}
+              >
+                <div className="pi-img">
+                  <img src={project.images[0]} alt={project.title}/>
+                </div>
+                <div className="pi-ov">
+                  <span className="pi-cat">{project.tags[0]}</span>
+                  <span className="pi-title">{project.title}</span>
+                  <div className="pi-arr">
+                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M2 10L10 2M10 2H4M10 2v6"/>
+                    </svg>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div className="pi" data-cat="art" data-proj="earth" onClick={() => goProject('earth', 'art')}>
-            <div className="pi-img">
-              <img src="/images/project-2.jpg" alt=""/>
-            </div>
-            <div className="pi-ov">
-              <span className="pi-cat">Fine Art Curation</span>
-              <span className="pi-title">Earth Tones Series</span>
-              <div className="pi-arr">
-                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M2 10L10 2M10 2H4M10 2v6"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div className="pi" data-cat="interior" data-proj="nordic" onClick={() => goProject('nordic', 'interior')}>
-            <div className="pi-img">
-              <img src="/images/project-3.jpg" alt=""/>
-            </div>
-            <div className="pi-ov">
-              <span className="pi-cat">Interior Design</span>
-              <span className="pi-title">Warm Nordic Study</span>
-              <div className="pi-arr">
-                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M2 10L10 2M10 2H4M10 2v6"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div className="pi" data-cat="art" data-proj="sienna" onClick={() => goProject('sienna', 'art')}>
-            <div className="pi-img">
-              <img src="/images/project-4.jpg" alt=""/>
-            </div>
-            <div className="pi-ov">
-              <span className="pi-cat">Fine Art</span>
-              <span className="pi-title">Sienna Abstract</span>
-              <div className="pi-arr">
-                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M2 10L10 2M10 2H4M10 2v6"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div className="pi" data-cat="interior" data-proj="terra" onClick={() => goProject('terra', 'interior')}>
-            <div className="pi-img">
-              <img src="/images/project-5.jpg" alt=""/>
-            </div>
-            <div className="pi-ov">
-              <span className="pi-cat">Interior Design</span>
-              <span className="pi-title">Terracotta Living</span>
-              <div className="pi-arr">
-                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M2 10L10 2M10 2H4M10 2v6"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div className="pi" data-cat="art" data-proj="clay" onClick={() => goProject('clay', 'art')}>
-            <div className="pi-img">
-              <img src="/images/project-6.jpg" alt=""/>
-            </div>
-            <div className="pi-ov">
-              <span className="pi-cat">Fine Art</span>
-              <span className="pi-title">Clay Forms</span>
-              <div className="pi-arr">
-                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M2 10L10 2M10 2H4M10 2v6"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div className="pi" data-cat="interior" data-proj="linen" onClick={() => goProject('linen', 'interior')}>
-            <div className="pi-img">
-              <img src="/images/project-7.jpg" alt=""/>
-            </div>
-            <div className="pi-ov">
-              <span className="pi-cat">Interior Design</span>
-              <span className="pi-title">Linen & Oak</span>
-              <div className="pi-arr">
-                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M2 10L10 2M10 2H4M10 2v6"/>
-                </svg>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
         <div style={{textAlign: 'center', marginTop: '56px'}}>
           <Link to="/portfolio" className="btn-ghost">View Full Portfolio <span className="circ"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg></span></Link>
