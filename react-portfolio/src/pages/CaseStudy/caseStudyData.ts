@@ -33,7 +33,8 @@ const BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS = [
   '/images/Boconcept/office/boconcept-desk-details-2.png',
   '/images/Boconcept/office/boconcept-office-details-corner.png',
   '/images/Boconcept/office/boconcept-office-room.png',
-  '/images/Boconcept/office/boconcept-office-sofabed-pull-2.png'
+  '/images/Boconcept/office/boconcept-office-sofabed-pull-2.png',
+  '/images/Boconcept/office/boconcept-office-view-before.png'
 ];
 
 export const PROJECTS: Record<string, Project> = {
@@ -135,9 +136,9 @@ export const PROJECTS: Record<string, Project> = {
     title: 'BoConcept Home Office Decor',
     location: 'San Jose, California - Home office of the dreams - Virtual',
     tagLabels: ['Interior Design', 'Office Design', 'Workspace', 'Bo Concept'],
-    heroImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[3],
-    beforeImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[0],
-    afterImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[1],
+    heroImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[2],
+    beforeImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[9],
+    afterImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[3],
     overviewTitle: 'A placeholder office concept built from BoConcept reference imagery',
     overviewTextPrimary: 'This project entry is currently using placeholder copy while the final office case study details are being prepared. The image gallery is sourced from the BoConcept office reference set in the public images folder.',
     overviewTextSecondary: 'Use this record as the central place to replace placeholder text, tags, captions, and story content once the office project narrative and deliverables are confirmed.',
