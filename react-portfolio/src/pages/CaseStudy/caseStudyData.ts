@@ -18,9 +18,22 @@ export type Project = {
   overviewTextPrimary: string;
   overviewTextSecondary: string;
   deliverableItems: Deliverable[];
+  referenceImageUrls?: string[];
   galleryImageUrls: string[];
   galleryCaptions: string[];
 };
+
+const BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS = [
+  '/images/Boconcept/office/boconcept-office-details-cabinet.png',
+  '/images/Boconcept/office/boconcept-desk-details.png',
+  '/images/Boconcept/office/boconcept-office-view-2.png',
+  '/images/Boconcept/office/boconcept-bright-office-view-1.png',
+  '/images/Boconcept/office/boconcept-c-table-details.png',
+  '/images/Boconcept/office/boconcept-desk-details-2.png',
+  '/images/Boconcept/office/boconcept-office-details-corner.png',
+  '/images/Boconcept/office/boconcept-office-room.png',
+  '/images/Boconcept/office/boconcept-office-sofabed-pull-2.png'
+];
 
 export const PROJECTS: Record<string, Project> = {
   amber: {
@@ -101,6 +114,7 @@ export const PROJECTS: Record<string, Project> = {
       { icon: '05', text: 'Art Commission Coordination' },
       { icon: '06', text: 'Installation Management' }
     ],
+    referenceImageUrls: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS,
     galleryImageUrls: [
       'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=700&q=80',
       'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=700&q=80',
@@ -109,6 +123,39 @@ export const PROJECTS: Record<string, Project> = {
       'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=700&q=80'
     ],
     galleryCaptions: ['Study - full view', 'Shelving detail', 'Reading corner', 'Desk at the window', 'Art placement']
+  },
+  offices: {
+    storyType: 'interior',
+    isSelectedForHome: true,
+    title: 'BoConcept Office Concept',
+    location: 'Placeholder Location - In-Person',
+    tagLabels: ['Interior Design', 'Office Design', 'Workspace', 'Bo Concept'],
+    heroImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[3],
+    beforeImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[0],
+    afterImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[1],
+    overviewTitle: 'A placeholder office concept built from BoConcept reference imagery',
+    overviewTextPrimary: 'This project entry is currently using placeholder copy while the final office case study details are being prepared. The image gallery is sourced from the BoConcept office reference set in the public images folder.',
+    overviewTextSecondary: 'Use this record as the central place to replace placeholder text, tags, captions, and story content once the office project narrative and deliverables are confirmed.',
+    deliverableItems: [
+      { icon: '01', text: 'Placeholder deliverable one' },
+      { icon: '02', text: 'Placeholder deliverable two' },
+      { icon: '03', text: 'Placeholder deliverable three' },
+      { icon: '04', text: 'Placeholder deliverable four' },
+      { icon: '05', text: 'Placeholder deliverable five' },
+      { icon: '06', text: 'Placeholder deliverable six' }
+    ],
+    galleryImageUrls: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS,
+    galleryCaptions: [
+      'Office reference image 1',
+      'Office reference image 2',
+      'Office reference image 3',
+      'Office reference image 4',
+      'Office reference image 5',
+      'Office reference image 6',
+      'Office reference image 7',
+      'Office reference image 8',
+      'Office reference image 9'
+    ]
   },
   linen: {
     storyType: 'interior',

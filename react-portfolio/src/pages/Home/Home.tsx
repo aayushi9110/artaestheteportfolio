@@ -163,7 +163,7 @@ const Home = () => {
                 onClick={() => goProject(id, cardType)}
               >
                 <div className="pi-img">
-                  <img src={project.galleryImageUrls[0]} alt={project.title}/>
+                  <img src={project.heroImageUrl} alt={project.title}/>
                 </div>
                 <div className="pi-ov">
                   <span className="pi-cat">{project.tagLabels[0]}</span>
