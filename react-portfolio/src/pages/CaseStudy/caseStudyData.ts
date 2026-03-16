@@ -36,6 +36,32 @@ const BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS = [
   '/images/Boconcept/office/boconcept-office-view-before.png'
 ];
 
+const WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS = [
+  '/images/WestElm/contemporaryLiving/westelm-details.png',
+  '/images/WestElm/contemporaryLiving/westelm-dining-1.png',
+  '/images/WestElm/contemporaryLiving/westelm-dining-pa-phone.png',
+  '/images/WestElm/contemporaryLiving/westelm-dining.png',
+  '/images/WestElm/contemporaryLiving/westelm-project-details.png',
+  '/images/WestElm/contemporaryLiving/westelm-project-living-room.png',
+  '/images/WestElm/contemporaryLiving/westelm-project-living.png',
+  '/images/WestElm/contemporaryLiving/westelm-project-perspective.png',
+  '/images/WestElm/contemporaryLiving/westelm-project.png',
+  '/images/WestElm/contemporaryLiving/westelm-sofa-detail.png'
+];
+
+const WESTELM_MID_CENTURY_MODERN_IMAGE_URLS = [
+  '/images/WestElm/midCenturyModern/firefly-geminiflash-cabinet-books-edit.png',
+  '/images/WestElm/midCenturyModern/firefly-mix-single-picture.png',
+  '/images/WestElm/midCenturyModern/firefly-move-tree-right-sofa.png',
+  '/images/WestElm/midCenturyModern/westelm-dining-project-1-chandelier.png',
+  '/images/WestElm/midCenturyModern/westelm-dining-project-1.png',
+  '/images/WestElm/midCenturyModern/westelm-living-dining-project-1.png',
+  '/images/WestElm/midCenturyModern/westelm-living-project-1.png',
+  '/images/WestElm/midCenturyModern/westelm-living-project-view-2.png',
+  '/images/WestElm/midCenturyModern/westelm-living-project.png',
+  '/images/WestElm/midCenturyModern/westelm-project-living-view-2.png'
+];
+
 export const PROJECTS: Record<string, Project> = {
   amber: {
     storyType: 'interior',
@@ -160,6 +186,78 @@ export const PROJECTS: Record<string, Project> = {
       'Office reference image 7',
       'Office reference image 8',
       'Office reference image 9'
+    ]
+  },
+  contemporaryLiving: {
+    storyType: 'interior',
+    isSelectedForHome: false,
+    homeVisibilityPriority: 97,
+    title: 'West Elm Contemporary Living',
+    location: 'Placeholder Location - Interior Styling',
+    tagLabels: ['Interior Design', 'Contemporary Living', 'West Elm'],
+    heroImageUrl: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS[8],
+    beforeImageUrl: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS[1],
+    afterImageUrl: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS[8],
+    overviewTitle: 'A contemporary living concept built from West Elm reference imagery',
+    overviewTextPrimary: 'This project entry uses placeholder copy for now while the final West Elm contemporary living story is being assembled. All gallery imagery is sourced from the local contemporaryLiving folder.',
+    overviewTextSecondary: 'Replace this text with the final concept summary, sourcing rationale, and room transformation notes once the project narrative is ready.',
+    deliverableItems: [
+      { icon: '01', text: 'Placeholder deliverable one' },
+      { icon: '02', text: 'Placeholder deliverable two' },
+      { icon: '03', text: 'Placeholder deliverable three' },
+      { icon: '04', text: 'Placeholder deliverable four' },
+      { icon: '05', text: 'Placeholder deliverable five' },
+      { icon: '06', text: 'Placeholder deliverable six' }
+    ],
+    referenceImageUrls: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS,
+    galleryImageUrls: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS,
+    galleryCaptions: [
+      'Contemporary living reference 1',
+      'Contemporary living reference 2',
+      'Contemporary living reference 3',
+      'Contemporary living reference 4',
+      'Contemporary living reference 5',
+      'Contemporary living reference 6',
+      'Contemporary living reference 7',
+      'Contemporary living reference 8',
+      'Contemporary living reference 9',
+      'Contemporary living reference 10'
+    ]
+  },
+  midCenturyModern: {
+    storyType: 'interior',
+    isSelectedForHome: false,
+    homeVisibilityPriority: 98,
+    title: 'West Elm Mid-Century Modern',
+    location: 'Placeholder Location - Interior Styling',
+    tagLabels: ['Interior Design', 'Mid-Century Modern', 'West Elm'],
+    heroImageUrl: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS[8],
+    beforeImageUrl: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS[0],
+    afterImageUrl: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS[8],
+    overviewTitle: 'A mid-century modern concept built from West Elm reference imagery',
+    overviewTextPrimary: 'This project entry currently uses placeholder content while the final West Elm mid-century modern case study is being prepared. The gallery is driven by the local midCenturyModern image set.',
+    overviewTextSecondary: 'Use this record to centralize the final transformation copy, deliverables, and caption details once the project is ready to publish.',
+    deliverableItems: [
+      { icon: '01', text: 'Placeholder deliverable one' },
+      { icon: '02', text: 'Placeholder deliverable two' },
+      { icon: '03', text: 'Placeholder deliverable three' },
+      { icon: '04', text: 'Placeholder deliverable four' },
+      { icon: '05', text: 'Placeholder deliverable five' },
+      { icon: '06', text: 'Placeholder deliverable six' }
+    ],
+    referenceImageUrls: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS,
+    galleryImageUrls: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS,
+    galleryCaptions: [
+      'Mid-century modern reference 1',
+      'Mid-century modern reference 2',
+      'Mid-century modern reference 3',
+      'Mid-century modern reference 4',
+      'Mid-century modern reference 5',
+      'Mid-century modern reference 6',
+      'Mid-century modern reference 7',
+      'Mid-century modern reference 8',
+      'Mid-century modern reference 9',
+      'Mid-century modern reference 10'
     ]
   },
   linen: {
