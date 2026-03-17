@@ -30,8 +30,6 @@ const BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS = [
   '/images/Boconcept/office/boconcept-c-table-details.png',
   '/images/Boconcept/office/boconcept-desk-details.png',
   '/images/Boconcept/office/boconcept-office-details-cabinet.png',
-  '/images/Boconcept/office/boconcept-office-details-corner.png',
-  '/images/Boconcept/office/boconcept-office-room.png',
   '/images/Boconcept/office/boconcept-office-sofabed-pull-2.png',
   '/images/Boconcept/office/boconcept-office-view-2.png'
 ];
@@ -190,34 +188,32 @@ export const PROJECTS: Record<string, Project> = {
     storyType: 'interior',
     isSelectedForHome: true,
     homeVisibilityPriority: 1,
-    title: 'BoConcept Home Office Decor',
-    location: 'San Jose, California - Home office of the dreams - Virtual',
-    tagLabels: ['Interior Design', 'Office Design', 'Workspace', 'Bo Concept'],
+    title: 'Home Office ',
+    location: 'San Jose, California -The Modern Study - Virtual',
+    tagLabels: ['Interior Design', 'Home Office Design', 'Workspace', 'Productivity Zone', 'Bo Concept'],
     heroImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[3],
     beforeImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[0],
     afterImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[1],
-    overviewTitle: 'A placeholder office concept built from BoConcept reference imagery',
-    overviewTextPrimary: 'This project entry is currently using placeholder copy while the final office case study details are being prepared. The image gallery is sourced from the BoConcept office reference set in the public images folder.',
-    overviewTextSecondary: 'Use this record as the central place to replace placeholder text, tags, captions, and story content once the office project narrative and deliverables are confirmed.',
+    overviewTitle: 'A calm, modern home office designed for clarity, comfort, and effortless focus.',
+    overviewTextPrimary: 'This home office concept is designed to feel like a sanctuary for focused work—a space where structure meets serenity. It supports the user’s professional needs while nurturing creativity and emotional balance, making it an ideal environment for remote work, study, or personal projects.',
+    overviewTextSecondary: 'A flexible retreat that powers your work and pampers your guests.',
     deliverableItems: [
-      { icon: '01', text: 'Placeholder deliverable one' },
-      { icon: '02', text: 'Placeholder deliverable two' },
-      { icon: '03', text: 'Placeholder deliverable three' },
-      { icon: '04', text: 'Placeholder deliverable four' },
-      { icon: '05', text: 'Placeholder deliverable five' },
-      { icon: '06', text: 'Placeholder deliverable six' }
+      { icon: '01', text: 'Bespoke Furniture Sourcing' },
+      { icon: '02', text: 'Moodboard' },
+      { icon: '03', text: 'Full Space Plan' },
+      { icon: '04', text: 'Color & Material Palette' },
+      { icon: '05', text: 'Art Commission Coordination' },
+      { icon: '06', text: 'Installation Management' }
     ],
     galleryImageUrls: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS,
     galleryCaptions: [
-      'Office reference image 1',
-      'Office reference image 2',
-      'Office reference image 3',
-      'Office reference image 4',
-      'Office reference image 5',
-      'Office reference image 6',
-      'Office reference image 7',
-      'Office reference image 8',
-      'Office reference image 9'
+      'Guest bedroom before transformation',
+      'Guest bedroom after transformation',
+      'Functional styling details',
+      'Desk and hidden storage details',
+      'Bookcase and cabinet details',
+      'Sofabed pull-out detail',
+      'Office view with natural light'
     ]
   },
   contemporaryLiving: {
