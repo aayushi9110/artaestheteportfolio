@@ -108,7 +108,7 @@
 
 .ab-intro-txt p {
   font-weight: 300;
-  font-size: 0.88rem;
+  font-size: 1rem;
   line-height: 1.9;
   color: var(--taupe);
   margin-bottom: 12px;
@@ -119,12 +119,32 @@
   position: relative;
 }
 
+.ab-intro-img-portrait {
+  background: transparent;
+  width: 100%;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .ab-intro-img img {
   width: 100%;
-  height: 420px;
+  height: 100%;
   object-fit: cover;
   display: block;
   transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.ab-intro-img-portrait .ab-intro-photo {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: contain;
+  object-position: center top;
+}
+
+.ab-intro-img-portrait:hover .ab-intro-photo {
+  transform: none;
 }
 
 .ab-intro-img:hover img {
@@ -361,6 +381,12 @@
   .ab-intro {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+
+  .ab-intro-img-portrait {
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .val-grid,

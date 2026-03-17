@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { RESOURCES } from '../../data/appData.ts';
 import './About.css';
 
 const About = () => {
@@ -44,7 +45,7 @@ const About = () => {
             <div className="ab-intro-txt reveal">
               <span className="sec-label">The Beginning</span>
               <h2>A studio born from<br/><em>restlessness</em></h2>
-              <p>Elara Voss didn't set out to start a design studio. She set out to find rooms that felt honest — spaces that didn't pretend to be something they weren't.</p>
+              <p>Hi, I am Aayushi Shah set out to achieve and build my passion to start a design studio. I set out to find rooms that felt honest — spaces that didn't pretend to be something they weren't.</p>
               <p>In 2017, from a rented studio in Brooklyn with three clients and an obsession with warm plaster walls, Art Aesthete opened its doors. The name came from a late-night conversation about the difference between someone who appreciates beauty and someone who needs it. Elara needed it.</p>
               <p>Today, Art Aesthete works across three continents — but the ethos has never changed. Every project begins with listening. Really listening. Not to what clients say they want, but to what they feel when they walk into a room they love.</p>
               <div style={{marginTop: '28px'}}>
@@ -53,9 +54,10 @@ const About = () => {
                 </button>
               </div>
             </div>
-            <div className="ab-intro-img rr">
+            <div className="ab-intro-img ab-intro-img-portrait rr">
               <img
-                src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80"
+                className="ab-intro-photo"
+                src={RESOURCES.about.profileImageUrl}
                 alt="Studio"
               />
             </div>
@@ -131,6 +133,8 @@ const About = () => {
             </div>
           </div>
 
+          {/* Team section is intentionally hidden for now. Re-enable this block when the team grows. */}
+          {/*
           <div className="ab-team reveal">
             <span className="sec-label">The Team</span>
             <h2>The people behind<br/><em>the spaces</em></h2>
@@ -167,6 +171,7 @@ const About = () => {
               </div>
             </div>
           </div>
+          */}
         </div>
       </div>
 

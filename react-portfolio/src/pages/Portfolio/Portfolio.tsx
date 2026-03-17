@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PROJECTS } from '../CaseStudy/caseStudyData.ts';
+import { PROJECTS } from '../../data/appData.ts';
 import './Portfolio.css';
 
 type GalleryItem = {

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { PROJECTS } from '../CaseStudy/caseStudyData.ts';
+import { PROJECTS } from '../../data/appData.ts';
 import './Home.css';
 
 const MARQUEE_ITEMS = [
