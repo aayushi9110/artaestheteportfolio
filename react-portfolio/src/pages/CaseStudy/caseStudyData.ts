@@ -610,7 +610,7 @@ export const PROJECTS: Record<string, Project> = {
       { icon: '04', text: 'Custom Plinths & Placement Design' },
       { icon: '05', text: 'Still Life Photography' }
     ],
-    galleryImageUrls: [
+    galleryImageUrls: [ 
       'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=700&q=80',
       'https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=700&q=80',
       'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=700&q=80',
