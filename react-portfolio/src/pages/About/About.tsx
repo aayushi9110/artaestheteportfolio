@@ -34,8 +34,8 @@ const About = () => {
               <path d="M12 5H2M2 5L6 1M2 5l4 4"/>
             </svg> Back
           </button>
-          <span className="sec-label gold">Our Story</span>
-          <h1>Built on beauty,<br/><em>driven by instinct</em></h1>
+          <span className="sec-label gold">My Story</span>
+          <h1>Built on beauty, <br/><em>driven by instinct</em></h1>
           <p>A decade of designing spaces that feel like discoveries. This is how Art Aesthete came to be.</p>
         </div>
       </div>
@@ -178,7 +178,7 @@ const About = () => {
       <div className="cta-strip" style={{ marginTop: 0 }}>
         <div style={{ position: 'relative', zIndex: 1 }}>
           <h2>Curious about working together?</h2>
-          <p>Tell us about your project and we'll be in touch within 24 hours.</p>
+          <p>Tell us about your project and I'll be in touch within 24 hours.</p>
         </div>
         <button className="btn-lt" style={{ position: 'relative', zIndex: 1 }} onClick={() => navigate('/book')}>
           <span>Start a Conversation</span>

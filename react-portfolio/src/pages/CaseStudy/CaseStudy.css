@@ -233,6 +233,19 @@
   align-items: start;
 }
 
+.cs-overview.no-deliverables {
+  grid-template-columns: 1fr;
+  width: 100%;
+}
+
+.cs-overview.no-deliverables .cs-overview-txt {
+  text-align: left;
+}
+
+.cs-overview.no-deliverables .sec-label {
+  justify-content: flex-start;
+}
+
 .cs-overview-txt h3,
 .cs-deliverables h3,
 .cs-gallery h3 {

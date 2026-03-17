@@ -1,10 +1,10 @@
 /* About page */
 .ab-hero {
-  min-height: 60vh;
+  min-height: 30vh;
   background: var(--dark);
   display: flex;
   align-items: flex-end;
-  padding: 140px 60px 72px;
+  padding: 100px 60px 72px;
   position: relative;
   overflow: hidden;
 }
@@ -13,8 +13,8 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: url("https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1400&q=80")
-    center/cover;
+  /* background: url("https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1400&q=80")
+    center/cover; */
   opacity: 0.16;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .ab-story {
-  padding: 100px 60px;
+  padding: 50px 60px;
   background: var(--warm);
 }
 
@@ -72,7 +72,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 80px;
   align-items: center;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 .ab-intro-txt h2,
@@ -152,7 +152,7 @@
 }
 
 .ab-timeline {
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 .tl {
@@ -181,7 +181,7 @@
   display: grid;
   grid-template-columns: 110px 1fr;
   gap: 40px;
-  padding: 40px 0 40px 10px;
+  padding: 20px 0 30px 10px;
   border-bottom: 1px solid rgba(217, 201, 168, 0.4);
   position: relative;
   transition: background 0.3s;
@@ -193,8 +193,8 @@
 
 .tl-yr {
   font-family: "Cormorant Garamond", serif;
-  font-size: 1.8rem;
-  font-weight: 300;
+  font-size: 2.3rem;
+  font-weight: 400;
   color: var(--terra);
   line-height: 1;
   padding-top: 4px;
@@ -215,7 +215,7 @@
 
 .tl-content h4 {
   font-family: "Cormorant Garamond", serif;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 400;
   color: var(--dark);
   margin-bottom: 8px;
@@ -223,14 +223,14 @@
 
 .tl-content p {
   font-weight: 300;
-  font-size: 0.86rem;
+  font-size: 1rem;
   line-height: 1.85;
   color: var(--taupe);
 }
 
 .tl-content .tl-tag {
   display: inline-block;
-  font-size: 0.56rem;
+  font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   border: 1px solid var(--sand);
@@ -241,7 +241,7 @@
 
 .ab-values {
   background: var(--linen);
-  padding: 80px 60px;
+  padding: 50px 70px;
   margin: 0 -60px;
 }
 

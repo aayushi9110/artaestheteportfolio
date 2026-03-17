@@ -421,7 +421,7 @@ body::before {
 
 .cta-strip {
   background: var(--terra);
-  padding: 88px 60px;
+  padding: 40px 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;

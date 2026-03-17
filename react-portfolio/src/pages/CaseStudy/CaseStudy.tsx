@@ -97,6 +97,7 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
 
   const totalImages = project.galleryImageUrls.length;
   const isCarouselTemporarilyPaused = carouselPauseUntil > Date.now();
+  const hasDeliverables = showInteriorView && project.deliverableItems.length > 0;
 
   useEffect(() => {
     if (totalImages <= 1 || isCarouselHovered || expandedImageIndex !== null || isCarouselTemporarilyPaused) {
@@ -270,14 +271,14 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
             </div>
           </div>
         )}
-        <div className="cs-overview reveal">
+        <div className={`cs-overview reveal ${!hasDeliverables ? 'no-deliverables' : ''}`.trim()}>
           <div className="cs-overview-txt">
             <span className="sec-label">Project Overview</span>
             <h3>{project.overviewTitle}</h3>
             <p>{project.overviewTextPrimary}</p>
             <p>{project.overviewTextSecondary}</p>
           </div>
-          {showInteriorView && (
+          {hasDeliverables && (
             <div className="cs-deliverableItems">
               <span className="sec-label">Deliverables</span>
               <h3>What we provided</h3>
