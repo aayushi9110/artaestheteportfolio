@@ -15,7 +15,7 @@ type GalleryItem = {
 const allPortfolioItems: GalleryItem[] = Object.entries(PROJECTS).map(([id, project]) => ({
   id,
   storyType: project.storyType,
-  imageUrl: project.galleryImageUrls[0],
+  imageUrl: project.heroImageUrl,
   categoryLabel: project.tagLabels[0],
   title: project.title,
   summary: project.overviewTextPrimary,
@@ -99,7 +99,10 @@ const Portfolio = () => {
   return (
     <div id="pg-portfolio" className="pg on">
       <div className="gall-hero">
-        <div className="gall-hero-img"></div>
+        <div
+          className="gall-hero-img"
+          style={{ backgroundImage: `url(${featuredItems[featuredIndex]?.imageUrl || interiorItems[0]?.imageUrl || ''})` }}
+        ></div>
         <div className="gall-hero-c">
           <button className="page-back" onClick={() => navigate('/')}>
             <svg width="13" height="9" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5">
