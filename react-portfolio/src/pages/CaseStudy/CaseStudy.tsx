@@ -131,12 +131,24 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setExpandedImageIndex(null);
+        return;
+      }
+
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        showPrevExpandedImage();
+        return;
+      }
+
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        showNextExpandedImage();
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [expandedImageIndex]);
+  }, [expandedImageIndex, totalImages]);
 
   useEffect(() => {
     if (totalImages <= 1 || expandedImageIndex !== null) {
@@ -184,6 +196,30 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
 
   const showNextImage = () => {
     setActiveImageIndex((prev) => (prev + 1) % totalImages);
+  };
+
+  const showPrevExpandedImage = () => {
+    setExpandedImageIndex((prev) => {
+      if (prev === null) {
+        return prev;
+      }
+
+      const nextIndex = (prev - 1 + totalImages) % totalImages;
+      setActiveImageIndex(nextIndex);
+      return nextIndex;
+    });
+  };
+
+  const showNextExpandedImage = () => {
+    setExpandedImageIndex((prev) => {
+      if (prev === null) {
+        return prev;
+      }
+
+      const nextIndex = (prev + 1) % totalImages;
+      setActiveImageIndex(nextIndex);
+      return nextIndex;
+    });
   };
 
   return (
@@ -321,6 +357,30 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
         </div>
         {expandedImageIndex !== null && (
           <div className="cs-lightbox" onClick={() => setExpandedImageIndex(null)}>
+            {totalImages > 1 && (
+              <>
+                <button
+                  className="cs-lightbox-nav cs-lightbox-prev"
+                  aria-label="Show previous preview image"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    showPrevExpandedImage();
+                  }}
+                >
+                  ‹
+                </button>
+                <button
+                  className="cs-lightbox-nav cs-lightbox-next"
+                  aria-label="Show next preview image"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    showNextExpandedImage();
+                  }}
+                >
+                  ›
+                </button>
+              </>
+            )}
             <button
               className="cs-lightbox-close"
               aria-label="Close expanded image"
