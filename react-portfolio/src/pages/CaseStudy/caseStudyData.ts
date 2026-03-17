@@ -58,45 +58,47 @@ const WESTELM_MID_CENTURY_MODERN_IMAGE_URLS = [
   '/images/WestElm/midCenturyModern/westelm-living-project.png'  
 ];
 
-const BOCONCEPT_ROCHEBOBOIS_DINING_IMAGE_URLS = [
+const ROCHEBOBOIS_DINING_IMAGE_URLS = [
+  '/images/Boconcept/office/rocheboboisDining/MadisonDiningflowy.png',
   '/images/Boconcept/office/rocheboboisDining/MadisonDiningBefore.png',
-  '/images/Boconcept/office/rocheboboisDining/MadisonDining1After.png',
-  '/images/Boconcept/office/rocheboboisDining/MadisonDiningflowy.png'
+  '/images/Boconcept/office/rocheboboisDining/MadisonDining1After.png'  
 ];
 
-const WESTELM_CUPPERTINO_HOME_IMAGE_URLS = [
+const CUPPERTINO_HOME_IMAGE_URLS = [
+  '/images/WestElm/cuppertinoHome/CuppertinoSectional.png',
   '/images/WestElm/cuppertinoHome/CuppertinoEmptyview.png',
-  '/images/WestElm/cuppertinoHome/CuppertinoAfter1.png',
   '/images/WestElm/cuppertinoHome/CuppertinoAfterView.png',
   '/images/WestElm/cuppertinoHome/cuppertino-dining-view-1.png',
   '/images/WestElm/cuppertinoHome/cuppertino-dining-view-2.png',
   '/images/WestElm/cuppertinoHome/cuppertino-dining-zoom.png',
-  '/images/WestElm/cuppertinoHome/CuppertinoEntryway.png',
   '/images/WestElm/cuppertinoHome/CuppertinoLivingroom1.png',
-  '/images/WestElm/cuppertinoHome/CuppertinoSectional.png',
-  '/images/WestElm/cuppertinoHome/Cuppertinoview3.png',
-  '/images/WestElm/cuppertinoHome/emptyCuppertinoEntryway.png'
+  '/images/WestElm/cuppertinoHome/Cuppertinoview3.png'
 ];
 
-const WESTELM_FOSTER_CITY_LIVING_DINING_IMAGE_URLS = [
+const FOSTER_CITY_LIVING_DINING_IMAGE_URLS = [
+  '/images/WestElm/fosterCityLivingDining/openLayPaloAltoViewHero.png',
   '/images/WestElm/fosterCityLivingDining/openLayoutBefore.png',
   '/images/WestElm/fosterCityLivingDining/openLayoutPaloAltoAfter.png',
-  '/images/WestElm/fosterCityLivingDining/openLayPaloAltoViewHero.png',
   '/images/WestElm/fosterCityLivingDining/openLayPaloAltoDining.png',
   '/images/WestElm/fosterCityLivingDining/openLayPaloAltoview2.png'
 ];
 
 const WESTELM_SAN_FRAN_IMAGE_URLS = [
+  '/images/WestElm/SanFran/sanFransicoBedviewHero.png',
   '/images/WestElm/SanFran/sanFransicoBedroomBefore.png',
-  '/images/WestElm/SanFran/sanFransicoBedroomAfter.png',
-  '/images/WestElm/SanFran/sanFransicoBedviewHero.png'
+  '/images/WestElm/SanFran/sanFransicoBedroomAfter.png'
+];
+
+const WESTELM_ENTRYWAY_IMAGE_URLS = [
+  '/images/WestElm/entryway/emptyCuppertinoEntryway.png',
+  '/images/WestElm/entryway/CuppertinoEntryway.png'
 ];
 
 export const PROJECTS: Record<string, Project> = {
   amber: {
     storyType: 'interior',
-    isSelectedForHome: true,
-    homeVisibilityPriority: 5,
+    isSelectedForHome: false,
+    homeVisibilityPriority: 99,
     title: 'The Amber Salon',
     location: 'New York, NY - Virtual Design',
     tagLabels: ['Interior Design', 'Virtual Consultation', 'Living Room'],
@@ -289,14 +291,14 @@ export const PROJECTS: Record<string, Project> = {
   },
   rocheboboisDining: {
     storyType: 'interior',
-    isSelectedForHome: false,
-    homeVisibilityPriority: 99,
+    isSelectedForHome: true,
+    homeVisibilityPriority: 6,
     title: 'Roche Bobois Dining',
     location: 'Placeholder Location - Dining Styling',
     tagLabels: ['Interior Design', 'Dining Room', 'BoConcept', 'Roche Bobois'],
-    heroImageUrl: BOCONCEPT_ROCHEBOBOIS_DINING_IMAGE_URLS[1],
-    beforeImageUrl: BOCONCEPT_ROCHEBOBOIS_DINING_IMAGE_URLS[0],
-    afterImageUrl: BOCONCEPT_ROCHEBOBOIS_DINING_IMAGE_URLS[1],
+    heroImageUrl: ROCHEBOBOIS_DINING_IMAGE_URLS[0],
+    beforeImageUrl: ROCHEBOBOIS_DINING_IMAGE_URLS[1],
+    afterImageUrl: ROCHEBOBOIS_DINING_IMAGE_URLS[2],
     overviewTitle: 'A dining concept entry built from Roche Bobois references',
     overviewTextPrimary: 'This is a placeholder project record created from local Roche Bobois dining images. Replace this copy with the final concept story, scope details, and transformation narrative.',
     overviewTextSecondary: 'Use this entry to centralize final deliverables, captions, and before/after details once the project brief is approved.',
@@ -308,24 +310,24 @@ export const PROJECTS: Record<string, Project> = {
       { icon: '05', text: 'Placeholder deliverable five' },
       { icon: '06', text: 'Placeholder deliverable six' }
     ],
-    referenceImageUrls: BOCONCEPT_ROCHEBOBOIS_DINING_IMAGE_URLS,
-    galleryImageUrls: BOCONCEPT_ROCHEBOBOIS_DINING_IMAGE_URLS,
+    referenceImageUrls: ROCHEBOBOIS_DINING_IMAGE_URLS,
+    galleryImageUrls: ROCHEBOBOIS_DINING_IMAGE_URLS,
     galleryCaptions: [
-      'Roche Bobois dining reference 1',
+      'Dining Room before any interior upgrades',
       'Roche Bobois dining reference 2',
       'Roche Bobois dining reference 3'
     ]
   },
   cuppertinoHome: {
     storyType: 'interior',
-    isSelectedForHome: false,
-    homeVisibilityPriority: 99,
+    isSelectedForHome: true,
+    homeVisibilityPriority: 7,
     title: 'Cuppertino Home',
     location: 'Placeholder Location - Home Styling',
     tagLabels: ['Interior Design', 'West Elm', 'Living Room', 'Dining Room'],
-    heroImageUrl: WESTELM_CUPPERTINO_HOME_IMAGE_URLS[2],
-    beforeImageUrl: WESTELM_CUPPERTINO_HOME_IMAGE_URLS[0],
-    afterImageUrl: WESTELM_CUPPERTINO_HOME_IMAGE_URLS[1],
+    heroImageUrl: CUPPERTINO_HOME_IMAGE_URLS[0],
+    beforeImageUrl: CUPPERTINO_HOME_IMAGE_URLS[1],
+    afterImageUrl: CUPPERTINO_HOME_IMAGE_URLS[2],
     overviewTitle: 'A Cuppertino home concept built from West Elm references',
     overviewTextPrimary: 'This placeholder entry is wired to the local cuppertinoHome folder to streamline case study setup. Replace this with the final client brief, style direction, and room-by-room design outcomes.',
     overviewTextSecondary: 'Update the deliverables, before/after rationale, and final captions when the narrative is ready for publishing.',
@@ -337,8 +339,8 @@ export const PROJECTS: Record<string, Project> = {
       { icon: '05', text: 'Placeholder deliverable five' },
       { icon: '06', text: 'Placeholder deliverable six' }
     ],
-    referenceImageUrls: WESTELM_CUPPERTINO_HOME_IMAGE_URLS,
-    galleryImageUrls: WESTELM_CUPPERTINO_HOME_IMAGE_URLS,
+    referenceImageUrls: CUPPERTINO_HOME_IMAGE_URLS,
+    galleryImageUrls: CUPPERTINO_HOME_IMAGE_URLS,
     galleryCaptions: [
       'Cuppertino home reference 1',
       'Cuppertino home reference 2',
@@ -347,22 +349,19 @@ export const PROJECTS: Record<string, Project> = {
       'Cuppertino home reference 5',
       'Cuppertino home reference 6',
       'Cuppertino home reference 7',
-      'Cuppertino home reference 8',
-      'Cuppertino home reference 9',
-      'Cuppertino home reference 10',
-      'Cuppertino home reference 11'
+      'Cuppertino home reference 8'
     ]
   },
   fosterCityLivingDining: {
     storyType: 'interior',
-    isSelectedForHome: false,
-    homeVisibilityPriority: 99,
+    isSelectedForHome: true,
+    homeVisibilityPriority: 8,
     title: 'Foster City Living Dining',
-    location: 'Placeholder Location - Open Layout Renovation',
+    location: 'Foster City, California - Open Layout Renovation',
     tagLabels: ['Interior Design', 'West Elm', 'Open Layout', 'Living & Dining'],
-    heroImageUrl: WESTELM_FOSTER_CITY_LIVING_DINING_IMAGE_URLS[2],
-    beforeImageUrl: WESTELM_FOSTER_CITY_LIVING_DINING_IMAGE_URLS[0],
-    afterImageUrl: WESTELM_FOSTER_CITY_LIVING_DINING_IMAGE_URLS[1],
+    heroImageUrl: FOSTER_CITY_LIVING_DINING_IMAGE_URLS[0],
+    beforeImageUrl: FOSTER_CITY_LIVING_DINING_IMAGE_URLS[1],
+    afterImageUrl: FOSTER_CITY_LIVING_DINING_IMAGE_URLS[2],
     overviewTitle: 'An open-plan living and dining concept for Foster City',
     overviewTextPrimary: 'This placeholder project is connected to the fosterCityLivingDining image set. Replace this text with the final transformation goals, zoning strategy, and material direction.',
     overviewTextSecondary: 'Use this object as the source of truth for final before/after framing, deliverables, and presentation captions.',
@@ -374,8 +373,8 @@ export const PROJECTS: Record<string, Project> = {
       { icon: '05', text: 'Placeholder deliverable five' },
       { icon: '06', text: 'Placeholder deliverable six' }
     ],
-    referenceImageUrls: WESTELM_FOSTER_CITY_LIVING_DINING_IMAGE_URLS,
-    galleryImageUrls: WESTELM_FOSTER_CITY_LIVING_DINING_IMAGE_URLS,
+    referenceImageUrls: FOSTER_CITY_LIVING_DINING_IMAGE_URLS,
+    galleryImageUrls: FOSTER_CITY_LIVING_DINING_IMAGE_URLS,
     galleryCaptions: [
       'Foster City reference 1',
       'Foster City reference 2',
@@ -391,9 +390,9 @@ export const PROJECTS: Record<string, Project> = {
     title: 'San Francisco Bedroom Refresh',
     location: 'San Francisco, California - Bedroom Styling',
     tagLabels: ['Interior Design', 'West Elm', 'Bedroom'],
-    heroImageUrl: WESTELM_SAN_FRAN_IMAGE_URLS[2],
-    beforeImageUrl: WESTELM_SAN_FRAN_IMAGE_URLS[0],
-    afterImageUrl: WESTELM_SAN_FRAN_IMAGE_URLS[1],
+    heroImageUrl: WESTELM_SAN_FRAN_IMAGE_URLS[0],
+    beforeImageUrl: WESTELM_SAN_FRAN_IMAGE_URLS[1],
+    afterImageUrl: WESTELM_SAN_FRAN_IMAGE_URLS[2],
     overviewTitle: 'A bedroom concept entry built from San Francisco references',
     overviewTextPrimary: 'This placeholder project uses local SanFran imagery to establish the case study data structure. Replace with final copy once bedroom goals and styling notes are approved.',
     overviewTextSecondary: 'Keep this record as the single place to maintain deliverables, transformation notes, and final captions.',
@@ -413,10 +412,38 @@ export const PROJECTS: Record<string, Project> = {
       'San Francisco bedroom reference 3'
     ]
   },
-  linen: {
+  entryway: {
     storyType: 'interior',
     isSelectedForHome: true,
-    homeVisibilityPriority: 6,
+    homeVisibilityPriority: 9,
+    title: 'Welcoming Entryway',
+    location: 'Anahiem, CA - Entryway Styling',
+    tagLabels: ['Interior Design', 'California', 'West Elm', 'Entryway', 'Anaheim', ],
+    heroImageUrl: WESTELM_ENTRYWAY_IMAGE_URLS[1],
+    beforeImageUrl: WESTELM_ENTRYWAY_IMAGE_URLS[0],
+    afterImageUrl: WESTELM_ENTRYWAY_IMAGE_URLS[1],
+    overviewTitle: 'An entryway concept built from local West Elm references',
+    overviewTextPrimary: 'This placeholder case study tracks the new entryway project and uses images from the dedicated WestElm/entryway folder. Replace with final project narrative and client goals when ready.',
+    overviewTextSecondary: 'Use this entry to maintain finalized before/after details, styling rationale, and project deliverables.',
+    deliverableItems: [
+      { icon: '01', text: 'Placeholder deliverable one' },
+      { icon: '02', text: 'Placeholder deliverable two' },
+      { icon: '03', text: 'Placeholder deliverable three' },
+      { icon: '04', text: 'Placeholder deliverable four' },
+      { icon: '05', text: 'Placeholder deliverable five' },
+      { icon: '06', text: 'Placeholder deliverable six' }
+    ],
+    referenceImageUrls: WESTELM_ENTRYWAY_IMAGE_URLS,
+    galleryImageUrls: WESTELM_ENTRYWAY_IMAGE_URLS,
+    galleryCaptions: [
+      'Entryway before styling',
+      'Entryway after styling'
+    ]
+  },
+  linen: {
+    storyType: 'interior',
+    isSelectedForHome: false,
+    homeVisibilityPriority: 99,
     title: 'Linen & Oak',
     location: 'Paris, France - In-Person',
     tagLabels: ['Interior Design', 'Living Room', 'Dining', 'In-Person'],
@@ -506,7 +533,7 @@ export const PROJECTS: Record<string, Project> = {
   earth: {
     storyType: 'fine-art',
     isSelectedForHome: false,
-    homeVisibilityPriority: 7,
+    homeVisibilityPriority: 99,
     title: 'Earth Tones Series',
     location: 'Gallery Commission - New York',
     tagLabels: ['Fine Art', 'Oil on Linen', 'Commissioned'],
@@ -536,7 +563,7 @@ export const PROJECTS: Record<string, Project> = {
   sienna: {
     storyType: 'fine-art',
     isSelectedForHome: false,
-    homeVisibilityPriority: 8,
+    homeVisibilityPriority: 99,
     title: 'Sienna Abstract',
     location: 'Mixed Media - London Commission',
     tagLabels: ['Fine Art', 'Mixed Media', 'Commission'],
@@ -566,7 +593,7 @@ export const PROJECTS: Record<string, Project> = {
   clay: {
     storyType: 'fine-art',
     isSelectedForHome: false,
-    homeVisibilityPriority: 9,
+    homeVisibilityPriority: 99,
     title: 'Clay Forms',
     location: 'Ceramic Sculpture - Brooklyn Studio',
     tagLabels: ['Fine Art', 'Ceramic', 'Sculptural'],
