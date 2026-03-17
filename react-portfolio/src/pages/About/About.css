@@ -379,14 +379,21 @@
   }
 
   .ab-intro {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
     gap: 40px;
   }
 
+  .ab-intro-txt,
   .ab-intro-img-portrait {
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
+    flex: 1;
+  }
+
+  .ab-intro-img-portrait {
+    max-width: 280px;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .val-grid,
@@ -412,6 +419,18 @@
 @media (max-width: 640px) {
   .ab-story {
     padding: 60px 20px;
+  }
+
+  .ab-intro {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .ab-intro-img-portrait {
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .val-grid,
