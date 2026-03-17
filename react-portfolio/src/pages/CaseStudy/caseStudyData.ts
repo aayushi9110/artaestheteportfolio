@@ -604,7 +604,7 @@ export const PROJECTS: Record<string, Project> = {
     overviewTextPrimary: 'Clay Forms began as a single commission - three sculptural vessels for a Brooklyn brownstone living room. The response led to a larger collaboration with ceramicist Yuki Nakamura.',
     overviewTextSecondary: 'Each piece is hand-formed and wood-fired, finished in ash glaze, terracotta slip, and raw clay. No two pieces are identical.',
     deliverableItems: [
-      { icon: '01', text: 'Ceramicist Brief & Scale Reference' },
+      { icon: '01', text: 'Cer amicist Brief & Scale Reference' },
       { icon: '02', text: 'Glaze & Finish Curation' },
       { icon: '03', text: 'Series of Handmade Sculptural Vessels' },
       { icon: '04', text: 'Custom Plinths & Placement Design' },
