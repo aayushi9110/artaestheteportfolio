@@ -35,7 +35,7 @@ const BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS = [
 ];
 
 const WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS = [
-  '/images/WestElm/contemporaryLiving/westelm-project.png'
+  '/images/WestElm/contemporaryLiving/westelm-project.png',
   '/images/WestElm/contemporaryLiving/WestElmPaloAltoEmpty.png',
   '/images/WestElm/contemporaryLiving/westelm-details.png',
   '/images/WestElm/contemporaryLiving/westelm-dining-1.png',
@@ -50,12 +50,10 @@ const WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS = [
 
 const WESTELM_MID_CENTURY_MODERN_IMAGE_URLS = [
   '/images/WestElm/midCenturyModern/sanJoseBefore.png',
-  '/images/WestElm/midCenturyModern/westelm-living-dining-project-1.png',
-  '/images/WestElm/midCenturyModern/westelm-dining-project-1-chandelier.png',
-  '/images/WestElm/midCenturyModern/westelm-great-room.png',
   '/images/WestElm/midCenturyModern/westelm-project-living-view-2.png',
-  '/images/WestElm/midCenturyModern/westelm-living-project-1.png',
-  '/images/WestElm/midCenturyModern/westelm-living-project.png'
+  '/images/WestElm/midCenturyModern/westelm-dining-project-1-chandelier.png',
+  '/images/WestElm/midCenturyModern/westelm-living-dining-project-1.png',
+  '/images/WestElm/midCenturyModern/westelm-living-project.png',
 ];
 
 const ROCHEBOBOIS_DINING_IMAGE_URLS = [
@@ -232,12 +230,12 @@ export const PROJECTS: Record<string, Project> = {
     overviewTextPrimary: 'This Modern Organic living space blends clean contemporary architecture with earthy warmth. Floor to ceiling windows, natural materials, and a soft neutral palette create an airy, grounded atmosphere. Plush seating, sculptural décor, and an open layout connect comfort with sophistication, making the space feel both inviting and refined.',
     overviewTextSecondary: 'A serene, light filled retreat designed for modern living with timeless ease.',
     deliverableItems: [
-      { icon: '01', text: 'Placeholder deliverable one' },
-      { icon: '02', text: 'Placeholder deliverable two' },
-      { icon: '03', text: 'Placeholder deliverable three' },
-      { icon: '04', text: 'Placeholder deliverable four' },
-      { icon: '05', text: 'Placeholder deliverable five' },
-      { icon: '06', text: 'Placeholder deliverable six' }
+      { icon: '01', text: 'Moodboard - Warm Contemporary Concept' },
+      { icon: '02', text: 'Space Planning - Open Concept Layout' },
+      { icon: '03', text: 'Furniture Selection - Modern Organic Pieces' },
+      { icon: '04', text: 'Color & Material Palette - Neutral, Earthy and Accent Tones' },
+      { icon: '05', text: 'Lighting Design - Natural & Ambient' },
+      { icon: '06', text: 'Styling & Accessories - Sculptural Décor' }
     ],
     referenceImageUrls: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS,
     galleryImageUrls: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS,
@@ -255,38 +253,36 @@ export const PROJECTS: Record<string, Project> = {
       'Contemporary living reference 10'
     ]
   },
-  midCenturyModern: {
+  modernScandinavian: {
     storyType: 'interior',
     isSelectedForHome: true,
     homeVisibilityPriority: 2,
-    title: 'Mid-Century Modern',
-    location: 'Placeholder Location - Interior Styling',
-    tagLabels: ['Interior Design', 'Mid-Century Modern', 'West Elm', 'Living', 'Dining'],
+    title: 'Modern Scandinavian Living & Dining',
+    location: 'San Jose, California',
+    tagLabels: ['Interior Design', 'Warm Scandinavian','Organic Contemporary', 'West Elm', 'Living', 'Dining'],
     heroImageUrl: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS[1],
     beforeImageUrl: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS[0],
-    afterImageUrl: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS[5],
-    overviewTitle: 'A mid-century modern concept built from West Elm reference imagery',
-    overviewTextPrimary: 'This project entry currently uses placeholder content while the final West Elm mid-century modern case study is being prepared. The gallery is driven by the local midCenturyModern image set.',
-    overviewTextSecondary: 'Use this record to centralize the final transformation copy, deliverables, and caption details once the project is ready to publish.',
+    afterImageUrl: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS[3],
+    overviewTitle: 'Modern Minimalist with Scandinavian Warmth',
+    overviewTextPrimary: 'This Modern Minimalist living–dining space blends Scandinavian warmth with clean contemporary lines. Soft neutrals, natural wood, and airy sheer curtains create a calm, inviting atmosphere filled with natural light. The open layout connects the lounge and dining areas seamlessly, while organic textures, greenery, and sculptural lighting add depth and quiet sophistication..',
+    overviewTextSecondary: 'A serene, balanced interior designed for modern living with understated elegance.',
     deliverableItems: [
-      { icon: '01', text: 'Placeholder deliverable one' },
-      { icon: '02', text: 'Placeholder deliverable two' },
-      { icon: '03', text: 'Placeholder deliverable three' },
-      { icon: '04', text: 'Placeholder deliverable four' },
-      { icon: '05', text: 'Placeholder deliverable five' },
-      { icon: '06', text: 'Placeholder deliverable six' }
+      { icon: '01', text: 'Moodboard - Warm Scandinavian Concept' },
+      { icon: '02', text: 'Space Planning - Open Concept Layout' },
+      { icon: '03', text: 'Furniture Selection - Modern Organic Pieces' },
+      { icon: '04', text: 'Color & Material Palette - Neutral, Sand and Wooden tones' },
+      { icon: '05', text: 'Lighting Design - Natural & Ambient' },
+      { icon: '06', text: 'Styling & Accessories - Sculptural Décor' }
     ],
     referenceImageUrls: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS,
     galleryImageUrls: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS,
     galleryCaptions: [
-      'San Jose - before',
+      'Space Before the transformation',
       'Mid-century modern reference 1',
       'Mid-century modern reference 2',
       'Mid-century modern reference 3',
       'Mid-century modern reference 4',
-      'Mid-century modern reference 5',
-      'Mid-century modern reference 6',
-      'Mid-century modern reference 7'
+      'Mid-century modern reference 5'
     ]
   },
   rocheboboisDining: {
@@ -299,23 +295,23 @@ export const PROJECTS: Record<string, Project> = {
     heroImageUrl: ROCHEBOBOIS_DINING_IMAGE_URLS[0],
     beforeImageUrl: ROCHEBOBOIS_DINING_IMAGE_URLS[1],
     afterImageUrl: ROCHEBOBOIS_DINING_IMAGE_URLS[2],
-    overviewTitle: 'A dining concept entry built from Roche Bobois references',
-    overviewTextPrimary: 'This is a placeholder project record created from local Roche Bobois dining images. Replace this copy with the final concept story, scope details, and transformation narrative.',
-    overviewTextSecondary: 'Use this entry to centralize final deliverables, captions, and before/after details once the project brief is approved.',
+    overviewTitle: 'Modern luxury shaped by soft light, sculptural design, and the rhythm of New York City.',
+    overviewTextPrimary: 'A modern dining space anchored by a marble table, soft neutrals, and sweeping city views. Light, texture, and curated details create a calm, elevated atmosphere perfect for everyday living and intimate gatherings.',
+    overviewTextSecondary: '- A serene pause in the middle of New York’s endless motion.',
     deliverableItems: [
-      { icon: '01', text: 'Placeholder deliverable one' },
-      { icon: '02', text: 'Placeholder deliverable two' },
-      { icon: '03', text: 'Placeholder deliverable three' },
-      { icon: '04', text: 'Placeholder deliverable four' },
-      { icon: '05', text: 'Placeholder deliverable five' },
-      { icon: '06', text: 'Placeholder deliverable six' }
+      { icon: '01', text: 'Moodboard' },
+      { icon: '02', text: 'Space Layout' },
+      { icon: '03', text: 'Furniture Selection' },
+      { icon: '04', text: 'Color & Material Palette' },
+      { icon: '05', text: 'Lighting' },
+      { icon: '06', text: 'Styling & Accessories' }
     ],
     referenceImageUrls: ROCHEBOBOIS_DINING_IMAGE_URLS,
     galleryImageUrls: ROCHEBOBOIS_DINING_IMAGE_URLS,
     galleryCaptions: [
       'Dining Room before any interior upgrades',
-      'Roche Bobois dining reference 2',
-      'Roche Bobois dining reference 3'
+      'Madison Dining Space after transformation',
+      'Serenity and sculptural design details in the dining room'
     ]
   },
   cuppertinoHome: {
