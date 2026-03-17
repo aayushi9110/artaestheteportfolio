@@ -35,7 +35,9 @@ const BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS = [
 ];
 
 const WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS = [
-  '/images/WestElm/contemporaryLiving/westelm-details.png' ,
+  '/images/WestElm/contemporaryLiving/westelm-project.png'
+  '/images/WestElm/contemporaryLiving/WestElmPaloAltoEmpty.png',
+  '/images/WestElm/contemporaryLiving/westelm-details.png',
   '/images/WestElm/contemporaryLiving/westelm-dining-1.png',
   '/images/WestElm/contemporaryLiving/westelm-dining-pa-phone.png',
   '/images/WestElm/contemporaryLiving/westelm-dining.png',
@@ -43,17 +45,17 @@ const WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS = [
   '/images/WestElm/contemporaryLiving/westelm-project-living-room.png',
   '/images/WestElm/contemporaryLiving/westelm-project-living.png',
   '/images/WestElm/contemporaryLiving/westelm-project-perspective.png',
-  '/images/WestElm/contemporaryLiving/westelm-project.png',
   '/images/WestElm/contemporaryLiving/westelm-sofa-detail.png'
 ];
 
 const WESTELM_MID_CENTURY_MODERN_IMAGE_URLS = [
+  '/images/WestElm/midCenturyModern/sanJoseBefore.png',
   '/images/WestElm/midCenturyModern/westelm-living-dining-project-1.png',
   '/images/WestElm/midCenturyModern/westelm-dining-project-1-chandelier.png',
   '/images/WestElm/midCenturyModern/westelm-great-room.png',
   '/images/WestElm/midCenturyModern/westelm-project-living-view-2.png',
   '/images/WestElm/midCenturyModern/westelm-living-project-1.png',
-  '/images/WestElm/midCenturyModern/westelm-living-project.png'  
+  '/images/WestElm/midCenturyModern/westelm-living-project.png'
 ];
 
 const ROCHEBOBOIS_DINING_IMAGE_URLS = [
@@ -220,15 +222,15 @@ export const PROJECTS: Record<string, Project> = {
     storyType: 'interior',
     isSelectedForHome: true,
     homeVisibilityPriority: 3,
-    title: 'West Elm Contemporary Living',
-    location: 'Placeholder Location - Interior Styling',
-    tagLabels: ['Interior Design', 'Contemporary Living', 'West Elm'],
-    heroImageUrl: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS[8],
-    beforeImageUrl: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS[1],
-    afterImageUrl: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS[8],
-    overviewTitle: 'A contemporary living concept built from West Elm reference imagery',
-    overviewTextPrimary: 'This project entry uses placeholder copy for now while the final West Elm contemporary living story is being assembled. All gallery imagery is sourced from the local contemporaryLiving folder.',
-    overviewTextSecondary: 'Replace this text with the final concept summary, sourcing rationale, and room transformation notes once the project narrative is ready.',
+    title: 'Contemporary Living',
+    location: 'Palo Alto, California - Open Concept Living Room Design',
+    tagLabels: ['California Contemporary',' Open Concept Living',' Modern Living Room Design','Interior Design', 'Contemporary Home Styling','West Elm'],
+    heroImageUrl: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS[1],
+    beforeImageUrl: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS[2],
+    afterImageUrl: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS[1],
+    overviewTitle: 'A warm, modern sanctuary where natural light and organic textures shape effortless living.',
+    overviewTextPrimary: 'This Modern Organic living space blends clean contemporary architecture with earthy warmth. Floor to ceiling windows, natural materials, and a soft neutral palette create an airy, grounded atmosphere. Plush seating, sculptural décor, and an open layout connect comfort with sophistication, making the space feel both inviting and refined.',
+    overviewTextSecondary: 'A serene, light filled retreat designed for modern living with timeless ease.',
     deliverableItems: [
       { icon: '01', text: 'Placeholder deliverable one' },
       { icon: '02', text: 'Placeholder deliverable two' },
@@ -240,6 +242,7 @@ export const PROJECTS: Record<string, Project> = {
     referenceImageUrls: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS,
     galleryImageUrls: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS,
     galleryCaptions: [
+      'Empty space before styling',
       'Contemporary living reference 1',
       'Contemporary living reference 2',
       'Contemporary living reference 3',
@@ -259,9 +262,9 @@ export const PROJECTS: Record<string, Project> = {
     title: 'Mid-Century Modern',
     location: 'Placeholder Location - Interior Styling',
     tagLabels: ['Interior Design', 'Mid-Century Modern', 'West Elm', 'Living', 'Dining'],
-    heroImageUrl: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS[0],
+    heroImageUrl: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS[1],
     beforeImageUrl: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS[0],
-    afterImageUrl: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS[4],
+    afterImageUrl: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS[5],
     overviewTitle: 'A mid-century modern concept built from West Elm reference imagery',
     overviewTextPrimary: 'This project entry currently uses placeholder content while the final West Elm mid-century modern case study is being prepared. The gallery is driven by the local midCenturyModern image set.',
     overviewTextSecondary: 'Use this record to centralize the final transformation copy, deliverables, and caption details once the project is ready to publish.',
@@ -276,6 +279,7 @@ export const PROJECTS: Record<string, Project> = {
     referenceImageUrls: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS,
     galleryImageUrls: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS,
     galleryCaptions: [
+      'San Jose - before',
       'Mid-century modern reference 1',
       'Mid-century modern reference 2',
       'Mid-century modern reference 3',
