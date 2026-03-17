@@ -22,6 +22,7 @@ const Header = () => {
   const isAboutActive = pathname === '/about';
   const isVirtualActive = pathname === '/virtual';
   const isBookActive = pathname === '/book';
+  const logoSrc = isSubPage && !isStuck ? '/images/logos/artAesthetewh.png' : '/images/logos/artAesthete.png';
 
   useEffect(() => {
     const updateStuckState = () => {
@@ -41,16 +42,29 @@ const Header = () => {
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  };
+
   const goTo = (path: string) => {
     closeMobileMenu();
+
+    if (pathname === path) {
+      scrollToTop();
+      return;
+    }
+
     navigate(path);
+    window.requestAnimationFrame(() => {
+      scrollToTop();
+    });
   };
 
   return (
     <>
       <nav id="nav" className={`${isStuck ? 'stuck' : ''} ${isSubPage ? 'subpage' : ''}`.trim()}>
         <Link to="/" className={`n-logo ${isHomeActive ? 'active' : ''}`.trim()} onClick={() => goTo('/')}> 
-          <img src="/images/logos/artAesthete.png" alt="Logo" style={{height: '32px', marginRight: '8px', verticalAlign: 'middle'}} />
+          <img className="n-logo-mark" src={logoSrc} alt="Logo" style={{height: '32px', marginRight: '8px', verticalAlign: 'middle'}} />
           Art 
           <span>Aesthete
             <span className='byaayushi'> By Aayushi</span>

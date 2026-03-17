@@ -27,11 +27,18 @@ nav.stuck {
   color: var(--dark);
   text-decoration: none;
   cursor: pointer;
+  padding: 8px 14px 9px;
+  border-radius: 3px;
+  background: transparent;
+  transition:
+    color 0.3s,
+    background 0.3s;
 }
 
 .n-logo span {
   color: var(--terra);
   font-style: normal;
+  transition: color 0.3s;
 }
 
 .n-logo .byaayushi {
@@ -43,6 +50,26 @@ nav.stuck {
   bottom: -12px;
   left: -14%;
   opacity: 0.6;
+  transition: color 0.3s, opacity 0.3s;
+}
+
+.n-logo-mark {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+nav.stuck .n-logo:hover {
+  color: var(--burnt);
+  background: rgba(176, 124, 84, 0.12);
+}
+
+nav.stuck .n-logo:hover span,
+nav.stuck .n-logo:hover .byaayushi {
+  color: var(--burnt);
+}
+
+nav.stuck .n-logo:hover .n-logo-mark {
+  transform: translateY(-1px);
+  opacity: 0.88;
 }
 
 .n-links {
@@ -187,12 +214,6 @@ nav.stuck {
 
 nav.subpage:not(.stuck) .n-logo {
   color: var(--linen);
-  padding: 8px 14px 9px;
-  border-radius: 3px;
-  background: transparent;
-  transition:
-    color 0.3s,
-    background 0.3s;
 }
 
 nav.subpage:not(.stuck) .n-logo span {
