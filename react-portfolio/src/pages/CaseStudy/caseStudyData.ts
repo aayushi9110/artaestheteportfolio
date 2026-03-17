@@ -188,7 +188,7 @@ export const PROJECTS: Record<string, Project> = {
     storyType: 'interior',
     isSelectedForHome: true,
     homeVisibilityPriority: 1,
-    title: 'Home Office ',
+    title: 'Home Office',
     location: 'San Jose, California -The Modern Study - Virtual',
     tagLabels: ['Interior Design', 'Home Office Design', 'Workspace', 'Productivity Zone', 'Bo Concept'],
     heroImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[3],
