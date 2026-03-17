@@ -18,6 +18,7 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
   const [expandedImageIndex, setExpandedImageIndex] = useState<number | null>(null);
   const [isAutoSliding, setIsAutoSliding] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [carouselPauseUntil, setCarouselPauseUntil] = useState<number>(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -44,6 +45,7 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
     setExpandedImageIndex(null);
     setIsCarouselHovered(false);
     setHasInteracted(false);
+    setCarouselPauseUntil(0);
   }, [id]);
 
   useEffect(() => {
@@ -94,9 +96,10 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
   };
 
   const totalImages = project.galleryImageUrls.length;
+  const isCarouselTemporarilyPaused = carouselPauseUntil > Date.now();
 
   useEffect(() => {
-    if (totalImages <= 1 || isCarouselHovered || expandedImageIndex !== null) {
+    if (totalImages <= 1 || isCarouselHovered || expandedImageIndex !== null || isCarouselTemporarilyPaused) {
       return;
     }
 
@@ -105,7 +108,20 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
     }, 3000);
 
     return () => window.clearInterval(autoRotateId);
-  }, [id, totalImages, isCarouselHovered, expandedImageIndex]);
+  }, [id, totalImages, isCarouselHovered, expandedImageIndex, isCarouselTemporarilyPaused]);
+
+  useEffect(() => {
+    if (!isCarouselTemporarilyPaused) {
+      return;
+    }
+
+    const remainingPauseMs = Math.max(0, carouselPauseUntil - Date.now());
+    const resumeTimer = window.setTimeout(() => {
+      setCarouselPauseUntil(0);
+    }, remainingPauseMs);
+
+    return () => window.clearTimeout(resumeTimer);
+  }, [carouselPauseUntil, isCarouselTemporarilyPaused]);
 
   useEffect(() => {
     if (expandedImageIndex === null) {
@@ -122,11 +138,44 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [expandedImageIndex]);
 
+  useEffect(() => {
+    if (totalImages <= 1 || expandedImageIndex !== null) {
+      return;
+    }
+
+    const handleCarouselArrowKeys = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      const targetTag = target?.tagName.toLowerCase();
+
+      if (targetTag === 'input' || targetTag === 'textarea' || targetTag === 'select') {
+        return;
+      }
+
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        showPrevImage();
+      }
+
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        showNextImage();
+      }
+    };
+
+    window.addEventListener('keydown', handleCarouselArrowKeys);
+    return () => window.removeEventListener('keydown', handleCarouselArrowKeys);
+  }, [totalImages, expandedImageIndex]);
+
   const goToImage = (index: number) => {
     if (index < 0 || index >= totalImages) {
       return;
     }
     setActiveImageIndex(index);
+  };
+
+  const goToImageFromThumbnail = (index: number) => {
+    goToImage(index);
+    setCarouselPauseUntil(Date.now() + 10_000);
   };
 
   const showPrevImage = () => {
@@ -260,7 +309,7 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
                 <button
                   key={`thumb-${img}-${i}`}
                   className={`cs-carousel-thumb ${activeImageIndex === i ? 'active' : ''}`.trim()}
-                  onClick={() => goToImage(i)}
+                  onClick={() => goToImageFromThumbnail(i)}
                   aria-label={`Show final result thumbnail ${i + 1}`}
                   aria-current={activeImageIndex === i ? 'true' : undefined}
                 >
