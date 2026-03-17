@@ -58,6 +58,40 @@ const WESTELM_MID_CENTURY_MODERN_IMAGE_URLS = [
   '/images/WestElm/midCenturyModern/westelm-living-project.png'  
 ];
 
+const BOCONCEPT_ROCHEBOBOIS_DINING_IMAGE_URLS = [
+  '/images/Boconcept/office/rocheboboisDining/MadisonDiningBefore.png',
+  '/images/Boconcept/office/rocheboboisDining/MadisonDining1After.png',
+  '/images/Boconcept/office/rocheboboisDining/MadisonDiningflowy.png'
+];
+
+const WESTELM_CUPPERTINO_HOME_IMAGE_URLS = [
+  '/images/WestElm/cuppertinoHome/CuppertinoEmptyview.png',
+  '/images/WestElm/cuppertinoHome/CuppertinoAfter1.png',
+  '/images/WestElm/cuppertinoHome/CuppertinoAfterView.png',
+  '/images/WestElm/cuppertinoHome/cuppertino-dining-view-1.png',
+  '/images/WestElm/cuppertinoHome/cuppertino-dining-view-2.png',
+  '/images/WestElm/cuppertinoHome/cuppertino-dining-zoom.png',
+  '/images/WestElm/cuppertinoHome/CuppertinoEntryway.png',
+  '/images/WestElm/cuppertinoHome/CuppertinoLivingroom1.png',
+  '/images/WestElm/cuppertinoHome/CuppertinoSectional.png',
+  '/images/WestElm/cuppertinoHome/Cuppertinoview3.png',
+  '/images/WestElm/cuppertinoHome/emptyCuppertinoEntryway.png'
+];
+
+const WESTELM_FOSTER_CITY_LIVING_DINING_IMAGE_URLS = [
+  '/images/WestElm/fosterCityLivingDining/openLayoutBefore.png',
+  '/images/WestElm/fosterCityLivingDining/openLayoutPaloAltoAfter.png',
+  '/images/WestElm/fosterCityLivingDining/openLayPaloAltoViewHero.png',
+  '/images/WestElm/fosterCityLivingDining/openLayPaloAltoDining.png',
+  '/images/WestElm/fosterCityLivingDining/openLayPaloAltoview2.png'
+];
+
+const WESTELM_SAN_FRAN_IMAGE_URLS = [
+  '/images/WestElm/SanFran/sanFransicoBedroomBefore.png',
+  '/images/WestElm/SanFran/sanFransicoBedroomAfter.png',
+  '/images/WestElm/SanFran/sanFransicoBedviewHero.png'
+];
+
 export const PROJECTS: Record<string, Project> = {
   amber: {
     storyType: 'interior',
@@ -251,6 +285,132 @@ export const PROJECTS: Record<string, Project> = {
       'Mid-century modern reference 5',
       'Mid-century modern reference 6',
       'Mid-century modern reference 7'
+    ]
+  },
+  rocheboboisDining: {
+    storyType: 'interior',
+    isSelectedForHome: false,
+    homeVisibilityPriority: 99,
+    title: 'Roche Bobois Dining',
+    location: 'Placeholder Location - Dining Styling',
+    tagLabels: ['Interior Design', 'Dining Room', 'BoConcept', 'Roche Bobois'],
+    heroImageUrl: BOCONCEPT_ROCHEBOBOIS_DINING_IMAGE_URLS[1],
+    beforeImageUrl: BOCONCEPT_ROCHEBOBOIS_DINING_IMAGE_URLS[0],
+    afterImageUrl: BOCONCEPT_ROCHEBOBOIS_DINING_IMAGE_URLS[1],
+    overviewTitle: 'A dining concept entry built from Roche Bobois references',
+    overviewTextPrimary: 'This is a placeholder project record created from local Roche Bobois dining images. Replace this copy with the final concept story, scope details, and transformation narrative.',
+    overviewTextSecondary: 'Use this entry to centralize final deliverables, captions, and before/after details once the project brief is approved.',
+    deliverableItems: [
+      { icon: '01', text: 'Placeholder deliverable one' },
+      { icon: '02', text: 'Placeholder deliverable two' },
+      { icon: '03', text: 'Placeholder deliverable three' },
+      { icon: '04', text: 'Placeholder deliverable four' },
+      { icon: '05', text: 'Placeholder deliverable five' },
+      { icon: '06', text: 'Placeholder deliverable six' }
+    ],
+    referenceImageUrls: BOCONCEPT_ROCHEBOBOIS_DINING_IMAGE_URLS,
+    galleryImageUrls: BOCONCEPT_ROCHEBOBOIS_DINING_IMAGE_URLS,
+    galleryCaptions: [
+      'Roche Bobois dining reference 1',
+      'Roche Bobois dining reference 2',
+      'Roche Bobois dining reference 3'
+    ]
+  },
+  cuppertinoHome: {
+    storyType: 'interior',
+    isSelectedForHome: false,
+    homeVisibilityPriority: 99,
+    title: 'Cuppertino Home',
+    location: 'Placeholder Location - Home Styling',
+    tagLabels: ['Interior Design', 'West Elm', 'Living Room', 'Dining Room'],
+    heroImageUrl: WESTELM_CUPPERTINO_HOME_IMAGE_URLS[2],
+    beforeImageUrl: WESTELM_CUPPERTINO_HOME_IMAGE_URLS[0],
+    afterImageUrl: WESTELM_CUPPERTINO_HOME_IMAGE_URLS[1],
+    overviewTitle: 'A Cuppertino home concept built from West Elm references',
+    overviewTextPrimary: 'This placeholder entry is wired to the local cuppertinoHome folder to streamline case study setup. Replace this with the final client brief, style direction, and room-by-room design outcomes.',
+    overviewTextSecondary: 'Update the deliverables, before/after rationale, and final captions when the narrative is ready for publishing.',
+    deliverableItems: [
+      { icon: '01', text: 'Placeholder deliverable one' },
+      { icon: '02', text: 'Placeholder deliverable two' },
+      { icon: '03', text: 'Placeholder deliverable three' },
+      { icon: '04', text: 'Placeholder deliverable four' },
+      { icon: '05', text: 'Placeholder deliverable five' },
+      { icon: '06', text: 'Placeholder deliverable six' }
+    ],
+    referenceImageUrls: WESTELM_CUPPERTINO_HOME_IMAGE_URLS,
+    galleryImageUrls: WESTELM_CUPPERTINO_HOME_IMAGE_URLS,
+    galleryCaptions: [
+      'Cuppertino home reference 1',
+      'Cuppertino home reference 2',
+      'Cuppertino home reference 3',
+      'Cuppertino home reference 4',
+      'Cuppertino home reference 5',
+      'Cuppertino home reference 6',
+      'Cuppertino home reference 7',
+      'Cuppertino home reference 8',
+      'Cuppertino home reference 9',
+      'Cuppertino home reference 10',
+      'Cuppertino home reference 11'
+    ]
+  },
+  fosterCityLivingDining: {
+    storyType: 'interior',
+    isSelectedForHome: false,
+    homeVisibilityPriority: 99,
+    title: 'Foster City Living Dining',
+    location: 'Placeholder Location - Open Layout Renovation',
+    tagLabels: ['Interior Design', 'West Elm', 'Open Layout', 'Living & Dining'],
+    heroImageUrl: WESTELM_FOSTER_CITY_LIVING_DINING_IMAGE_URLS[2],
+    beforeImageUrl: WESTELM_FOSTER_CITY_LIVING_DINING_IMAGE_URLS[0],
+    afterImageUrl: WESTELM_FOSTER_CITY_LIVING_DINING_IMAGE_URLS[1],
+    overviewTitle: 'An open-plan living and dining concept for Foster City',
+    overviewTextPrimary: 'This placeholder project is connected to the fosterCityLivingDining image set. Replace this text with the final transformation goals, zoning strategy, and material direction.',
+    overviewTextSecondary: 'Use this object as the source of truth for final before/after framing, deliverables, and presentation captions.',
+    deliverableItems: [
+      { icon: '01', text: 'Placeholder deliverable one' },
+      { icon: '02', text: 'Placeholder deliverable two' },
+      { icon: '03', text: 'Placeholder deliverable three' },
+      { icon: '04', text: 'Placeholder deliverable four' },
+      { icon: '05', text: 'Placeholder deliverable five' },
+      { icon: '06', text: 'Placeholder deliverable six' }
+    ],
+    referenceImageUrls: WESTELM_FOSTER_CITY_LIVING_DINING_IMAGE_URLS,
+    galleryImageUrls: WESTELM_FOSTER_CITY_LIVING_DINING_IMAGE_URLS,
+    galleryCaptions: [
+      'Foster City reference 1',
+      'Foster City reference 2',
+      'Foster City reference 3',
+      'Foster City reference 4',
+      'Foster City reference 5'
+    ]
+  },
+  sanFranBedroom: {
+    storyType: 'interior',
+    isSelectedForHome: false,
+    homeVisibilityPriority: 99,
+    title: 'San Francisco Bedroom Refresh',
+    location: 'San Francisco, California - Bedroom Styling',
+    tagLabels: ['Interior Design', 'West Elm', 'Bedroom'],
+    heroImageUrl: WESTELM_SAN_FRAN_IMAGE_URLS[2],
+    beforeImageUrl: WESTELM_SAN_FRAN_IMAGE_URLS[0],
+    afterImageUrl: WESTELM_SAN_FRAN_IMAGE_URLS[1],
+    overviewTitle: 'A bedroom concept entry built from San Francisco references',
+    overviewTextPrimary: 'This placeholder project uses local SanFran imagery to establish the case study data structure. Replace with final copy once bedroom goals and styling notes are approved.',
+    overviewTextSecondary: 'Keep this record as the single place to maintain deliverables, transformation notes, and final captions.',
+    deliverableItems: [
+      { icon: '01', text: 'Placeholder deliverable one' },
+      { icon: '02', text: 'Placeholder deliverable two' },
+      { icon: '03', text: 'Placeholder deliverable three' },
+      { icon: '04', text: 'Placeholder deliverable four' },
+      { icon: '05', text: 'Placeholder deliverable five' },
+      { icon: '06', text: 'Placeholder deliverable six' }
+    ],
+    referenceImageUrls: WESTELM_SAN_FRAN_IMAGE_URLS,
+    galleryImageUrls: WESTELM_SAN_FRAN_IMAGE_URLS,
+    galleryCaptions: [
+      'San Francisco bedroom reference 1',
+      'San Francisco bedroom reference 2',
+      'San Francisco bedroom reference 3'
     ]
   },
   linen: {
