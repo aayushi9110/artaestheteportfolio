@@ -189,7 +189,7 @@ export const PROJECTS: Record<string, Project> = {
     isSelectedForHome: true,
     homeVisibilityPriority: 1,
     title: 'Home Office',
-    location: 'San Jose, California -The Modern Study - Virtual',
+    location: 'Menlo Park, California -The Modern Study - Virtual',
     tagLabels: ['Interior Design', 'Home Office Design', 'Workspace', 'Productivity Zone', 'Bo Concept'],
     heroImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[3],
     beforeImageUrl: BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS[0],
@@ -223,9 +223,9 @@ export const PROJECTS: Record<string, Project> = {
     title: 'Contemporary Living',
     location: 'Palo Alto, California - Open Concept Living Room Design',
     tagLabels: ['California Contemporary',' Open Concept Living',' Modern Living Room Design','Interior Design', 'Contemporary Home Styling','West Elm'],
-    heroImageUrl: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS[1],
-    beforeImageUrl: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS[2],
-    afterImageUrl: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS[1],
+    heroImageUrl: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS[2],
+    beforeImageUrl: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS[1],
+    afterImageUrl: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS[0],
     overviewTitle: 'A warm, modern sanctuary where natural light and organic textures shape effortless living.',
     overviewTextPrimary: 'This Modern Organic living space blends clean contemporary architecture with earthy warmth. Floor to ceiling windows, natural materials, and a soft neutral palette create an airy, grounded atmosphere. Plush seating, sculptural décor, and an open layout connect comfort with sophistication, making the space feel both inviting and refined.',
     overviewTextSecondary: 'A serene, light filled retreat designed for modern living with timeless ease.',
@@ -240,17 +240,17 @@ export const PROJECTS: Record<string, Project> = {
     referenceImageUrls: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS,
     galleryImageUrls: WESTELM_CONTEMPORARY_LIVING_IMAGE_URLS,
     galleryCaptions: [
-      'Empty space before styling',
-      'Contemporary living reference 1',
-      'Contemporary living reference 2',
-      'Contemporary living reference 3',
-      'Contemporary living reference 4',
-      'Contemporary living reference 5',
-      'Contemporary living reference 6',
-      'Contemporary living reference 7',
-      'Contemporary living reference 8',
-      'Contemporary living reference 9',
-      'Contemporary living reference 10'
+      'Living and DiningSpace after transformation',
+      'Empty space before transformation',
+      'Beautiful details and material balance in the living room',
+      'Dining area with sculptural lighting and beautiful textures',
+      'Dining area',
+      'Dining area with natural light and organic textures',
+      'Layered details',
+      'Living room area for warm hosting and quiet evenings',
+      'A modern, light filled space shaped by elegance',
+      'Modern living softened by light, texture',
+      'A quiet statement piece'
     ]
   },
   modernScandinavian: {
@@ -278,11 +278,10 @@ export const PROJECTS: Record<string, Project> = {
     galleryImageUrls: WESTELM_MID_CENTURY_MODERN_IMAGE_URLS,
     galleryCaptions: [
       'Space Before the transformation',
-      'Mid-century modern reference 1',
-      'Mid-century modern reference 2',
-      'Mid-century modern reference 3',
-      'Mid-century modern reference 4',
-      'Mid-century modern reference 5'
+      'A bright, breathable living room shaped by natural materials and understated design',
+      'A dining area with sculptural lighting and organic textures',
+      'Warm woods, clean Nordic lines',
+      'Soft neutrals, modern Nordic warmth'
     ]
   },
   rocheboboisDining: {
