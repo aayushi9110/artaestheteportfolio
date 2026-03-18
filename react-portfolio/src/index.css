@@ -139,7 +139,8 @@ body::before {
 
 .btn-dk,
 .btn-tr,
-.btn-lt {
+.btn-lt,
+.bk-back-btn {
   font-size: 0.8rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;

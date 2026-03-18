@@ -30,9 +30,6 @@ const Book = () => {
       <div className="book-page">
         <div className="book-l">
           <div className="book-l-c">
-            <button className="page-back" onClick={() => navigate('/')}>
-              <svg width="13" height="9" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5H2M2 5L6 1M2 5l4 4"/></svg> Back
-            </button>
             <span className="sec-label gold">Book a Consultation</span>
             <h2>Let's start with your <em>story</em></h2>
             <p>Tell us about your space, your vision, and what you're hoping to feel when you walk through the door. We'll take it from there.</p>

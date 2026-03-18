@@ -7,7 +7,7 @@
 
 .book-l {
   background: var(--dark);
-  padding: 100px 60px 20px;
+  padding: 140px 60px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -296,26 +296,27 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 24px;
+  margin-top: 40px;
 }
 
-.bk-back-btn {
-  font-size: 0.68rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--taupe);
-  background: none;
-  border: none;
-  cursor: none;
-  font-family: "Jost", sans-serif;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: color 0.3s;
+.bk-back-btn{
+  color: var(--taupe-grey);
+  background: var(--linen);
 }
 
 .bk-back-btn:hover {
   color: var(--dark);
+  background: var(--cream);
+  border-color: rgba(181, 99, 58, 0.42);
+  transform: translateY(-1px);
+}
+
+.bk-back-btn svg {
+  transition: transform 0.3s;
+}
+
+.bk-back-btn:hover svg {
+  transform: translateX(-3px);
 }
 
 .bk-success {
