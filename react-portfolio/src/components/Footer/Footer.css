@@ -49,8 +49,9 @@
 }
 
 .ft-social {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
+  /* flex-wrap: wrap; */
   justify-content: flex-end;
   align-content: flex-end;
   align-items: stretch;

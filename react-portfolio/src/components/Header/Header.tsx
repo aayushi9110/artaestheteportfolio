@@ -5,12 +5,13 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 const STUCK_BREAKPOINT = 1100;
 
 const Header = () => {
-  const [isStuck, setIsStuck] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const isSubPage = location.pathname !== '/';
   const pathname = location.pathname;
+  const isBookPage = pathname === '/book';
+  const [isStuck, setIsStuck] = useState(() => isBookPage || window.innerWidth <= STUCK_BREAKPOINT || window.scrollY > 50);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isSubPage = location.pathname !== '/';
   const isHomeActive = pathname === '/';
   const isPortfolioActive =
     pathname === '/portfolio' ||
@@ -25,6 +26,11 @@ const Header = () => {
   const logoSrc = isSubPage && !isStuck ? '/images/logos/artAesthetewh.png' : '/images/logos/artAesthete.png';
 
   useEffect(() => {
+    if (isBookPage) {
+      setIsStuck(true);
+      return;
+    }
+
     const updateStuckState = () => {
       const shouldStickForViewport = window.innerWidth <= STUCK_BREAKPOINT;
       setIsStuck(shouldStickForViewport || window.scrollY > 50);
@@ -38,7 +44,7 @@ const Header = () => {
       window.removeEventListener('scroll', updateStuckState);
       window.removeEventListener('resize', updateStuckState);
     };
-  }, []);
+  }, [isBookPage]);
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
@@ -77,9 +83,11 @@ const Header = () => {
           <li><Link to="/about" className={isAboutActive ? 'active' : ''} onClick={() => goTo('/about')}>About</Link></li>
           <li><Link to="/virtual" className={isVirtualActive ? 'active' : ''} onClick={() => goTo('/virtual')}>Virtual Consult</Link></li>
         </ul>
-        <button className={`n-book ${isBookActive ? 'active' : ''}`.trim()} onClick={() => goTo('/book')}>
-          <span>Book Consultation</span>
-        </button>
+        {!isBookPage && (
+          <button className={`n-book ${isBookActive ? 'active' : ''}`.trim()} onClick={() => goTo('/book')}>
+            <span>Book Consultation</span>
+          </button>
+        )}
         <button
           className="n-ham"
           id="ham"
@@ -99,7 +107,7 @@ const Header = () => {
           <Link to="/process" className={isProcessActive ? 'active' : ''} onClick={() => goTo('/process')}>Process</Link>
           <Link to="/about" className={isAboutActive ? 'active' : ''} onClick={() => goTo('/about')}>About</Link>
           <Link to="/virtual" className={isVirtualActive ? 'active' : ''} onClick={() => goTo('/virtual')}>Virtual Consult</Link>
-          <button className={isBookActive ? 'active' : ''} onClick={() => goTo('/book')}>Book Consultation</button>
+          {!isBookPage && <button className={isBookActive ? 'active' : ''} onClick={() => goTo('/book')}>Book Consultation</button>}
           <button onClick={closeMobileMenu}>✕</button>
         </div>
       )}

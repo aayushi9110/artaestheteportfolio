@@ -194,9 +194,14 @@
 .bk-sub {
   font-weight: 300;
   font-size: 1.1rem;
-  color: var(--taupe);
+  color: var(--taupe-grey);
   margin-bottom: 32px;
   line-height: 1.65;
+}
+
+.bk-required-mark {
+  color: var(--burnt);
+  margin-left: 6px;
 }
 
 .bk-opts {
@@ -255,11 +260,18 @@
 }
 
 .bk-field label {
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--taupe);
   font-weight: 400;
+}
+
+.bk-field-error {
+  margin-top: 4px;
+  font-size: 0.76rem;
+  line-height: 1.4;
+  color: var(--burnt);
 }
 
 .bk-field input,
@@ -269,7 +281,7 @@
   border: 1px solid var(--sand);
   padding: 13px 16px;
   font-family: "Jost", sans-serif;
-  font-size: 0.86rem;
+  font-size: 1rem;
   font-weight: 300;
   color: var(--dark);
   outline: none;
@@ -282,6 +294,11 @@
 .bk-field textarea:focus,
 .bk-field select:focus {
   border-color: var(--terra);
+}
+
+.bk-field .bk-input-invalid {
+  border-color: var(--burnt);
+  background: rgba(139, 58, 30, 0.06);
 }
 
 .bk-field select {

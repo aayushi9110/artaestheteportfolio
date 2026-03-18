@@ -1,53 +1,90 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {
+  BOOKING_CONTENT,
+  BOOKING_FAQS,
+  BOOKING_OPTION_STEPS,
+  BUDGET_OPTIONS,
+  CONTACT_FIELD_ERRORS,
+  CONTACT_FIELDS,
+  SOURCE_OPTIONS,
+  type BookingFormValues
+} from './bookingData.ts';
 import './Book.css';
 
-const PROJECT_TYPE_OPTIONS = [
-  { t: 'Interior Design', p: 'Full-service, in-person project for your home or commercial space.' },
-  { t: 'Virtual Consultation', p: 'Online E-Design package - perfect for any location, any budget.' },
-  { t: 'Fine Art Curation', p: 'Art sourcing, commissioning, and placement for your space.' },
-  { t: "I'm not sure yet", p: "Tell us about your space and we'll recommend the right service." }
-];
-
-const SPACE_OPTIONS = [
-  { t: 'Living Room', p: 'The room everyone sees - and feels.' },
-  { t: 'Bedroom', p: 'Where the day begins and ends.' },
-  { t: 'Kitchen / Dining', p: 'The heart of the home.' },
-  { t: 'Full Home / Commercial', p: 'A larger scope - multiple rooms or a workplace.' }
-];
-
-const STYLE_OPTIONS = [
-  { t: 'Warm & Organic', p: 'Natural materials, earthy tones, textures that invite touch.' },
-  { t: 'Sleek & Contemporary', p: 'Clean lines, considered restraint, modern confidence.' },
-  { t: 'Classic & Timeless', p: 'Rich layers, antiques, a sense of history and belonging.' },
-  { t: 'Eclectic & Personal', p: 'Collected over time, full of stories, nothing matching perfectly.' }
-];
+const INITIAL_FORM_STATE: BookingFormValues = {
+  budget: '',
+  name: '',
+  email: '',
+  location: '',
+  details: '',
+  source: ''
+};
 
 const Book = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
-  const [selected, setSelected] = useState<Record<number, number>>({});
-
-  const [form, setForm] = useState({
-    budget: '',
-    name: '',
-    email: '',
-    location: '',
-    details: '',
-    source: ''
+  const [selected, setSelected] = useState<Record<number, number[]>>({});
+  const [contactTouched, setContactTouched] = useState<Record<'name' | 'email' | 'location', boolean>>({
+    name: false,
+    email: false,
+    location: false
   });
 
-  const selectOption = (stepIndex: number, optionIndex: number) => {
-    setSelected((prev) => ({ ...prev, [stepIndex]: optionIndex }));
+  const [form, setForm] = useState<BookingFormValues>(INITIAL_FORM_STATE);
+
+  const toggleOption = (stepIndex: number, optionIndex: number) => {
+    setSelected((prev) => {
+      const currentSelections = prev[stepIndex] || [];
+      const isAlreadySelected = currentSelections.includes(optionIndex);
+
+      return {
+        ...prev,
+        [stepIndex]: isAlreadySelected
+          ? currentSelections.filter((item) => item !== optionIndex)
+          : [...currentSelections, optionIndex]
+      };
+    });
   };
 
-  const hasStepSelection = (stepIndex: number) => selected[stepIndex] !== undefined;
+  const setFormField = <K extends keyof BookingFormValues>(field: K, value: BookingFormValues[K]) => {
+    setForm((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const hasStepSelection = (stepIndex: number) => (selected[stepIndex] || []).length > 0;
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
   const isContactStepComplete = form.name.trim().length > 1 && isEmailValid && form.location.trim().length > 1;
+  const optionStepCount = BOOKING_OPTION_STEPS.length;
+  const totalSteps = optionStepCount + 1;
+  const isOnContactStep = step === optionStepCount;
 
   const handleSubmit = () => {
     setSubmitted(true);
+  };
+
+  const markContactFieldTouched = (field: 'name' | 'email' | 'location') => {
+    setContactTouched((prev) => ({ ...prev, [field]: true }));
+  };
+
+  const getContactFieldError = (field: 'name' | 'email' | 'location') => {
+    if (!contactTouched[field]) {
+      return '';
+    }
+
+    if (field === 'name' && form.name.trim().length <= 1) {
+      return CONTACT_FIELD_ERRORS.name;
+    }
+
+    if (field === 'email' && !isEmailValid) {
+      return CONTACT_FIELD_ERRORS.email;
+    }
+
+    if (field === 'location' && form.location.trim().length <= 1) {
+      return CONTACT_FIELD_ERRORS.location;
+    }
+
+    return '';
   };
 
   return (
@@ -55,14 +92,16 @@ const Book = () => {
       <div className="book-page">
         <div className="book-l">
           <div className="book-l-c">
-            <span className="sec-label gold">Book a Consultation</span>
-            <h2>Let's start with your <em>story</em></h2>
-            <p>Tell us about your space, your vision, and what you're hoping to feel when you walk through the door. We'll take it from there.</p>
+            <span className="sec-label gold">{BOOKING_CONTENT.sectionLabel}</span>
+            <h2>{BOOKING_CONTENT.introHeadingLead} <em>{BOOKING_CONTENT.introHeadingEmphasis}</em></h2>
+            <p>{BOOKING_CONTENT.introBody}</p>
             <div className="book-faq">
-              <div className="bfaq-item"><h5>How soon will I hear back?</h5><p>Within 24 hours on weekdays. I read every submission personally.</p></div>
-              <div className="bfaq-item"><h5>What does a consultation cost?</h5><p>Initial discovery calls are complimentary. Project quotes follow after our first conversation.</p></div>
-              <div className="bfaq-item"><h5>Can I book a virtual consult?</h5><p>Absolutely. I work with clients all accorss the States — location is never a barrier.</p></div>
-              <div className="bfaq-item"><h5>How long do projects take?</h5><p>Virtual E-Design: 2-4 weeks. Full interior design: 8-16 weeks depending on scope.</p></div>
+              {BOOKING_FAQS.map((faq) => (
+                <div className="bfaq-item" key={faq.question}>
+                  <h5>{faq.question}</h5>
+                  <p>{faq.answer}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -71,102 +110,127 @@ const Book = () => {
             <form
               onSubmit={(event) => {
                 event.preventDefault();
-                if (isContactStepComplete) {
-                  handleSubmit();
+                if (!isContactStepComplete) {
+                  setContactTouched({ name: true, email: true, location: true });
+                  return;
                 }
+
+                handleSubmit();
               }}
               noValidate
             >
               <div className="bk-prog">
-                {[0, 1, 2, 3].map((i) => (
+                {Array.from({ length: totalSteps }, (_, i) => i).map((i) => (
                   <div className="bk-prog-item" key={`prog-${i}`}>
                     <div key={`dot-${i}`} className={`bk-step-dot ${i === step ? 'act' : ''} ${i < step ? 'done' : ''}`}>{i + 1}</div>
-                    {i < 3 && <div key={`line-${i}`} className={`bk-step-line ${i < step ? 'done' : ''}`}></div>}
+                    {i < totalSteps - 1 && <div key={`line-${i}`} className={`bk-step-line ${i < step ? 'done' : ''}`}></div>}
                   </div>
                 ))}
               </div>
 
-              <div className={`bk-form-step ${step === 0 ? 'on' : ''}`}>
-                <div className="bk-q">What kind of project are you looking for?</div>
-                <div className="bk-sub">This helps us match you with the right designer and service.</div>
-                <div className="bk-opts">
-                  {PROJECT_TYPE_OPTIONS.map((opt, i) => (
-                    <button
-                      key={opt.t}
-                      type="button"
-                      className={`bk-opt ${selected[0] === i ? 'sel' : ''}`}
-                      onClick={() => selectOption(0, i)}
-                      aria-pressed={selected[0] === i}
-                    >
-                      <span className="opt-icon">0{i + 1}</span><h4>{opt.t}</h4><p>{opt.p}</p>
+              {BOOKING_OPTION_STEPS.map((stepConfig, stepIndex) => (
+                <div className={`bk-form-step ${step === stepIndex ? 'on' : ''}`} key={stepConfig.id}>
+                  <div className="bk-q">
+                    {stepConfig.question}
+                    {stepConfig.isRequired && <span className="bk-required-mark">{BOOKING_CONTENT.requiredMarker}</span>}
+                  </div>
+                  <div className="bk-sub">{stepConfig.subtext}</div>
+                  <div className="bk-opts">
+                    {stepConfig.options.map((option, optionIndex) => (
+                      <button
+                        key={option.title}
+                        type="button"
+                        className={`bk-opt ${(selected[stepIndex] || []).includes(optionIndex) ? 'sel' : ''}`}
+                        onClick={() => toggleOption(stepIndex, optionIndex)}
+                        aria-pressed={(selected[stepIndex] || []).includes(optionIndex)}
+                      >
+                        <span className="opt-icon">0{optionIndex + 1}</span>
+                        <h4>{option.title}</h4>
+                        <p>{option.description}</p>
+                      </button>
+                    ))}
+                  </div>
+                  {stepConfig.showBudgetSelect && (
+                    <div className="bk-field" style={{ marginTop: '8px' }}>
+                      <label>Approximate Budget (optional)</label>
+                      <select value={form.budget} onChange={(e) => setFormField('budget', e.target.value)}>
+                        {BUDGET_OPTIONS.map((budgetOption, index) => (
+                          <option key={budgetOption} value={index === 0 ? '' : budgetOption}>
+                            {budgetOption}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+                  <div className="bk-nav">
+                    {stepIndex > 0 ? (
+                      <button className="bk-back-btn" type="button" onClick={() => setStep(stepIndex - 1)}>
+                        <svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5H2M2 5L6 1M2 5l4 4"/></svg> {BOOKING_CONTENT.backLabel}
+                      </button>
+                    ) : (
+                      <div></div>
+                    )}
+                    <button className="btn-tr" type="button" onClick={() => setStep(stepIndex + 1)} disabled={!hasStepSelection(stepIndex)}>
+                      <span>{BOOKING_CONTENT.continueLabel}</span>
                     </button>
-                  ))}
+                  </div>
                 </div>
-                <div className="bk-nav">
-                  <div></div>
-                  <button className="btn-tr" type="button" onClick={() => setStep(1)} disabled={!hasStepSelection(0)}><span>Continue -{'>'}</span></button>
-                </div>
-              </div>
+              ))}
 
-              <div className={`bk-form-step ${step === 1 ? 'on' : ''}`}>
-                <div className="bk-q">Tell us about your space</div>
-                <div className="bk-sub">The more you share, the better we can prepare for our conversation.</div>
-                <div className="bk-opts">
-                  {SPACE_OPTIONS.map((opt, i) => (
-                    <button
-                      key={opt.t}
-                      type="button"
-                      className={`bk-opt ${selected[1] === i ? 'sel' : ''}`}
-                      onClick={() => selectOption(1, i)}
-                      aria-pressed={selected[1] === i}
-                    >
-                      <span className="opt-icon">0{i + 1}</span><h4>{opt.t}</h4><p>{opt.p}</p>
-                    </button>
-                  ))}
-                </div>
-                <div className="bk-nav"><button className="bk-back-btn" type="button" onClick={() => setStep(0)}><svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5H2M2 5L6 1M2 5l4 4"/></svg> Back</button><button className="btn-tr" type="button" onClick={() => setStep(2)} disabled={!hasStepSelection(1)}><span>Continue -{'>'}</span></button></div>
-              </div>
-
-              <div className={`bk-form-step ${step === 2 ? 'on' : ''}`}>
-                <div className="bk-q">What's your aesthetic direction?</div>
-                <div className="bk-sub">Don't overthink it — a gut feeling is enough.</div>
-                <div className="bk-opts">
-                  {STYLE_OPTIONS.map((opt, i) => (
-                    <button
-                      key={opt.t}
-                      type="button"
-                      className={`bk-opt ${selected[2] === i ? 'sel' : ''}`}
-                      onClick={() => selectOption(2, i)}
-                      aria-pressed={selected[2] === i}
-                    >
-                      <span className="opt-icon">0{i + 1}</span><h4>{opt.t}</h4><p>{opt.p}</p>
-                    </button>
-                  ))}
-                </div>
-                <div className="bk-field" style={{ marginTop: '8px' }}>
-                  <label>Approximate Budget (optional)</label>
-                  <select value={form.budget} onChange={(e) => setForm({ ...form, budget: e.target.value })}>
-                    <option value="">I'd prefer to discuss this</option>
-                    <option>Under £2,000 / $2,500</option>
-                    <option>£2,000-£5,000 / $2,500-$6,500</option>
-                    <option>£5,000-£15,000 / $6,500-$20,000</option>
-                    <option>£15,000+ / $20,000+</option>
+              <div className={`bk-form-step ${isOnContactStep ? 'on' : ''}`}>
+                <div className="bk-q">How do we reach you?<span className="bk-required-mark">{BOOKING_CONTENT.requiredMarker}</span></div>
+                <div className="bk-sub">We'll send a personal reply — not a template, not a bot.</div>
+                {CONTACT_FIELDS.map((field) => (
+                  <div className="bk-field" key={field.key}>
+                    <label>{field.label}{field.required && <span className="bk-required-mark">{BOOKING_CONTENT.requiredMarker}</span>}</label>
+                    {field.multiline ? (
+                      <textarea
+                        rows={4}
+                        placeholder={field.placeholder}
+                        value={form[field.key]}
+                        onChange={(e) => setFormField(field.key, e.target.value)}
+                      ></textarea>
+                    ) : (
+                      <input
+                        type={field.type || 'text'}
+                        placeholder={field.placeholder}
+                        value={form[field.key]}
+                        className={
+                          (field.key === 'name' || field.key === 'email' || field.key === 'location') && getContactFieldError(field.key)
+                            ? 'bk-input-invalid'
+                            : ''
+                        }
+                        aria-invalid={
+                          field.key === 'name' || field.key === 'email' || field.key === 'location'
+                            ? Boolean(getContactFieldError(field.key))
+                            : false
+                        }
+                        required={field.required}
+                        onChange={(e) => setFormField(field.key, e.target.value)}
+                        onBlur={() => {
+                          if (field.key === 'name' || field.key === 'email' || field.key === 'location') {
+                            markContactFieldTouched(field.key);
+                          }
+                        }}
+                      />
+                    )}
+                    {(field.key === 'name' || field.key === 'email' || field.key === 'location') && getContactFieldError(field.key) && (
+                      <p className="bk-field-error">{getContactFieldError(field.key)}</p>
+                    )}
+                  </div>
+                ))}
+                <div className="bk-field">
+                  <label>How did you find us?</label>
+                  <select value={form.source} onChange={(e) => setFormField('source', e.target.value)}>
+                    <option value="">Select one</option>
+                    {SOURCE_OPTIONS.map((sourceOption) => (
+                      <option key={sourceOption} value={sourceOption}>{sourceOption}</option>
+                    ))}
                   </select>
                 </div>
-                <div className="bk-nav"><button className="bk-back-btn" type="button" onClick={() => setStep(1)}><svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5H2M2 5L6 1M2 5l4 4"/></svg> Back</button><button className="btn-tr" type="button" onClick={() => setStep(3)} disabled={!hasStepSelection(2)}><span>Continue -{'>'}</span></button></div>
-              </div>
-
-              <div className={`bk-form-step ${step === 3 ? 'on' : ''}`}>
-                <div className="bk-q">How do we reach you?</div>
-                <div className="bk-sub">We'll send a personal reply — not a template, not a bot.</div>
-                <div className="bk-field"><label>Your Full Name</label><input type="text" placeholder="Jane Smith" value={form.name} required onChange={(e) => setForm({ ...form, name: e.target.value })}/></div>
-                <div className="bk-field"><label>Email Address</label><input type="email" placeholder="jane@example.com" value={form.email} required onChange={(e) => setForm({ ...form, email: e.target.value })}/></div>
-                <div className="bk-field"><label>Location / City</label><input type="text" placeholder="New York, London, Sydney..." value={form.location} required onChange={(e) => setForm({ ...form, location: e.target.value })}/></div>
-                <div className="bk-field"><label>Tell us more (optional)</label><textarea rows={4} placeholder="Any context you'd like to share — links, images, a feeling. Anything helps." value={form.details} onChange={(e) => setForm({ ...form, details: e.target.value })}></textarea></div>
-                <div className="bk-field"><label>How did you find us?</label><select value={form.source} onChange={(e) => setForm({ ...form, source: e.target.value })}><option value="">Select one</option><option>Instagram</option><option>Pinterest</option><option>Google</option><option>Friend or referral</option><option>Press / Editorial</option><option>Other</option></select></div>
-                <div className="bk-nav"><button className="bk-back-btn" type="button" onClick={() => setStep(2)}><svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5H2M2 5L6 1M2 5l4 4"/></svg> Back</button><button className="btn-tr" type="submit" disabled={!isContactStepComplete}><span>Send My Enquiry -{'>'}</span></button></div>
+                <div className="bk-nav"><button className="bk-back-btn" type="button" onClick={() => setStep(optionStepCount - 1)}><svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5H2M2 5L6 1M2 5l4 4"/></svg> {BOOKING_CONTENT.backLabel}</button><button className="btn-tr" type="submit"><span>{BOOKING_CONTENT.submitLabel}</span></button></div>
                 {!isContactStepComplete && (
-                  <p className="bk-form-hint">Complete name, valid email, and location to continue.</p>
+                  <p className="bk-form-hint">{BOOKING_CONTENT.contactHint}</p>
                 )}
               </div>
             </form>
@@ -175,9 +239,9 @@ const Book = () => {
           {submitted && (
             <div className="bk-success" style={{ display: 'block' }}>
               <div className="check">✓</div>
-              <h3>We've got your<br/><em>message</em></h3>
-              <p>Thank you for reaching out. A real person on our team will read your enquiry and reply within 24 hours. In the meantime, feel free to explore our work.</p>
-              <button className="btn-dk" onClick={() => navigate('/portfolio')}><span>Explore Portfolio</span></button>
+              <h3>{BOOKING_CONTENT.successHeadingLead}<br/><em>{BOOKING_CONTENT.successHeadingEmphasis}</em></h3>
+              <p>{BOOKING_CONTENT.successBody}</p>
+              <button className="btn-dk" onClick={() => navigate('/portfolio')}><span>{BOOKING_CONTENT.successCtaLabel}</span></button>
             </div>
           )}
         </div>

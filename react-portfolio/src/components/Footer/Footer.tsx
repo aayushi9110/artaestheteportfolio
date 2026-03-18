@@ -43,6 +43,7 @@ const Footer = () => {
   return (
     <footer className="ft">
       <div className="ft-social">
+        <a href="" className="ft-soc"></a>
         {socialLinks.map((link) => (
           <a key={link.name} href={link.href} className="ft-soc" aria-label={link.name}>
             <span className="ft-soc-icon">{link.icon}</span>
