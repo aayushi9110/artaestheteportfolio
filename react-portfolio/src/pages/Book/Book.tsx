@@ -34,12 +34,12 @@ const Book = () => {
               <svg width="13" height="9" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5H2M2 5L6 1M2 5l4 4"/></svg> Back
             </button>
             <span className="sec-label gold">Book a Consultation</span>
-            <h2>Let's start with<br/>your <em>story</em></h2>
+            <h2>Let's start with your <em>story</em></h2>
             <p>Tell us about your space, your vision, and what you're hoping to feel when you walk through the door. We'll take it from there.</p>
             <div className="book-faq">
-              <div className="bfaq-item"><h5>How soon will I hear back?</h5><p>Within 24 hours on weekdays. We read every submission personally.</p></div>
+              <div className="bfaq-item"><h5>How soon will I hear back?</h5><p>Within 24 hours on weekdays. I read every submission personally.</p></div>
               <div className="bfaq-item"><h5>What does a consultation cost?</h5><p>Initial discovery calls are complimentary. Project quotes follow after our first conversation.</p></div>
-              <div className="bfaq-item"><h5>Can I book a virtual consult?</h5><p>Absolutely. We work with clients across 12 countries — location is never a barrier.</p></div>
+              <div className="bfaq-item"><h5>Can I book a virtual consult?</h5><p>Absolutely. I work with clients all accorss the States — location is never a barrier.</p></div>
               <div className="bfaq-item"><h5>How long do projects take?</h5><p>Virtual E-Design: 2-4 weeks. Full interior design: 8-16 weeks depending on scope.</p></div>
             </div>
           </div>

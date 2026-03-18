@@ -5,33 +5,46 @@
 
 .ft-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr;
   gap: 52px;
-  margin-bottom: 52px;
+  margin-bottom: 20px;
 }
 
 .ft-logo {
   display: block;
   margin-bottom: 16px;
   color: var(--cream) !important;
-  font-size: 1.45rem;
+  font-size: 3rem;
   font-family: "Cormorant Garamond", serif;
   font-weight: 400;
   letter-spacing: 0.09em;
   text-decoration: none;
+  padding-left: 0;
 }
 
 .ft-logo span {
-  color: var(--terra) !important;
-  font-style: italic;
+  color: var(--terra);
 }
+
+.ft-logo .byaayushi {
+  color: var(--cream);
+  font-size: 50%;
+  letter-spacing: 0.15em;
+  font-style: italic;
+  position: relative;
+  bottom: -23px;
+  left: -14%;
+  opacity: 0.6;
+  transition: color 0.3s, opacity 0.3s;
+}
+
 
 .ft-about {
   font-weight: 300;
-  font-size: 0.8rem;
+  font-size: 1.1rem;
   line-height: 1.8;
   color: rgba(245, 239, 228, 0.38);
-  max-width: 265px;
+  max-width: 75%;
   margin-bottom: 22px;
 }
 
@@ -52,8 +65,8 @@
   min-height: 54px;
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 10px 14px;
+  gap: 10px;
+  padding: 0 14px;
   white-space: nowrap;
   text-decoration: none;
   font-size: 0.68rem;
@@ -64,16 +77,15 @@
 }
 
 .ft-soc-icon {
-  width: 45px;
-  height: 45px;
+  width: 55px;
+  height: 55px;
   /* border: 1px solid rgba(245, 239, 228, 0.1); */
   border-radius:10px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: var(--cream);
-  background-color: var(--gold);
+  color: var(--gold);
 }
 
 .ft-soc-icon svg {
@@ -88,7 +100,7 @@
 }
 
 .ft-soc-copy strong {
-  font-size: 0.72rem;
+  font-size: 0.85rem;
   font-weight: 400;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -96,7 +108,7 @@
 }
 
 .ft-soc-copy span {
-  font-size: 0.74rem;
+  font-size: 0.86rem;
   color: var(--linen);
 }
 
@@ -116,7 +128,7 @@
 
 .ft-col h5 {
   font-weight: 400;
-  font-size: 0.66rem;
+  font-size: 0.9rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--cream);
@@ -134,7 +146,7 @@
 .ft-col ul a,
 .ft-col ul button {
   font-weight: 300;
-  font-size: 0.8rem;
+  font-size: 1.1rem;
   color: rgba(245, 239, 228, 0.36);
   text-decoration: none;
   transition: color 0.3s;
@@ -160,7 +172,7 @@
 
 .ft-bot p {
   font-weight: 300;
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   color: rgba(245, 239, 228, 0.22);
 }
 

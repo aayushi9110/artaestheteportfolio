@@ -57,21 +57,15 @@ const Footer = () => {
       <div className="ft-grid">
         <div>
           <Link to="/" className="n-logo ft-logo">
-            <img src="/images/logos/artAesthetewh.png" alt="Logo" style={{height: '32px', marginRight: '8px', verticalAlign: 'middle'}} />
-            Art <span>Aesthete</span>
+            <img src="/images/logos/artAesthetewh.png" alt="Logo" style={{height: '70px', marginRight: '8px', verticalAlign: 'middle'}} />
+            Art 
+            <span>Aesthete
+              <span className='byaayushi'> By Aayushi</span>
+            </span>
           </Link>
           <p className="ft-about">
             A design studio dedicated to the art of living — where every room is a canvas and every object tells a story.
           </p>
-        </div>
-        <div className="ft-col">
-          <h5>Studio</h5>
-          <ul>
-            <li><Link to="/about">About Us</Link></li>
-            <li><Link to="/about">Our Team</Link></li>
-            <li><a href="#">Press</a></li>
-            <li><a href="#">Careers</a></li>
-          </ul>
         </div>
         <div className="ft-col">
           <h5>Services</h5>
@@ -85,9 +79,9 @@ const Footer = () => {
         <div className="ft-col">
           <h5>Contact</h5>
           <ul>
-            <li><a href="#">hello@artaesthete.co</a></li>
-            <li><a href="#">+1 212 555 0142</a></li>
-            <li><a href="#">New Jersey · New York</a></li>
+            <li><a href="#">a.art.aesthete@gmail.com</a></li>
+            <li><a href="#">+1(856)-283-5980</a></li>
+            <li><a href="#">New Jersey · New York · Bay Area · California · Mumbai, India</a></li>
           </ul>
         </div>
       </div>

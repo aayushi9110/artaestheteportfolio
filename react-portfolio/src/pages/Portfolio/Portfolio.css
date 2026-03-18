@@ -165,7 +165,7 @@
   background: linear-gradient(
     to top,
     rgba(44, 31, 20, 0.88) 0%,
-    rgba(44, 31, 20, 0.07) 42%,
+    rgba(44, 31, 20, 0.07) 60%,
     transparent
   );
   opacity: 0;
@@ -184,7 +184,7 @@
   font-size: 0.54rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--linen);
   margin-bottom: 4px;
 }
 
@@ -306,7 +306,7 @@
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: 0;
-  margin-bottom: 72px;
+  margin-bottom: 35px;
   border: 1px solid var(--sand);
   overflow: hidden;
 }
@@ -388,7 +388,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 460px;
+  height: 100%;
   padding: 40px 38px 30px;
   position: relative;
 }
@@ -458,12 +458,41 @@
 }
 
 .pf-carousel-panel p {
-  font-size: 0.87rem;
+  font-size: 1.1rem;
   font-weight: 300;
   line-height: 1.85;
-  color: var(--taupe);
+  color: var(--taupe-grey);
   margin-bottom: 28px;
   flex: 1;
+}
+
+.pf-carousel-tags-section {
+  padding: 0px 0 40px 0;
+  border-bottom: 1px solid var(--sand);
+  margin: 0 0 30px 0;
+}
+
+.pf-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pf-tag {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  background: var(--sand);
+  color: var(--taupe);
+  display: inline-block;
+  transition: all 0.3s;
+}
+
+.pf-tag:hover {
+  background: var(--terra);
+  color: var(--warm);
 }
 
 .pf-carousel-actions {
@@ -491,7 +520,7 @@
 }
 
 .pf-quick-view {
-  font-size: 0.68rem;
+  font-size: 0.8rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--taupe);

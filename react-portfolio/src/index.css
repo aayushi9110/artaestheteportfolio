@@ -73,9 +73,9 @@ body::before {
   flex-shrink: 0;
 }
 
-.sec-label:hover {
+/* .sec-label:hover {
   letter-spacing: 0.55em;
-}
+} */
 
 .sec-label.gold {
   color: var(--gold);
@@ -140,7 +140,7 @@ body::before {
 .btn-dk,
 .btn-tr,
 .btn-lt {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   border: none;

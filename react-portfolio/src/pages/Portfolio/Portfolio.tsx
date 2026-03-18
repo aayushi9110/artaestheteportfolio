@@ -8,6 +8,7 @@ type GalleryItem = {
   storyType: 'interior' | 'fine-art';
   imageUrl: string;
   categoryLabel: string;
+  tagLabels: string[];
   title: string;
   summary: string;
 };
@@ -17,6 +18,7 @@ const allPortfolioItems: GalleryItem[] = Object.entries(PROJECTS).map(([id, proj
   storyType: project.storyType,
   imageUrl: project.heroImageUrl,
   categoryLabel: project.tagLabels[0],
+  tagLabels: project.tagLabels,
   title: project.title,
   summary: project.overviewTextPrimary,
 }));
@@ -206,6 +208,16 @@ const Portfolio = () => {
               <span className="pf-carousel-count">{featuredIndex + 1} / {featuredItems.length}</span>
             </div>
           </div>
+        </div>
+
+        <div className="pf-carousel-tags-section">
+          {featuredItems[featuredIndex] && (
+            <div className="pf-tags-container">
+              {featuredItems[featuredIndex].tagLabels.map((tag, index) => (
+                <span key={index} className="pf-tag">{tag}</span>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className={`gall-section ${tab === 'interiors' ? 'on' : ''}`}>

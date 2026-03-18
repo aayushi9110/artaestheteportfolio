@@ -86,6 +86,9 @@ nav.stuck .n-logo:hover .n-logo-mark {
   text-decoration: none;
   position: relative;
   font-weight: 400;
+  padding: 8px 12px;
+  border-radius: 3px;
+  background: transparent;
   transition: color 0.3s;
   cursor: none;
 }
@@ -245,6 +248,8 @@ nav.subpage:not(.stuck) .n-links a:hover {
 
 nav.subpage:not(.stuck) .n-links a.active {
   color: var(--gold);
+  background: rgba(245, 239, 228, 0.18);
+  backdrop-filter: blur(8px);
 }
 
 nav.subpage:not(.stuck) .n-links a.active::after {
