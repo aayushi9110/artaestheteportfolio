@@ -40,22 +40,6 @@
   z-index: 2;
 }
 
-.book-l .page-back {
-  color: var(--cream);
-  background: rgba(245, 239, 228, 0.1);
-  border: 1px solid rgba(245, 239, 228, 0.22);
-  border-radius: 999px;
-  padding: 10px 18px 10px 14px;
-  letter-spacing: 0.16em;
-  backdrop-filter: blur(8px);
-}
-
-.book-l .page-back:hover {
-  color: var(--gold);
-  background: rgba(245, 239, 228, 0.16);
-  border-color: rgba(201, 169, 110, 0.45);
-}
-
 .book-l-c h2 {
   font-family: "Cormorant Garamond", serif;
   font-size: clamp(2.2rem, 3.5vw, 3.2rem);
@@ -122,6 +106,16 @@
   align-items: center;
   gap: 0;
   margin-bottom: 48px;
+}
+
+.bk-prog-item {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.bk-prog-item:last-child {
+  flex: 0;
 }
 
 .bk-step-dot {
@@ -220,11 +214,17 @@
   text-align: left;
   transition: all 0.3s;
   font-family: "Jost", sans-serif;
+  width: 100%;
 }
 
 .bk-opt.sel {
   border-color: var(--terra);
   background: rgba(181, 99, 58, 0.06);
+}
+
+.bk-opt:focus-visible {
+  outline: 2px solid rgba(181, 99, 58, 0.55);
+  outline-offset: 2px;
 }
 
 .bk-opt .opt-icon {
@@ -299,7 +299,7 @@
   margin-top: 40px;
 }
 
-.bk-back-btn{
+.bk-back-btn {
   color: var(--taupe-grey);
   background: var(--linen);
 }
@@ -317,6 +317,24 @@
 
 .bk-back-btn:hover svg {
   transform: translateX(-3px);
+}
+
+.bk-nav .btn-tr:disabled {
+  background: var(--sand);
+  color: var(--cream);
+  cursor: not-allowed;
+  opacity: 0.78;
+}
+
+.bk-nav .btn-tr:disabled::before {
+  display: none;
+}
+
+.bk-form-hint {
+  margin-top: 14px;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--taupe);
 }
 
 .bk-success {
