@@ -4,8 +4,8 @@ import './Footer.css';
 const socialLinks = [
   {
     name: 'Instagram',
-    href: '#',
-    handle: '@yourinstagram',
+    href: 'https://www.instagram.com/art.aesthete.studio',
+    handle: '@art.aesthete.studio',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
         <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
@@ -16,8 +16,8 @@ const socialLinks = [
   },
   {
     name: 'Pinterest',
-    href: '#',
-    handle: '@yourpinterest',
+    href: 'https://www.pinterest.com/aartaesthete/',
+    handle: '@aartaesthete',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
         <path d="M12 3.5c-4.2 0-7 2.9-7 6.5 0 2.5 1.4 4.4 3.5 5.1" />
@@ -29,8 +29,8 @@ const socialLinks = [
   },
   {
     name: 'LinkedIn',
-    href: '#',
-    handle: 'in/yourlinkedin',
+    href: 'https://www.linkedin.com/in/aayushi-shah-/',
+    handle: 'in/aayushi-shah-',
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M6.8 8.3a1.8 1.8 0 1 1 0-3.6 1.8 1.8 0 0 1 0 3.6ZM5.2 9.8h3.2v8.9H5.2V9.8Zm5.1 0h3v1.2h.1c.4-.8 1.5-1.6 3.1-1.6 3.3 0 3.9 2 3.9 4.7v4.6h-3.2v-4.1c0-1 0-2.3-1.5-2.3s-1.7 1.1-1.7 2.2v4.2h-3.2V9.8Z" />
@@ -43,9 +43,8 @@ const Footer = () => {
   return (
     <footer className="ft">
       <div className="ft-social">
-        <a href="" className="ft-soc"></a>
         {socialLinks.map((link) => (
-          <a key={link.name} href={link.href} className="ft-soc" aria-label={link.name}>
+          <a key={link.name} href={link.href} className="ft-soc" aria-label={link.name} target="_blank" rel="noreferrer">
             <span className="ft-soc-icon">{link.icon}</span>
             <span className="ft-soc-copy">
               <strong>{link.name}</strong>
@@ -71,18 +70,18 @@ const Footer = () => {
         <div className="ft-col">
           <h5>Services</h5>
           <ul>
-            <li><Link to="/process">Interior Design</Link></li>
-            <li><Link to="/virtual">Virtual Consultation</Link></li>
-            <li><Link to="/portfolio">Fine Art Curation</Link></li>
-            <li><Link to="/book">Book Consultation</Link></li>
+            <li><span>Interior Design</span></li>
+            <li><span>Virtual Consultation</span></li>
+            <li><span>Fine Art Curation</span></li>
+            <li><span>Book Consultation</span></li>
           </ul>
         </div>
         <div className="ft-col">
           <h5>Contact</h5>
           <ul>
-            <li><a href="#">a.art.aesthete@gmail.com</a></li>
-            <li><a href="#">+1(856)-283-5980</a></li>
-            <li><a href="#">New Jersey · New York · Bay Area · California · Mumbai, India</a></li>
+            <li><a href="mailto:a.art.aesthete@gmail.com">a.art.aesthete@gmail.com</a></li>
+            <li><a href="tel:+18562835980">+1(856)-283-5980</a></li>
+            <li><span>New Jersey · New York · Bay Area · California · Mumbai, India</span></li>
           </ul>
         </div>
       </div>

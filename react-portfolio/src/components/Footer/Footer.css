@@ -145,18 +145,23 @@
 }
 
 .ft-col ul a,
+.ft-col ul span,
 .ft-col ul button {
   font-weight: 300;
   font-size: 1.1rem;
   color: rgba(245, 239, 228, 0.36);
   text-decoration: none;
-  transition: color 0.3s;
-  cursor: none;
+  cursor: default;
   background: none;
   border: none;
   font-family: "Jost", sans-serif;
   text-align: left;
   padding: 0;
+}
+
+.ft-col ul a {
+  cursor: none;
+  transition: color 0.3s;
 }
 
 .ft-col ul a:hover,
