@@ -21,10 +21,34 @@ const INITIAL_FORM_STATE: BookingFormValues = {
   source: ''
 };
 
+type BookingSubmissionPayload = {
+  projectTypes: string[];
+  spaces: string[];
+  aesthetics: string[];
+  budget: string;
+  name: string;
+  email: string;
+  location: string;
+  details: string;
+  source: string;
+  submittedAt: string;
+  pagePath: string;
+  pageUrl: string;
+  timezone: string;
+  userAgent: string;
+};
+
+type BookingApiResponse = {
+  message?: string;
+  error?: string;
+};
+
 const Book = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [selected, setSelected] = useState<Record<number, number[]>>({});
   const [contactTouched, setContactTouched] = useState<Record<'name' | 'email' | 'location', boolean>>({
     name: false,
@@ -55,12 +79,84 @@ const Book = () => {
   const hasStepSelection = (stepIndex: number) => (selected[stepIndex] || []).length > 0;
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
   const isContactStepComplete = form.name.trim().length > 1 && isEmailValid && form.location.trim().length > 1;
+  const bookingApiUrl = import.meta.env.VITE_BOOKING_API_URL?.trim() || '';
+  const bookingApiKey = import.meta.env.VITE_BOOKING_API_KEY?.trim() || '';
+  const requestTimeoutMs = Number(import.meta.env.VITE_BOOKING_REQUEST_TIMEOUT_MS || '15000');
   const optionStepCount = BOOKING_OPTION_STEPS.length;
   const totalSteps = optionStepCount + 1;
   const isOnContactStep = step === optionStepCount;
 
-  const handleSubmit = () => {
-    setSubmitted(true);
+  const getSelectedOptionTitles = (stepIndex: number) => {
+    return (selected[stepIndex] || [])
+      .map((optionIndex) => BOOKING_OPTION_STEPS[stepIndex]?.options[optionIndex]?.title)
+      .filter((title): title is string => Boolean(title));
+  };
+
+  const buildBookingPayload = (): BookingSubmissionPayload => ({
+    projectTypes: getSelectedOptionTitles(0),
+    spaces: getSelectedOptionTitles(1),
+    aesthetics: getSelectedOptionTitles(2),
+    budget: form.budget,
+    name: form.name.trim(),
+    email: form.email.trim(),
+    location: form.location.trim(),
+    details: form.details.trim(),
+    source: form.source,
+    submittedAt: new Date().toISOString(),
+    pagePath: window.location.pathname,
+    pageUrl: window.location.href,
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    userAgent: navigator.userAgent
+  });
+
+  const submitBookingForm = async () => {
+    if (!bookingApiUrl) {
+      throw new Error('Booking endpoint is not configured. Please set VITE_BOOKING_API_URL.');
+    }
+
+    const payload = buildBookingPayload();
+    const timeout = Number.isFinite(requestTimeoutMs) && requestTimeoutMs > 0 ? requestTimeoutMs : 15000;
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), timeout);
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json'
+    };
+
+    if (bookingApiKey) {
+      headers['x-api-key'] = bookingApiKey;
+    }
+
+    let response: Response;
+
+    try {
+      response = await fetch(bookingApiUrl, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(payload),
+        signal: controller.signal
+      });
+    } catch (error) {
+      if (error instanceof DOMException && error.name === 'AbortError') {
+        throw new Error('The request timed out. Please try again.');
+      }
+      throw error;
+    } finally {
+      window.clearTimeout(timeoutId);
+    }
+
+    if (!response.ok) {
+      let errorMessage = `Request failed with status ${response.status}`;
+      try {
+        const errorData = (await response.json()) as BookingApiResponse;
+        errorMessage = errorData?.message || errorData?.error || errorMessage;
+      } catch {
+        const responseText = await response.text();
+        if (responseText) {
+          errorMessage = responseText;
+        }
+      }
+      throw new Error(errorMessage);
+    }
   };
 
   const markContactFieldTouched = (field: 'name' | 'email' | 'location') => {
@@ -108,14 +204,25 @@ const Book = () => {
         <div className="book-r">
           {!submitted && (
             <form
-              onSubmit={(event) => {
+              onSubmit={async (event) => {
                 event.preventDefault();
                 if (!isContactStepComplete) {
                   setContactTouched({ name: true, email: true, location: true });
                   return;
                 }
 
-                handleSubmit();
+                setSubmitError('');
+                setIsSubmitting(true);
+
+                try {
+                  await submitBookingForm();
+                  setSubmitted(true);
+                } catch (error) {
+                  const message = error instanceof Error ? error.message : 'Unable to send your enquiry right now.';
+                  setSubmitError(message);
+                } finally {
+                  setIsSubmitting(false);
+                }
               }}
               noValidate
             >
@@ -228,9 +335,12 @@ const Book = () => {
                     ))}
                   </select>
                 </div>
-                <div className="bk-nav"><button className="bk-back-btn" type="button" onClick={() => setStep(optionStepCount - 1)}><svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5H2M2 5L6 1M2 5l4 4"/></svg> {BOOKING_CONTENT.backLabel}</button><button className="btn-tr" type="submit"><span>{BOOKING_CONTENT.submitLabel}</span></button></div>
+                <div className="bk-nav"><button className="bk-back-btn" type="button" onClick={() => setStep(optionStepCount - 1)}><svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5H2M2 5L6 1M2 5l4 4"/></svg> {BOOKING_CONTENT.backLabel}</button><button className="btn-tr" type="submit" disabled={isSubmitting}><span>{isSubmitting ? 'Sending...' : BOOKING_CONTENT.submitLabel}</span></button></div>
                 {!isContactStepComplete && (
                   <p className="bk-form-hint">{BOOKING_CONTENT.contactHint}</p>
+                )}
+                {submitError && (
+                  <p className="bk-submit-error">{submitError}</p>
                 )}
               </div>
             </form>

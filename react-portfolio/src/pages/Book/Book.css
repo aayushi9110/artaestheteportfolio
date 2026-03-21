@@ -354,6 +354,13 @@
   color: var(--taupe);
 }
 
+.bk-submit-error {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--burnt);
+}
+
 .bk-success {
   display: none;
   text-align: center;

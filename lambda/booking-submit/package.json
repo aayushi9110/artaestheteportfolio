@@ -1,0 +1,10 @@
+{
+  "name": "booking-submit-lambda",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "index.mjs",
+  "dependencies": {
+    "@aws-sdk/client-sesv2": "^3.893.0"
+  }
+}
