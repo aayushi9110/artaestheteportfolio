@@ -92,6 +92,28 @@ const WESTELM_ENTRYWAY_IMAGE_URLS = [
   '/images/WestElm/entryway/CuppertinoEntryway.png'
 ];
 
+const MUMBAI_BEDROOM_IMAGE_URLS = [
+  '/images/mumbai/mumbaibefore.png',
+  '/images/mumbai/bedroomMumbaiDetailhero.png',
+  '/images/mumbai/bedroomMumbaiDetailright.png',
+  '/images/mumbai/bedroomMumbai.png',
+  '/images/mumbai/mumbaiMedia.png'
+];
+
+const MUMBAI_BEDROOM_TWO_IMAGE_URLS = [
+  '/images/mumbaibed2/mumbaiBed2.png',
+  '/images/mumbaibed2/mumbaiBed2curtaind.png',
+  '/images/mumbaibed2/mumbaiBed2detail.png',
+  '/images/mumbaibed2/mumbaiDetailbed2.png'
+];
+
+const MUMBAI_BEDROOM_THREE_IMAGE_URLS = [
+  '/images/mumbaibed3/mumbaibed3.png',
+  '/images/mumbaibed3/mumbaiBed3detailsnightstand.png',
+  '/images/mumbaibed3/mumbaibed3nightstanddetail.png',
+  '/images/mumbaibed3/mumbaiBed3whole.png'
+];
+
 export const PROJECTS: Record<string, Project> = {
   // amber: {
   //   storyType: 'interior',
@@ -284,11 +306,11 @@ export const PROJECTS: Record<string, Project> = {
       'Soft neutrals, modern Nordic warmth'
     ]
   },
-  rocheboboisDining: {
+  madisonDining: {
     storyType: 'interior',
     isSelectedForHome: true,
     homeVisibilityPriority: 6,
-    title: 'Roche Bobois Dining',
+    title: 'Elevated Dining',
     location: 'Madison Ave NYC - Soft Luxury Dining.',
     tagLabels: ['Interior Design', 'Dining Room', 'BoConcept', 'Roche Bobois'],
     heroImageUrl: ROCHEBOBOIS_DINING_IMAGE_URLS[0],
@@ -423,6 +445,97 @@ export const PROJECTS: Record<string, Project> = {
     galleryCaptions: [
       'Entryway before styling',
       'Entryway after styling'
+    ]
+  },
+  mumbaiBedroomOne: {
+    storyType: 'interior',
+    isSelectedForHome: true,
+    homeVisibilityPriority: 10,
+    title: 'Bedroom Retreat I',
+    location: 'Mumbai, India ',
+    tagLabels: ['Interior Design', 'Bedroom', 'Mumbai', 'Contemporary', 'Project 1'],
+    heroImageUrl: MUMBAI_BEDROOM_IMAGE_URLS[1],
+    beforeImageUrl: MUMBAI_BEDROOM_IMAGE_URLS[0],
+    afterImageUrl: MUMBAI_BEDROOM_IMAGE_URLS[3],
+    overviewTitle: 'A contemporary Mumbai bedroom with calm, layered restraint.',
+    overviewTextPrimary: 'Project 1 focused on creating a clean and restful bedroom using a neutral base, gentle contrast, and tactile materials. The layout and visual balance were planned to support both comfort and everyday functionality.',
+    overviewTextSecondary: 'Soft textures and warm details deliver a polished, welcoming retreat with a minimal contemporary feel.',
+    deliverableItems: [
+      { icon: '01', text: 'Concept Moodboard & Visual Direction' },
+      { icon: '02', text: 'Bedroom Layout Refinement' },
+      { icon: '03', text: 'Furniture & Decor Selection' },
+      { icon: '04', text: 'Textile and Material Palette' },
+      { icon: '05', text: 'Lighting and Accent Styling' },
+      { icon: '06', text: 'Final Styling Curation' }
+    ],
+    referenceImageUrls: MUMBAI_BEDROOM_IMAGE_URLS,
+    galleryImageUrls: MUMBAI_BEDROOM_IMAGE_URLS,
+    galleryCaptions: [
+      'Bedroom before the transformation',
+      'Bedroom after transformation',
+      'Detail view with layered textures',
+      'Bedroom full view',
+      'Media wall styling detail'
+    ]
+  },
+  mumbaiBedroomTwo: {
+    storyType: 'interior',
+    isSelectedForHome: true,
+    homeVisibilityPriority: 11,
+    title: 'Compact Bedroom',
+    location: 'Mumbai, India  (Project 2)',
+    tagLabels: ['Interior Design', 'Bedroom', 'Mumbai', 'Contemporary', ],
+    heroImageUrl: MUMBAI_BEDROOM_TWO_IMAGE_URLS[2],
+    beforeImageUrl: MUMBAI_BEDROOM_TWO_IMAGE_URLS[0],
+    afterImageUrl: MUMBAI_BEDROOM_TWO_IMAGE_URLS[0],
+    overviewTitle: 'A light-filled bedroom with warm drapery and quiet detailing.',
+    overviewTextPrimary: 'Project 2 explores a softer bedroom palette with layered fabrics, warm light filtering, and curated accents that add depth without visual noise.',
+    overviewTextSecondary: 'The result is a serene, intimate space that feels composed, practical, and deeply comfortable.',
+    deliverableItems: [
+      { icon: '01', text: 'Concept Moodboard & Visual Direction' },
+      { icon: '02', text: 'Bedroom Layout Refinement' },
+      { icon: '03', text: 'Furniture & Decor Selection' },
+      { icon: '04', text: 'Textile and Material Palette' },
+      { icon: '05', text: 'Lighting and Accent Styling' },
+      { icon: '06', text: 'Final Styling Curation' }
+    ],
+    referenceImageUrls: MUMBAI_BEDROOM_TWO_IMAGE_URLS,
+    galleryImageUrls: MUMBAI_BEDROOM_TWO_IMAGE_URLS,
+    galleryCaptions: [
+      'Mumbai bedroom set 2 - full composition',
+      'Set 2 curtain and light detail',
+      'Set 2 close-up detail',
+      'Set 2 bed styling detail'
+    ]
+  },
+  mumbaiBedroomThree: {
+    storyType: 'interior',
+    isSelectedForHome: true,
+    homeVisibilityPriority: 12,
+    title: 'Luxe Bedroom',
+    location: 'Mumbai, India ',
+    tagLabels: ['Interior Design', 'Bedroom', 'Mumbai', 'Contemporary', 'Luxury'],
+    heroImageUrl: MUMBAI_BEDROOM_THREE_IMAGE_URLS[1],
+    beforeImageUrl: MUMBAI_BEDROOM_THREE_IMAGE_URLS[3],
+    afterImageUrl: MUMBAI_BEDROOM_THREE_IMAGE_URLS[3],
+    overviewTitle: 'A modern bedroom concept centered on texture and bedside detail.',
+    overviewTextPrimary: 'Project 3 leans into refined detailing with carefully styled bedside elements, tonal layering, and a cohesive material story across the room.',
+    overviewTextSecondary: 'The final design feels tailored and calm, with visual rhythm built through subtle contrast and texture.',
+    deliverableItems: [
+      { icon: '01', text: 'Concept Moodboard & Visual Direction' },
+      { icon: '02', text: 'Bedroom Layout Refinement' },
+      { icon: '03', text: 'Furniture & Decor Selection' },
+      { icon: '04', text: 'Textile and Material Palette' },
+      { icon: '05', text: 'Lighting and Accent Styling' },
+      { icon: '06', text: 'Final Styling Curation' }
+    ],
+    referenceImageUrls: MUMBAI_BEDROOM_THREE_IMAGE_URLS,
+    galleryImageUrls: MUMBAI_BEDROOM_THREE_IMAGE_URLS,
+    galleryCaptions: [
+      'Mumbai bedroom set 3 - full composition',
+      'Set 3 nightstand detail',
+      'Set 3 texture detail',
+      'Set 3 complete bedroom view'
     ]
   },
   // linen: {
