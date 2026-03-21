@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { PROJECTS } from '../../data/appData.ts';
+import { PROJECTS, RESOURCES } from '../../data/appData.ts';
 import './Home.css';
 
 const MARQUEE_ITEMS = [
@@ -13,7 +13,8 @@ const MARQUEE_ITEMS = [
   'Bespoke Styling',
 ];
 
-const HOME_HERO_IMAGE_URL = '/images/home/Heroimages/heroimagedetail.png';
+const HOME_HERO_IMAGE_URL = RESOURCES.home.heroImageUrl;
+const HOME_STUDIO_IMAGE_URL = RESOURCES.home.studioImageUrl;
 
 const BRAND_LOGOS = [
   { src: '/images/brandLogo/boconceptlogo.jpg', alt: 'Boconcept' },
@@ -141,7 +142,7 @@ const Home = () => {
 
       <section className="philosophy" id="about-strip">
         <div className="ph-img rl">
-          <img src="/images/home/Heroimages/heroStudioimage.png" alt="Studio"/>
+          <img src={HOME_STUDIO_IMAGE_URL} alt="Studio"/>
         </div>
         <div className="ph-content rr">
           <span className="sec-label">Philosophy</span>
