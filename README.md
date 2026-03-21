@@ -4,7 +4,7 @@ A modern React TypeScript portfolio website for an interior design studio.
 
 ## Features
 
-- Built with React 18 and TypeScript
+- Built with React  18 and TypeScript
 - Modern UI with custom animations
 - Responsive design
 - Google Analytics integration
