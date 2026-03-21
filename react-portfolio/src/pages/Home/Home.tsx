@@ -13,6 +13,22 @@ const MARQUEE_ITEMS = [
   'Bespoke Styling',
 ];
 
+const HOME_HERO_IMAGE_URL = '/images/home/Heroimages/heroimagedetail.png';
+
+const BRAND_LOGOS = [
+  { src: '/images/brandLogo/boconceptlogo.jpg', alt: 'Boconcept' },
+  { src: '/images/brandLogo/cb2logo.jpg', alt: 'CB2' },
+  { src: '/images/brandLogo/cratelogo.jpg', alt: 'Crate & Barrel' },
+  { src: '/images/brandLogo/dwrlogo.jpg', alt: 'Design Within Reach' },
+  { src: '/images/brandLogo/fermlivinglogo.jpg', alt: 'Ferm Living' },
+  { src: '/images/brandLogo/hermanmillerlogo.jpg', alt: 'Herman Miller' },
+  { src: '/images/brandLogo/lazzonilogo.jpg', alt: 'Lazzoni' },
+  { src: '/images/brandLogo/potterybarn Logo.jpg', alt: 'Pottery Barn' },
+  { src: '/images/brandLogo/rhLogo.jpg', alt: 'Restoration Hardware' },
+  { src: '/images/brandLogo/rocheboboisLogo.jpg', alt: 'Roche Bobois' },
+  { src: '/images/brandLogo/westelmLogo.jpg', alt: 'West Elm' },
+];
+
 const Home = () => {
   const navigate = useNavigate();
 
@@ -109,10 +125,8 @@ const Home = () => {
           </div>
         </div>
         <div className="hero-r">
-          <div className="h-img-grid">
-            <div className="h-img"><img src="/galleryImageUrls/hero-image-1.jpg" alt="" className="prlx" data-s=".04"/></div>
-            <div className="h-img"><img src="/galleryImageUrls/hero-image-2.jpg" alt="" className="prlx" data-s=".07"/></div>
-            <div className="h-img"><img src="/galleryImageUrls/hero-image-3.jpg" alt="" className="prlx" data-s=".03"/></div>
+          <div className="h-img-grid one">
+            <div className="h-img"><img src={HOME_HERO_IMAGE_URL} alt="Landing hero" className="prlx" data-s=".04"/></div>
           </div>
         </div>
       </section>
@@ -127,7 +141,7 @@ const Home = () => {
 
       <section className="philosophy" id="about-strip">
         <div className="ph-img rl">
-          <img src="/galleryImageUrls/studio.jpg" alt="Studio"/>
+          <img src="/images/home/Heroimages/heroStudioimage.png" alt="Studio"/>
         </div>
         <div className="ph-content rr">
           <span className="sec-label">Philosophy</span>
@@ -240,6 +254,19 @@ const Home = () => {
               <span className="mp">Placement</span>
             </div>
             <Link to="/portfolio" className="svc-lnk">View art gallery →</Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="brand-marq" aria-label="Brands we have worked with">
+        <span className="sec-label" style={{ justifyContent: 'center' }}>Brands We Have Worked With</span>
+        <div className="brand-marq-wrap">
+          <div className="brand-marq-track">
+            {[...BRAND_LOGOS, ...BRAND_LOGOS, ...BRAND_LOGOS, ...BRAND_LOGOS].map((logo, i) => (
+              <div className="brand-marq-item" key={`${logo.src}-${i}`}>
+                <img src={logo.src} alt={logo.alt} loading="lazy" />
+              </div>
+            ))}
           </div>
         </div>
       </section>
