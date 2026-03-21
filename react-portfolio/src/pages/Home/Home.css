@@ -44,9 +44,12 @@
 }
 
 .hero {
-  min-height: 100vh;
+  --hero-header-offset: 122px;
+  --hero-left-width: 50%;
+  min-height: 82dvh;
+  height: 85dvh;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, var(--hero-left-width)) minmax(0, 1fr);
   position: relative;
   overflow: hidden;
 }
@@ -55,10 +58,14 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 140px 80px 80px;
+  padding-top: max(var(--hero-header-offset), clamp(72px, 9vh, 110px));
+  padding-right: clamp(28px, 6vw, 80px);
+  padding-bottom: clamp(36px, 6vh, 80px);
+  padding-left: clamp(28px, 6vw, 80px);
   background: var(--warm);
   position: relative;
   z-index: 2;
+  min-height: 0;
 }
 
 .hero-punch {
@@ -84,7 +91,7 @@
 
 .hero-h1 {
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(3rem, 5.2vw, 5rem);
+  font-size: clamp(3rem, 4vw, 5rem);
   font-weight: 300;
   line-height: 1.06;
   color: var(--dark);
@@ -133,6 +140,34 @@
   opacity: 0;
   animation: fU 0.8s ease 1.65s forwards;
   flex-wrap: wrap;
+}
+
+@media (min-height: 900px) {
+  .hero-l {
+    justify-content: flex-start;
+    padding-top: max(var(--hero-header-offset), 140px);
+    padding-bottom: 96px;
+  }
+
+  .hero-punch {
+    margin-bottom: 34px;
+  }
+
+  .hero-h1 {
+    font-size: clamp(3.4rem, 5vw, 5.4rem);
+    line-height: 1.08;
+  }
+
+  .hero-desc {
+    margin-top: 30px;
+    font-size: 1.04rem;
+    line-height: 1.95;
+    max-width: 420px;
+  }
+
+  .hero-acts {
+    margin-top: 44px;
+  }
 }
 
 .scroll-cue {
@@ -187,8 +222,12 @@
 .hero-r {
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
   opacity: 0;
   animation: fI 1.4s ease 0.5s forwards;
+  min-height: 0;
+  max-height: 85dvh;
 }
 
 .hero-r::after {
@@ -208,7 +247,9 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  height: 100%;
+  height: min(100%, 85dvh);
+  max-height: 85dvh;
+  width: 100%;
   gap: 3px;
 }
 
@@ -220,6 +261,8 @@
 .h-img {
   overflow: hidden;
   position: relative;
+  min-height: 0;
+  max-height: 85dvh;
 }
 
 .h-img:first-child {
@@ -233,10 +276,11 @@
 .h-img img {
   width: 100%;
   height: 100%;
+  max-height: 85dvh;
   object-fit: cover;
+  object-position: center;
   display: block;
   transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1);
-  transform: scale(1.08);
 }
 
 .h-img img.rdy {
@@ -761,6 +805,7 @@
   .hero {
     grid-template-columns: 1fr;
     min-height: auto;
+    height: auto;
   }
 
   .hero-punch {
@@ -768,12 +813,15 @@
   }
 
   .hero-l {
-    padding: 110px 36px 60px;
+    padding-top: max(var(--hero-header-offset), clamp(86px, 14vh, 110px));
+    padding-right: 36px;
+    padding-bottom: 40px;
+    padding-left: 36px;
     overflow-y: hidden;
   }
 
   .hero-r {
-    min-height: 60vw;
+    min-height: clamp(300px, 48vh, 520px);
   }
 
   .philosophy {
@@ -831,8 +879,15 @@
 
 @media (max-width: 640px) {
   .hero-l {
-    padding: 95px 22px 12px;
+    padding-top: max(var(--hero-header-offset), 92px);
+    padding-right: 22px;
+    padding-bottom: 24px;
+    padding-left: 22px;
   }
+  .hero-r {
+    min-height: clamp(260px, 42vh, 380px);
+  }
+
 
   .hero-punch {
     font-size: 0.75rem;
@@ -887,5 +942,78 @@
 
   .ph-content {
     padding: 44px 20px;
+  }
+}
+
+@media (max-height: 780px) {
+  .hero {
+    --hero-header-offset: 132px;
+    --hero-left-width: 45%;
+  }
+
+  .hero-l {
+    justify-content: flex-start;
+    padding-bottom: 24px;
+    overflow-y: auto;
+  }
+
+  .hero-punch {
+    font-size: 0.82rem;
+    letter-spacing: 0.28em;
+    margin-bottom: 16px;
+  }
+
+  .hero-h1 {
+    font-size: clamp(2rem, 4.2vw, 3.1rem);
+    line-height: 1.02;
+  }
+
+  .hero-desc {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    margin-top: 16px;
+    max-width: 420px;
+  }
+
+  .hero-acts {
+    margin-top: 20px;
+    gap: 14px;
+  }
+
+  .scroll-cue {
+    display: none;
+  }
+}
+
+@media (max-height: 680px) {
+  .hero {
+    --hero-header-offset: 126px;
+    --hero-left-width: 40%;
+  }
+
+  .hero-l {
+    padding-bottom: 18px;
+  }
+
+  .hero-punch {
+    font-size: 0.74rem;
+    letter-spacing: 0.22em;
+    margin-bottom: 12px;
+  }
+
+  .hero-h1 {
+    font-size: clamp(1.7rem, 3.8vw, 2.6rem);
+  }
+
+  .hero-desc {
+    font-size: 0.86rem;
+    line-height: 1.45;
+    margin-top: 12px;
+    max-width: 460px;
+  }
+
+  .hero-acts {
+    margin-top: 14px;
+    gap: 10px;
   }
 }

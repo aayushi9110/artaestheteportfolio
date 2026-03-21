@@ -8,8 +8,9 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const pathname = location.pathname;
+  const isHomePage = pathname === '/';
   const isBookPage = pathname === '/book';
-  const [isStuck, setIsStuck] = useState(() => isBookPage || window.innerWidth <= STUCK_BREAKPOINT || window.scrollY > 50);
+  const [isStuck, setIsStuck] = useState(() => isHomePage || isBookPage || window.innerWidth <= STUCK_BREAKPOINT || window.scrollY > 50);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isSubPage = location.pathname !== '/';
   const isHomeActive = pathname === '/';
@@ -26,6 +27,11 @@ const Header = () => {
   const logoSrc = isSubPage && !isStuck ? '/images/logos/artAesthetewh.png' : '/images/logos/artAesthete.png';
 
   useEffect(() => {
+    if (isHomePage) {
+      setIsStuck(true);
+      return;
+    }
+
     if (isBookPage) {
       setIsStuck(true);
       return;
@@ -44,7 +50,7 @@ const Header = () => {
       window.removeEventListener('scroll', updateStuckState);
       window.removeEventListener('resize', updateStuckState);
     };
-  }, [isBookPage]);
+  }, [isBookPage, isHomePage]);
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
