@@ -12,42 +12,42 @@ type GalleryItem = {
 
 const interiorItems: GalleryItem[] = [
   {
-    src: 'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=900&q=80',
+    src: '.',
     category: 'Interior Design · New York',
     title: 'The Amber Salon',
     details: 'A warm Manhattan living room transformation focused on layered textures, amber tones, and custom art placement.',
     caseStudyId: 'amber'
   },
   {
-    src: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=700&q=80',
+    src: '.',
     category: 'Interior Design · London',
     title: 'Warm Nordic Study',
     details: 'A calm and focused study designed with smoked oak shelving, tactile materials, and soft natural light.',
     caseStudyId: 'nordic'
   },
   {
-    src: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=80',
+    src: '.',
     category: 'Virtual Design · California',
     title: 'Terracotta Living',
     details: 'A coastal family home layered with terracotta accents, relaxed silhouettes, and durable natural finishes.',
     caseStudyId: 'terra'
   },
   {
-    src: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=700&q=80',
+    src: '.',
     category: 'Interior Design · Paris',
     title: 'Linen & Oak',
     details: 'A Paris apartment balancing heritage architecture with modern comfort through linen, oak, and subtle contrast.',
     caseStudyId: 'linen'
   },
   {
-    src: 'https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?w=700&q=80',
+    src: '.',
     category: 'Interior Design · Dubai',
     title: 'The Sand Suite',
     details: 'A hospitality-inspired suite using tonal stone colors, sculptural lighting, and clean material transitions.',
     caseStudyId: 'sand'
   },
   {
-    src: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80',
+    src: '.',
     category: 'Virtual Design · Sydney',
     title: 'Coastal Calm Living Room',
     details: 'An airy living space designed around flow, sunlight, and a calm palette that supports everyday family routines.',
@@ -57,49 +57,49 @@ const interiorItems: GalleryItem[] = [
 
 const fineArtItems: GalleryItem[] = [
   {
-    src: 'https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800&q=80',
+    src: '.',
     category: 'Oil on Linen',
     title: 'Earth Tones Series I',
     details: 'A grounded abstract composition exploring muted mineral tones and layered brush movement.'
   },
   {
-    src: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=700&q=80',
+    src: '.',
     category: 'Mixed Media',
     title: 'Sienna Abstract II',
     details: 'Pigment, texture, and mark-making come together in a warm, atmospheric mixed media study.'
   },
   {
-    src: 'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=700&q=80',
+    src: '.',
     category: 'Ceramic Sculpture',
     title: 'Clay Forms',
     details: 'Handmade sculptural vessels with organic silhouettes and subtle surface variation.'
   },
   {
-    src: 'https://images.unsplash.com/photo-1536924430914-91f9e2041b83?w=700&q=80',
+    src: '.',
     category: 'Watercolour',
     title: 'Rust & Ochre',
     details: 'A translucent watercolor built from earth pigments and soft atmospheric edges.'
   },
   {
-    src: 'https://images.unsplash.com/photo-1502601425829-3e2c6d25f17c?w=700&q=80',
+    src: '.',
     category: 'Textile · Commissioned',
     title: 'Woven Landscape',
     details: 'A woven textile artwork commissioned to bring depth and tactility into neutral interiors.'
   },
   {
-    src: 'https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=700&q=80',
+    src: '.',
     category: 'Photography · Limited Ed.',
     title: 'Still, Morning',
     details: 'A limited edition still-life photograph emphasizing quiet light and tonal composition.'
   },
   {
-    src: 'https://images.unsplash.com/photo-1549490349-8643362247b5?w=700&q=80',
+    src: '.',
     category: 'Acrylic on Canvas',
     title: 'Burnt Edge Study',
     details: 'Acrylic layering and edge contrast create a bold, architectural abstract panel.'
   },
   {
-    src: 'https://images.unsplash.com/photo-1501472312651-726afe119ff1?w=700&q=80',
+    src: '.',
     category: 'Bronze Sculpture',
     title: 'Form No. 7',
     details: 'A bronze sculpture investigating volume, balance, and directional form in compact scale.'
