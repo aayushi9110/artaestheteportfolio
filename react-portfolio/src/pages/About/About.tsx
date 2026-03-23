@@ -36,7 +36,9 @@ const About = () => {
           </button>
           <span className="sec-label gold">My Story</span>
           <h1>Built on beauty, <br/><em>driven by instinct</em></h1>
-          <p>A decade of designing spaces that feel like discoveries. This is how Art Aesthete came to be.</p>
+          <p>78+ Projects Completed, 
+            104+ Spaces Styled,
+             80+ Art Pieces Commissioned </p>
         </div>
       </div>
       <div className="ab-story">
@@ -44,10 +46,10 @@ const About = () => {
           <div className="ab-intro">
             <div className="ab-intro-txt reveal">
               <span className="sec-label">The Beginning</span>
-              <h2>A studio born from<br/><em>restlessness</em></h2>
+              <h2>Most spaces are filled. Few are <br/><em>felt</em></h2> 
               <p>Hi, I am Aayushi Shah set out to achieve and build my passion to start a design studio. I set out to find rooms that felt honest — spaces that didn't pretend to be something they weren't.</p>
-              <p>In 2017, from a rented studio in Brooklyn with three clients and an obsession with warm plaster walls, Art Aesthete opened its doors. The name came from a late-night conversation about the difference between someone who appreciates beauty and someone who needs it. Elara needed it.</p>
-              <p>Today, Art Aesthete works across three continents — but the ethos has never changed. Every project begins with listening. Really listening. Not to what clients say they want, but to what they feel when they walk into a room they love.</p>
+              <p>Most people decorate their homes. I believe you should curate them.There's a difference — and once you see it, you can't unsee it. A decorated room fills space. A curated one commands it. It stops you in the doorway. It makes guests go quiet for a second before they say "wow." That's the power of art placed with intention, and it's what Art Aesthete was built to create.I didn't start this business because it seemed like a good idea. I started it because I couldn't stop doing it — walking into spaces and seeing exactly what was missing, what piece would unlock the whole room. Art and interiors aren't separate disciplines to me. They never were.</p>
+              <p>Art Aesthete exists for the homeowner who's done settling for "fine" — and is ready for a space that actually moves them.</p>
               <div style={{marginTop: '28px'}}>
                 <button className="btn-dk" onClick={() => navigate('/book')}>
                   <span>Work With Us</span>
@@ -68,51 +70,51 @@ const About = () => {
             <h2>Chapter by <em>chapter</em></h2>
             <div className="tl">
               <div className="tl-item">
-                <div className="tl-yr">2017</div>
-                <div className="tl-content">
-                  <h4>The First Room</h4>
-                  <p>Art Aesthete opens with a single residential project in Brooklyn — a 420 sq ft apartment transformed into something that felt like a full breath. Word spread quietly, the way good things do.</p>
-                  <span className="tl-tag">Est. Brooklyn, NY</span>
-                </div>
-              </div>
-              <div className="tl-item">
                 <div className="tl-yr">2018</div>
                 <div className="tl-content">
-                  <h4>Fine Art Enters the Story</h4>
-                  <p>A client's blank dining room wall became the catalyst. We commissioned a local artist and placed a piece that changed the entire energy of the home. Fine art curation became a core service — and a defining one.</p>
-                  <span className="tl-tag">First art commission</span>
+                  <h4>The Spark</h4>
+                  <p>It didn't start with a business plan. It started with a feeling — walking into a room and knowing, instantly, that one right piece of art would change everything. That instinct never went away. So eventually, I stopped ignoring it and built something around it.</p>
+                  <span className="tl-tag">Art Commisions</span>
                 </div>
               </div>
               <div className="tl-item">
                 <div className="tl-yr">2019</div>
                 <div className="tl-content">
-                  <h4>London Calling</h4>
-                  <p>A referral from a Manhattan client led to our first international project in Mayfair. We found that beautiful design speaks in every language, every postcode. The London studio followed six months later.</p>
-                  <span className="tl-tag">Studio opens · London</span>
+                  <h4>The Struggle</h4>
+                  <p> I left Mumbai with a suitcase, a sharp eye, and an obsession I couldn't explain to anyone. America was loud, fast, and completely indifferent to my dreams — and that was exactly the education I needed. Every rejection, every room I studied, every space I couldn't afford but walked through anyway, was quietly shaping the way I see. The struggle didn't break my vision. It built it.</p>
+                  <span className="tl-tag">One Suitcase. One Obsession</span>
+                </div>
+              </div>
+              <div className="tl-item">
+                <div className="tl-yr">2020</div>
+                <div className="tl-content">
+                  <h4>The First Room</h4>
+                  <p>While studying for my Masters in Design, I worked closely with realtors and home owners to refresh their homes and bring their personality into their spaces.</p>
+                  <span className="tl-tag">Est.San Francisco, CA</span>
                 </div>
               </div>
               <div className="tl-item">
                 <div className="tl-yr">2021</div>
                 <div className="tl-content">
-                  <h4>Going Virtual, Without Losing Soul</h4>
-                  <p>When the world went indoors, Art Aesthete went digital — but refused to go generic. We built a virtual consultation service that delivered every deliverable of an in-person project, beautifully and with the same rigour. It changed who we could reach.</p>
-                  <span className="tl-tag">Virtual service launches</span>
+                  <h4>Interior Enters The Story</h4>
+                  <p>A client's blank dining room became the catalyst. I worked with some renowned brands in USA to find a piece that changed the entire energy of the home. Interior Design became a core service — and a defining one..</p>
+                  <span className="tl-tag">Interior Consultations </span>
                 </div>
               </div>
               <div className="tl-item">
-                <div className="tl-yr">2023</div>
+                <div className="tl-yr">2024</div>
                 <div className="tl-content">
-                  <h4>The Art Aesthete Identity</h4>
-                  <p>We published our first editorial lookbook — a 48-page document on living with intention. It was downloaded 40,000 times. The brand became something clients wore as an identity, not just hired as a service.</p>
-                  <span className="tl-tag">Lookbook · 40k downloads</span>
+                  <h4>The Signature </h4>
+                  <p>Years of moving through different worlds — Mumbai's layered, maximalist energy and America's clean, intentional restraint — gave me something no design school could: a perspective that lives between two aesthetics. I stopped trying to fit into one school of thought and started trusting the tension between them. Bold choices. Considered placement. Spaces that feel collected over a lifetime, not assembled overnight. That contrast became the Art Aesthete signature..</p>
+                  <span className="tl-tag">Two Worlds. One Eye</span>
                 </div>
               </div>
               <div className="tl-item">
                 <div className="tl-yr">2026</div>
                 <div className="tl-content">
                   <h4>Still Listening</h4>
-                  <p>Today, Art Aesthete works across 12 countries, with a team of 8 designers, 3 curators, and an ever-growing network of artists, makers, and craftspeople. Every project still begins the same way — with a conversation.</p>
-                  <span className="tl-tag">Present · 12 countries</span>
+                  <p>New York was the next chapter — and it arrived with its own kind of gravity. I embedded myself in the city, working closely with major brands in corporate settings to deliver beautiful, curated homes to real people. That experience sharpened everything — the scale, the standard, the understanding that great design isn't a luxury, it's a language. Art Aesthete is now growing from that foundation, and the most ambitious chapters are still ahead..</p>
+                  <span className="tl-tag">From Instinct to Legacy.</span>
                 </div>
               </div>
             </div>
