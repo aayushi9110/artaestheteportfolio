@@ -417,7 +417,7 @@
 }
 
 .port-prev {
-  padding: 70px 60px;
+  padding: 50px 60px;
   background: var(--warm);
 }
 
@@ -425,7 +425,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
   flex-wrap: wrap;
   gap: 20px;
 }
@@ -620,7 +620,6 @@
 }
 
 .svc-hdr {
-  text-align: center;
   margin-bottom: 72px;
 }
 
@@ -652,6 +651,7 @@
 .brand-marq .sec-label {
   color: var(--terra);
   margin-bottom: 28px;
+  padding-left: 60px;;
 }
 
 .brand-marq-wrap {
@@ -705,7 +705,6 @@
 .testi {
   padding: 110px 60px;
   background: var(--warm);
-  text-align: center;
 }
 
 .testi h2 {
@@ -886,6 +885,20 @@
 }
 
 @media (max-width: 640px) {
+  .marq-track {
+    animation-duration: 4s;
+  }
+
+  .marq {
+    padding: 18px 0;
+  }
+
+  .marq-item {
+    font-size: 1.12rem;
+    padding: 0 30px;
+    gap: 30px;
+  }
+
   .hero-l {
     padding-top: max(var(--hero-header-offset), 92px);
     padding-right: 22px;
@@ -916,7 +929,7 @@
   }
 
   .brand-marq-wrap {
-    padding: 14px 0;
+    padding: 0;
   }
 
   .brand-marq-item {
@@ -932,6 +945,35 @@
   .port-grid {
     grid-template-columns: 1fr;
     grid-auto-rows: 260px;
+  }
+
+  .pi {
+    box-shadow: inset 0 0 0 1px transparent;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .pi:hover {
+    box-shadow: inset 0 0 0 1px rgba(245, 239, 228, 0.65);
+  }
+
+  .pi-ov {
+    opacity: 1;
+    padding: 16px;
+  }
+
+  .pi-cat {
+    font-size: 0.46rem;
+    letter-spacing: 0.22em;
+  }
+
+  .pi-title {
+    font-size: 1.02rem;
+    line-height: 1.1;
+  }
+
+  .pi-arr {
+    transform: translate(0, 0) rotate(0);
+    opacity: 1;
   }
 
   .pi:nth-child(n) {
@@ -950,6 +992,14 @@
 
   .ph-content {
     padding: 36px 20px;
+  }
+
+  .brand-marq .sec-label {
+    padding-left: 20px;
+  }
+
+  .svc-hdr {
+    margin-bottom: 45px;
   }
 }
 
@@ -1024,4 +1074,5 @@
     margin-top: 14px;
     gap: 10px;
   }
+  
 }

@@ -485,4 +485,15 @@ body::before {
   .sec-label {
     font-size: .75rem;
   }
+
+  .svc-card {
+    padding: 15px 36px;
+  }
+
+  .svc-n {
+    order: 1;
+  }
+  /* .svc-ico {
+    order: 2;
+  } */
 }

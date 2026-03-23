@@ -5,6 +5,11 @@ export type Deliverable = {
   text: string;
 };
 
+export type ProjectMetric = {
+  label: string;
+  value: string;
+};
+
 export type Project = {
   storyType: StoryType;
   isSelectedForHome: boolean;
@@ -23,6 +28,9 @@ export type Project = {
   galleryImageUrls: string[];
   galleryCaptions: string[];
 };
+
+const projectMetrics = (entries: Array<[string, string]>): ProjectMetric[] =>
+  entries.map(([label, value]) => ({ label, value }));
 
 const BOCONCEPT_OFFICE_REFERENCE_IMAGE_URLS = [
   '/images/Boconcept/office/OfficeBefore.png',
@@ -113,6 +121,119 @@ const MUMBAI_BEDROOM_THREE_IMAGE_URLS = [
   '/images/mumbaibed3/mumbaibed3nightstanddetail.png',
   '/images/mumbaibed3/mumbaiBed3whole.png'
 ];
+
+export const PROJECT_DETAIL_METRICS: Record<string, ProjectMetric[]> = {
+  homeOffices: projectMetrics([
+    ['Approx. investment', '$18,000-$28,000'],
+    ['Affiliated company', 'BoConcept'],
+    ['Style direction', 'Modern study with soft Scandinavian warmth'],
+    ['Expected build timeline', '6-8 weeks'],
+    ['Client meetings', '4 design reviews + 1 installation call'],
+    ['Space scope', 'Home office + guest-ready storage wall'],
+    ['Procurement model', 'Designer-led sourcing and vendor coordination'],
+    ['Key focus', 'Productivity, hidden storage, dual-purpose use']
+  ]),
+  contemporaryLiving: projectMetrics([
+    ['Approx. investment', '$32,000-$48,000'],
+    ['Affiliated company', 'West Elm'],
+    ['Style direction', 'Modern organic California contemporary'],
+    ['Expected build timeline', '10-12 weeks'],
+    ['Client meetings', '5 design reviews + 1 styling walkthrough'],
+    ['Space scope', 'Open-plan living and dining'],
+    ['Furniture lead time', '8-10 weeks'],
+    ['Key focus', 'Open flow, layered neutrals, sculptural accents']
+  ]),
+  modernScandinavian: projectMetrics([
+    ['Approx. investment', '$28,000-$42,000'],
+    ['Affiliated company', 'West Elm'],
+    ['Style direction', 'Warm Scandinavian minimalism'],
+    ['Expected build timeline', '8-10 weeks'],
+    ['Client meetings', '4 design reviews + procurement check-in'],
+    ['Space scope', 'Combined living and dining room'],
+    ['Procurement model', 'Curated sourcing with phased delivery'],
+    ['Key focus', 'Light, warmth, and understated material contrast']
+  ]),
+  madisonDining: projectMetrics([
+    ['Approx. investment', '$22,000-$36,000'],
+    ['Affiliated company', 'BoConcept + Roche Bobois'],
+    ['Style direction', 'Soft luxury dining'],
+    ['Expected build timeline', '7-9 weeks'],
+    ['Client meetings', '3 design reviews + 1 final styling session'],
+    ['Space scope', 'Dedicated dining room'],
+    ['Custom elements', 'Statement lighting and marble-led palette'],
+    ['Key focus', 'Elegant entertaining with a sculptural city backdrop']
+  ]),
+  cuppertinoHome: projectMetrics([
+    ['Approx. investment', '$36,000-$54,000'],
+    ['Affiliated company', 'West Elm'],
+    ['Style direction', 'Layered contemporary with Scandinavian notes'],
+    ['Expected build timeline', '10-14 weeks'],
+    ['Client meetings', '5 design reviews + installation planning'],
+    ['Space scope', 'Family living room and dining room'],
+    ['Procurement model', 'Full furniture, lighting, and accessories package'],
+    ['Key focus', 'Warmth, family comfort, and personality-rich styling']
+  ]),
+  fosterCityLivingDining: projectMetrics([
+    ['Approx. investment', '$30,000-$46,000'],
+    ['Affiliated company', 'West Elm'],
+    ['Style direction', 'Relaxed contemporary open-plan'],
+    ['Expected build timeline', '9-11 weeks'],
+    ['Client meetings', '4 design reviews + 1 install coordination call'],
+    ['Space scope', 'Open-concept living and dining'],
+    ['Project complexity', 'Medium - multi-zone layout balancing'],
+    ['Key focus', 'Cohesion, circulation, and family-friendly elegance']
+  ]),
+  sanFranBedroom: projectMetrics([
+    ['Approx. investment', '$14,000-$24,000'],
+    ['Affiliated company', 'West Elm'],
+    ['Style direction', 'Coastal luxury bedroom refresh'],
+    ['Expected build timeline', '5-7 weeks'],
+    ['Client meetings', '3 design reviews'],
+    ['Space scope', 'Primary bedroom refresh'],
+    ['Procurement model', 'Selective refresh with styling layer'],
+    ['Key focus', 'Softness, light, and restorative comfort']
+  ]),
+  entryway: projectMetrics([
+    ['Approx. investment', '$4,000-$9,000'],
+    ['Affiliated company', 'West Elm'],
+    ['Style direction', 'Warm California entry styling'],
+    ['Expected build timeline', '2-4 weeks'],
+    ['Client meetings', '2 design reviews'],
+    ['Space scope', 'Entry vignette and first impression zone'],
+    ['Procurement model', 'Quick-turn styling and accessory sourcing'],
+    ['Key focus', 'Welcome moment, layering, and visual identity']
+  ]),
+  mumbaiBedroomOne: projectMetrics([
+    ['Approx. investment', '$10,000-$18,000'],
+    ['Affiliated company', 'Local procurement partners'],
+    ['Style direction', 'Contemporary calm bedroom'],
+    ['Expected build timeline', '6-8 weeks'],
+    ['Client meetings', '4 design reviews'],
+    ['Space scope', 'Bedroom concept + media wall styling'],
+    ['Materials focus', 'Neutrals, upholstery, warm accent finishes'],
+    ['Key focus', 'Restful luxury with daily functionality']
+  ]),
+  mumbaiBedroomTwo: projectMetrics([
+    ['Approx. investment', '$9,000-$16,000'],
+    ['Affiliated company', 'Local procurement partners'],
+    ['Style direction', 'Soft contemporary bedroom'],
+    ['Expected build timeline', '5-7 weeks'],
+    ['Client meetings', '3 design reviews + curtain finish review'],
+    ['Space scope', 'Compact bedroom refresh'],
+    ['Materials focus', 'Layered drapery, tonal fabrics, warm wood'],
+    ['Key focus', 'Comfort, intimacy, and light diffusion']
+  ]),
+  mumbaiBedroomThree: projectMetrics([
+    ['Approx. investment', '$11,000-$19,000'],
+    ['Affiliated company', 'Local procurement partners'],
+    ['Style direction', 'Refined contemporary luxe bedroom'],
+    ['Expected build timeline', '6-8 weeks'],
+    ['Client meetings', '4 design reviews + final styling review'],
+    ['Space scope', 'Bedroom concept with bespoke bedside styling'],
+    ['Custom emphasis', 'Layered bedside detailing and tactile finishes'],
+    ['Key focus', 'Quiet luxury through texture and rhythm']
+  ])
+};
 
 export const PROJECTS: Record<string, Project> = {
   // amber: {

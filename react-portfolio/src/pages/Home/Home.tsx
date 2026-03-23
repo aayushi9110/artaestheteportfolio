@@ -199,6 +199,19 @@ const Home = () => {
         </div>
       </section>
 
+      <section className="brand-marq" aria-label="Brands we have worked with">
+        <span className="sec-label">Brands We Have Worked With</span>
+        <div className="brand-marq-wrap">
+          <div className="brand-marq-track">
+            {[...BRAND_LOGOS, ...BRAND_LOGOS, ...BRAND_LOGOS, ...BRAND_LOGOS].map((logo, i) => (
+              <div className="brand-marq-item" key={`${logo.src}-${i}`}>
+                <img src={logo.src} alt={logo.alt} loading="lazy" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="svc-prev">
         <div className="svc-hdr">
           <span className="sec-label gold">What We Offer</span>
@@ -259,21 +272,8 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="brand-marq" aria-label="Brands we have worked with">
-        <span className="sec-label" style={{ justifyContent: 'center' }}>Brands We Have Worked With</span>
-        <div className="brand-marq-wrap">
-          <div className="brand-marq-track">
-            {[...BRAND_LOGOS, ...BRAND_LOGOS, ...BRAND_LOGOS, ...BRAND_LOGOS].map((logo, i) => (
-              <div className="brand-marq-item" key={`${logo.src}-${i}`}>
-                <img src={logo.src} alt={logo.alt} loading="lazy" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="testi">
-        <span className="sec-label" style={{justifyContent: 'center'}}>Client Words</span>
+        <span className="sec-label">Client Words</span>
         <h2>Spaces that <em>speak</em></h2>
         <div className="testi-row">
           <div className="tc reveal">
