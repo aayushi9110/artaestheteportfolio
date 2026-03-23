@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { PROJECTS } from './caseStudyData.ts';
+import { PROJECTS, PROJECT_DETAIL_METRICS } from './caseStudyData.ts';
 import './CaseStudy.css';
 
 type CaseStudyProps = {
@@ -11,7 +11,8 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
   
   const navigate = useNavigate();
   const { id } = useParams();
-  const project = PROJECTS[id || ''] || PROJECTS.amber;
+  const projectKey = id && PROJECTS[id] ? id : 'homeOffices';
+  const project = PROJECTS[projectKey];
   const [comparePosition, setComparePosition] = useState(50);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isCarouselHovered, setIsCarouselHovered] = useState(false);
@@ -19,6 +20,7 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
   const [isAutoSliding, setIsAutoSliding] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
   const [carouselPauseUntil, setCarouselPauseUntil] = useState<number>(0);
+  const lbTouchStartX = useRef<number | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -97,7 +99,9 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
 
   const totalImages = project.galleryImageUrls.length;
   const isCarouselTemporarilyPaused = carouselPauseUntil > Date.now();
-  const hasDeliverables = showInteriorView && project.deliverableItems.length > 0;
+
+  const projectDetailMetrics = showInteriorView ? PROJECT_DETAIL_METRICS[projectKey] || [] : [];
+  const hasProjectDetailMetrics = projectDetailMetrics.length > 0;
 
   useEffect(() => {
     if (totalImages <= 1 || isCarouselHovered || expandedImageIndex !== null || isCarouselTemporarilyPaused) {
@@ -238,6 +242,14 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
         </div>
       </div>
       <div className="cs-body">
+        <div className="cs-overview reveal no-deliverables">
+          <div className="cs-overview-txt">
+            <span className="sec-label">Project Overview</span>
+            <h3>{project.overviewTitle}</h3>
+            <p>{project.overviewTextPrimary}</p>
+            <p>{project.overviewTextSecondary}</p>
+          </div>
+        </div>
         {showInteriorView && (<div className="cs-loc">{project.location}</div>)}
         {showInteriorView && (
           <div className="cs-ba">
@@ -271,25 +283,25 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
             </div>
           </div>
         )}
-        <div className={`cs-overview reveal ${!hasDeliverables ? 'no-deliverables' : ''}`.trim()}>
-          <div className="cs-overview-txt">
-            <span className="sec-label">Project Overview</span>
-            <h3>{project.overviewTitle}</h3>
-            <p>{project.overviewTextPrimary}</p>
-            <p>{project.overviewTextSecondary}</p>
-          </div>
-          {hasDeliverables && (
-            <div className="cs-deliverableItems">
-              <span className="sec-label">Deliverables</span>
-              <h3>What we provided</h3>
-              <ul className="cs-dl-list">
-                {project.deliverableItems.map((item) => (
-                  <li key={item.text}><span className="dl-ico">{item.icon}</span>{item.text}</li>
-                ))}
-              </ul>
+        {hasProjectDetailMetrics && (
+          <div className="cs-details reveal">
+            <div className="cs-details-intro">
+              <span className="sec-label">Project Details</span>
+              <h3>Scope, timeline, and build expectations</h3>
+              <p>
+                A practical snapshot of the project parameters, procurement rhythm, and delivery expectations for this interior design concept.
+              </p>
             </div>
-          )}
-        </div>
+            <div className="cs-details-grid">
+              {projectDetailMetrics.map((metric) => (
+                <div className="cs-detail-card" key={metric.label}>
+                  <span className="cs-detail-label">{metric.label}</span>
+                  <strong className="cs-detail-value">{metric.value}</strong>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         <div className="cs-gallery reveal">
           {showInteriorView && ( <span className="sec-label">Final Result</span> )}
           {showInteriorView && ( <h3>The finished space</h3> )}
@@ -357,7 +369,19 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
           </div>
         </div>
         {expandedImageIndex !== null && (
-          <div className="cs-lightbox" onClick={() => setExpandedImageIndex(null)}>
+          <div
+            className="cs-lightbox"
+            onClick={() => setExpandedImageIndex(null)}
+            onTouchStart={(e) => { lbTouchStartX.current = e.touches[0].clientX; }}
+            onTouchEnd={(e) => {
+              if (lbTouchStartX.current === null) return;
+              const dx = e.changedTouches[0].clientX - lbTouchStartX.current;
+              lbTouchStartX.current = null;
+              if (Math.abs(dx) < 40) return;
+              if (dx < 0) showNextExpandedImage();
+              else showPrevExpandedImage();
+            }}
+          >
             {totalImages > 1 && (
               <>
                 <button
@@ -400,8 +424,8 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
             </div>
           </div>
         )}
-        <div style={{ textAlign: 'center', padding: '72px 0 20px' }}>
-          <p style={{ fontWeight: 300, fontSize: '.88rem', color: 'var(--taupe)', marginBottom: '24px' }}>Inspired by this project?</p>
+        <div className="cs-cta">
+          <p>Inspired by this project?</p>
           <button className="btn-tr" onClick={() => navigate('/book')}><span>Start Your Project</span></button>
         </div>
       </div>

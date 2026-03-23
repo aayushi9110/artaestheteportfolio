@@ -108,8 +108,11 @@
   color: var(--terra);
   line-height: 1;
   padding-top: 4px;
-  position: relative;
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .psf-dot {
@@ -117,9 +120,7 @@
   height: 12px;
   border-radius: 50%;
   background: var(--terra);
-  position: absolute;
-  left: 54px;
-  top: 10px;
+  flex-shrink: 0;
   box-shadow: 0 0 16px rgba(181, 99, 58, 0.45);
 }
 

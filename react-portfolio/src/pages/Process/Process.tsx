@@ -41,7 +41,7 @@ const Process = () => {
       <div className="proc-body">
         <div className="proc-steps-full">
           <div className="psf reveal">
-            <div className="psf-num">I<div className="psf-dot"></div></div>
+            <div className="psf-num"><div className="psf-dot"></div>I</div>
             <div className="psf-inner">
               <h3>Discovery Call</h3>
               <p>Every project begins with a real conversation. We explore your story, lifestyle, aspirations for the space, and the feelings you want it to evoke. This is where we listen — really listen.</p>
@@ -57,7 +57,7 @@ const Process = () => {
           </div>
 
           <div className="psf reveal">
-            <div className="psf-num">II<div className="psf-dot"></div></div>
+            <div className="psf-num"><div className="psf-dot"></div>II</div>
             <div className="psf-inner">
               <h3>Concept & Creative Direction</h3>
               <p>We translate your brief into a full visual and spatial language. Moodboards, palettes, and material stories are assembled into a coherent creative direction — your project's north star.</p>
@@ -73,7 +73,7 @@ const Process = () => {
           </div>
 
           <div className="psf reveal">
-            <div className="psf-num">III<div className="psf-dot"></div></div>
+            <div className="psf-num"><div className="psf-dot"></div>III</div>
             <div className="psf-inner">
               <h3>Space Planning & Design Development</h3>
               <p>We move from concept into concrete plans. Floor plans, furniture layouts, and lighting strategies are developed — ensuring beauty and function work in full harmony.</p>
@@ -89,7 +89,7 @@ const Process = () => {
           </div>
 
           <div className="psf reveal">
-            <div className="psf-num">IV<div className="psf-dot"></div></div>
+            <div className="psf-num"><div className="psf-dot"></div>IV</div>
             <div className="psf-inner">
               <h3>Presentation & Refinement</h3>
               <p>We present every element in a formal design presentation — walking you through each decision and the reasoning behind it. Revisions are welcomed; we refine until the design feels undeniably right.</p>
@@ -105,7 +105,7 @@ const Process = () => {
           </div>
 
           <div className="psf reveal">
-            <div className="psf-num">V<div className="psf-dot"></div></div>
+            <div className="psf-num"><div className="psf-dot"></div>V</div>
             <div className="psf-inner">
               <h3>Delivery, Styling & Final Reveal</h3>
               <p>You receive everything needed to bring the space to life — with complete guidance at every step. For virtual projects, a detailed installation guide. For in-person projects, we're there for the reveal.</p>
