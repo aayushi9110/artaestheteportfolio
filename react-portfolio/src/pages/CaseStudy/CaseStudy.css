@@ -227,8 +227,8 @@
 
 .cs-overview {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.75fr);
+  gap: 112px;
   margin-bottom: 45px;
   align-items: start;
 }
@@ -276,6 +276,44 @@
   margin-bottom: 12px;
 }
 
+.cs-overview-details {
+  justify-self: end;
+  width: min(100%, 380px);
+  margin-top: 44px;
+  padding: 20px 22px;
+  background: var(--taupe-grey);
+  border: 1px solid rgba(245, 239, 228, 0.14);
+}
+
+.cs-overview-details-list {
+  list-style: none;
+  margin-top: 0;
+  border-top: 1px solid rgba(245, 239, 228, 0.2);
+}
+
+.cs-overview-details-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(245, 239, 228, 0.14);
+}
+
+.cs-overview-details-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(245, 239, 228, 0.56);
+}
+
+.cs-overview-details-value {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--cream);
+}
+
 .cs-dl-list {
   list-style: none;
   display: flex;
@@ -301,63 +339,6 @@
 .cs-dl-list .dl-ico {
   font-size: 1.1rem;
   flex-shrink: 0;
-}
-
-.cs-details {
-  margin-bottom: 72px;
-}
-
-.cs-details-intro {
-  max-width: 700px;
-  margin-bottom: 28px;
-}
-
-.cs-details-intro h3 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.9rem;
-  font-weight: 400;
-  color: var(--dark);
-  margin-top: 16px;
-  margin-bottom: 14px;
-}
-
-.cs-details-intro p {
-  font-weight: 300;
-  font-size: 0.88rem;
-  line-height: 1.9;
-  color: var(--taupe);
-}
-
-.cs-details-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.cs-detail-card {
-  min-height: 132px;
-  padding: 18px 18px 20px;
-  background: linear-gradient(180deg, rgba(250, 247, 242, 0.96) 0%, rgba(245, 239, 228, 0.88) 100%);
-  border: 1px solid rgba(217, 201, 168, 0.45);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.cs-detail-label {
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--taupe);
-  line-height: 1.6;
-}
-
-.cs-detail-value {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.12rem;
-  font-weight: 500;
-  line-height: 1.25;
-  color: var(--dark);
 }
 
 .cs-gallery {
@@ -633,8 +614,10 @@
     gap: 40px;
   }
 
-  .cs-details-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .cs-overview-details {
+    justify-self: start;
+    width: 100%;
+    margin-top: 0;
   }
 
   .cs-ba-compare {
@@ -672,20 +655,8 @@
     padding: 60px 20px;
   }
 
-  .cs-details {
-    margin-bottom: 56px;
-  }
-
-  .cs-details-intro h3 {
-    font-size: 1.6rem;
-  }
-
-  .cs-details-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .cs-detail-card {
-    min-height: 0;
+  .cs-overview-details-value {
+    font-size: 1.08rem;
   }
 
   .cs-ba-compare {

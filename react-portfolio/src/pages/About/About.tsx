@@ -36,9 +36,22 @@ const About = () => {
           </button>
           <span className="sec-label gold">My Story</span>
           <h1>Built on beauty, <br/><em>driven by instinct</em></h1>
-          <p>78+ Projects Completed, 
-            104+ Spaces Styled,
-             80+ Art Pieces Commissioned </p>
+          <div className="ab-stats">
+            <div className="ab-stat">
+              <span className="ab-stat-num">78<span className="ab-stat-plus">+</span></span>
+              <span className="ab-stat-label">Projects Completed</span>
+            </div>
+            <div className="ab-stat-divider" aria-hidden="true" />
+            <div className="ab-stat">
+              <span className="ab-stat-num">104<span className="ab-stat-plus">+</span></span>
+              <span className="ab-stat-label">Spaces Styled</span>
+            </div>
+            <div className="ab-stat-divider" aria-hidden="true" />
+            <div className="ab-stat">
+              <span className="ab-stat-num">80<span className="ab-stat-plus">+</span></span>
+              <span className="ab-stat-label">Art Pieces Commissioned</span>
+            </div>
+          </div>
         </div>
       </div>
       <div className="ab-story">
@@ -46,8 +59,8 @@ const About = () => {
           <div className="ab-intro">
             <div className="ab-intro-txt reveal">
               <span className="sec-label">The Beginning</span>
-              <h2>Most spaces are filled. Few are <br/><em>felt</em></h2> 
-              <p>Hi, I am Aayushi Shah set out to achieve and build my passion to start a design studio. I set out to find rooms that felt honest — spaces that didn't pretend to be something they weren't.</p>
+              <h2>Most spaces are filled.<br/><em>Few are felt</em></h2> 
+              <p>Hi, I am Aayushi Shah. I set out to find rooms that felt honest — spaces that didn't pretend to be something they weren't.</p>
               <p>Most people decorate their homes. I believe you should curate them.There's a difference — and once you see it, you can't unsee it. A decorated room fills space. A curated one commands it. It stops you in the doorway. It makes guests go quiet for a second before they say "wow." That's the power of art placed with intention, and it's what Art Aesthete was built to create.I didn't start this business because it seemed like a good idea. I started it because I couldn't stop doing it — walking into spaces and seeing exactly what was missing, what piece would unlock the whole room. Art and interiors aren't separate disciplines to me. They never were.</p>
               <p>Art Aesthete exists for the homeowner who's done settling for "fine" — and is ready for a space that actually moves them.</p>
               <div style={{marginTop: '28px'}}>

@@ -100,8 +100,8 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
   const totalImages = project.galleryImageUrls.length;
   const isCarouselTemporarilyPaused = carouselPauseUntil > Date.now();
 
-  const projectDetailMetrics = showInteriorView ? PROJECT_DETAIL_METRICS[projectKey] || [] : [];
-  const hasProjectDetailMetrics = projectDetailMetrics.length > 0;
+  const filteredProjectDetailMetrics = showInteriorView ? (PROJECT_DETAIL_METRICS[projectKey] ?? []) : [];
+  const hasProjectDetailMetrics = filteredProjectDetailMetrics.length > 0;
 
   useEffect(() => {
     if (totalImages <= 1 || isCarouselHovered || expandedImageIndex !== null || isCarouselTemporarilyPaused) {
@@ -242,14 +242,6 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
         </div>
       </div>
       <div className="cs-body">
-        <div className="cs-overview reveal no-deliverables">
-          <div className="cs-overview-txt">
-            <span className="sec-label">Project Overview</span>
-            <h3>{project.overviewTitle}</h3>
-            <p>{project.overviewTextPrimary}</p>
-            <p>{project.overviewTextSecondary}</p>
-          </div>
-        </div>
         {showInteriorView && (<div className="cs-loc">{project.location}</div>)}
         {showInteriorView && (
           <div className="cs-ba">
@@ -283,25 +275,26 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
             </div>
           </div>
         )}
-        {hasProjectDetailMetrics && (
-          <div className="cs-details reveal">
-            <div className="cs-details-intro">
-              <span className="sec-label">Project Details</span>
-              <h3>Scope, timeline, and build expectations</h3>
-              <p>
-                A practical snapshot of the project parameters, procurement rhythm, and delivery expectations for this interior design concept.
-              </p>
-            </div>
-            <div className="cs-details-grid">
-              {projectDetailMetrics.map((metric) => (
-                <div className="cs-detail-card" key={metric.label}>
-                  <span className="cs-detail-label">{metric.label}</span>
-                  <strong className="cs-detail-value">{metric.value}</strong>
-                </div>
-              ))}
-            </div>
+        <div className={`cs-overview reveal ${hasProjectDetailMetrics ? '' : 'no-deliverables'}`.trim()}>
+          <div className="cs-overview-txt">
+            <span className="sec-label">Project Overview</span>
+            <h3>{project.overviewTitle}</h3>
+            <p>{project.overviewTextPrimary}</p>
+            <p>{project.overviewTextSecondary}</p>
           </div>
-        )}
+          {hasProjectDetailMetrics && (
+            <aside className="cs-overview-details" aria-label="Project details">
+              <ul className="cs-overview-details-list">
+                {filteredProjectDetailMetrics.map((metric) => (
+                  <li className="cs-overview-details-item" key={metric.label}>
+                    <span className="cs-overview-details-label">{metric.label}</span>
+                    <strong className="cs-overview-details-value">{metric.value}</strong>
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          )}
+        </div>
         <div className="cs-gallery reveal">
           {showInteriorView && ( <span className="sec-label">Final Result</span> )}
           {showInteriorView && ( <h3>The finished space</h3> )}

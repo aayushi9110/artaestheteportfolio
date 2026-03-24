@@ -57,10 +57,10 @@ const Footer = () => {
       <div className="ft-grid">
         <div>
           <Link to="/" className="n-logo ft-logo">
-            <img src="/images/logos/artAesthetewh.png" alt="Logo" style={{height: '48px', width: 'auto', display: 'block', flexShrink: 0, marginRight: '12px'}} />
-            <span className="logo-wordmark">
-              <span className="logo-main">Art <span>Aesthete</span></span>
-              <span className='byaayushi'>By Aayushi</span>
+            <img className="n-logo-mark" src="/images/logos/artAesthetewh.png" alt="Logo" style={{height: '32px', marginRight: '8px', verticalAlign: 'middle'}} />
+            Art
+            <span>Aesthete
+              <span className='byaayushi'> By Aayushi</span>
             </span>
           </Link>
           <p className="ft-about">

@@ -120,6 +120,22 @@ const Home = () => {
             <Link to="/portfolio" className="btn-dk"><span>Explore Portfolio</span></Link>
             <Link to="/process" className="btn-ghost">Our Process <span className="circ"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg></span></Link>
           </div>
+          <div className="hero-stats">
+            <div className="hero-stat">
+              <span className="hero-stat-num">78<span className="hero-stat-plus">+</span></span>
+              <span className="hero-stat-label">Projects Completed</span>
+            </div>
+            <div className="hero-stat-divider" aria-hidden="true" />
+            <div className="hero-stat">
+              <span className="hero-stat-num">104<span className="hero-stat-plus">+</span></span>
+              <span className="hero-stat-label">Spaces Styled</span>
+            </div>
+            <div className="hero-stat-divider" aria-hidden="true" />
+            <div className="hero-stat">
+              <span className="hero-stat-num">80<span className="hero-stat-plus">+</span></span>
+              <span className="hero-stat-label">Art Pieces Commissioned</span>
+            </div>
+          </div>
           <div className="scroll-cue">
             <div className="sc-line"></div>
             <span className="sc-txt">Scroll</span>

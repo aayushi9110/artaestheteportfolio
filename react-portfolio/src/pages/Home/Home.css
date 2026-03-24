@@ -142,6 +142,55 @@
   flex-wrap: wrap;
 }
 
+.hero-stats {
+  display: flex;
+  align-items: center;
+  margin-top: 40px;
+  opacity: 0;
+  animation: fU 0.8s ease 1.8s forwards;
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-right: 32px;
+}
+
+.hero-stat-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(44, 31, 20, 0.15);
+  flex-shrink: 0;
+  margin-right: 32px;
+}
+
+.hero-stat-num {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.9rem, 2.8vw, 2.6rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--dark);
+  letter-spacing: -0.01em;
+}
+
+.hero-stat-plus {
+  color: var(--terra);
+  font-size: 62%;
+  vertical-align: super;
+  margin-left: 1px;
+}
+
+.hero-stat-label {
+  font-family: "Jost", sans-serif;
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--taupe-grey);
+  white-space: nowrap;
+}
+
 @media (min-height: 900px) {
   .hero-l {
     justify-content: flex-start;
