@@ -15,20 +15,22 @@ const MARQUEE_ITEMS = [
 
 const HOME_HERO_IMAGE_URL = RESOURCES.home.heroImageUrl;
 const HOME_STUDIO_IMAGE_URL = RESOURCES.home.studioImageUrl;
+const BRAND_LOGOS = RESOURCES.home.brandLogos;
+const TESTIMONIALS = RESOURCES.home.testimonials;
 
-const BRAND_LOGOS = [
-  { src: '/images/brandLogo/boconceptlogo.jpg', alt: 'Boconcept' },
-  { src: '/images/brandLogo/cb2logo.jpg', alt: 'CB2' },
-  { src: '/images/brandLogo/cratelogo.jpg', alt: 'Crate & Barrel' },
-  { src: '/images/brandLogo/dwrlogo.jpg', alt: 'Design Within Reach' },
-  { src: '/images/brandLogo/fermlivinglogo.jpg', alt: 'Ferm Living' },
-  { src: '/images/brandLogo/hermanmillerlogo.jpg', alt: 'Herman Miller' },
-  { src: '/images/brandLogo/lazzonilogo.jpg', alt: 'Lazzoni' },
-  { src: '/images/brandLogo/potterybarn Logo.jpg', alt: 'Pottery Barn' },
-  { src: '/images/brandLogo/rhLogo.jpg', alt: 'Restoration Hardware' },
-  { src: '/images/brandLogo/rocheboboisLogo.jpg', alt: 'Roche Bobois' },
-  { src: '/images/brandLogo/westelmLogo.jpg', alt: 'West Elm' },
-];
+const TestimonialAvatar = ({ name, photoUrl }: { name: string; photoUrl: string }) => {
+  if (photoUrl.endsWith('.svg')) {
+    return (
+      <svg viewBox="0 0 200 200" role="img" aria-label={`${name} placeholder portrait`}>
+        <rect className="tc-av-bg" width="200" height="200" />
+        <circle className="tc-av-figure" cx="100" cy="78" r="34" />
+        <path className="tc-av-figure" d="M42 176c8-31 31-48 58-48s50 17 58 48" />
+      </svg>
+    );
+  }
+
+  return <img src={photoUrl} alt={name} />;
+};
 
 const Home = () => {
   const navigate = useNavigate();
@@ -292,45 +294,21 @@ const Home = () => {
         <span className="sec-label">Client Words</span>
         <h2>Spaces that <em>speak</em></h2>
         <div className="testi-row">
-          <div className="tc reveal">
-            <div className="stars">★★★★★</div>
-            <blockquote>They didn't just design our home — they gave us a place we finally feel like ourselves in. Every object chosen with care, every corner considered.</blockquote>
-            <div className="tc-info">
-              <div className="tc-av">
-                <img src="/galleryImageUrls/testimonial-1.jpg" alt=""/>
-              </div>
-              <div>
-                <div className="tc-name">Isabelle R.</div>
-                <div className="tc-loc">Mayfair, London</div>
-              </div>
-            </div>
-          </div>
-          <div className="tc reveal" style={{transitionDelay: '0.12s'}}>
-            <div className="stars">★★★★★</div>
-            <blockquote>The virtual consultation was shockingly thorough. Over a video call, they designed our living room — and the result was more beautiful than we imagined.</blockquote>
-            <div className="tc-info">
-              <div className="tc-av">
-                <img src="/galleryImageUrls/testimonial-2.jpg" alt=""/>
-              </div>
-              <div>
-                <div className="tc-name">Marcus T.</div>
-                <div className="tc-loc">Tribeca, New York</div>
+          {TESTIMONIALS.map((t, i) => (
+            <div className="tc reveal" key={t.name} style={i > 0 ? { transitionDelay: `${i * 0.12}s` } : undefined}>
+              <div className="stars">★★★★★</div>
+              <blockquote>{t.quote}</blockquote>
+              <div className="tc-info">
+                <div className="tc-av">
+                  <TestimonialAvatar name={t.name} photoUrl={t.photoUrl} />
+                </div>
+                <div>
+                  <div className="tc-name">{t.name}</div>
+                  <div className="tc-loc">{t.location}</div>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="tc reveal" style={{transitionDelay: '0.24s'}}>
-            <div className="stars">★★★★★</div>
-            <blockquote>They understood exactly what I couldn't articulate. The warmth, the textures, the light — it feels like the house has always been this way.</blockquote>
-            <div className="tc-info">
-              <div className="tc-av">
-                <img src="/galleryImageUrls/testimonial-3.jpg" alt=""/>
-              </div>
-              <div>
-                <div className="tc-name">Nadia O.</div>
-                <div className="tc-loc">Malibu, California</div>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 

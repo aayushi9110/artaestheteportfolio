@@ -126,7 +126,7 @@
   font-size: 1rem;
   line-height: 1.88;
   color: var(--taupe-grey);
-  max-width: 380px;
+  max-width: 85%;
   margin-top: 26px;
   opacity: 0;
   animation: fU 0.8s ease 1.5s forwards;
@@ -136,7 +136,7 @@
   display: flex;
   align-items: center;
   gap: 28px;
-  margin-top: 38px;
+  margin-top: 18px;
   opacity: 0;
   animation: fU 0.8s ease 1.65s forwards;
   flex-wrap: wrap;
@@ -145,7 +145,7 @@
 .hero-stats {
   display: flex;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 18px;
   opacity: 0;
   animation: fU 0.8s ease 1.8s forwards;
 }
@@ -167,7 +167,7 @@
 
 .hero-stat-num {
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(1.9rem, 2.8vw, 2.6rem);
+  font-size: clamp(3rem, 4vw, 5rem);
   font-weight: 300;
   line-height: 1;
   color: var(--dark);
@@ -188,7 +188,7 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--taupe-grey);
-  white-space: nowrap;
+  white-space: wrap;
 }
 
 @media (min-height: 900px) {
@@ -211,11 +211,11 @@
     margin-top: 30px;
     font-size: 1.04rem;
     line-height: 1.95;
-    max-width: 420px;
+    max-width: 90%;
   }
 
   .hero-acts {
-    margin-top: 44px;
+    margin-top: 20px;
   }
 }
 
@@ -693,7 +693,7 @@
 
 .brand-marq {
   background: #ffffff;
-  padding: 44px 0 54px;
+  padding: 25px 0 0;
   overflow: hidden;
 }
 
@@ -828,9 +828,22 @@
   flex-shrink: 0;
 }
 
-.tc-av img {
+.tc-av img,
+.tc-av svg {
   width: 100%;
   height: 100%;
+  display: block;
+}
+
+.tc-av-bg {
+  fill: var(--linen);
+}
+
+.tc-av-figure {
+  fill: var(--taupe);
+}
+
+.tc-av img {
   object-fit: cover;
 }
 
@@ -1083,8 +1096,27 @@
   }
 
   .hero-acts {
-    margin-top: 20px;
-    gap: 14px;
+    margin-top: 18px;
+    gap: 12px;
+  }
+
+  .hero-acts .btn-dk {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    padding: 12px 24px;
+  }
+
+  .hero-acts .btn-ghost {
+    font-size: 0.78rem;
+    gap: 8px;
+  }
+
+  .hero-stats {
+    margin-top: 28px;
+  }
+
+  .hero-stat-num {
+    font-size: clamp(2.2rem, 3.4vw, 3.2rem);
   }
 
   .scroll-cue {
@@ -1120,8 +1152,27 @@
   }
 
   .hero-acts {
-    margin-top: 14px;
-    gap: 10px;
+    margin-top: 12px;
+    gap: 8px;
+  }
+
+  .hero-acts .btn-dk {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    padding: 10px 18px;
+  }
+
+  .hero-acts .btn-ghost {
+    font-size: 0.72rem;
+    gap: 7px;
+  }
+
+  .hero-stats {
+    margin-top: 20px;
+  }
+
+  .hero-stat-num {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
   }
   
 }

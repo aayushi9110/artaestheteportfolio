@@ -136,34 +136,24 @@ const PAINTING_GALLERY_ITEM: GalleryItem[] = [
   { url: '/images/painting/padmavati.png', caption: 'Padmavati — original painting' },
   { url: '/images/painting/fireWithin.png', caption: 'Fire Within — original painting' },
   { url: '/images/painting/aWarrior.png', caption: 'A Warrior — original painting' },
-  { url: '/images/painting/aThinLine.png', caption: 'A Thin Line — original painting' },
-  { url: '/images/painting/aThinLineclient.png', caption: 'A Thin Line — in client\'s home' },
-  { url: '/images/painting/orangeSeries.png', caption: 'Orange Series — studio view' },
-  { url: '/images/painting/orangeSeriesMumbaihome.png', caption: 'Orange Series — Mumbai home installation' },
   { url: '/images/painting/familyPortraitclient.png', caption: 'Family Portrait — in client\'s home' },
 ];
 
-const SIENNA_GALLERY_ITEM: GalleryItem[] = [
-  { url: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=700&q=80', caption: 'Sienna Abstract - full view' },
-  { url: 'https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=700&q=80', caption: 'Pigment detail' },
-  { url: 'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=700&q=80', caption: 'In situ - dining room' },
-  { url: 'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=700&q=80', caption: 'Mark making detail' },
-  { url: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=700&q=80', caption: 'Final installation' }
+const CHARCOAL_ART_GALLERY_ITEM: GalleryItem[] = [
+  { url: '/images/painting/aThinLine.png', caption: 'A Thin Line — Conceptual Charcoal Art' },
+  { url: '/images/painting/aThinLineclient.png', caption: 'A Thin Line — in client\'s home' },
 ];
 
-const CLAY_GALLERY_ITEM: GalleryItem[] = [
-  { url: 'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=700&q=80', caption: 'Clay Forms - hero shot' },
-  { url: 'https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=700&q=80', caption: 'Vessel detail' },
-  { url: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=700&q=80', caption: 'In situ - brownstone' },
-  { url: 'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=700&q=80', caption: 'Scale and placement' },
-  { url: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=700&q=80', caption: 'Series overview' }
+const ORANGE_SERIES_ART_GALLERY_ITEM: GalleryItem[] = [
+  { url: '/images/painting/orangeSeries.png', caption: 'Orange Series — studio view' },
+  { url: '/images/painting/orangeSeriesMumbaihome.png', caption: 'Orange Series — Mumbai home installation' },
 ];
 
 export const PROJECTS: Record<string, Project> = {
   homeOffices: {
     storyType: 'interior',
     isSelectedForHome: true,
-    homeVisibilityPriority: 1,
+    homeVisibilityPriority: 8,
     title: 'Home Office',
     location: 'Menlo Park, California -The Modern Study - Virtual',
     tagLabels: ['Interior Design', 'Home Office Design', 'Workspace', 'Productivity Zone', 'Bo Concept'],
@@ -268,7 +258,7 @@ export const PROJECTS: Record<string, Project> = {
   fosterCityLivingDining: {
     storyType: 'interior',
     isSelectedForHome: true,
-    homeVisibilityPriority: 8,
+    homeVisibilityPriority: 1,
     title: 'Foster City Living- Dining',
     location: 'Foster City, California - An open-plan living and dining concept for a family home',
     tagLabels: ['Interior Design', 'West Elm', 'Open Layout', 'Living & Dining'],
@@ -391,12 +381,12 @@ export const PROJECTS: Record<string, Project> = {
       { label: 'Floor Area', value: '' },
     ]
   },
-  paintings: {
+  allpaintings: {
     storyType: 'fine-art',
     isSelectedForHome: true,
-    homeVisibilityPriority: 0,
-    title: 'Original Paintings',
-    location: 'Oil & Mixed Media — Various Commissions',
+    homeVisibilityPriority: 8,
+    title: 'Original Painting Collection',
+    location: 'All',
     tagLabels: ['Fine Art', 'Original Paintings', 'Commission', 'Oil on Canvas', 'Mixed Media'],
     heroImageUrl: PAINTING_GALLERY_ITEM[0].url,
     beforeImageUrl: PAINTING_GALLERY_ITEM[0].url,
@@ -406,35 +396,35 @@ export const PROJECTS: Record<string, Project> = {
     overviewTextSecondary: 'Every canvas carries its own narrative. These works have been placed in private homes across India, the UK, and the United States.',
     galleryItems: PAINTING_GALLERY_ITEM,
   },
-  sienna: {
+  thinlineCharcoal: {
     storyType: 'fine-art',
-    isSelectedForHome: false,
-    homeVisibilityPriority: 99,
-    title: 'Sienna Abstract',
-    location: 'Mixed Media - London Commission',
-    tagLabels: ['Fine Art', 'Mixed Media', 'Commission'],
-    heroImageUrl: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=1400&q=80',
-    beforeImageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
-    afterImageUrl: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&q=80',
-    overviewTitle: 'A large-format commission for a Mayfair dining room',
-    overviewTextPrimary: 'The brief was simple and difficult in equal measure: a single artwork large enough to own the dining room wall, and personal enough to feel like it had always been there.',
-    overviewTextSecondary: 'The final 200x140 mixed media work combines raw pigment, plaster, and drawn mark, resulting in something between painting and wall sculpture.',
-    galleryItems: SIENNA_GALLERY_ITEM
+    isSelectedForHome: true,
+    homeVisibilityPriority: 8,
+    title: 'A Thin line',
+    location: 'An Expo in Bandra, Mumbai',
+    tagLabels: ['Fine Art', 'Charcoal', 'Original Painting', 'Conceptual'],
+    heroImageUrl: CHARCOAL_ART_GALLERY_ITEM[0].url,
+    beforeImageUrl: CHARCOAL_ART_GALLERY_ITEM[0].url,
+    afterImageUrl: CHARCOAL_ART_GALLERY_ITEM[0].url,
+    overviewTitle: 'Paintings rooted in emotion, mythology, and the quiet power of colour.',
+    overviewTextPrimary: 'Each painting is an original work — commission or studio piece — drawing from personal iconography, cultural memory, and an instinctive relationship with colour. Figures, landscapes, and abstractions intersect across the series, bridging interior and emotional worlds.',
+    overviewTextSecondary: 'Every canvas carries its own narrative. These works have been placed in private homes across India, the UK, and the United States.',
+    galleryItems: CHARCOAL_ART_GALLERY_ITEM
   },
-  clay: {
+  orangeSeriesPainting: {
     storyType: 'fine-art',
-    isSelectedForHome: false,
-    homeVisibilityPriority: 99,
-    title: 'Clay Forms',
-    location: 'Ceramic Sculpture - Brooklyn Studio',
-    tagLabels: ['Fine Art', 'Ceramic', 'Sculptural'],
-    heroImageUrl: 'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=1400&q=80',
-    beforeImageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
-    afterImageUrl: 'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=800&q=80',
-    overviewTitle: 'A series of handmade ceramics placed across projects',
-    overviewTextPrimary: 'Clay Forms began as a single commission - three sculptural vessels for a Brooklyn brownstone living room. The response led to a larger collaboration with ceramicist Yuki Nakamura.',
-    overviewTextSecondary: 'Each piece is hand-formed and wood-fired, finished in ash glaze, terracotta slip, and raw clay. No two pieces are identical.',
-    galleryItems: CLAY_GALLERY_ITEM
+    isSelectedForHome: true,
+    homeVisibilityPriority: 8,
+    title: 'The Oranges',
+    location: 'Marine lines, Mumbai',
+    tagLabels: ['Fine Art', 'Original Painting', 'Mixed media', 'Conceptual'],
+    heroImageUrl: ORANGE_SERIES_ART_GALLERY_ITEM[1].url,
+    beforeImageUrl: ORANGE_SERIES_ART_GALLERY_ITEM[0].url,
+    afterImageUrl: ORANGE_SERIES_ART_GALLERY_ITEM[0].url,
+    overviewTitle: 'Paintings rooted in emotion, mythology, and the quiet power of colour.',
+    overviewTextPrimary: 'Each painting is an original work — commission or studio piece — drawing from personal iconography, cultural memory, and an instinctive relationship with colour. Figures, landscapes, and abstractions intersect across the series, bridging interior and emotional worlds.',
+    overviewTextSecondary: 'Every canvas carries its own narrative. These works have been placed in private homes across India, the UK, and the United States.',
+    galleryItems: ORANGE_SERIES_ART_GALLERY_ITEM
   }
 };
 

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="title desc">
+  <title id="title">Testimonial placeholder portrait</title>
+  <desc id="desc">Abstract placeholder avatar for client testimonials.</desc>
+  <rect width="200" height="200" fill="#e9e0d4" />
+  <circle cx="100" cy="78" r="34" fill="#b89f87" />
+  <path d="M42 176c8-31 31-48 58-48s50 17 58 48" fill="#b89f87" />
+</svg>

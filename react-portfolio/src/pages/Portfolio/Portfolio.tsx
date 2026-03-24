@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PROJECTS } from '../../data/appData.ts';
 import './Portfolio.css';
@@ -26,15 +26,26 @@ const allPortfolioItems: GalleryItem[] = Object.entries(PROJECTS).map(([id, proj
 const interiorItems: GalleryItem[] = allPortfolioItems.filter((item) => item.storyType === 'interior');
 const fineArtItems: GalleryItem[] = allPortfolioItems.filter((item) => item.storyType === 'fine-art');
 
+const shuffleItems = (items: GalleryItem[]) => {
+  const arr = [...items];
+  for (let i = arr.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+};
+
 const Portfolio = () => {
   const navigate = useNavigate();
-  const [tab, setTab] = useState<'interiors' | 'fineart'>('interiors');
+  const [tab, setTab] = useState<'all' | 'interiors' | 'fineart'>('all');
   const [activeItem, setActiveItem] = useState<GalleryItem | null>(null);
   const [featuredIndex, setFeaturedIndex] = useState(0);
   const [isFeaturedHovered, setIsFeaturedHovered] = useState(false);
   const touchStartX = useRef<number | null>(null);
 
-  const featuredItems = tab === 'interiors' ? interiorItems : fineArtItems;
+  const mixedAllItems = useMemo(() => shuffleItems(allPortfolioItems), []);
+
+  const featuredItems = tab === 'all' ? mixedAllItems : tab === 'interiors' ? interiorItems : fineArtItems;
 
   const getStoryPath = (item: GalleryItem) => {
     return item.storyType === 'fine-art' ? `/fine-art-story/${item.id}` : `/interior-story/${item.id}`;
@@ -117,6 +128,7 @@ const Portfolio = () => {
       </div>
       <div className="gall-body">
         <div className="gall-tabs">
+          <button className={`gtab ${tab === 'all' ? 'act' : ''}`} onClick={() => setTab('all')}>All</button>
           <button className={`gtab ${tab === 'interiors' ? 'act' : ''}`} onClick={() => setTab('interiors')}>All Interiors</button>
           <button className={`gtab ${tab === 'fineart' ? 'act' : ''}`} onClick={() => setTab('fineart')}>Fine Art Gallery</button>
         </div>
@@ -220,24 +232,9 @@ const Portfolio = () => {
           )}
         </div>
 
-        <div className={`gall-section ${tab === 'interiors' ? 'on' : ''}`}>
-          <div className="gall-grid int">
-            {interiorItems.map((item) => (
-              <div className="gi" key={`${item.title}-${item.imageUrl}`} onClick={() => setActiveItem(item)}>
-                <div className="gi-img"><img src={item.imageUrl} alt={item.title}/></div>
-                <div className="gi-ov">
-                  <span className="gi-cat">{item.categoryLabel}</span>
-                  <span className="gi-title">{item.title}</span>
-                  <div className="gi-arr"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className={`gall-section ${tab === 'fineart' ? 'on' : ''}`}>
-          <div className="gall-grid art">
-            {fineArtItems.map((item) => (
+        <div className="gall-section on">
+          <div className={`gall-grid ${tab === 'fineart' ? 'art' : 'int'}`}>
+            {(tab === 'all' ? mixedAllItems : tab === 'interiors' ? interiorItems : fineArtItems).map((item) => (
               <div className="gi" key={`${item.title}-${item.imageUrl}`} onClick={() => setActiveItem(item)}>
                 <div className="gi-img"><img src={item.imageUrl} alt={item.title}/></div>
                 <div className="gi-ov">
