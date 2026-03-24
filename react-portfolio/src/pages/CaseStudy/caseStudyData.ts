@@ -167,7 +167,7 @@ export const PROJECTS: Record<string, Project> = {
       { label: 'Approx Budget', value: '$18,000 - $28,000' },
       { label: 'Timeline', value: '6 - 8 Weeks' },
       { label: 'Space Scope', value: 'Home office + guest storage wall' },
-      { label: 'Floor Area', value: '' },
+      { label: 'Floor Area', value: '300 sq ft' },
     ]
   },
   contemporaryLiving: {

@@ -1,5 +1,5 @@
 .ft {
-  background: var(--dark);
+  background: linear-gradient(150deg, var(--bark) 5%, var(--dark) 50% );
   padding: 30px 48px 26px;
 }
 
@@ -51,9 +51,9 @@
   font-weight: 300;
   font-size: 0.96rem;
   line-height: 1.65;
-  color: rgba(245, 239, 228, 0.38);
+  color: var(--taupe);
   max-width: 85%;
-  margin-bottom: 14px;
+  margin: 30px 0;
 }
 
 .ft-social {
@@ -155,7 +155,8 @@
 .ft-col ul button {
   font-weight: 300;
   font-size: 0.94rem;
-  color: rgba(245, 239, 228, 0.36);
+  color: var(--sand);
+  opacity: 0.8;
   text-decoration: none;
   cursor: default;
   background: none;
@@ -176,7 +177,7 @@
 }
 
 .ft-bot {
-  border-top: 1px solid rgba(245, 239, 228, 0.06);
+  border-top: 1px solid var(--taupe-grey);
   padding-top: 16px;
   display: flex;
   justify-content: space-between;
@@ -185,7 +186,7 @@
 .ft-bot p {
   font-weight: 300;
   font-size: 0.78rem;
-  color: rgba(245, 239, 228, 0.22);
+  color: var(--taupe);
 }
 
 .ft-bot span {
