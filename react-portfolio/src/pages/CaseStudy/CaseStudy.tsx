@@ -97,7 +97,10 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
     setComparePosition(value);
   };
 
-  const totalImages = project.galleryImageUrls.length;
+  const galleryItems = project.galleryItems;
+  const galleryUrls = galleryItems.map((galleryItem) => galleryItem.url);
+  const galleryCaptions = galleryItems.map((galleryItem) => galleryItem.caption);
+  const totalImages = galleryUrls.length;
   const isCarouselTemporarilyPaused = carouselPauseUntil > Date.now();
 
   const filteredProjectDetailMetrics = showInteriorView ? (PROJECT_DETAIL_METRICS[projectKey] ?? []) : [];
@@ -305,7 +308,7 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
               onMouseEnter={() => setIsCarouselHovered(true)}
               onMouseLeave={() => setIsCarouselHovered(false)}
             >
-              {project.galleryImageUrls.map((img, i) => (
+              {galleryUrls.map((img, i) => (
                 <div
                   key={`${img}-${i}`}
                   className={`cs-carousel-slide ${activeImageIndex === i ? 'active' : ''}`.trim()}
@@ -317,9 +320,6 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
                     alt={`${project.title} - final result ${i + 1}`}
                     onClick={() => setExpandedImageIndex(i)}
                   />
-                  <div className="cs-carousel-overlay">
-                    <span>{project.galleryCaptions[i] || ''}</span>
-                  </div>
                 </div>
               ))}
               <button
@@ -346,8 +346,12 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
               </button>
             </div>
 
+            <div className="cs-carousel-caption" aria-live="polite">
+              <span>{galleryCaptions[activeImageIndex] || ''}</span>
+            </div>
+
             <div className="cs-carousel-thumbs" aria-label="Final result thumbnails">
-              {project.galleryImageUrls.map((img, i) => (
+              {galleryUrls.map((img, i) => (
                 <button
                   key={`thumb-${img}-${i}`}
                   className={`cs-carousel-thumb ${activeImageIndex === i ? 'active' : ''}`.trim()}
@@ -408,12 +412,12 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
             </button>
             <img
               className="cs-lightbox-image"
-              src={project.galleryImageUrls[expandedImageIndex]}
+              src={galleryUrls[expandedImageIndex]}
               alt={`${project.title} - expanded final result ${expandedImageIndex + 1}`}
               onClick={(e) => e.stopPropagation()}
             />
             <div className="cs-lightbox-cap" onClick={(e) => e.stopPropagation()}>
-              {project.galleryCaptions[expandedImageIndex] || ''}
+              {galleryCaptions[expandedImageIndex] || ''}
             </div>
           </div>
         )}

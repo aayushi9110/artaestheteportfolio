@@ -348,7 +348,7 @@
 .cs-carousel {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 0;
 }
 
 .cs-carousel-frame {
@@ -393,20 +393,19 @@
   transform: scale(1.03);
 }
 
-.cs-carousel-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(44, 31, 20, 0.78), transparent);
-  padding: 22px 18px;
+.cs-carousel-caption {
+  background: var(--cream);
+  border-top: none;
+  padding: 14px 16px;
 }
 
-.cs-carousel-overlay span {
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
+.cs-carousel-caption span {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(245, 239, 228, 0.75);
+  color: rgba(44, 31, 20, 0.78);
+  line-height: 1.55;
 }
 
 .cs-carousel-nav {
@@ -477,7 +476,8 @@
   align-items: center;
   gap: 8px;
   overflow-x: auto;
-  background-color: var(--cream);
+  background-color: #fff;
+  margin-top: 10px;
   padding: 5px 10px;
   scrollbar-width: thin;
 }
