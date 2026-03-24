@@ -648,7 +648,7 @@
 
 .svc-prev {
   background: var(--dark);
-  padding: 110px 60px;
+  padding: 50px 60px;
   position: relative;
   overflow: hidden;
 }
@@ -669,7 +669,7 @@
 }
 
 .svc-hdr {
-  margin-bottom: 72px;
+  margin-bottom: 40px;
 }
 
 .svc-hdr h2 {
@@ -752,7 +752,7 @@
 }
 
 .testi {
-  padding: 110px 60px;
+  padding: 50px 60px;
   background: var(--warm);
 }
 
