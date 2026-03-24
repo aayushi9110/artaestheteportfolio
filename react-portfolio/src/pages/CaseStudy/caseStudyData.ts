@@ -132,6 +132,17 @@ const MUMBAI_BEDROOM_THREE_GALLERY_ITEM: GalleryItem[] = [
 ];
 
 
+const PAINTING_GALLERY_ITEM: GalleryItem[] = [
+  { url: '/images/painting/padmavati.png', caption: 'Padmavati — original painting' },
+  { url: '/images/painting/fireWithin.png', caption: 'Fire Within — original painting' },
+  { url: '/images/painting/aWarrior.png', caption: 'A Warrior — original painting' },
+  { url: '/images/painting/aThinLine.png', caption: 'A Thin Line — original painting' },
+  { url: '/images/painting/aThinLineclient.png', caption: 'A Thin Line — in client\'s home' },
+  { url: '/images/painting/orangeSeries.png', caption: 'Orange Series — studio view' },
+  { url: '/images/painting/orangeSeriesMumbaihome.png', caption: 'Orange Series — Mumbai home installation' },
+  { url: '/images/painting/familyPortraitclient.png', caption: 'Family Portrait — in client\'s home' },
+];
+
 const SIENNA_GALLERY_ITEM: GalleryItem[] = [
   { url: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=700&q=80', caption: 'Sienna Abstract - full view' },
   { url: 'https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=700&q=80', caption: 'Pigment detail' },
@@ -379,6 +390,21 @@ export const PROJECTS: Record<string, Project> = {
       { label: 'Space Scope', value: 'Bedroom with bespoke bedside styling' },
       { label: 'Floor Area', value: '' },
     ]
+  },
+  paintings: {
+    storyType: 'fine-art',
+    isSelectedForHome: true,
+    homeVisibilityPriority: 0,
+    title: 'Original Paintings',
+    location: 'Oil & Mixed Media — Various Commissions',
+    tagLabels: ['Fine Art', 'Original Paintings', 'Commission', 'Oil on Canvas', 'Mixed Media'],
+    heroImageUrl: PAINTING_GALLERY_ITEM[0].url,
+    beforeImageUrl: PAINTING_GALLERY_ITEM[0].url,
+    afterImageUrl: PAINTING_GALLERY_ITEM[0].url,
+    overviewTitle: 'Paintings rooted in emotion, mythology, and the quiet power of colour.',
+    overviewTextPrimary: 'Each painting is an original work — commission or studio piece — drawing from personal iconography, cultural memory, and an instinctive relationship with colour. Figures, landscapes, and abstractions intersect across the series, bridging interior and emotional worlds.',
+    overviewTextSecondary: 'Every canvas carries its own narrative. These works have been placed in private homes across India, the UK, and the United States.',
+    galleryItems: PAINTING_GALLERY_ITEM,
   },
   sienna: {
     storyType: 'fine-art',
