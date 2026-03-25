@@ -126,7 +126,6 @@ const MUMBAI_BEDROOM_TWO_GALLERY_ITEM: GalleryItem[] = [
 
 const MUMBAI_BEDROOM_THREE_GALLERY_ITEM: GalleryItem[] = [
   { url: '/images/mumbaibed3/mumbaibed3.png', caption: 'Mumbai bedroom set 3 - full composition' },
-  { url: '/images/mumbaibed3/mumbaiBed3detailsnightstand.png', caption: 'Set 3 nightstand detail' },
   { url: '/images/mumbaibed3/mumbaibed3nightstanddetail.png', caption: 'Set 3 texture detail' },
   { url: '/images/mumbaibed3/mumbaiBed3whole.png', caption: 'Set 3 complete bedroom view' }
 ];
@@ -194,8 +193,8 @@ export const PROJECTS: Record<string, Project> = {
   },
   modernScandinavian: {
     storyType: 'interior',
-    isSelectedForHome: true,
-    homeVisibilityPriority: 2,
+    isSelectedForHome: false,
+    homeVisibilityPriority: 99,
     title: 'Modern Scandinavian Living & Dining',
     location: 'San Jose, California',
     tagLabels: ['Interior Design', 'Warm Scandinavian', 'Organic Contemporary', 'West Elm', 'Living', 'Dining'],
@@ -236,8 +235,8 @@ export const PROJECTS: Record<string, Project> = {
   },
   cuppertinoHome: {
     storyType: 'interior',
-    isSelectedForHome: true,
-    homeVisibilityPriority: 7,
+    isSelectedForHome: false,
+    homeVisibilityPriority: 99,
     title: 'A warm fusion to reflect personal style',
     location: 'Mountain View, California - A warm fusion of contemporary styles for a family home',
     tagLabels: ['Interior Design', 'West Elm', 'Living Room', 'Dining Room'],
@@ -258,7 +257,7 @@ export const PROJECTS: Record<string, Project> = {
   fosterCityLivingDining: {
     storyType: 'interior',
     isSelectedForHome: true,
-    homeVisibilityPriority: 1,
+    homeVisibilityPriority: 2,
     title: 'Foster City Living- Dining',
     location: 'Foster City, California - An open-plan living and dining concept for a family home',
     tagLabels: ['Interior Design', 'West Elm', 'Open Layout', 'Living & Dining'],
@@ -299,8 +298,8 @@ export const PROJECTS: Record<string, Project> = {
   },
   entryway: {
     storyType: 'interior',
-    isSelectedForHome: true,
-    homeVisibilityPriority: 9,
+    isSelectedForHome: false,
+    homeVisibilityPriority: 99,
     title: 'Welcoming Entryway',
     location: 'Anahiem, CA - Entryway Styling',
     tagLabels: ['Interior Design', 'California', 'West Elm', 'Entryway', 'Anaheim',],
@@ -320,8 +319,8 @@ export const PROJECTS: Record<string, Project> = {
   },
   mumbaiBedroomOne: {
     storyType: 'interior',
-    isSelectedForHome: true,
-    homeVisibilityPriority: 10,
+    isSelectedForHome: false,
+    homeVisibilityPriority: 99,
     title: 'Bedroom Retreat I',
     location: 'Mumbai, India ',
     tagLabels: ['Interior Design', 'Bedroom', 'Mumbai', 'Contemporary', 'Project 1'],
@@ -363,13 +362,13 @@ export const PROJECTS: Record<string, Project> = {
   mumbaiBedroomThree: {
     storyType: 'interior',
     isSelectedForHome: true,
-    homeVisibilityPriority: 12,
+    homeVisibilityPriority: 8,
     title: 'Luxe Bedroom',
     location: 'Mumbai, India ',
     tagLabels: ['Interior Design', 'Bedroom', 'Mumbai', 'Contemporary', 'Luxury'],
     heroImageUrl: MUMBAI_BEDROOM_THREE_GALLERY_ITEM[1].url,
-    beforeImageUrl: MUMBAI_BEDROOM_THREE_GALLERY_ITEM[3].url,
-    afterImageUrl: MUMBAI_BEDROOM_THREE_GALLERY_ITEM[3].url,
+    beforeImageUrl: MUMBAI_BEDROOM_THREE_GALLERY_ITEM[2].url,
+    afterImageUrl: MUMBAI_BEDROOM_THREE_GALLERY_ITEM[2].url,
     overviewTitle: 'A modern bedroom concept centered on texture and bedside detail.',
     overviewTextPrimary: 'Project 3 leans into refined detailing with carefully styled bedside elements, tonal layering, and a cohesive material story across the room.',
     overviewTextSecondary: 'The final design feels tailored and calm, with visual rhythm built through subtle contrast and texture.',
@@ -383,8 +382,8 @@ export const PROJECTS: Record<string, Project> = {
   },
   allpaintings: {
     storyType: 'fine-art',
-    isSelectedForHome: true,
-    homeVisibilityPriority: 8,
+    isSelectedForHome: false,
+    homeVisibilityPriority: 99,
     title: 'Original Painting Collection',
     location: 'All',
     tagLabels: ['Fine Art', 'Original Paintings', 'Commission', 'Oil on Canvas', 'Mixed Media'],
@@ -399,7 +398,7 @@ export const PROJECTS: Record<string, Project> = {
   thinlineCharcoal: {
     storyType: 'fine-art',
     isSelectedForHome: true,
-    homeVisibilityPriority: 8,
+    homeVisibilityPriority: 1,
     title: 'A Thin line',
     location: 'An Expo in Bandra, Mumbai',
     tagLabels: ['Fine Art', 'Charcoal', 'Original Painting', 'Conceptual'],
@@ -414,7 +413,7 @@ export const PROJECTS: Record<string, Project> = {
   orangeSeriesPainting: {
     storyType: 'fine-art',
     isSelectedForHome: true,
-    homeVisibilityPriority: 8,
+    homeVisibilityPriority: 12,
     title: 'The Oranges',
     location: 'Marine lines, Mumbai',
     tagLabels: ['Fine Art', 'Original Painting', 'Mixed media', 'Conceptual'],

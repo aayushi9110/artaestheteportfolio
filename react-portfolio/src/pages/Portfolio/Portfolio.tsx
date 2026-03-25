@@ -129,7 +129,7 @@ const Portfolio = () => {
       <div className="gall-body">
         <div className="gall-tabs">
           <button className={`gtab ${tab === 'all' ? 'act' : ''}`} onClick={() => setTab('all')}>All</button>
-          <button className={`gtab ${tab === 'interiors' ? 'act' : ''}`} onClick={() => setTab('interiors')}>All Interiors</button>
+          <button className={`gtab ${tab === 'interiors' ? 'act' : ''}`} onClick={() => setTab('interiors')}>Interiors </button>
           <button className={`gtab ${tab === 'fineart' ? 'act' : ''}`} onClick={() => setTab('fineart')}>Fine Art Gallery</button>
         </div>
 

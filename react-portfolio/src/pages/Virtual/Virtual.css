@@ -4,7 +4,7 @@
   background: var(--dark);
   display: flex;
   align-items: flex-end;
-  padding: 140px 60px 72px;
+  padding: 120px 60px 60px;
   position: relative;
   overflow: hidden;
 }
@@ -50,15 +50,15 @@
 
 .vc-hero-c p {
   font-weight: 300;
-  font-size: 0.92rem;
+  font-size: 1rem;
   line-height: 1.85;
-  color: rgba(245, 239, 228, 0.5);
+  color: var(--linen);
   max-width: 530px;
   margin-top: 20px;
 }
 
 .vc-body {
-  padding: 90px 60px;
+  padding: 90px 60px 0 60px;
   max-width: 1100px;
   margin: 0 auto;
 }
@@ -68,7 +68,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 72px;
   align-items: center;
-  margin-bottom: 90px;
+  margin-bottom: 60px;
 }
 
 .vc-intro-txt h2 {
@@ -88,9 +88,9 @@
 
 .vc-intro-txt p {
   font-weight: 300;
-  font-size: 0.88rem;
+  font-size: 1rem;
   line-height: 1.9;
-  color: var(--taupe);
+  color: var(--taupe-grey);
   margin-bottom: 12px;
 }
 
@@ -111,7 +111,7 @@
 }
 
 .vc-del-hdr {
-  text-align: center;
+  text-align: left;
   margin-bottom: 64px;
 }
 
@@ -130,10 +130,10 @@
 
 .vc-del-hdr p {
   font-weight: 300;
-  font-size: 0.88rem;
-  color: var(--taupe);
+  font-size: 1rem;
+  color: var(--taupe-grey);
   max-width: 480px;
-  margin: 14px auto 0;
+  margin-top: 14px;;
   line-height: 1.8;
 }
 
@@ -178,20 +178,9 @@
   font-family: "Cormorant Garamond", serif;
   font-size: 2.9rem;
   font-weight: 300;
-  color: rgba(181, 99, 58, 0.16);
+  color: var(--terra);
   line-height: 1;
   margin-bottom: 14px;
-}
-
-.vd-ico {
-  font-size: 1.55rem;
-  margin-bottom: 16px;
-  display: block;
-  transition: transform 0.32s;
-}
-
-.vd:hover .vd-ico {
-  transform: scale(1.12) rotate(-3deg);
 }
 
 .vd h3 {
@@ -205,9 +194,9 @@
 
 .vd p {
   font-weight: 300;
-  font-size: 0.82rem;
+  font-size: 0.95rem;
   line-height: 1.85;
-  color: var(--taupe);
+  color: var(--taupe-grey);
   margin-bottom: 14px;
 }
 
@@ -219,9 +208,9 @@
 }
 
 .vd ul li {
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   font-weight: 300;
-  color: var(--taupe);
+  color: var(--taupe-grey);
   display: flex;
   align-items: flex-start;
   gap: 8px;
@@ -287,6 +276,7 @@
   margin-bottom: 12px;
   display: block;
   transition: transform 0.3s;
+  color: var(--gold);
 }
 
 .ao:hover .ao-ico {
@@ -303,9 +293,9 @@
 
 .ao p {
   font-weight: 300;
-  font-size: 0.78rem;
+  font-size: 0.9rem;
   line-height: 1.75;
-  color: rgba(245, 239, 228, 0.4);
+  color: var(--sand)
 }
 
 .vc-pkgs h2 {
@@ -440,7 +430,7 @@
 
 @media (max-width: 1100px) {
   .vc-body {
-    padding: 60px 36px;
+    padding: 60px 36px 0 36px;
   }
 
   .vc-intro {
@@ -471,7 +461,7 @@
 
 @media (max-width: 640px) {
   .vc-body {
-    padding: 60px 20px;
+    padding: 60px 20px 0 20px;
   }
 
   .vc-del-grid,
