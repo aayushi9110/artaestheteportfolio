@@ -70,6 +70,8 @@
 }
 
 .psf {
+  --psf-rail-x: 59px;
+  --psf-dot-size: 12px;
   display: grid;
   grid-template-columns: 120px 1fr;
   gap: 0;
@@ -90,7 +92,7 @@
 .psf::before {
   content: "";
   position: absolute;
-  left: 59px;
+  left: var(--psf-rail-x);
   top: 0;
   bottom: 0;
   width: 1px;
@@ -108,16 +110,17 @@
   color: var(--terra);
   line-height: 1;
   padding-top: 4px;
+  padding-left: calc(var(--psf-rail-x) - (var(--psf-dot-size) / 2));
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 10px;
 }
 
 .psf-dot {
-  width: 12px;
-  height: 12px;
+  width: var(--psf-dot-size);
+  height: var(--psf-dot-size);
   border-radius: 50%;
   background: var(--terra);
   flex-shrink: 0;
@@ -138,9 +141,9 @@
 
 .psf-inner > p {
   font-weight: 300;
-  font-size: 0.88rem;
-  line-height: 1.9;
-  color: var(--taupe);
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--taupe-grey);
   margin-bottom: 20px;
   max-width: 580px;
 }
@@ -152,13 +155,13 @@
 }
 
 .psf-del {
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 300;
-  color: var(--taupe);
+  color: var(--taupe-grey);
   display: flex;
   align-items: flex-start;
   gap: 9px;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 .psf-del::before {
@@ -246,18 +249,30 @@
   }
 
   .psf {
+    --psf-rail-x: 39px;
+    padding: 30px 0;
     grid-template-columns: 80px 1fr;
   }
 
   .psf::before {
-    left: 39px;
+    left: var(--psf-rail-x);
   }
 
-  .psf-dot {
-    left: 34px;
+  .psf-inner > p {
+    line-height: 1.7;
+    max-width: 100%;
+  }
+
+  .psf-inner {
+    padding-left: 20px;
   }
 
   .psf-dels {
     grid-template-columns: 1fr;
   }
+
+  .psf-del {
+    line-height: 1.4;
+  }
+
 }

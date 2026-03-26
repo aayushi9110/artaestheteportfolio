@@ -2,12 +2,26 @@ import { SESv2Client, SendEmailCommand } from '@aws-sdk/client-sesv2';
 
 const ses = new SESv2Client({ region: process.env.AWS_REGION || 'us-east-1' });
 
-const REQUIRED_ENV_VARS = ['SES_FROM_EMAIL', 'SES_TO_EMAIL'];
+const REQUIRED_ENV_VARS = ['SES_FROM_EMAIL', 'SES_TO_EMAIL', 'CORS_ALLOW_ORIGIN'];
+
+const parsePositiveInt = (value, fallback) => {
+  const parsed = Number.parseInt(String(value ?? ''), 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+};
+
+const RATE_LIMIT_WINDOW_MS = parsePositiveInt(process.env.RATE_LIMIT_WINDOW_MS, 10 * 60 * 1000);
+const RATE_LIMIT_MAX_PER_IP = parsePositiveInt(process.env.RATE_LIMIT_MAX_PER_IP, 8);
+const RATE_LIMIT_MAX_PER_EMAIL = parsePositiveInt(process.env.RATE_LIMIT_MAX_PER_EMAIL, 3);
+const RATE_LIMIT_MIN_INTERVAL_MS = parsePositiveInt(process.env.RATE_LIMIT_MIN_INTERVAL_MS, 15 * 1000);
+const RATE_LIMIT_MAX_KEYS = parsePositiveInt(process.env.RATE_LIMIT_MAX_KEYS, 1500);
+
+const rateLimitStore = new Map();
 
 const corsHeaders = {
-  'Access-Control-Allow-Origin': process.env.CORS_ALLOW_ORIGIN || '*',
+  'Access-Control-Allow-Origin': process.env.CORS_ALLOW_ORIGIN || 'null',
   'Access-Control-Allow-Headers': 'Content-Type,x-api-key',
   'Access-Control-Allow-Methods': 'OPTIONS,POST',
+  Vary: 'Origin',
   'Content-Type': 'application/json'
 };
 
@@ -17,6 +31,108 @@ const getSafeArray = (value) =>
     : [];
 
 const getSafeString = (value) => (typeof value === 'string' ? value.trim() : '');
+
+const getHeaderValue = (headers, key) => {
+  if (!headers || typeof headers !== 'object') {
+    return '';
+  }
+
+  const direct = headers[key];
+  if (typeof direct === 'string') {
+    return direct;
+  }
+
+  const lower = headers[key.toLowerCase()];
+  return typeof lower === 'string' ? lower : '';
+};
+
+const getClientIp = (event) => {
+  const forwardedFor = getHeaderValue(event?.headers, 'x-forwarded-for');
+  if (forwardedFor) {
+    return forwardedFor.split(',')[0].trim();
+  }
+
+  const requestIp = getSafeString(event?.requestContext?.http?.sourceIp);
+  if (requestIp) {
+    return requestIp;
+  }
+
+  return getSafeString(event?.requestContext?.identity?.sourceIp) || 'unknown';
+};
+
+const cleanupRateLimitStore = (nowMs) => {
+  if (rateLimitStore.size <= RATE_LIMIT_MAX_KEYS) {
+    return;
+  }
+
+  for (const [key, entry] of rateLimitStore.entries()) {
+    if (nowMs - entry.windowStartMs > RATE_LIMIT_WINDOW_MS * 2) {
+      rateLimitStore.delete(key);
+    }
+  }
+
+  if (rateLimitStore.size <= RATE_LIMIT_MAX_KEYS) {
+    return;
+  }
+
+  let oldestKey = null;
+  let oldestTime = Number.POSITIVE_INFINITY;
+
+  for (const [key, entry] of rateLimitStore.entries()) {
+    if (entry.windowStartMs < oldestTime) {
+      oldestTime = entry.windowStartMs;
+      oldestKey = key;
+    }
+  }
+
+  if (oldestKey) {
+    rateLimitStore.delete(oldestKey);
+  }
+};
+
+const checkRateLimit = ({ key, maxRequests, windowMs, minIntervalMs = 0 }) => {
+  const nowMs = Date.now();
+  cleanupRateLimitStore(nowMs);
+
+  const current = rateLimitStore.get(key) || {
+    windowStartMs: nowMs,
+    count: 0,
+    lastRequestMs: 0
+  };
+
+  if (nowMs - current.windowStartMs >= windowMs) {
+    current.windowStartMs = nowMs;
+    current.count = 0;
+  }
+
+  if (minIntervalMs > 0 && current.lastRequestMs > 0) {
+    const elapsedMs = nowMs - current.lastRequestMs;
+    if (elapsedMs < minIntervalMs) {
+      const retryAfterSeconds = Math.ceil((minIntervalMs - elapsedMs) / 1000);
+      return {
+        allowed: false,
+        retryAfterSeconds: Math.max(retryAfterSeconds, 1)
+      };
+    }
+  }
+
+  if (current.count >= maxRequests) {
+    const retryAfterSeconds = Math.ceil((windowMs - (nowMs - current.windowStartMs)) / 1000);
+    return {
+      allowed: false,
+      retryAfterSeconds: Math.max(retryAfterSeconds, 1)
+    };
+  }
+
+  current.count += 1;
+  current.lastRequestMs = nowMs;
+  rateLimitStore.set(key, current);
+
+  return {
+    allowed: true,
+    retryAfterSeconds: 0
+  };
+};
 
 const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -247,9 +363,12 @@ const sendBookingEmail = async (payload) => {
   await ses.send(command);
 };
 
-const jsonResponse = (statusCode, body) => ({
+const jsonResponse = (statusCode, body, extraHeaders = {}) => ({
   statusCode,
-  headers: corsHeaders,
+  headers: {
+    ...corsHeaders,
+    ...extraHeaders
+  },
   body: JSON.stringify(body)
 });
 
@@ -279,6 +398,26 @@ export const handler = async (event) => {
   try {
     checkRequiredEnv();
 
+    const clientIp = getClientIp(event);
+    const ipLimit = checkRateLimit({
+      key: `ip:${clientIp}`,
+      maxRequests: RATE_LIMIT_MAX_PER_IP,
+      windowMs: RATE_LIMIT_WINDOW_MS,
+      minIntervalMs: RATE_LIMIT_MIN_INTERVAL_MS
+    });
+
+    if (!ipLimit.allowed) {
+      return jsonResponse(
+        429,
+        {
+          message: 'Too many requests. Please wait before submitting again.'
+        },
+        {
+          'Retry-After': String(ipLimit.retryAfterSeconds)
+        }
+      );
+    }
+
     const rawBody = typeof event?.body === 'string' ? event.body : '';
     let payload = {};
 
@@ -297,6 +436,24 @@ export const handler = async (event) => {
         message: 'Validation failed',
         errors
       });
+    }
+
+    const emailLimit = checkRateLimit({
+      key: `email:${normalized.email.toLowerCase()}`,
+      maxRequests: RATE_LIMIT_MAX_PER_EMAIL,
+      windowMs: RATE_LIMIT_WINDOW_MS
+    });
+
+    if (!emailLimit.allowed) {
+      return jsonResponse(
+        429,
+        {
+          message: 'Too many enquiries from this email. Please try again later.'
+        },
+        {
+          'Retry-After': String(emailLimit.retryAfterSeconds)
+        }
+      );
     }
 
     await sendBookingEmail(normalized);

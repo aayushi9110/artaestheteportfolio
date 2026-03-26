@@ -33,7 +33,7 @@ const Process = () => {
               <path d="M12 5H2M2 5L6 1M2 5l4 4"/>
             </svg> Back
           </button>
-          <span className="sec-label gold">How We Work</span>
+          <span className="sec-label gold">How I Work</span>
           <h1>From first call<br/>to <em>final reveal</em></h1>
           <p>A transparent, structured process — because great design doesn't happen by accident.</p>
         </div>
@@ -44,7 +44,7 @@ const Process = () => {
             <div className="psf-num"><div className="psf-dot"></div>I</div>
             <div className="psf-inner">
               <h3>Discovery Call</h3>
-              <p>Every project begins with a real conversation. We explore your story, lifestyle, aspirations for the space, and the feelings you want it to evoke. This is where we listen — really listen.</p>
+              <p>Every project begins with a real conversation. I explore your story, lifestyle, aspirations for the space, and the feelings you want it to evoke. This is where I listen deeply.</p>
               <div className="psf-dels">
                 <div className="psf-del">45-minute initial consultation</div>
                 <div className="psf-del">Detailed style questionnaire</div>
@@ -60,7 +60,7 @@ const Process = () => {
             <div className="psf-num"><div className="psf-dot"></div>II</div>
             <div className="psf-inner">
               <h3>Concept & Creative Direction</h3>
-              <p>We translate your brief into a full visual and spatial language. Moodboards, palettes, and material stories are assembled into a coherent creative direction — your project's north star.</p>
+              <p>I translate your brief into a full visual and spatial language. Moodboards, palettes, and material stories are assembled into a coherent creative direction — your project's north star.</p>
               <div className="psf-dels">
                 <div className="psf-del">Moodboard & concept board</div>
                 <div className="psf-del">Color palette & finishes guide</div>
@@ -76,7 +76,7 @@ const Process = () => {
             <div className="psf-num"><div className="psf-dot"></div>III</div>
             <div className="psf-inner">
               <h3>Space Planning & Design Development</h3>
-              <p>We move from concept into concrete plans. Floor plans, furniture layouts, and lighting strategies are developed — ensuring beauty and function work in full harmony.</p>
+              <p>I move from concept into concrete plans. Floor plans, furniture layouts, and lighting strategies are developed to ensure beauty and function work in full harmony.</p>
               <div className="psf-dels">
                 <div className="psf-del">Measured floor plan</div>
                 <div className="psf-del">2-3 furniture layout options</div>
@@ -92,7 +92,7 @@ const Process = () => {
             <div className="psf-num"><div className="psf-dot"></div>IV</div>
             <div className="psf-inner">
               <h3>Presentation & Refinement</h3>
-              <p>We present every element in a formal design presentation — walking you through each decision and the reasoning behind it. Revisions are welcomed; we refine until the design feels undeniably right.</p>
+              <p>I present every element in a formal design presentation, walking you through each decision and the reasoning behind it. Revisions are welcome; I refine until the design feels undeniably right.</p>
               <div className="psf-dels">
                 <div className="psf-del">Full design presentation call</div>
                 <div className="psf-del">Revision rounds included</div>
@@ -108,7 +108,7 @@ const Process = () => {
             <div className="psf-num"><div className="psf-dot"></div>V</div>
             <div className="psf-inner">
               <h3>Delivery, Styling & Final Reveal</h3>
-              <p>You receive everything needed to bring the space to life — with complete guidance at every step. For virtual projects, a detailed installation guide. For in-person projects, we're there for the reveal.</p>
+              <p>You receive everything needed to bring the space to life, with complete guidance at every step. For virtual projects, I provide a detailed installation guide. For in-person projects, I am there for the reveal.</p>
               <div className="psf-dels">
                 <div className="psf-del">Installation guide & room-by-room styling</div>
                 <div className="psf-del">Furniture placement map</div>
@@ -123,8 +123,8 @@ const Process = () => {
 
         <div className="proc-what reveal">
           <div className="proc-what-inner">
-            <span className="sec-label gold">Our Services</span>
-            <h2>Choose how we <em>work together</em></h2>
+            <span className="sec-label gold">My Services</span>
+            <h2>Choose how I can <em>support you</em></h2>
             <div className="proc-svc-grid">
               <div className="svc-card">
                 <div className="svc-n">01</div>
@@ -175,7 +175,7 @@ const Process = () => {
       <div className="cta-strip">
         <div style={{ position: 'relative', zIndex: 1 }}>
           <h2>Ready to begin?</h2>
-          <p>Let's start with a conversation about your space.</p>
+          <p>I would love to start with a conversation about your space.</p>
         </div>
         <button className="btn-lt" style={{ position: 'relative', zIndex: 1 }} onClick={() => navigate('/book')}>
           <span>Book a Consultation</span>
