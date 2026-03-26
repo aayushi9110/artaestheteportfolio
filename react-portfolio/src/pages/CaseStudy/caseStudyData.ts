@@ -36,7 +36,7 @@ const BOCONCEPT_OFFICE_REFERENCE_GALLERY_ITEM: GalleryItem[] = [
   { url: '/images/Boconcept/office/OfficeBefore.png', caption: 'Guest bedroom before transformation' },
   { url: '/images/Boconcept/office/boconcept-bright-office-view-1.png', caption: 'Guest bedroom after transformation' },
   { url: '/images/Boconcept/office/boconcept-c-table-details.png', caption: 'Functional styling details' },
-  { url: '/images/Boconcept/office/boconcept-desk-details.png', caption: 'Desk and hidden storage details' },
+  { url: '/images/Boconcept/office/boconcept-desk-details.webp', caption: 'Desk and hidden storage details' },
   { url: '/images/Boconcept/office/boconcept-office-details-cabinet.png', caption: 'Bookcase and cabinet details' },
   { url: '/images/Boconcept/office/boconcept-office-sofabed-pull-2.png', caption: 'Sofabed pull-out detail' },
   { url: '/images/Boconcept/office/boconcept-office-view-2.png', caption: 'Office view with natural light' }
@@ -45,7 +45,7 @@ const BOCONCEPT_OFFICE_REFERENCE_GALLERY_ITEM: GalleryItem[] = [
 const WESTELM_CONTEMPORARY_LIVING_GALLERY_ITEM: GalleryItem[] = [
   { url: '/images/WestElm/contemporaryLiving/westelm-project.png', caption: 'Living and DiningSpace after transformation' },
   { url: '/images/WestElm/contemporaryLiving/WestElmPaloAltoEmpty.png', caption: 'Empty space before transformation' },
-  { url: '/images/WestElm/contemporaryLiving/westelm-details.png', caption: 'Beautiful details and material balance in the living room' },
+  { url: '/images/WestElm/contemporaryLiving/westelm-details.webp', caption: 'Beautiful details and material balance in the living room' },
   { url: '/images/WestElm/contemporaryLiving/westelm-dining-1.png', caption: 'Dining area with sculptural lighting and beautiful textures' },
   { url: '/images/WestElm/contemporaryLiving/westelm-dining-pa-phone.png', caption: 'Dining area' },
   { url: '/images/WestElm/contemporaryLiving/westelm-dining.png', caption: 'Dining area with natural light and organic textures' },
@@ -65,7 +65,7 @@ const WESTELM_MID_CENTURY_MODERN_GALLERY_ITEM: GalleryItem[] = [
 ];
 
 const ROCHEBOBOIS_DINING_GALLERY_ITEM: GalleryItem[] = [
-  { url: '/images/Boconcept/office/rocheboboisDining/MadisonDiningflowy.png', caption: 'Dining Room before any interior upgrades' },
+  { url: '/images/Boconcept/office/rocheboboisDining/MadisonDiningflowy.webp', caption: 'Dining Room before any interior upgrades' },
   { url: '/images/Boconcept/office/rocheboboisDining/MadisonDiningBefore.png', caption: 'Madison Dining Space after transformation' },
   { url: '/images/Boconcept/office/rocheboboisDining/MadisonDining1After.png', caption: 'Serenity and sculptural design details in the dining room' }
 ];
@@ -82,7 +82,7 @@ const CUPPERTINO_HOME_GALLERY_ITEM: GalleryItem[] = [
 ];
 
 const FOSTER_CITY_LIVING_DINING_GALLERY_ITEM: GalleryItem[] = [
-  { url: '/images/WestElm/fosterCityLivingDining/openLayPaloAltoViewHero.png', caption: 'Space after the transformation' },
+  { url: '/images/WestElm/fosterCityLivingDining/openLayPaloAltoViewHero.webp', caption: 'Space after the transformation' },
   { url: '/images/WestElm/fosterCityLivingDining/openLayoutBefore.png', caption: 'Space before the transformation' },
   { url: '/images/WestElm/fosterCityLivingDining/openLayoutPaloAltoAfter.png', caption: 'Soft edges meeting striking contrast' },
   { url: '/images/WestElm/fosterCityLivingDining/openLayPaloAltoDining.png', caption: 'Pure calm in connected space' },
@@ -120,13 +120,13 @@ const MUMBAI_BEDROOM_GALLERY_ITEM: GalleryItem[] = [
 const MUMBAI_BEDROOM_TWO_GALLERY_ITEM: GalleryItem[] = [
   { url: '/images/mumbaibed2/mumbaiBed2.png', caption: 'Mumbai bedroom set 2 - full composition' },
   { url: '/images/mumbaibed2/mumbaiBed2curtaind.png', caption: 'Set 2 curtain and light detail' },
-  { url: '/images/mumbaibed2/mumbaiBed2detail.png', caption: 'Set 2 close-up detail' },
+  { url: '/images/mumbaibed2/mumbaiBed2detail.webp', caption: 'Set 2 close-up detail' },
   { url: '/images/mumbaibed2/mumbaiDetailbed2.png', caption: 'Set 2 bed styling detail' }
 ];
 
 const MUMBAI_BEDROOM_THREE_GALLERY_ITEM: GalleryItem[] = [
   { url: '/images/mumbaibed3/mumbaibed3.png', caption: 'Mumbai bedroom set 3 - full composition' },
-  { url: '/images/mumbaibed3/mumbaibed3nightstanddetail.png', caption: 'Set 3 texture detail' },
+  { url: '/images/mumbaibed3/mumbaibed3nightstanddetail.webp', caption: 'Set 3 texture detail' },
   { url: '/images/mumbaibed3/mumbaiBed3whole.png', caption: 'Set 3 complete bedroom view' }
 ];
 
@@ -139,13 +139,13 @@ const PAINTING_GALLERY_ITEM: GalleryItem[] = [
 ];
 
 const CHARCOAL_ART_GALLERY_ITEM: GalleryItem[] = [
-  { url: '/images/painting/aThinLine.png', caption: 'A Thin Line — Conceptual Charcoal Art' },
+  { url: '/images/painting/aThinLine.webp', caption: 'A Thin Line — Conceptual Charcoal Art' },
   { url: '/images/painting/aThinLineclient.png', caption: 'A Thin Line — in client\'s home' },
 ];
 
 const ORANGE_SERIES_ART_GALLERY_ITEM: GalleryItem[] = [
   { url: '/images/painting/orangeSeries.png', caption: 'Orange Series — studio view' },
-  { url: '/images/painting/orangeSeriesMumbaihome.png', caption: 'Orange Series — Mumbai home installation' },
+  { url: '/images/painting/orangeSeriesMumbaihome.webp', caption: 'Orange Series — Mumbai home installation' },
 ];
 
 export const PROJECTS: Record<string, Project> = {

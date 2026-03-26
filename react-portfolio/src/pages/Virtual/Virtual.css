@@ -13,7 +13,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: url("C:\Users\aayus\Documents\interiorPortfolio\react-portfolio\public\images\home\Heroimages\heroStudioimage.png") no-repeat
+  background: url("/images/home/Heroimages/heroStudioimage.webp") no-repeat
     center/cover;
   opacity: 0.17;
 }

@@ -1,18 +1,18 @@
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate, useParams } from 'react-router-dom';
-import Home from './pages/Home/Home';
-import About from './pages/About/About';
-import Portfolio from './pages/Portfolio/Portfolio';
-import Process from './pages/Process/Process';
-import Virtual from './pages/Virtual/Virtual';
-import Book from './pages/Book/Book';
+import { lazy, Suspense, useState, useEffect } from 'react';
+const Home = lazy(() => import('./pages/Home/Home'));
+const About = lazy(() => import('./pages/About/About'));
+const Portfolio = lazy(() => import('./pages/Portfolio/Portfolio'));
+const Process = lazy(() => import('./pages/Process/Process'));
+const Virtual = lazy(() => import('./pages/Virtual/Virtual'));
+const Book = lazy(() => import('./pages/Book/Book'));
 import { PROJECTS } from './data/appData.ts';
-import InteriorStory from './pages/InteriorStory/InteriorStory';
-import FineArtStory from './pages/FineArtStory/FineArtStory';
+const InteriorStory = lazy(() => import('./pages/InteriorStory/InteriorStory'));
+const FineArtStory = lazy(() => import('./pages/FineArtStory/FineArtStory'));
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Cursor from './components/Cursor';
 import Loader from './components/Loader';
-import { useState, useEffect } from 'react';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -51,18 +51,20 @@ function App() {
       <div className="App">
         <Cursor />
         <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/process" element={<Process />} />
-          <Route path="/virtual" element={<Virtual />} />
-          <Route path="/book" element={<Book />} />
-          <Route path="/case-study/:id" element={<StoryRouteResolver />} />
-          <Route path="/interior-story/:id" element={<InteriorStory />} />
-          <Route path="/fine-art-story/:id" element={<FineArtStory />} />
-          <Route path="/project/:id" element={<StoryRouteResolver />} />
-        </Routes>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/process" element={<Process />} />
+            <Route path="/virtual" element={<Virtual />} />
+            <Route path="/book" element={<Book />} />
+            <Route path="/case-study/:id" element={<StoryRouteResolver />} />
+            <Route path="/interior-story/:id" element={<InteriorStory />} />
+            <Route path="/fine-art-story/:id" element={<FineArtStory />} />
+            <Route path="/project/:id" element={<StoryRouteResolver />} />
+          </Routes>
+        </Suspense>
         <Footer />
       </div>
     </Router>

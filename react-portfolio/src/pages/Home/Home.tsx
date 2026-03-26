@@ -29,7 +29,7 @@ const TestimonialAvatar = ({ name, photoUrl }: { name: string; photoUrl: string 
     );
   }
 
-  return <img src={photoUrl} alt={name} />;
+  return <img src={photoUrl} alt={name} loading="lazy" />;
 };
 
 const Home = () => {
@@ -160,7 +160,7 @@ const Home = () => {
 
       <section className="philosophy" id="about-strip">
         <div className="ph-img rl">
-          <img src={HOME_STUDIO_IMAGE_URL} alt="Studio"/>
+          <img src={HOME_STUDIO_IMAGE_URL} alt="Studio" loading="lazy"/>
         </div>
         <div className="ph-content rr">
           <span className="sec-label">Philosophy</span>
@@ -197,7 +197,7 @@ const Home = () => {
                 onClick={() => goProject(id, cardType)}
               >
                 <div className="pi-img">
-                  <img src={project.heroImageUrl} alt={project.title}/>
+                  <img src={project.heroImageUrl} alt={project.title} loading="lazy"/>
                 </div>
                 <div className="pi-ov">
                   <span className="pi-cat">{project.tagLabels[0]}</span>

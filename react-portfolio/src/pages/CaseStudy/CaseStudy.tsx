@@ -101,6 +101,8 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
   const galleryUrls = galleryItems.map((galleryItem) => galleryItem.url);
   const galleryCaptions = galleryItems.map((galleryItem) => galleryItem.caption);
   const totalImages = galleryUrls.length;
+  const previousImageIndex = totalImages ? (activeImageIndex - 1 + totalImages) % totalImages : -1;
+  const nextImageIndex = totalImages ? (activeImageIndex + 1) % totalImages : -1;
   const isCarouselTemporarilyPaused = carouselPauseUntil > Date.now();
 
   const filteredProjectDetailMetrics = showInteriorView ? (PROJECT_DETAIL_METRICS[projectKey] ?? []) : [];
@@ -249,12 +251,12 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
         {showInteriorView && (
           <div className="cs-ba">
             <div className={`cs-ba-compare ${isAutoSliding ? 'auto-sliding' : ''}`}>
-              <img className="cs-ba-img" src={project.afterImageUrl} alt="After" />
+              <img className="cs-ba-img" src={project.afterImageUrl} alt="After" loading="lazy" />
               <div
                 className="cs-ba-after"
                 style={{ clipPath: `inset(0 ${100 - comparePosition}% 0 0)` }}
               >
-                <img className="cs-ba-img" src={project.beforeImageUrl} alt="Before" />
+                <img className="cs-ba-img" src={project.beforeImageUrl} alt="Before" loading="lazy" />
               </div>
 
               <div className="cs-ba-divider" style={{ left: `${comparePosition}%` }} aria-hidden="true">
@@ -314,12 +316,15 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
                   className={`cs-carousel-slide ${activeImageIndex === i ? 'active' : ''}`.trim()}
                   aria-hidden={activeImageIndex !== i}
                 >
-                  <img
-                    className="cs-carousel-image"
-                    src={img}
-                    alt={`${project.title} - final result ${i + 1}`}
-                    onClick={() => setExpandedImageIndex(i)}
-                  />
+                  {(i === activeImageIndex || i === previousImageIndex || i === nextImageIndex) && (
+                    <img
+                      className="cs-carousel-image"
+                      src={img}
+                      alt={`${project.title} - final result ${i + 1}`}
+                      loading={i === activeImageIndex ? 'eager' : 'lazy'}
+                      onClick={() => setExpandedImageIndex(i)}
+                    />
+                  )}
                 </div>
               ))}
               <button
@@ -359,7 +364,7 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
                   aria-label={`Show final result thumbnail ${i + 1}`}
                   aria-current={activeImageIndex === i ? 'true' : undefined}
                 >
-                  <img src={img} alt="" />
+                  <img src={img} alt="" loading="lazy" />
                 </button>
               ))}
             </div>

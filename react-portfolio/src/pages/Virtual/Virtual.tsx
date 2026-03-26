@@ -47,7 +47,7 @@ const Virtual = () => {
             <p>Every virtual project is fully bespoke. You receive a comprehensive suite of deliverables, a dedicated designer, and ongoing support throughout the process. No template. No compromise.</p>
             <div style={{ marginTop: '28px' }}><button className="btn-dk" onClick={() => navigate('/book')}><span>Get Started</span></button></div>
           </div>
-          <div className="vc-intro-img rr"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80" alt="Virtual Design"/></div>
+          <div className="vc-intro-img rr"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80" alt="Virtual Design" loading="lazy"/></div>
         </div>
 
         <div className="vc-del-hdr reveal">

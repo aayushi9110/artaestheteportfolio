@@ -3,8 +3,8 @@ export type { Deliverable, Project, StoryType } from '../pages/CaseStudy/caseStu
 
 export const RESOURCES = {
 	home: {
-		heroImageUrl: '/images/home/Heroimages/heroimagedetail.png',
-		studioImageUrl: '/images/home/Heroimages/heroStudioimage.png',
+		heroImageUrl: '/images/home/Heroimages/heroimagedetail.webp',
+		studioImageUrl: '/images/home/Heroimages/heroStudioimage.webp',
 		testimonialPlaceholderImageUrl: '/images/home/testimonials_placeholder.svg',
 		brandLogos: [
 			{ src: '/images/brandLogo/boconceptlogo.jpg', alt: 'Boconcept' },

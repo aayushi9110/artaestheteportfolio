@@ -46,6 +46,12 @@ const Portfolio = () => {
   const mixedAllItems = useMemo(() => shuffleItems(allPortfolioItems), []);
 
   const featuredItems = tab === 'all' ? mixedAllItems : tab === 'interiors' ? interiorItems : fineArtItems;
+  const previousFeaturedIndex = featuredItems.length
+    ? (featuredIndex - 1 + featuredItems.length) % featuredItems.length
+    : -1;
+  const nextFeaturedIndex = featuredItems.length
+    ? (featuredIndex + 1) % featuredItems.length
+    : -1;
 
   const getStoryPath = (item: GalleryItem) => {
     return item.storyType === 'fine-art' ? `/fine-art-story/${item.id}` : `/interior-story/${item.id}`;
@@ -164,12 +170,15 @@ const Portfolio = () => {
                 className={`pf-carousel-slide ${featuredIndex === i ? 'active' : ''}`.trim()}
                 aria-hidden={featuredIndex !== i}
               >
-                <img
-                  src={item.imageUrl}
-                  alt={item.title}
-                  className="pf-carousel-img"
-                  onClick={() => setActiveItem(item)}
-                />
+                {(i === featuredIndex || i === previousFeaturedIndex || i === nextFeaturedIndex) && (
+                  <img
+                    src={item.imageUrl}
+                    alt={item.title}
+                    className="pf-carousel-img"
+                    loading={i === featuredIndex ? 'eager' : 'lazy'}
+                    onClick={() => setActiveItem(item)}
+                  />
+                )}
               </div>
             ))}
             <button
@@ -236,7 +245,7 @@ const Portfolio = () => {
           <div className={`gall-grid ${tab === 'fineart' ? 'art' : 'int'}`}>
             {(tab === 'all' ? mixedAllItems : tab === 'interiors' ? interiorItems : fineArtItems).map((item) => (
               <div className="gi" key={`${item.title}-${item.imageUrl}`} onClick={() => setActiveItem(item)}>
-                <div className="gi-img"><img src={item.imageUrl} alt={item.title}/></div>
+                <div className="gi-img"><img src={item.imageUrl} alt={item.title} loading="lazy"/></div>
                 <div className="gi-ov">
                   <span className="gi-cat">{item.categoryLabel}</span>
                   <span className="gi-title">{item.title}</span>

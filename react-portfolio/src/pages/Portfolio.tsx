@@ -187,7 +187,7 @@ const Portfolio = () => {
                 }}
               >
                 <div className="gi-img">
-                  <img src={(item.caseStudyId ? PROJECTS[item.caseStudyId]?.heroImageUrl : undefined) || item.src} alt={item.title}/>
+                  <img src={(item.caseStudyId ? PROJECTS[item.caseStudyId]?.heroImageUrl : undefined) || item.src} alt={item.title} loading="lazy"/>
                 </div>
                 <div className="gi-ov">
                   <span className="gi-cat">{item.category}</span>
@@ -203,7 +203,7 @@ const Portfolio = () => {
           <div className="gall-grid art">
             {fineArtItems.map((item) => (
               <div className="gi" key={`${item.title}-${item.src}`} onClick={() => setActiveItem(item)}>
-                <div className="gi-img"><img src={item.src} alt={item.title}/></div>
+                <div className="gi-img"><img src={item.src} alt={item.title} loading="lazy"/></div>
                 <div className="gi-ov">
                   <span className="gi-cat">{item.category}</span>
                   <span className="gi-title">{item.title}</span>
