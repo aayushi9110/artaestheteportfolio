@@ -1,6 +1,6 @@
 @page {
   size: A4 landscape;
-  margin: 11mm;
+  margin: 0;
 }
 
 :root {
@@ -37,11 +37,11 @@ body {
 .home-page,
 .about-page,
 .case-study-page {
-  min-height: calc(210mm - 22mm);
+  height: 210mm;
   padding: 14mm;
   background: var(--warm);
   border: 1px solid var(--sand);
-  page-break-after: always;
+  page-break-inside: avoid;
   position: relative;
   overflow: hidden;
 }
@@ -55,7 +55,7 @@ body {
   left: 0;
   right: 0;
   background: linear-gradient(150deg, var(--bark) 5%, var(--dark) 50% );
-  border-bottom: 1px solid color-mix(in srgb, var(--sand) 40%, transparent);
+  border-bottom: 1px solid rgba(217, 201, 168, 0.4);
   z-index: 1;
   pointer-events: none;
 }
@@ -102,6 +102,20 @@ body {
 .logo-footer-left {
   bottom: 5mm;
   left: 8mm;
+}
+
+.footer-url {
+  position: absolute;
+  bottom: 5mm;
+  right: 8mm;
+  margin: 0;
+  font-size: 0.825em;
+  color: var(--gold);
+  z-index: 3;
+  font-style: italic;
+  font-family: "Cormorant Garamond", serif;
+  letter-spacing: 0.15em;
+  text-decoration: none;
 }
 
 .pdf-brand .n-logo-mark {
@@ -156,6 +170,22 @@ body {
   color: var(--linen);
 }
 
+.logo-footer-left .n-logo-mark {
+  filter: none;
+}
+
+.logo-footer-left .brand-wordmark {
+  color: var(--dark);
+}
+
+.logo-footer-left .brand-wordmark > span {
+  color: var(--gold);
+}
+
+.logo-footer-left .brand-wordmark .byaayushi {
+  color: var(--dark);
+}
+
 .home-bg {
   position: absolute;
   inset: 0;
@@ -167,7 +197,7 @@ body {
 .home-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(105deg, color-mix(in srgb, var(--dark) 76%, transparent), color-mix(in srgb, var(--bark) 52%, transparent));
+  background: linear-gradient(105deg, rgba(44, 31, 20, 0.76), rgba(92, 61, 46, 0.52));
   z-index: 1;
 }
 
@@ -244,7 +274,7 @@ h1 span:last-child {
 }
 
 .home-stats div + div {
-  border-left: 1px solid color-mix(in srgb, var(--sand) 45%, transparent);
+  border-left: 1px solid rgba(217, 201, 168, 0.45);
   padding-left: 6mm;
 }
 
@@ -435,9 +465,9 @@ h2 {
 }
 
 .case-study-page .header-chips .chip {
-  background: color-mix(in srgb, var(--dark) 55%, transparent);
+  background: rgba(44, 31, 20, 0.55);
   color: var(--linen);
-  border-color: color-mix(in srgb, var(--sand) 65%, transparent);
+  border-color: rgba(217, 201, 168, 0.65);
 }
 
 .chip {

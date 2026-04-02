@@ -127,6 +127,7 @@ const caseStudySections = topTenProjects
 
         <div class="image-grid">${imageMarkup}</div>
         ${renderBrandMark('logo-footer-left')}
+        <a class="footer-url" href="https://www.byaayushi.com" target="_blank" rel="noopener noreferrer">www.byaayushi.com</a>
       </section>
     `;
   })
@@ -190,6 +191,7 @@ const html = `<!doctype html>
         </div>
       </div>
       ${renderBrandMark('logo-footer-left')}
+      <a class="footer-url" href="https://www.byaayushi.com" target="_blank" rel="noopener noreferrer">www.byaayushi.com</a>
     </section>
 
     ${caseStudySections}

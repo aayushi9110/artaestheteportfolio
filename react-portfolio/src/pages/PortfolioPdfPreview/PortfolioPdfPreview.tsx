@@ -57,6 +57,7 @@ const getTopThreeImages = (project: ProjectEntry): { url: string; caption: strin
 
 const PortfolioPdfPreview = () => {
   const [isGenerating, setIsGenerating] = useState(false);
+  const [generationError, setGenerationError] = useState<string | null>(null);
 
   const renderBrandMark = (positionClass: 'logo-home-left' | 'logo-header-right' | 'logo-footer-left', tone: 'dark' | 'light' = 'dark') => (
     <div className={`pdf-brand ${positionClass} ${tone === 'light' ? 'brand-light' : 'brand-dark'}`}>
@@ -66,7 +67,6 @@ const PortfolioPdfPreview = () => {
       </span>
     </div>
   );
-
   const projects = useMemo(() => pickTopProjects(), []);
   const aboutStoryParagraphs = useMemo(
     () => [
@@ -83,6 +83,8 @@ const PortfolioPdfPreview = () => {
       return;
     }
 
+    exportRoot.classList.add('is-exporting');
+    setGenerationError(null);
     setIsGenerating(true);
     try {
       const { default: html2pdf } = await import('html2pdf.js');
@@ -90,14 +92,20 @@ const PortfolioPdfPreview = () => {
       await html2pdf()
         .set({
           filename: 'Art-Aesthete-Portfolio-Top10.pdf',
-          margin: [8, 8, 8, 8],
+          margin: [0, 0, 0, 0],
           image: { type: 'jpeg', quality: 0.95 },
           html2canvas: { scale: 2, useCORS: true, backgroundColor: '#f2f0ec' },
           jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' },
-        })
+          pagebreak: { mode: ['avoid-all'] },
+        } as any)
         .from(exportRoot)
         .save();
+    } catch (error) {
+      // Surface failures that previously looked like a no-op when html2pdf/image capture fails.
+      console.error('Failed to generate PDF:', error);
+      setGenerationError('PDF generation failed. Please refresh and try again.');
     } finally {
+      exportRoot.classList.remove('is-exporting');
       setIsGenerating(false);
     }
   };
@@ -106,14 +114,13 @@ const PortfolioPdfPreview = () => {
     <div className="pdf-preview-shell">
       <header className="pdf-preview-toolbar">
         <div>
-          <p className="pdf-preview-kicker">Portfolio PDF Preview</p>
-          <h1>Top 10 Interior Case Studies</h1>
           <p>Review this endpoint and click Generate PDF to download from browser.</p>
         </div>
         <button className="pdf-generate-button" onClick={handleGeneratePdf} disabled={isGenerating}>
           {isGenerating ? 'Generating...' : 'Generate PDF'}
         </button>
       </header>
+      {generationError ? <p className="pdf-generation-error">{generationError}</p> : null}
 
       <div id="pdf-export-root" className="pdf-document">
         <section className="pdf-page home-page">
@@ -167,6 +174,7 @@ const PortfolioPdfPreview = () => {
             </div>
           </div>
           {renderBrandMark('logo-footer-left')}
+          <a className="footer-url" href="https://www.byaayushi.com" target="_blank" rel="noopener noreferrer">www.byaayushi.com</a>
         </section>
 
         {projects.map((project, index) => {
@@ -203,6 +211,7 @@ const PortfolioPdfPreview = () => {
                 ))}
               </div>
               {renderBrandMark('logo-footer-left')}
+              <a className="footer-url" href="https://www.byaayushi.com" target="_blank" rel="noopener noreferrer">www.byaayushi.com</a>
             </section>
           );
         })}
