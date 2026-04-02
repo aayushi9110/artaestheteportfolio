@@ -1,6 +1,12 @@
-import { writeFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { PROJECTS } from '../src/pages/CaseStudy/caseStudyData.ts';
+import { RESOURCES } from '../src/data/appData.ts';
+
+const scriptDir = dirname(fileURLToPath(import.meta.url));
+const stylesPath = resolve(scriptDir, 'portfolioPdfTemplate.css');
+const pdfStyles = readFileSync(stylesPath, 'utf8');
 
 type ProjectEntry = {
   id: string;
@@ -72,6 +78,21 @@ const esc = (value: string): string =>
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#39;');
 
+const HOME_HERO_IMAGE_URL = RESOURCES.home.heroImageUrl;
+const ABOUT_PROFILE_IMAGE_URL = RESOURCES.about.profileImageUrl;
+const LOGO_DARK_URL = '/images/logos/artAesthete.png';
+
+const renderBrandMark = (positionClass: 'logo-home-left' | 'logo-header-right' | 'logo-footer-left', tone: 'dark' | 'light' = 'dark'): string => {
+  const toneClass = tone === 'light' ? 'brand-light' : 'brand-dark';
+
+  return `
+    <div class="pdf-brand ${positionClass} ${toneClass}">
+      <img class="n-logo-mark" src="${esc(LOGO_DARK_URL)}" alt="Art Aesthete logo" />
+      <span class="brand-wordmark">Art <span>Aesthete <span class="byaayushi">By Aayushi</span></span></span>
+    </div>
+  `;
+};
+
 const caseStudySections = topTenProjects
   .map((project, index) => {
     const images = imageCandidates(project);
@@ -90,13 +111,13 @@ const caseStudySections = topTenProjects
 
     return `
       <section class="case-study-page" id="case-study-${esc(project.id)}">
+        ${renderBrandMark('logo-header-right')}
         <header class="page-header">
           <div>
             <p class="kicker">Case Study ${index + 1}</p>
             <h2>${esc(project.title)}</h2>
             <p class="location">${esc(project.location)}</p>
           </div>
-          <p class="story-type">${project.storyType === 'interior' ? 'Interior Design' : 'Fine Art'}</p>
         </header>
 
         <p class="overview-title">${esc(project.overviewTitle)}</p>
@@ -106,6 +127,7 @@ const caseStudySections = topTenProjects
         <div class="chips">${tags}</div>
 
         <div class="image-grid">${imageMarkup}</div>
+        ${renderBrandMark('logo-footer-left')}
       </section>
     `;
   })
@@ -117,226 +139,58 @@ const generatedDate = new Date().toLocaleDateString('en-US', {
   day: 'numeric',
 });
 
+const aboutStoryParagraphs = [
+  'Hi, I am Aayushi Shah. I set out to find rooms that felt honest - spaces that did not pretend to be something they were not.',
+  'Most people decorate their homes. I believe you should curate them. A decorated room fills space. A curated one commands it.',
+  'Art Aesthete exists for the homeowner who is done settling for fine and is ready for a space that actually moves them.',
+];
+
 const html = `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Art Aesthete Portfolio - Top 10 Case Studies</title>
-    <style>
-      @page {
-        size: A4 landscape;
-        margin: 11mm;
-      }
-
-      :root {
-        --ink: #1f2522;
-        --muted: #55615c;
-        --paper: #f2f0ec;
-        --accent: #8a5a3c;
-        --accent-soft: #d8c2af;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
-        font-family: "Georgia", "Times New Roman", serif;
-        color: var(--ink);
-        background: var(--paper);
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
-
-      .cover-page,
-      .case-study-page {
-        min-height: calc(210mm - 22mm);
-        padding: 14mm;
-        background: linear-gradient(160deg, #f7f3ed 0%, #ece6de 65%, #e4dacd 100%);
-        border: 1px solid #d8cfc2;
-        page-break-after: always;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .cover-page::before,
-      .case-study-page::before {
-        content: "";
-        position: absolute;
-        inset: 8mm;
-        border: 1px solid rgba(138, 90, 60, 0.25);
-        pointer-events: none;
-      }
-
-      .cover-inner {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        min-height: 100%;
-      }
-
-      .brand {
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--muted);
-        font-size: 11px;
-        margin-bottom: 16mm;
-      }
-
-      h1 {
-        font-size: 44px;
-        line-height: 1.07;
-        margin: 0;
-        max-width: 520px;
-        font-weight: 500;
-      }
-
-      .subtitle {
-        margin-top: 10mm;
-        font-size: 15px;
-        color: #36413d;
-        max-width: 540px;
-        line-height: 1.45;
-      }
-
-      .cover-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 12px;
-        color: var(--muted);
-        border-top: 1px solid #ccb9a8;
-        padding-top: 6mm;
-      }
-
-      .page-header {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 8mm;
-      }
-
-      .kicker {
-        text-transform: uppercase;
-        letter-spacing: 0.09em;
-        font-size: 10px;
-        color: var(--muted);
-        margin: 0 0 2mm;
-      }
-
-      h2 {
-        margin: 0;
-        font-size: 29px;
-        line-height: 1.15;
-        max-width: 440px;
-      }
-
-      .location {
-        margin: 3mm 0 0;
-        color: #34403b;
-        font-size: 13px;
-      }
-
-      .story-type {
-        margin: 0;
-        font-size: 12px;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: #6f7c76;
-      }
-
-      .overview-title {
-        margin: 7mm 0 4mm;
-        font-weight: 600;
-        font-size: 17px;
-        line-height: 1.35;
-        max-width: 92%;
-      }
-
-      .overview-text {
-        margin: 0 0 3mm;
-        color: #2b3531;
-        font-size: 13px;
-        line-height: 1.55;
-      }
-
-      .secondary {
-        color: #47534e;
-      }
-
-      .chips {
-        display: flex;
-        gap: 2mm;
-        flex-wrap: wrap;
-        margin: 5mm 0 7mm;
-      }
-
-      .chip {
-        border: 1px solid #c8b49f;
-        background: rgba(255, 255, 255, 0.56);
-        color: #39453f;
-        font-size: 10px;
-        padding: 1.5mm 2.5mm;
-        border-radius: 999px;
-      }
-
-      .image-grid {
-        display: grid;
-        grid-template-columns: 1.1fr 0.9fr;
-        grid-template-rows: 52mm 36mm;
-        gap: 4mm;
-      }
-
-      .image-card {
-        margin: 0;
-        background: #fefcf9;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .image-1 {
-        grid-row: 1 / span 2;
-      }
-
-      .image-card img {
-        width: 100%;
-        height: 100%;
-        min-height: 0;
-        object-fit: cover;
-        flex: 1;
-      }
-
-      .image-card figcaption {
-        border-top: 1px solid #d8cfc3;
-        font-size: 10px;
-        color: #4c5953;
-        padding: 2.2mm 2.8mm;
-      }
-    </style>
+    <style>${pdfStyles}</style>
   </head>
   <body>
-    <section class="cover-page">
-      <div class="cover-inner">
-        <div>
-          <p class="brand">Art Aesthete</p>
-          <h1>Portfolio Selection</h1>
-          <p class="subtitle">
-            Curated PDF portfolio with the top 10 case studies and 3 key visuals per project.
-            Crafted for quick recruiter review while preserving the tone and visual language of the website.
-          </p>
-        </div>
-
-        <div class="cover-footer">
-          <span>Aayushi Shah</span>
-          <span>${esc(generatedDate)}</span>
+    <section class="home-page">
+      ${renderBrandMark('logo-home-left', 'light')}
+      <div class="home-overlay"></div>
+      <img class="home-bg" src="${esc(HOME_HERO_IMAGE_URL)}" alt="Art Aesthete home hero" />
+      <div class="home-content">
+        <p class="home-punch">Your space, your story, beautifully told</p>
+        <h1>
+          <span>Where Spaces</span>
+          <span>Become</span>
+          <span>Living Art</span>
+        </h1>
+        <p class="subtitle">
+          We design interiors that feel as extraordinary as the people who inhabit them.
+          Every detail is intentional. Every room tells a story.
+        </p>
+        <div class="home-stats">
+          <div><strong>78+</strong><span>Projects Completed</span></div>
+          <div><strong>104+</strong><span>Spaces Styled</span></div>
+          <div><strong>80+</strong><span>Art Pieces Commissioned</span></div>
         </div>
       </div>
+    </section>
+
+    <section class="about-page">
+      ${renderBrandMark('logo-header-right')}
+      <div class="about-grid">
+        <div class="about-copy">
+          <p class="kicker">My Story</p>
+          <h2>Built on beauty,<br/>driven by instinct</h2>
+          <p class="about-lead">Most spaces are filled. Few are felt.</p>
+          ${aboutStoryParagraphs.map((paragraph) => `<p class="about-text">${esc(paragraph)}</p>`).join('')}
+        </div>
+        <div class="about-portrait-wrap">
+          <img class="about-portrait" src="${esc(ABOUT_PROFILE_IMAGE_URL)}" alt="Aayushi Shah" />
+        </div>
+      </div>
+      ${renderBrandMark('logo-footer-left')}
     </section>
 
     ${caseStudySections}

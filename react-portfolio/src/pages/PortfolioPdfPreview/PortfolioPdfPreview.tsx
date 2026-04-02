@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { PROJECTS } from '../../data/appData.ts';
+import { PROJECTS, RESOURCES } from '../../data/appData.ts';
 import './PortfolioPdfPreview.css';
 
 type ProjectEntry = {
@@ -58,14 +58,22 @@ const getTopThreeImages = (project: ProjectEntry): { url: string; caption: strin
 const PortfolioPdfPreview = () => {
   const [isGenerating, setIsGenerating] = useState(false);
 
+  const renderBrandMark = (positionClass: 'logo-home-left' | 'logo-header-right' | 'logo-footer-left', tone: 'dark' | 'light' = 'dark') => (
+    <div className={`pdf-brand ${positionClass} ${tone === 'light' ? 'brand-light' : 'brand-dark'}`}>
+      <img className="n-logo-mark" src="/images/logos/artAesthete.png" alt="Art Aesthete logo" />
+      <span className="brand-wordmark">
+        Art <span>Aesthete <span className="byaayushi">By Aayushi</span></span>
+      </span>
+    </div>
+  );
+
   const projects = useMemo(() => pickTopProjects(), []);
-  const generatedDate = useMemo(
-    () =>
-      new Date().toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      }),
+  const aboutStoryParagraphs = useMemo(
+    () => [
+      'Hi, I am Aayushi Shah. I set out to find rooms that felt honest - spaces that did not pretend to be something they were not.',
+      'Most people decorate their homes. I believe you should curate them. A decorated room fills space. A curated one commands it.',
+      'Art Aesthete exists for the homeowner who is done settling for fine and is ready for a space that actually moves them.',
+    ],
     []
   );
 
@@ -108,20 +116,58 @@ const PortfolioPdfPreview = () => {
       </header>
 
       <div id="pdf-export-root" className="pdf-document">
-        <section className="pdf-page cover-page">
-          <div className="cover-inner">
-            <div>
-              <p className="brand">Art Aesthete</p>
-              <h2>Portfolio Selection</h2>
-              <p className="subtitle">
-                Curated PDF portfolio with the top 10 interior case studies and 3 key visuals per project.
-              </p>
-            </div>
-            <div className="cover-footer">
-              <span>Aayushi Shah</span>
-              <span>{generatedDate}</span>
+        <section className="pdf-page home-page">
+          {renderBrandMark('logo-home-left', 'light')}
+          <div className="home-overlay" />
+          <img className="home-bg" src={RESOURCES.home.heroImageUrl} alt="Art Aesthete home hero" />
+          <div className="home-content">
+            <p className="home-punch">Your space, your story, beautifully told</p>
+            <h1>
+              <span>Where Spaces</span>
+              <span>Become</span>
+              <span>Living Art</span>
+            </h1>
+            <p className="subtitle">
+              We design interiors that feel as extraordinary as the people who inhabit them.
+              Every detail is intentional. Every room tells a story.
+            </p>
+
+            <div className="home-stats">
+              <div>
+                <strong>78+</strong>
+                <span>Projects Completed</span>
+              </div>
+              <div>
+                <strong>104+</strong>
+                <span>Spaces Styled</span>
+              </div>
+              <div>
+                <strong>80+</strong>
+                <span>Art Pieces Commissioned</span>
+              </div>
             </div>
           </div>
+        </section>
+
+        <section className="pdf-page about-page">
+          {renderBrandMark('logo-header-right')}
+          <div className="about-grid">
+            <div className="about-copy">
+              <p className="kicker">My Story</p>
+              <h2>Built on beauty, driven by instinct</h2>
+              <p className="about-lead">Most spaces are filled. Few are felt.</p>
+              {aboutStoryParagraphs.map((paragraph) => (
+                <p className="about-text" key={paragraph}>
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+
+            <div className="about-portrait-wrap">
+              <img className="about-portrait" src={RESOURCES.about.profileImageUrl} alt="Aayushi Shah" />
+            </div>
+          </div>
+          {renderBrandMark('logo-footer-left')}
         </section>
 
         {projects.map((project, index) => {
@@ -129,13 +175,13 @@ const PortfolioPdfPreview = () => {
 
           return (
             <section key={project.id} className="pdf-page case-study-page">
+              {renderBrandMark('logo-header-right')}
               <header className="page-header">
                 <div>
                   <p className="kicker">Case Study {index + 1}</p>
-                  <h3>{project.title}</h3>
+                  <h2>{project.title}</h2>
                   <p className="location">{project.location}</p>
                 </div>
-                <p className="story-type">Interior Design</p>
               </header>
 
               <p className="overview-title">{project.overviewTitle}</p>
@@ -158,6 +204,7 @@ const PortfolioPdfPreview = () => {
                   </figure>
                 ))}
               </div>
+              {renderBrandMark('logo-footer-left')}
             </section>
           );
         })}
