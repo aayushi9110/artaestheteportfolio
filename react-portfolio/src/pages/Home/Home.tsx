@@ -124,17 +124,17 @@ const Home = () => {
           </div>
           <div className="hero-stats">
             <div className="hero-stat">
-              <span className="hero-stat-num">78<span className="hero-stat-plus">+</span></span>
+              <span className="hero-stat-num">51<span className="hero-stat-plus">+</span></span>
               <span className="hero-stat-label">Projects Completed</span>
             </div>
             <div className="hero-stat-divider" aria-hidden="true" />
             <div className="hero-stat">
-              <span className="hero-stat-num">104<span className="hero-stat-plus">+</span></span>
+              <span className="hero-stat-num">30<span className="hero-stat-plus">+</span></span>
               <span className="hero-stat-label">Spaces Styled</span>
             </div>
             <div className="hero-stat-divider" aria-hidden="true" />
             <div className="hero-stat">
-              <span className="hero-stat-num">80<span className="hero-stat-plus">+</span></span>
+              <span className="hero-stat-num">55<span className="hero-stat-plus">+</span></span>
               <span className="hero-stat-label">Art Pieces Commissioned</span>
             </div>
           </div>

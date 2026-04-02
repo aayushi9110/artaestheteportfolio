@@ -114,17 +114,16 @@ const caseStudySections = topTenProjects
         ${renderBrandMark('logo-header-right')}
         <header class="page-header">
           <div>
-            <p class="kicker">Case Study ${index + 1}</p>
+            <p class="kicker">Project ${index + 1}</p>
             <h2>${esc(project.title)}</h2>
             <p class="location">${esc(project.location)}</p>
           </div>
+          <div class="chips header-chips">${tags}</div>
         </header>
 
         <p class="overview-title">${esc(project.overviewTitle)}</p>
         <p class="overview-text">${esc(project.overviewTextPrimary)}</p>
         <p class="overview-text secondary">${esc(project.overviewTextSecondary)}</p>
-
-        <div class="chips">${tags}</div>
 
         <div class="image-grid">${imageMarkup}</div>
         ${renderBrandMark('logo-footer-left')}
@@ -151,6 +150,7 @@ const html = `<!doctype html>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Art Aesthete Portfolio - Top 10 Case Studies</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
     <style>${pdfStyles}</style>
   </head>
   <body>
@@ -178,7 +178,6 @@ const html = `<!doctype html>
     </section>
 
     <section class="about-page">
-      ${renderBrandMark('logo-header-right')}
       <div class="about-grid">
         <div class="about-copy">
           <p class="kicker">My Story</p>

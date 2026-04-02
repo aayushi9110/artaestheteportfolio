@@ -134,15 +134,15 @@ const PortfolioPdfPreview = () => {
 
             <div className="home-stats">
               <div>
-                <strong>78+</strong>
+                <strong>51<span className="home-stat-plus">+</span></strong>
                 <span>Projects Completed</span>
               </div>
               <div>
-                <strong>104+</strong>
+                <strong>30<span className="home-stat-plus">+</span></strong>
                 <span>Spaces Styled</span>
               </div>
               <div>
-                <strong>80+</strong>
+                <strong>55<span className="home-stat-plus">+</span></strong>
                 <span>Art Pieces Commissioned</span>
               </div>
             </div>
@@ -150,7 +150,6 @@ const PortfolioPdfPreview = () => {
         </section>
 
         <section className="pdf-page about-page">
-          {renderBrandMark('logo-header-right')}
           <div className="about-grid">
             <div className="about-copy">
               <p className="kicker">My Story</p>
@@ -178,23 +177,22 @@ const PortfolioPdfPreview = () => {
               {renderBrandMark('logo-header-right')}
               <header className="page-header">
                 <div>
-                  <p className="kicker">Case Study {index + 1}</p>
+                  <p className="kicker">Project {index + 1}</p>
                   <h2>{project.title}</h2>
                   <p className="location">{project.location}</p>
+                </div>
+                <div className="chips header-chips">
+                  {project.tagLabels.slice(0, 5).map((tag) => (
+                    <span key={`${project.id}-${tag}`} className="chip">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </header>
 
               <p className="overview-title">{project.overviewTitle}</p>
               <p className="overview-text">{project.overviewTextPrimary}</p>
               <p className="overview-text secondary">{project.overviewTextSecondary}</p>
-
-              <div className="chips">
-                {project.tagLabels.slice(0, 5).map((tag) => (
-                  <span key={`${project.id}-${tag}`} className="chip">
-                    {tag}
-                  </span>
-                ))}
-              </div>
 
               <div className="image-grid">
                 {images.map((image, imageIndex) => (
