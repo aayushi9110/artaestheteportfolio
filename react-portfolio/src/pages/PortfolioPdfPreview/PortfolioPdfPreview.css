@@ -42,12 +42,16 @@
 
 .pdf-generate-button {
   border: none;
-  border-radius: 999px;
   padding: 0.7rem 1.1rem;
-  background: var(--dark);
+  background: var(--bark);
   color: var(--warm);
   font-weight: 600;
   cursor: pointer;
+}
+
+.pdf-generate-button:hover {
+  background: var(--dark);
+  color: var(--warm);
 }
 
 .pdf-generate-button:disabled {

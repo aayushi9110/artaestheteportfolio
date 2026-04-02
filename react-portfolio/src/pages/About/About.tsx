@@ -1,7 +1,25 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RESOURCES } from '../../data/appData.ts';
+import { CONTENT } from '../../data/contentData.ts';
 import './About.css';
+
+const ABOUT_CONTENT = CONTENT.about;
+const HERO_CONTENT = CONTENT.home;
+const aboutHeadingParts = ABOUT_CONTENT.heading.split(', ');
+const aboutLeadParts = ABOUT_CONTENT.lead.split('. ');
+
+const renderMetricValue = (value: string, plusClassName: string) => {
+  const hasPlus = value.endsWith('+');
+  const baseValue = hasPlus ? value.slice(0, -1) : value;
+
+  return (
+    <>
+      {baseValue}
+      {hasPlus ? <span className={plusClassName}>+</span> : null}
+    </>
+  );
+};
 
 const About = () => {
   const navigate = useNavigate();
@@ -34,22 +52,22 @@ const About = () => {
               <path d="M12 5H2M2 5L6 1M2 5l4 4"/>
             </svg> Back
           </button>
-          <span className="sec-label gold">My Story</span>
-          <h1>Built on beauty, <br/><em>driven by instinct</em></h1>
+          <span className="sec-label gold">{ABOUT_CONTENT.kicker}</span>
+          <h1>{aboutHeadingParts[0]}, <br/><em>{aboutHeadingParts[1] ?? ''}</em></h1>
           <div className="ab-stats">
             <div className="ab-stat">
-              <span className="ab-stat-num">78<span className="ab-stat-plus">+</span></span>
-              <span className="ab-stat-label">Projects Completed</span>
+              <span className="ab-stat-num">{renderMetricValue(HERO_CONTENT.stats[0].value, 'ab-stat-plus')}</span>
+              <span className="ab-stat-label">{HERO_CONTENT.stats[0].label}</span>
             </div>
             <div className="ab-stat-divider" aria-hidden="true" />
             <div className="ab-stat">
-              <span className="ab-stat-num">104<span className="ab-stat-plus">+</span></span>
-              <span className="ab-stat-label">Spaces Styled</span>
+              <span className="ab-stat-num">{renderMetricValue(HERO_CONTENT.stats[1].value, 'ab-stat-plus')}</span>
+              <span className="ab-stat-label">{HERO_CONTENT.stats[1].label}</span>
             </div>
             <div className="ab-stat-divider" aria-hidden="true" />
             <div className="ab-stat">
-              <span className="ab-stat-num">80<span className="ab-stat-plus">+</span></span>
-              <span className="ab-stat-label">Art Pieces Commissioned</span>
+              <span className="ab-stat-num">{renderMetricValue(HERO_CONTENT.stats[2].value, 'ab-stat-plus')}</span>
+              <span className="ab-stat-label">{HERO_CONTENT.stats[2].label}</span>
             </div>
           </div>
         </div>
@@ -59,10 +77,10 @@ const About = () => {
           <div className="ab-intro">
             <div className="ab-intro-txt reveal">
               <span className="sec-label">The Beginning</span>
-              <h2>Most spaces are filled.<br/><em>Few are felt</em></h2> 
-              <p>Hi, I am Aayushi Shah. I set out to find rooms that felt honest — spaces that didn't pretend to be something they weren't.</p>
-              <p>Most people decorate their homes. I believe you should curate them.There's a difference — and once you see it, you can't unsee it. A decorated room fills space. A curated one commands it. It stops you in the doorway. It makes guests go quiet for a second before they say "wow." That's the power of art placed with intention, and it's what Art Aesthete was built to create.I didn't start this business because it seemed like a good idea. I started it because I couldn't stop doing it — walking into spaces and seeing exactly what was missing, what piece would unlock the whole room. Art and interiors aren't separate disciplines to me. They never were.</p>
-              <p>Art Aesthete exists for the homeowner who's done settling for "fine" — and is ready for a space that actually moves them.</p>
+              <h2>{aboutLeadParts[0]}<br/><em>{(aboutLeadParts[1] ?? '').replace('.', '')}</em></h2> 
+              {ABOUT_CONTENT.storyParagraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
               <div style={{marginTop: '28px'}}>
                 <button className="btn-dk" onClick={() => navigate('/book')}>
                   <span>Work With Us</span>

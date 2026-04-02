@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PROJECTS, RESOURCES } from '../../data/appData.ts';
+import { CONTENT } from '../../data/contentData.ts';
 import './Home.css';
 
 const MARQUEE_ITEMS = [
@@ -17,6 +18,19 @@ const HOME_HERO_IMAGE_URL = RESOURCES.home.heroImageUrl;
 const HOME_STUDIO_IMAGE_URL = RESOURCES.home.studioImageUrl;
 const BRAND_LOGOS = RESOURCES.home.brandLogos;
 const TESTIMONIALS = RESOURCES.home.testimonials;
+const HERO_CONTENT = CONTENT.home;
+
+const renderMetricValue = (value: string, plusClassName: string) => {
+  const hasPlus = value.endsWith('+');
+  const baseValue = hasPlus ? value.slice(0, -1) : value;
+
+  return (
+    <>
+      {baseValue}
+      {hasPlus ? <span className={plusClassName}>+</span> : null}
+    </>
+  );
+};
 
 const TestimonialAvatar = ({ name, photoUrl }: { name: string; photoUrl: string }) => {
   if (photoUrl.endsWith('.svg')) {
@@ -109,33 +123,31 @@ const Home = () => {
     <div id="pg-home" className="pg on">
       <section className="hero">
         <div className="hero-l">
-          <span className="hero-punch">Your space, your story, beautifully told</span>
+          <span className="hero-punch">{HERO_CONTENT.punchline}</span>
           <h1 className="hero-h1">
-            <span className="h1-line"><span>Where Spaces</span></span>
-            <span className="h1-line"><span>Become</span></span>
-            <span className="h1-line"><span>Living Art</span></span>
+            {HERO_CONTENT.heroTitleLines.map((line) => (
+              <span key={line} className="h1-line"><span>{line}</span></span>
+            ))}
           </h1>
-          <p className="hero-desc">
-            We design interiors that feel as extraordinary as the people who inhabit them — where every detail is intentional, every room a narrative.
-          </p>
+          <p className="hero-desc">{HERO_CONTENT.heroDescription}</p>
           <div className="hero-acts">
             <Link to="/portfolio" className="btn-dk"><span>Explore Portfolio</span></Link>
             <Link to="/process" className="btn-ghost">Our Process <span className="circ"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg></span></Link>
           </div>
           <div className="hero-stats">
             <div className="hero-stat">
-              <span className="hero-stat-num">51<span className="hero-stat-plus">+</span></span>
-              <span className="hero-stat-label">Projects Completed</span>
+              <span className="hero-stat-num">{renderMetricValue(HERO_CONTENT.stats[0].value, 'hero-stat-plus')}</span>
+              <span className="hero-stat-label">{HERO_CONTENT.stats[0].label}</span>
             </div>
             <div className="hero-stat-divider" aria-hidden="true" />
             <div className="hero-stat">
-              <span className="hero-stat-num">30<span className="hero-stat-plus">+</span></span>
-              <span className="hero-stat-label">Spaces Styled</span>
+              <span className="hero-stat-num">{renderMetricValue(HERO_CONTENT.stats[1].value, 'hero-stat-plus')}</span>
+              <span className="hero-stat-label">{HERO_CONTENT.stats[1].label}</span>
             </div>
             <div className="hero-stat-divider" aria-hidden="true" />
             <div className="hero-stat">
-              <span className="hero-stat-num">55<span className="hero-stat-plus">+</span></span>
-              <span className="hero-stat-label">Art Pieces Commissioned</span>
+              <span className="hero-stat-num">{renderMetricValue(HERO_CONTENT.stats[2].value, 'hero-stat-plus')}</span>
+              <span className="hero-stat-label">{HERO_CONTENT.stats[2].label}</span>
             </div>
           </div>
           <div className="scroll-cue">

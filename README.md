@@ -30,7 +30,43 @@ A modern React TypeScript portfolio website for an interior design studio.
 
 ## Generate Portfolio PDF (Top 10 Case Studies)
 
-This project includes a custom generator that creates a dedicated PDF portfolio layout (cover page + top 10 case studies + top 3 images per case study).
+This project includes a custom generator that creates a dedicated PDF portfolio layout (cover page + top 10 case studies + 4 images per case study).
+
+## Centralized Content (Single Source of Truth)
+
+Website and PDF copy has been centralized so you can edit text in one place.
+
+### Edit this file
+
+- `react-portfolio/src/data/contentData.ts`
+
+### What is controlled from `contentData.ts`
+
+- Brand values:
+   - Site URL shown in PDF footer
+   - Logo alt text
+- Home content:
+   - Punchline
+   - Hero title lines
+   - Hero description
+   - Stats values and labels
+- About content:
+   - Kicker
+   - Heading
+   - Lead text
+   - Story paragraphs (used in website + PDF)
+- PDF content:
+   - Toolbar hint text
+   - Output file name
+   - Case study label prefix (for example: `Project`)
+   - Image captions (`featured`, `before`, `after`)
+
+### Where this shared content is used
+
+- Website Home page: `react-portfolio/src/pages/Home/Home.tsx`
+- Website About page: `react-portfolio/src/pages/About/About.tsx`
+- PDF preview page: `react-portfolio/src/pages/PortfolioPdfPreview/PortfolioPdfPreview.tsx`
+- PDF HTML generator: `react-portfolio/scripts/generatePortfolioPdf.mts`
 
 ### Files involved
 

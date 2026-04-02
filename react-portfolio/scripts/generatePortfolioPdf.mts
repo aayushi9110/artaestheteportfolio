@@ -3,6 +3,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { PROJECTS } from '../src/pages/CaseStudy/caseStudyData.ts';
 import { RESOURCES } from '../src/data/appData.ts';
+import { CONTENT } from '../src/data/contentData.ts';
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const stylesPath = resolve(scriptDir, 'portfolioPdfTemplate.css');
@@ -46,28 +47,34 @@ const topTenProjects = projectEntries
   .slice(0, 10);
 
 const imageCandidates = (project: ProjectEntry): { url: string; caption: string }[] => {
-  const selected = [
-    { url: project.afterImageUrl, caption: 'After view' },
-    { url: project.beforeImageUrl, caption: 'Before view' },
-    { url: project.heroImageUrl, caption: 'Featured view' },
-  ];
+  const featured = { url: project.heroImageUrl, caption: CONTENT.pdf.imageCaptions.featured };
+  const before = { url: project.beforeImageUrl, caption: CONTENT.pdf.imageCaptions.before };
+  const after = { url: project.afterImageUrl, caption: CONTENT.pdf.imageCaptions.after };
 
-  for (const item of project.galleryItems) {
-    if (selected.length >= 6) {
-      break;
-    }
-    selected.push(item);
-  }
-
-  const unique = new Map<string, { url: string; caption: string }>();
-  for (const item of selected) {
-    if (!item.url || unique.has(item.url)) {
+  const topPool = [featured, ...project.galleryItems].filter(
+    (item) => item.url && item.url !== before.url && item.url !== after.url
+  );
+  const topUnique = new Map<string, { url: string; caption: string }>();
+  for (const item of topPool) {
+    if (!item.url || topUnique.has(item.url)) {
       continue;
     }
-    unique.set(item.url, item);
+    topUnique.set(item.url, item);
+    if (topUnique.size === 2) {
+      break;
+    }
   }
 
-  return Array.from(unique.values()).slice(0, 3);
+  const topImages = Array.from(topUnique.values());
+  const fallbackTopOne = topImages[0] ?? featured;
+  const fallbackTopTwo = topImages[1] ?? fallbackTopOne;
+
+  return [
+    topImages[0] ?? fallbackTopOne,
+    topImages[1] ?? fallbackTopTwo,
+    before.url ? before : fallbackTopOne,
+    after.url ? after : fallbackTopTwo,
+  ];
 };
 
 const esc = (value: string): string =>
@@ -87,7 +94,7 @@ const renderBrandMark = (positionClass: 'logo-home-left' | 'logo-header-right' |
 
   return `
     <div class="pdf-brand ${positionClass} ${toneClass}">
-      <img class="n-logo-mark" src="${esc(LOGO_DARK_URL)}" alt="Art Aesthete logo" />
+      <img class="n-logo-mark" src="${esc(LOGO_DARK_URL)}" alt="${esc(CONTENT.brand.logoAlt)}" />
       <span class="brand-wordmark">Art <span>Aesthete <span class="byaayushi">By Aayushi</span></span></span>
     </div>
   `;
@@ -114,7 +121,7 @@ const caseStudySections = topTenProjects
         ${renderBrandMark('logo-header-right')}
         <header class="page-header">
           <div>
-            <p class="kicker">Project ${index + 1}</p>
+            <p class="kicker">${esc(CONTENT.pdf.caseStudyLabelPrefix)} ${index + 1}</p>
             <h2>${esc(project.title)}</h2>
             <p class="location">${esc(project.location)}</p>
           </div>
@@ -127,7 +134,7 @@ const caseStudySections = topTenProjects
 
         <div class="image-grid">${imageMarkup}</div>
         ${renderBrandMark('logo-footer-left')}
-        <a class="footer-url" href="https://www.byaayushi.com" target="_blank" rel="noopener noreferrer">www.byaayushi.com</a>
+        <a class="footer-url" href="https://${esc(CONTENT.brand.siteUrl)}" target="_blank" rel="noopener noreferrer">${esc(CONTENT.brand.siteUrl)}</a>
       </section>
     `;
   })
@@ -139,11 +146,8 @@ const generatedDate = new Date().toLocaleDateString('en-US', {
   day: 'numeric',
 });
 
-const aboutStoryParagraphs = [
-  'Hi, I am Aayushi Shah. I set out to find rooms that felt honest - spaces that did not pretend to be something they were not.',
-  'Most people decorate their homes. I believe you should curate them. A decorated room fills space. A curated one commands it.',
-  'Art Aesthete exists for the homeowner who is done settling for fine and is ready for a space that actually moves them.',
-];
+const homeContent = CONTENT.home;
+const aboutContent = CONTENT.about;
 
 const html = `<!doctype html>
 <html lang="en">
@@ -160,20 +164,13 @@ const html = `<!doctype html>
       <div class="home-overlay"></div>
       <img class="home-bg" src="${esc(HOME_HERO_IMAGE_URL)}" alt="Art Aesthete home hero" />
       <div class="home-content">
-        <p class="home-punch">Your space, your story, beautifully told</p>
+        <p class="home-punch">${esc(homeContent.punchline)}</p>
         <h1>
-          <span>Where Spaces</span>
-          <span>Become</span>
-          <span>Living Art</span>
+          ${homeContent.heroTitleLines.map((line) => `<span>${esc(line)}</span>`).join('')}
         </h1>
-        <p class="subtitle">
-          We design interiors that feel as extraordinary as the people who inhabit them.
-          Every detail is intentional. Every room tells a story.
-        </p>
+        <p class="subtitle">${esc(homeContent.heroDescription)}</p>
         <div class="home-stats">
-          <div><strong>78+</strong><span>Projects Completed</span></div>
-          <div><strong>104+</strong><span>Spaces Styled</span></div>
-          <div><strong>80+</strong><span>Art Pieces Commissioned</span></div>
+          ${homeContent.stats.map((item) => `<div><strong>${esc(item.value)}</strong><span>${esc(item.label)}</span></div>`).join('')}
         </div>
       </div>
     </section>
@@ -181,17 +178,17 @@ const html = `<!doctype html>
     <section class="about-page">
       <div class="about-grid">
         <div class="about-copy">
-          <p class="kicker">My Story</p>
-          <h2>Built on beauty,<br/>driven by instinct</h2>
-          <p class="about-lead">Most spaces are filled. Few are felt.</p>
-          ${aboutStoryParagraphs.map((paragraph) => `<p class="about-text">${esc(paragraph)}</p>`).join('')}
+          <p class="kicker">${esc(aboutContent.kicker)}</p>
+          <h2>${esc(aboutContent.heading)}</h2>
+          <p class="about-lead">${esc(aboutContent.lead)}</p>
+          ${aboutContent.storyParagraphs.map((paragraph) => `<p class="about-text">${esc(paragraph)}</p>`).join('')}
         </div>
         <div class="about-portrait-wrap">
           <img class="about-portrait" src="${esc(ABOUT_PROFILE_IMAGE_URL)}" alt="Aayushi Shah" />
         </div>
       </div>
       ${renderBrandMark('logo-footer-left')}
-      <a class="footer-url" href="https://www.byaayushi.com" target="_blank" rel="noopener noreferrer">www.byaayushi.com</a>
+      <a class="footer-url" href="https://${esc(CONTENT.brand.siteUrl)}" target="_blank" rel="noopener noreferrer">${esc(CONTENT.brand.siteUrl)}</a>
     </section>
 
     ${caseStudySections}

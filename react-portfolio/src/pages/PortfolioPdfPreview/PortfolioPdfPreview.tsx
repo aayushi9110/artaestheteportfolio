@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { PROJECTS, RESOURCES } from '../../data/appData.ts';
+import { CONTENT } from '../../data/contentData.ts';
 import './PortfolioPdfPreview.css';
 
 type ProjectEntry = {
@@ -36,46 +37,66 @@ const pickTopProjects = (): ProjectEntry[] => {
     .slice(0, 10);
 };
 
-const getTopThreeImages = (project: ProjectEntry): { url: string; caption: string }[] => {
-  const selected = [
-    { url: project.afterImageUrl, caption: 'After view' },
-    { url: project.beforeImageUrl, caption: 'Before view' },
-    { url: project.heroImageUrl, caption: 'Featured view' },
-    ...project.galleryItems,
-  ];
+const getTopFourImages = (project: ProjectEntry): { url: string; caption: string }[] => {
+  const featured = { url: project.heroImageUrl, caption: CONTENT.pdf.imageCaptions.featured };
+  const before = { url: project.beforeImageUrl, caption: CONTENT.pdf.imageCaptions.before };
+  const after = { url: project.afterImageUrl, caption: CONTENT.pdf.imageCaptions.after };
 
-  const unique = new Map<string, { url: string; caption: string }>();
-  for (const item of selected) {
-    if (!item.url || unique.has(item.url)) {
+  const topPool = [featured, ...project.galleryItems].filter(
+    (item) => item.url && item.url !== before.url && item.url !== after.url
+  );
+  const topUnique = new Map<string, { url: string; caption: string }>();
+  for (const item of topPool) {
+    if (!item.url || topUnique.has(item.url)) {
       continue;
     }
-    unique.set(item.url, item);
+    topUnique.set(item.url, item);
+    if (topUnique.size === 2) {
+      break;
+    }
   }
 
-  return Array.from(unique.values()).slice(0, 3);
+  const topImages = Array.from(topUnique.values());
+  const fallbackTopOne = topImages[0] ?? featured;
+  const fallbackTopTwo = topImages[1] ?? fallbackTopOne;
+
+  return [
+    topImages[0] ?? fallbackTopOne,
+    topImages[1] ?? fallbackTopTwo,
+    before.url ? before : fallbackTopOne,
+    after.url ? after : fallbackTopTwo,
+  ];
 };
 
 const PortfolioPdfPreview = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generationError, setGenerationError] = useState<string | null>(null);
+  const homeContent = CONTENT.home;
+  const aboutContent = CONTENT.about;
+  const pdfContent = CONTENT.pdf;
+
+  const renderMetricValue = (value: string) => {
+    const hasPlus = value.endsWith('+');
+    const baseValue = hasPlus ? value.slice(0, -1) : value;
+
+    return (
+      <>
+        {baseValue}
+        {hasPlus ? <span className="home-stat-plus">+</span> : null}
+      </>
+    );
+  };
 
   const renderBrandMark = (positionClass: 'logo-home-left' | 'logo-header-right' | 'logo-footer-left', tone: 'dark' | 'light' = 'dark') => (
     <div className={`pdf-brand ${positionClass} ${tone === 'light' ? 'brand-light' : 'brand-dark'}`}>
-      <img className="n-logo-mark" src="/images/logos/artAesthete.png" alt="Art Aesthete logo" />
+      <img className="n-logo-mark" src="/images/logos/artAesthete.png" alt={CONTENT.brand.logoAlt} />
       <span className="brand-wordmark">
         Art <span>Aesthete <span className="byaayushi">By Aayushi</span></span>
       </span>
     </div>
   );
   const projects = useMemo(() => pickTopProjects(), []);
-  const aboutStoryParagraphs = useMemo(
-    () => [
-      'Hi, I am Aayushi Shah. I set out to find rooms that felt honest - spaces that did not pretend to be something they were not.',
-      'Most people decorate their homes. I believe you should curate them. A decorated room fills space. A curated one commands it.',
-      'Art Aesthete exists for the homeowner who is done settling for fine and is ready for a space that actually moves them.',
-    ],
-    []
-  );
+  const aboutStoryParagraphs = aboutContent.storyParagraphs;
 
   const handleGeneratePdf = async () => {
     const exportRoot = document.getElementById('pdf-export-root');
@@ -91,7 +112,7 @@ const PortfolioPdfPreview = () => {
 
       await html2pdf()
         .set({
-          filename: 'Art-Aesthete-Portfolio-Top10.pdf',
+          filename: pdfContent.fileName,
           margin: [0, 0, 0, 0],
           image: { type: 'jpeg', quality: 0.95 },
           html2canvas: { scale: 2, useCORS: true, backgroundColor: '#f2f0ec' },
@@ -114,7 +135,7 @@ const PortfolioPdfPreview = () => {
     <div className="pdf-preview-shell">
       <header className="pdf-preview-toolbar">
         <div>
-          <p>Review this endpoint and click Generate PDF to download from browser.</p>
+          <p>{pdfContent.toolbarHint}</p>
         </div>
         <button className="pdf-generate-button" onClick={handleGeneratePdf} disabled={isGenerating}>
           {isGenerating ? 'Generating...' : 'Generate PDF'}
@@ -128,29 +149,26 @@ const PortfolioPdfPreview = () => {
           <div className="home-overlay" />
           <img className="home-bg" src={RESOURCES.home.heroImageUrl} alt="Art Aesthete home hero" />
           <div className="home-content">
-            <p className="home-punch">Your space, your story, beautifully told</p>
+            <p className="home-punch">{homeContent.punchline}</p>
             <h1>
-              <span>Where Spaces</span>
-              <span>Become</span>
-              <span>Living Art</span>
+              {homeContent.heroTitleLines.map((line) => (
+                <span key={line}>{line}</span>
+              ))}
             </h1>
-            <p className="subtitle">
-              We design interiors that feel as extraordinary as the people who inhabit them.
-              Every detail is intentional. Every room tells a story.
-            </p>
+            <p className="subtitle">{homeContent.heroDescription}</p>
 
             <div className="home-stats">
               <div>
-                <strong>51<span className="home-stat-plus">+</span></strong>
-                <span>Projects Completed</span>
+                <strong>{renderMetricValue(homeContent.stats[0].value)}</strong>
+                <span>{homeContent.stats[0].label}</span>
               </div>
               <div>
-                <strong>30<span className="home-stat-plus">+</span></strong>
-                <span>Spaces Styled</span>
+                <strong>{renderMetricValue(homeContent.stats[1].value)}</strong>
+                <span>{homeContent.stats[1].label}</span>
               </div>
               <div>
-                <strong>55<span className="home-stat-plus">+</span></strong>
-                <span>Art Pieces Commissioned</span>
+                <strong>{renderMetricValue(homeContent.stats[2].value)}</strong>
+                <span>{homeContent.stats[2].label}</span>
               </div>
             </div>
           </div>
@@ -159,9 +177,9 @@ const PortfolioPdfPreview = () => {
         <section className="pdf-page about-page">
           <div className="about-grid">
             <div className="about-copy">
-              <p className="kicker">My Story</p>
-              <h2>Built on beauty, driven by instinct</h2>
-              <p className="about-lead">Most spaces are filled. Few are felt.</p>
+              <p className="kicker">{aboutContent.kicker}</p>
+              <h2>{aboutContent.heading}</h2>
+              <p className="about-lead">{aboutContent.lead}</p>
               {aboutStoryParagraphs.map((paragraph) => (
                 <p className="about-text" key={paragraph}>
                   {paragraph}
@@ -174,18 +192,18 @@ const PortfolioPdfPreview = () => {
             </div>
           </div>
           {renderBrandMark('logo-footer-left')}
-          <a className="footer-url" href="https://www.byaayushi.com" target="_blank" rel="noopener noreferrer">www.byaayushi.com</a>
+          <a className="footer-url" href={`https://${CONTENT.brand.siteUrl}`} target="_blank" rel="noopener noreferrer">{CONTENT.brand.siteUrl}</a>
         </section>
 
         {projects.map((project, index) => {
-          const images = getTopThreeImages(project);
+          const images = getTopFourImages(project);
 
           return (
             <section key={project.id} className="pdf-page case-study-page">
               {renderBrandMark('logo-header-right')}
               <header className="page-header">
                 <div>
-                  <p className="kicker">Project {index + 1}</p>
+                  <p className="kicker">{pdfContent.caseStudyLabelPrefix} {index + 1}</p>
                   <h2>{project.title}</h2>
                   <p className="location">{project.location}</p>
                 </div>
@@ -211,7 +229,7 @@ const PortfolioPdfPreview = () => {
                 ))}
               </div>
               {renderBrandMark('logo-footer-left')}
-              <a className="footer-url" href="https://www.byaayushi.com" target="_blank" rel="noopener noreferrer">www.byaayushi.com</a>
+              <a className="footer-url" href={`https://${CONTENT.brand.siteUrl}`} target="_blank" rel="noopener noreferrer">{CONTENT.brand.siteUrl}</a>
             </section>
           );
         })}
