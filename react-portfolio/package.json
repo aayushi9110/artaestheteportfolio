@@ -5,12 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:pdf": "vite --open /portfolio-pdf-preview",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate:portfolio-html": "tsx scripts/generatePortfolioPdf.mts",
+    "generate:portfolio-pdf": "npm run generate:portfolio-html && vite preview --host 127.0.0.1 --port 4173 & PREVIEW_PID=$!; sleep 3; \"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless=new --disable-gpu --virtual-time-budget=30000 --print-to-pdf=\"$PWD/dist/Art-Aesthete-Portfolio-Top10.pdf\" \"http://127.0.0.1:4173/portfolio-top10-source.html\"; kill $PREVIEW_PID"
   },
   "dependencies": {
-    "react": "^18.2.0", 
+    "html2pdf.js": "^0.14.0",
+    "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.0"
   },
@@ -23,6 +27,7 @@
     "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
+    "tsx": "^4.21.0",
     "typescript": "^5.0.2",
     "vite": "^7.0.0"
   }

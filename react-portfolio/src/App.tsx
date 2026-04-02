@@ -9,6 +9,7 @@ const Book = lazy(() => import('./pages/Book/Book'));
 import { PROJECTS } from './data/appData.ts';
 const InteriorStory = lazy(() => import('./pages/InteriorStory/InteriorStory'));
 const FineArtStory = lazy(() => import('./pages/FineArtStory/FineArtStory'));
+const PortfolioPdfPreview = lazy(() => import('./pages/PortfolioPdfPreview/PortfolioPdfPreview'));
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Cursor from './components/Cursor';
@@ -32,6 +33,34 @@ function StoryRouteResolver() {
   return <Navigate to={target} replace />;
 }
 
+function AppShell() {
+  const { pathname } = useLocation();
+  const isPdfPreviewRoute = pathname === '/portfolio-pdf-preview';
+
+  return (
+    <div className="App">
+      {!isPdfPreviewRoute && <Cursor />}
+      {!isPdfPreviewRoute && <Header />}
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/process" element={<Process />} />
+          <Route path="/virtual" element={<Virtual />} />
+          <Route path="/book" element={<Book />} />
+          <Route path="/case-study/:id" element={<StoryRouteResolver />} />
+          <Route path="/interior-story/:id" element={<InteriorStory />} />
+          <Route path="/fine-art-story/:id" element={<FineArtStory />} />
+          <Route path="/project/:id" element={<StoryRouteResolver />} />
+          <Route path="/portfolio-pdf-preview" element={<PortfolioPdfPreview />} />
+        </Routes>
+      </Suspense>
+      {!isPdfPreviewRoute && <Footer />}
+    </div>
+  );
+}
+
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -48,25 +77,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="App">
-        <Cursor />
-        <Header />
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/process" element={<Process />} />
-            <Route path="/virtual" element={<Virtual />} />
-            <Route path="/book" element={<Book />} />
-            <Route path="/case-study/:id" element={<StoryRouteResolver />} />
-            <Route path="/interior-story/:id" element={<InteriorStory />} />
-            <Route path="/fine-art-story/:id" element={<FineArtStory />} />
-            <Route path="/project/:id" element={<StoryRouteResolver />} />
-          </Routes>
-        </Suspense>
-        <Footer />
-      </div>
+      <AppShell />
     </Router>
   );
 }

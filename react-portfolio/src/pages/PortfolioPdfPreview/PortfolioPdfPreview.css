@@ -1,0 +1,269 @@
+:root {
+  --pdf-ink: #1f2522;
+  --pdf-muted: #55615c;
+  --pdf-paper: #f2f0ec;
+}
+
+.pdf-preview-shell {
+  min-height: 100vh;
+  background: radial-gradient(circle at 20% 10%, #f7f3ed 0%, #ece6de 45%, #e4dacd 100%);
+  color: var(--pdf-ink);
+  padding: 1.25rem;
+}
+
+.pdf-preview-shell,
+.pdf-preview-shell * {
+  cursor: auto;
+}
+
+.pdf-preview-toolbar {
+  max-width: 1100px;
+  margin: 0 auto 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid #d7cdbf;
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+}
+
+.pdf-preview-kicker {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #5f6a65;
+  font-size: 0.75rem;
+}
+
+.pdf-preview-toolbar h1 {
+  margin: 0.25rem 0;
+  font-size: 1.5rem;
+}
+
+.pdf-preview-toolbar p {
+  margin: 0;
+  color: #4b5752;
+  font-size: 0.9rem;
+}
+
+.pdf-generate-button {
+  border: none;
+  border-radius: 999px;
+  padding: 0.7rem 1.1rem;
+  background: #23352d;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pdf-generate-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.pdf-document {
+  width: 297mm;
+  margin: 0 auto;
+}
+
+.pdf-page {
+  min-height: 210mm;
+  padding: 14mm;
+  margin-bottom: 0.6rem;
+  background: linear-gradient(160deg, #f7f3ed 0%, #ece6de 65%, #e4dacd 100%);
+  border: 1px solid #d8cfc2;
+  position: relative;
+  overflow: hidden;
+}
+
+.pdf-page::before {
+  content: '';
+  position: absolute;
+  inset: 8mm;
+  border: 1px solid rgba(138, 90, 60, 0.25);
+  pointer-events: none;
+}
+
+.cover-inner {
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.brand {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pdf-muted);
+  font-size: 11px;
+  margin-bottom: 16mm;
+}
+
+.cover-page h2 {
+  font-size: 42px;
+  line-height: 1.08;
+  margin: 0;
+  font-weight: 500;
+}
+
+.subtitle {
+  margin-top: 10mm;
+  font-size: 15px;
+  color: #36413d;
+  max-width: 520px;
+  line-height: 1.45;
+}
+
+.cover-footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #ccb9a8;
+  padding-top: 6mm;
+  font-size: 12px;
+  color: var(--pdf-muted);
+}
+
+.page-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 8mm;
+}
+
+.kicker {
+  margin: 0 0 2mm;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--pdf-muted);
+  font-size: 10px;
+}
+
+.case-study-page h3 {
+  margin: 0;
+  font-size: 29px;
+  line-height: 1.15;
+  max-width: 440px;
+}
+
+.location {
+  margin: 3mm 0 0;
+  color: #34403b;
+  font-size: 13px;
+}
+
+.story-type {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6f7c76;
+}
+
+.overview-title {
+  margin: 7mm 0 4mm;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.overview-text {
+  margin: 0 0 3mm;
+  color: #2b3531;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.secondary {
+  color: #47534e;
+}
+
+.chips {
+  display: flex;
+  gap: 2mm;
+  flex-wrap: wrap;
+  margin: 5mm 0 7mm;
+}
+
+.chip {
+  border: 1px solid #c8b49f;
+  background: rgba(255, 255, 255, 0.56);
+  color: #39453f;
+  font-size: 10px;
+  padding: 1.5mm 2.5mm;
+  border-radius: 999px;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-rows: 52mm 36mm;
+  gap: 4mm;
+}
+
+.image-card {
+  margin: 0;
+  border: 1px solid #c7bbab;
+  background: #fefcf9;
+  display: flex;
+  flex-direction: column;
+}
+
+.image-1 {
+  grid-row: 1 / span 2;
+}
+
+.image-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+  flex: 1;
+}
+
+.image-card figcaption {
+  border-top: 1px solid #d8cfc3;
+  font-size: 10px;
+  color: #4c5953;
+  padding: 2.2mm 2.8mm;
+}
+
+@media print {
+  .pdf-preview-shell {
+    padding: 0;
+    background: transparent;
+  }
+
+  .pdf-preview-toolbar {
+    display: none;
+  }
+
+  .pdf-page {
+    margin: 0;
+    page-break-after: always;
+  }
+}
+
+@media (max-width: 940px) {
+  .pdf-document {
+    width: 100%;
+  }
+
+  .pdf-page {
+    min-height: auto;
+    padding: 1rem;
+  }
+
+  .image-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .image-1 {
+    grid-row: auto;
+  }
+}

@@ -14,6 +14,7 @@ A modern React TypeScript portfolio website for an interior design studio.
 
 1. Install dependencies:
    ```bash
+   cd react-portfolio
    npm install
    ```
 
@@ -26,6 +27,83 @@ A modern React TypeScript portfolio website for an interior design studio.
    ```bash
    npm run build
    ```
+
+## Generate Portfolio PDF (Top 10 Case Studies)
+
+This project includes a custom generator that creates a dedicated PDF portfolio layout (cover page + top 10 case studies + top 3 images per case study).
+
+### Files involved
+
+- `react-portfolio/scripts/generatePortfolioPdf.mts`
+- Output HTML: `react-portfolio/dist/portfolio-top10-source.html`
+- Output PDF: `react-portfolio/dist/Art-Aesthete-Portfolio-Top10.pdf`
+
+### Quick run (macOS with Google Chrome installed)
+
+From `react-portfolio/`:
+
+```bash
+npm run build
+npm run generate:portfolio-pdf
+```
+
+### Manual run (step-by-step)
+
+1. Build the website assets:
+
+```bash
+npm run build
+```
+
+2. Generate the custom portfolio HTML source:
+
+```bash
+npm run generate:portfolio-html
+```
+
+3. Serve the `dist` folder:
+
+```bash
+npm run preview -- --host 127.0.0.1 --port 4173
+```
+
+4. In a second terminal, export the PDF using headless Chrome:
+
+```bash
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+   --headless=new \
+   --disable-gpu \
+   --virtual-time-budget=30000 \
+   --print-to-pdf="$PWD/dist/Art-Aesthete-Portfolio-Top10.pdf" \
+   "http://127.0.0.1:4173/portfolio-top10-source.html"
+```
+
+Note: The one-command script `generate:portfolio-pdf` is currently macOS-specific because it uses the default Google Chrome app path.
+
+## Live PDF Preview in Dev (with Generate button)
+
+You can now preview the portfolio PDF layout inside the app and generate/download directly from the browser.
+
+### Start the preview endpoint
+
+From `react-portfolio/` run:
+
+```bash
+npm run dev:pdf
+```
+
+This opens:
+
+- `http://localhost:5173/portfolio-pdf-preview`
+
+### How to use
+
+1. Open the preview page endpoint above.
+2. Review all pages (cover + top 10 case studies).
+3. Click **Generate PDF** at the top right.
+4. Your browser downloads: `Art-Aesthete-Portfolio-Top10.pdf`.
+
+This method helps you validate the final look before using the CLI export script.
 
 ## Deployment to AWS S3 and CloudFront
 
