@@ -24,6 +24,7 @@ type ProjectEntry = {
   galleryItems: { url: string; caption: string }[];
   homeVisibilityPriority: number;
   isSelectedForHome: boolean;
+  isSelectedForPdf: boolean;
 };
 
 const projectEntries = Object.entries(PROJECTS).map(([id, project]) => ({
@@ -32,19 +33,14 @@ const projectEntries = Object.entries(PROJECTS).map(([id, project]) => ({
 })) as ProjectEntry[];
 
 const topTenProjects = projectEntries
-  .filter((project) => project.storyType === 'interior')
+  .filter((project) => project.storyType === 'interior' && project.isSelectedForPdf)
   .sort((a, b) => {
     if (a.homeVisibilityPriority !== b.homeVisibilityPriority) {
       return a.homeVisibilityPriority - b.homeVisibilityPriority;
     }
 
-    if (a.isSelectedForHome !== b.isSelectedForHome) {
-      return a.isSelectedForHome ? -1 : 1;
-    }
-
     return a.title.localeCompare(b.title);
-  })
-  .slice(0, 10);
+  });
 
 const imageCandidates = (project: ProjectEntry): { url: string; caption: string }[] => {
   const featured = { url: project.heroImageUrl, caption: CONTENT.pdf.imageCaptions.featured };

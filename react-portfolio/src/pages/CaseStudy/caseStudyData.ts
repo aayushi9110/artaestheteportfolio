@@ -18,6 +18,7 @@ export type GalleryItem = {
 export type Project = {
   storyType: StoryType;
   isSelectedForHome: boolean;
+  isSelectedForPdf: boolean;
   homeVisibilityPriority: number;
   title: string;
   location: string;
@@ -152,6 +153,7 @@ export const PROJECTS: Record<string, Project> = {
   homeOffices: {
     storyType: 'interior',
     isSelectedForHome: true,
+    isSelectedForPdf: true,
     homeVisibilityPriority: 8,
     title: 'Home Office',
     location: 'Menlo Park, California -The Modern Study - Virtual',
@@ -173,6 +175,7 @@ export const PROJECTS: Record<string, Project> = {
   contemporaryLiving: {
     storyType: 'interior',
     isSelectedForHome: true,
+    isSelectedForPdf: true,
     homeVisibilityPriority: 3,
     title: 'Contemporary Living',
     location: 'Palo Alto, California - Open Concept Living Room Design',
@@ -193,8 +196,9 @@ export const PROJECTS: Record<string, Project> = {
   },
   modernScandinavian: {
     storyType: 'interior',
-    isSelectedForHome: false,
-    homeVisibilityPriority: 99,
+    isSelectedForHome: true,
+    isSelectedForPdf: false,
+    homeVisibilityPriority: 9,
     title: 'Modern Scandinavian Living & Dining',
     location: 'San Jose, California',
     tagLabels: ['Interior Design', 'Warm Scandinavian', 'Organic Contemporary', 'West Elm', 'Living', 'Dining'],
@@ -215,6 +219,7 @@ export const PROJECTS: Record<string, Project> = {
   madisonDining: {
     storyType: 'interior',
     isSelectedForHome: true,
+    isSelectedForPdf: true,
     homeVisibilityPriority: 6,
     title: 'Elevated Dining',
     location: 'Madison Ave NYC - Soft Luxury Dining.',
@@ -236,6 +241,7 @@ export const PROJECTS: Record<string, Project> = {
   cuppertinoHome: {
     storyType: 'interior',
     isSelectedForHome: false,
+    isSelectedForPdf: true,
     homeVisibilityPriority: 99,
     title: 'A warm fusion to reflect personal style',
     location: 'Mountain View, California - A warm fusion of contemporary styles for a family home',
@@ -257,6 +263,7 @@ export const PROJECTS: Record<string, Project> = {
   fosterCityLivingDining: {
     storyType: 'interior',
     isSelectedForHome: true,
+    isSelectedForPdf: true,
     homeVisibilityPriority: 2,
     title: 'Foster City Living- Dining',
     location: 'Foster City, California - An open-plan living and dining concept for a family home',
@@ -277,8 +284,9 @@ export const PROJECTS: Record<string, Project> = {
   },
   sanFranBedroom: {
     storyType: 'interior',
-    isSelectedForHome: false,
-    homeVisibilityPriority: 99,
+    isSelectedForHome: true,
+    isSelectedForPdf: true,
+    homeVisibilityPriority: 11,
     title: 'San Francisco Bedroom Refresh',
     location: 'San Francisco, California - Bedroom Refresh',
     tagLabels: ['Interior Design', 'California style', 'West Elm', 'Bedroom'],
@@ -299,6 +307,7 @@ export const PROJECTS: Record<string, Project> = {
   entryway: {
     storyType: 'interior',
     isSelectedForHome: false,
+    isSelectedForPdf: false,
     homeVisibilityPriority: 99,
     title: 'Welcoming Entryway',
     location: 'Anahiem, CA - Entryway Styling',
@@ -320,6 +329,7 @@ export const PROJECTS: Record<string, Project> = {
   mumbaiBedroomOne: {
     storyType: 'interior',
     isSelectedForHome: false,
+    isSelectedForPdf: true,
     homeVisibilityPriority: 99,
     title: 'Bedroom Retreat I',
     location: 'Mumbai, India ',
@@ -341,7 +351,8 @@ export const PROJECTS: Record<string, Project> = {
   mumbaiBedroomTwo: {
     storyType: 'interior',
     isSelectedForHome: true,
-    homeVisibilityPriority: 11,
+    isSelectedForPdf: false,
+    homeVisibilityPriority: 8,
     title: 'Compact Bedroom',
     location: 'Mumbai, India  (Project 2)',
     tagLabels: ['Interior Design', 'Bedroom', 'Mumbai', 'Contemporary',],
@@ -361,8 +372,9 @@ export const PROJECTS: Record<string, Project> = {
   },
   mumbaiBedroomThree: {
     storyType: 'interior',
-    isSelectedForHome: true,
-    homeVisibilityPriority: 8,
+    isSelectedForHome: false,
+    isSelectedForPdf: false,
+    homeVisibilityPriority: 99,
     title: 'Luxe Bedroom',
     location: 'Mumbai, India ',
     tagLabels: ['Interior Design', 'Bedroom', 'Mumbai', 'Contemporary', 'Luxury'],
@@ -383,6 +395,7 @@ export const PROJECTS: Record<string, Project> = {
   allpaintings: {
     storyType: 'fine-art',
     isSelectedForHome: false,
+    isSelectedForPdf: false,
     homeVisibilityPriority: 99,
     title: 'Original Painting Collection',
     location: 'All',
@@ -398,6 +411,7 @@ export const PROJECTS: Record<string, Project> = {
   thinlineCharcoal: {
     storyType: 'fine-art',
     isSelectedForHome: true,
+    isSelectedForPdf: true,
     homeVisibilityPriority: 1,
     title: 'A Thin line',
     location: 'An Expo in Bandra, Mumbai',
@@ -413,6 +427,7 @@ export const PROJECTS: Record<string, Project> = {
   orangeSeriesPainting: {
     storyType: 'fine-art',
     isSelectedForHome: true,
+    isSelectedForPdf: true,
     homeVisibilityPriority: 12,
     title: 'The Oranges',
     location: 'Marine lines, Mumbai',
