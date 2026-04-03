@@ -67,6 +67,11 @@
   /* padding: 0 50px; */
 }
 
+.pdf-document.is-exporting {
+  margin: 0;
+  transform: none;
+}
+
 .home-content-export {
   display: none;
   position: relative;

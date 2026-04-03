@@ -114,7 +114,7 @@ const PortfolioPdfPreview = () => {
           image: { type: 'jpeg', quality: 0.95 },
           html2canvas: { scale: 2, useCORS: true, backgroundColor: '#f2f0ec' },
           jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' },
-          pagebreak: { mode: ['avoid-all'] },
+          pagebreak: { mode: ['css', 'legacy'] },
         } as any)
         .from(exportRoot)
         .save();
