@@ -401,20 +401,10 @@ h1 span:last-child {
   position: relative;
   display: grid;
   gap: 1.8mm;
-  padding: 2mm 0 0;
+  padding: 2mm 0 0 4mm;
   margin-left: 15mm;
+  border-left: 1px solid rgba(139, 58, 30, 0.45);
   align-content: start;
-}
-
-.toc-timeline::before {
-  content: "";
-  position: absolute;
-  top: 2mm;
-  bottom: 2mm;
-  left: 4mm;
-  width: 1px;
-  transform: translateX(-50%);
-  background: linear-gradient(180deg, rgba(196, 122, 69, 0.2), rgba(139, 58, 30, 0.7), rgba(196, 122, 69, 0.2));
 }
 
 .toc-item {
@@ -474,16 +464,16 @@ h1 span:last-child {
 
 .toc-marker span {
   position: absolute;
-  top: 30px;
+  top: 0;
   left: 50%;
   display: block;
   width: 4mm;
   height: 4mm;
   border-radius: 999px;
   border: 1px solid rgba(92, 61, 46, 0.25);
-  background: radial-gradient(circle at 35% 35%, var(--warm) 0%, var(--gold) 36%, var(--clay) 100%);
+  background-color: var(--clay);
   box-shadow: 0 0 0 1.4mm rgba(217, 201, 168, 0.4);
-  transform: translateX(-50%);
+  transform: translate(-50%, 0);
 }
 
 .toc-item .toc-marker {
