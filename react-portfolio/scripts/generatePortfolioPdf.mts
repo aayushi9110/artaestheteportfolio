@@ -88,13 +88,15 @@ const esc = (value: string): string =>
 const HOME_HERO_IMAGE_URL = RESOURCES.home.heroImageUrl;
 const ABOUT_PROFILE_IMAGE_URL = RESOURCES.about.profileImageUrl;
 const LOGO_DARK_URL = '/images/logos/artAesthete.png';
+const LOGO_LIGHT_URL = '/images/logos/artAesthetewh.png';
 
 const renderBrandMark = (positionClass: 'logo-home-left' | 'logo-header-right' | 'logo-footer-left', tone: 'dark' | 'light' = 'dark'): string => {
   const toneClass = tone === 'light' ? 'brand-light' : 'brand-dark';
+  const logoUrl = tone === 'light' ? LOGO_LIGHT_URL : LOGO_DARK_URL;
 
   return `
     <div class="pdf-brand ${positionClass} ${toneClass}">
-      <img class="n-logo-mark" src="${esc(LOGO_DARK_URL)}" alt="${esc(CONTENT.brand.logoAlt)}" />
+      <img class="n-logo-mark" src="${esc(logoUrl)}" alt="${esc(CONTENT.brand.logoAlt)}" />
       <span class="brand-wordmark">Art <span>Aesthete <span class="byaayushi">By Aayushi</span></span></span>
     </div>
   `;
@@ -118,12 +120,19 @@ const caseStudySections = topTenProjects
 
     return `
       <section class="case-study-page" id="case-study-${esc(project.id)}">
-        ${renderBrandMark('logo-header-right')}
+        ${renderBrandMark('logo-header-right', 'light')}
         <header class="page-header">
           <div>
             <p class="kicker">${esc(CONTENT.pdf.caseStudyLabelPrefix)} ${index + 1}</p>
             <h2>${esc(project.title)}</h2>
-            <p class="location">${esc(project.location)}</p>
+            <p class="location">
+              <span class="location-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false" role="presentation">
+                  <path d="M12 22s7-6.6 7-12a7 7 0 1 0-14 0c0 5.4 7 12 7 12zm0-9a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                </svg>
+              </span>
+              ${esc(project.location)}
+            </p>
           </div>
           <div class="chips header-chips">${tags}</div>
         </header>
@@ -176,11 +185,10 @@ const html = `<!doctype html>
     </section>
 
     <section class="about-page">
+      ${renderBrandMark('logo-header-right', 'light')}
       <div class="about-grid">
         <div class="about-copy">
           <p class="kicker">${esc(aboutContent.kicker)}</p>
-          <h2>${esc(aboutContent.heading)}</h2>
-          <p class="about-lead">${esc(aboutContent.lead)}</p>
           ${aboutContent.storyParagraphs.map((paragraph) => `<p class="about-text">${esc(paragraph)}</p>`).join('')}
         </div>
         <div class="about-portrait-wrap">

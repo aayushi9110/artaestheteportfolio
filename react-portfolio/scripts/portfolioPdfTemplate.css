@@ -60,12 +60,9 @@ body {
   pointer-events: none;
 }
 
-.case-study-page::after {
-  height: 35mm;
-}
-
+.case-study-page::after,
 .about-page::after {
-    height: 50mm;
+  height: 35mm;
 }
 
 .home-page::before,
@@ -100,7 +97,7 @@ body {
 }
 
 .logo-footer-left {
-  bottom: 5mm;
+  bottom: 8mm;
   left: 8mm;
 }
 
@@ -109,8 +106,8 @@ body {
   bottom: 5mm;
   right: 8mm;
   margin: 0;
-  font-size: 0.825em;
-  color: var(--gold);
+  font-size: 1em;
+  color: var(--bark);
   z-index: 3;
   font-style: italic;
   font-family: "Cormorant Garamond", serif;
@@ -122,7 +119,13 @@ body {
   height: 7mm;
   width: auto;
   object-fit: contain;
+  -webkit-filter: brightness(0) invert(1);
   filter: brightness(0) invert(1);
+}
+
+.brand-light .n-logo-mark {
+  -webkit-filter: none;
+  filter: none;
 }
 
 .brand-wordmark {
@@ -146,7 +149,7 @@ body {
 }
 
 /* User-adjusted lockup placement/scale on page 1 */
-.brand-light {
+.home-page .logo-home-left.brand-light {
   padding: 1.5mm 2.2mm;
   transform: scale(2);
   position: absolute;
@@ -154,7 +157,8 @@ body {
   top: 12%;
 }
 
-.logo-header-right .n-logo-mark {
+.logo-header-right.brand-dark .n-logo-mark {
+  -webkit-filter: brightness(0) invert(1);
   filter: brightness(0) invert(1);
 }
 
@@ -170,7 +174,8 @@ body {
   color: var(--linen);
 }
 
-.home-page .logo-home-left .n-logo-mark {
+.home-page .logo-home-left.brand-dark .n-logo-mark {
+  -webkit-filter: brightness(0) invert(1) contrast(1.1);
   filter: brightness(0) invert(1) contrast(1.1);
 }
 
@@ -322,26 +327,18 @@ h1 span:last-child {
   z-index: 2;
   min-height: 100%;
   display: grid;
-  grid-template-columns: 1.35fr 0.95fr;
-  gap: 10mm;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 1mm;
 }
 
 .about-copy h2 {
-  margin-top: 0;
-  margin-bottom: 4mm;
+  margin-top: 5mm;
+  margin-bottom: 20mm;
   color: var(--cream);
-  font-size: 1.8125em;
+  font-size: 2em;
   line-height: 1.15;
   font-weight: 400;
-  font-family: "Cormorant Garamond", serif;
-}
-
-.about-lead {
-  margin: 0 0 20mm;
-  color: var(--linen);
-  font-size: 1.25em;
-  line-height: 1.4;
-  font-weight: 400;
+  font-style: italic;
   font-family: "Cormorant Garamond", serif;
 }
 
@@ -357,11 +354,12 @@ h1 span:last-child {
   display: flex;
   flex-direction: column;
   gap: 4mm;
+  padding: 30% 15% 0 0;
 }
 
 .about-portrait {
   width: 100%;
-  height: 144mm;
+  height: 125mm;
   object-fit: cover;
   border: 1px solid var(--sand);
 }
@@ -419,21 +417,20 @@ h2 {
   gap: 0.5em;
 }
 
-.location::before {
-  content: "";
+.location .location-icon {
   width: 1.1em;
   height: 1.1em;
-  color: var(--sage);
-  background-color: currentColor;
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 22s7-6.6 7-12a7 7 0 1 0-14 0c0 5.4 7 12 7 12zm0-9a3 3 0 1 1 0-6 3 3 0 0 1 0 6z'/%3E%3C/svg%3E");
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 22s7-6.6 7-12a7 7 0 1 0-14 0c0 5.4 7 12 7 12zm0-9a3 3 0 1 1 0-6 3 3 0 0 1 0 6z'/%3E%3C/svg%3E");
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-size: contain;
-  mask-size: contain;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+}
+
+.location .location-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  fill: var(--sage);
 }
 
 .overview-title {
@@ -501,9 +498,9 @@ h2 {
   display: grid;
   grid-template-columns: 2.1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 4mm;
-  height: 88mm;
-  margin-bottom: 8mm;
+  gap: 3mm;
+  height: 95mm;
+  margin: 10mm 0;
 }
 
 .image-1 {

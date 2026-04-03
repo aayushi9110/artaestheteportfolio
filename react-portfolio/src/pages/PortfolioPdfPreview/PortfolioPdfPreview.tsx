@@ -89,7 +89,7 @@ const PortfolioPdfPreview = () => {
 
   const renderBrandMark = (positionClass: 'logo-home-left' | 'logo-header-right' | 'logo-footer-left', tone: 'dark' | 'light' = 'dark') => (
     <div className={`pdf-brand ${positionClass} ${tone === 'light' ? 'brand-light' : 'brand-dark'}`}>
-      <img className="n-logo-mark" src="/images/logos/artAesthete.png" alt={CONTENT.brand.logoAlt} />
+      <img className="n-logo-mark" src={tone === 'light' ? '/images/logos/artAesthetewh.png' : '/images/logos/artAesthete.png'} alt={CONTENT.brand.logoAlt} />
       <span className="brand-wordmark">
         Art <span>Aesthete <span className="byaayushi">By Aayushi</span></span>
       </span>
@@ -175,11 +175,10 @@ const PortfolioPdfPreview = () => {
         </section>
 
         <section className="pdf-page about-page">
+          {renderBrandMark('logo-header-right', 'light')}
           <div className="about-grid">
             <div className="about-copy">
-              <p className="kicker">{aboutContent.kicker}</p>
-              <h2>{aboutContent.heading}</h2>
-              <p className="about-lead">{aboutContent.lead}</p>
+              <h2>{aboutContent.kicker}</h2>
               {aboutStoryParagraphs.map((paragraph) => (
                 <p className="about-text" key={paragraph}>
                   {paragraph}
@@ -200,12 +199,19 @@ const PortfolioPdfPreview = () => {
 
           return (
             <section key={project.id} className="pdf-page case-study-page">
-              {renderBrandMark('logo-header-right')}
+              {renderBrandMark('logo-header-right', 'light')}
               <header className="page-header">
                 <div>
                   <p className="kicker">{pdfContent.caseStudyLabelPrefix} {index + 1}</p>
                   <h2>{project.title}</h2>
-                  <p className="location">{project.location}</p>
+                  <p className="location">
+                    <span className="location-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" focusable="false" role="presentation">
+                        <path d="M12 22s7-6.6 7-12a7 7 0 1 0-14 0c0 5.4 7 12 7 12zm0-9a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                      </svg>
+                    </span>
+                    {project.location}
+                  </p>
                 </div>
                 <div className="chips header-chips">
                   {project.tagLabels.slice(0, 5).map((tag) => (

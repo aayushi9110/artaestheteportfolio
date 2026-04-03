@@ -20,9 +20,7 @@ export const CONTENT = {
     ] as MetricItem[],
   },
   about: {
-    kicker: 'My Story',
-    heading: 'Built on beauty, driven by instinct',
-    lead: 'Most spaces are filled. Few are felt.',
+    kicker: '--My Story',
     storyParagraphs: [
       'Hi, I am Aayushi Shah. I set out to find rooms that felt honest - spaces that did not pretend to be something they were not.',
       'Most people decorate their homes. I believe you should curate them. A decorated room fills space. A curated one commands it.',
