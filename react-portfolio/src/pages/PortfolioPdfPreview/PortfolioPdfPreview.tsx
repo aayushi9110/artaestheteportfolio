@@ -178,7 +178,7 @@ const PortfolioPdfPreview = () => {
           {renderBrandMark('logo-header-right', 'light')}
           <div className="about-grid">
             <div className="about-copy">
-              <h2>{aboutContent.kicker}</h2>
+              <h2>{aboutContent.heading}</h2>
               {aboutStoryParagraphs.map((paragraph) => (
                 <p className="about-text" key={paragraph}>
                   {paragraph}
