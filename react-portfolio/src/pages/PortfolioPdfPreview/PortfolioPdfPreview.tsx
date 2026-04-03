@@ -101,23 +101,40 @@ const PortfolioPdfPreview = () => {
       return;
     }
 
+    const pageElements = Array.from(exportRoot.querySelectorAll<HTMLElement>('.pdf-page'));
+    if (!pageElements.length) {
+      return;
+    }
+
     exportRoot.classList.add('is-exporting');
     setGenerationError(null);
     setIsGenerating(true);
     try {
-      const { default: html2pdf } = await import('html2pdf.js');
+      const [{ default: html2canvas }, { jsPDF }] = await Promise.all([
+        import('html2canvas'),
+        import('jspdf'),
+        document.fonts?.ready ?? Promise.resolve(),
+      ]);
 
-      await html2pdf()
-        .set({
-          filename: pdfContent.fileName,
-          margin: [0, 0, 0, 0],
-          image: { type: 'jpeg', quality: 0.95 },
-          html2canvas: { scale: 2, useCORS: true, backgroundColor: '#f2f0ec' },
-          jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' },
-          pagebreak: { mode: ['css', 'legacy'] },
-        } as any)
-        .from(exportRoot)
-        .save();
+      const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'landscape' });
+
+      for (const [pageIndex, pageElement] of pageElements.entries()) {
+        const canvas = await html2canvas(pageElement, {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: '#f2f0ec',
+        });
+
+        const imageData = canvas.toDataURL('image/jpeg', 0.95);
+
+        if (pageIndex > 0) {
+          pdf.addPage('a4', 'landscape');
+        }
+
+        pdf.addImage(imageData, 'JPEG', 0, 0, 297, 210);
+      }
+
+      pdf.save(pdfContent.fileName);
     } catch (error) {
       // Surface failures that previously looked like a no-op when html2pdf/image capture fails.
       console.error('Failed to generate PDF:', error);
