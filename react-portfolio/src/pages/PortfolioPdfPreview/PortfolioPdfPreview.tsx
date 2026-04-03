@@ -18,23 +18,20 @@ type ProjectEntry = {
   galleryItems: { url: string; caption: string }[];
   homeVisibilityPriority: number;
   isSelectedForHome: boolean;
+  isSelectedForPdf: boolean;
 };
 
 const pickTopProjects = (): ProjectEntry[] => {
   const entries = Object.entries(PROJECTS).map(([id, project]) => ({ id, ...project })) as ProjectEntry[];
 
   return entries
-    .filter((project) => project.storyType === 'interior')
+    .filter((project) => project.storyType === 'interior' && project.isSelectedForPdf)
     .sort((a, b) => {
       if (a.homeVisibilityPriority !== b.homeVisibilityPriority) {
         return a.homeVisibilityPriority - b.homeVisibilityPriority;
       }
-      if (a.isSelectedForHome !== b.isSelectedForHome) {
-        return a.isSelectedForHome ? -1 : 1;
-      }
       return a.title.localeCompare(b.title);
-    })
-    .slice(0, 10);
+    });
 };
 
 const getTopFourImages = (project: ProjectEntry): { url: string; caption: string }[] => {
@@ -194,6 +191,86 @@ const PortfolioPdfPreview = () => {
           <a className="footer-url" href={`https://${CONTENT.brand.siteUrl}`} target="_blank" rel="noopener noreferrer">{CONTENT.brand.siteUrl}</a>
         </section>
 
+        <section className="pdf-page toc-page">
+          {renderBrandMark('logo-header-right', 'light')}
+          <header className="page-header">
+            <div>
+                <p className="kicker">Portfolio Flow</p>
+                <h2>Table of Contents (1)</h2>
+                {/* <p className="location"></p> */}
+            </div>
+          </header>
+          <div className="toc-layout">
+            <div className="toc-timeline" role="list" aria-label="Portfolio project contents">
+              {projects.slice(0, 7).map((project, index) => {
+                const projectNumber = String(index + 1).padStart(2, '0');
+                const isLeftAligned = index % 2 === 0;
+
+                return (
+                  <article
+                    key={`toc-${project.id}`}
+                    className={`toc-item ${isLeftAligned ? 'toc-item-left' : 'toc-item-right'}`}
+                    role="listitem"
+                  >
+                    <div className="toc-marker" aria-hidden="true">
+                      <span />
+                    </div>
+                    <div className="toc-card">
+                      <p className="toc-item-label">Project {projectNumber}</p>
+                      <h3>{project.title}</h3>
+                      <p className="toc-item-location">{project.location}</p>
+                    </div>
+                    
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+          {renderBrandMark('logo-footer-left')}
+          <a className="footer-url" href={`https://${CONTENT.brand.siteUrl}`} target="_blank" rel="noopener noreferrer">{CONTENT.brand.siteUrl}</a>
+        </section>
+
+        {projects.length > 7 && (
+          <section className="pdf-page toc-page">
+            {renderBrandMark('logo-header-right', 'light')}
+            <header className="page-header">
+              <div>
+                  <p className="kicker">Portfolio Flow</p>
+                  <h2>Table of Contents (2)</h2>
+                  {/* <p className="location"></p> */}
+              </div>
+            </header>
+            <div className="toc-layout">
+              <div className="toc-timeline" role="list" aria-label="Portfolio project contents continued">
+                {projects.slice(7).map((project, index) => {
+                  const projectNumber = String(index + 8).padStart(2, '0');
+                  const isLeftAligned = index % 2 === 0;
+
+                  return (
+                    <article
+                      key={`toc-${project.id}`}
+                      className={`toc-item ${isLeftAligned ? 'toc-item-left' : 'toc-item-right'}`}
+                      role="listitem"
+                    >
+                      <div className="toc-marker" aria-hidden="true">
+                        <span />
+                      </div>
+                      <div className="toc-card">
+                        <p className="toc-item-label">Project {projectNumber}</p>
+                        <h3>{project.title}</h3>
+                        <p className="toc-item-location">{project.location}</p>
+                      </div>
+                      
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+            {renderBrandMark('logo-footer-left')}
+            <a className="footer-url" href={`https://${CONTENT.brand.siteUrl}`} target="_blank" rel="noopener noreferrer">{CONTENT.brand.siteUrl}</a>
+          </section>
+        )}
+
         {projects.map((project, index) => {
           const images = getTopFourImages(project);
 
@@ -228,7 +305,7 @@ const PortfolioPdfPreview = () => {
 
               <div className="image-grid">
                 {images.map((image, imageIndex) => (
-                  <figure key={`${project.id}-${image.url}`} className={`image-card image-${imageIndex + 1}`}>
+                  <figure key={`${project.id}-${imageIndex}`} className={`image-card image-${imageIndex + 1}`}>
                     <img src={image.url} alt={`${project.title} ${imageIndex + 1}`} loading="lazy" />
                     <figcaption>{image.caption || `Project view ${imageIndex + 1}`}</figcaption>
                   </figure>

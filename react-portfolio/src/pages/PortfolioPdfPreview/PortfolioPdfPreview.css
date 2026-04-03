@@ -67,8 +67,34 @@
   /* padding: 0 50px; */
 }
 
-.pdf-document.is-exporting {
-  transform: none;
+.home-content-export {
+  display: none;
+  position: relative;
+  z-index: 4;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
+  margin-top: 40mm;
+  width: 70%;
+  max-width: 210mm;
+  padding: 6mm;
+  border: 1px solid rgba(92, 61, 46, 0.25);
+  border-radius: 1mm;
+  background: rgba(250, 247, 242, 0.9);
+}
+
+.home-content-export .home-punch,
+.home-content-export h1,
+.home-content-export h1 span:last-child,
+.home-content-export .subtitle,
+.home-content-export .home-stats strong,
+.home-content-export .home-stats span,
+.home-content-export .home-stat-plus {
+  color: #2c1f14 !important;
+}
+
+.home-content-export .home-stats div + div {
+  border-left-color: rgba(92, 61, 46, 0.45);
 }
 
 .pdf-generation-error {
@@ -103,5 +129,30 @@
   .pdf-page {
     min-height: auto;
     padding: 1rem;
+  }
+
+  .toc-layout {
+    padding-top: 5rem;
+  }
+
+  .toc-timeline::before {
+    left: 0.7rem;
+    transform: translateX(-50%);
+  }
+
+  .toc-item {
+    grid-template-columns: 1.4rem minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .toc-item .toc-marker {
+    grid-column: 1;
+  }
+
+  .toc-item .toc-card,
+  .toc-item .toc-card {
+    grid-column: 2;
+    justify-self: start;
+    text-align: left;
   }
 }
