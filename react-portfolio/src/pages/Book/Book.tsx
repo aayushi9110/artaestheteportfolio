@@ -203,147 +203,163 @@ const Book = () => {
         </div>
         <div className="book-r">
           {!submitted && (
-            <form
-              onSubmit={async (event) => {
-                event.preventDefault();
-                if (!isContactStepComplete) {
-                  setContactTouched({ name: true, email: true, location: true });
-                  return;
-                }
+            <div className="bk-form-wrap">
+              <form
+                onSubmit={async (event) => {
+                  event.preventDefault();
+                  if (!isContactStepComplete) {
+                    setContactTouched({ name: true, email: true, location: true });
+                    return;
+                  }
 
-                setSubmitError('');
-                setIsSubmitting(true);
+                  setSubmitError('');
+                  setIsSubmitting(true);
 
-                try {
-                  await submitBookingForm();
-                  setSubmitted(true);
-                } catch (error) {
-                  const message = error instanceof Error ? error.message : 'Unable to send your enquiry right now.';
-                  setSubmitError(message);
-                } finally {
-                  setIsSubmitting(false);
-                }
-              }}
-              noValidate
-            >
-              <div className="bk-prog">
-                {Array.from({ length: totalSteps }, (_, i) => i).map((i) => (
-                  <div className="bk-prog-item" key={`prog-${i}`}>
-                    <div key={`dot-${i}`} className={`bk-step-dot ${i === step ? 'act' : ''} ${i < step ? 'done' : ''}`}>{i + 1}</div>
-                    {i < totalSteps - 1 && <div key={`line-${i}`} className={`bk-step-line ${i < step ? 'done' : ''}`}></div>}
+                  try {
+                    await submitBookingForm();
+                    setSubmitted(true);
+                  } catch (error) {
+                    const message = error instanceof Error ? error.message : 'Unable to send your enquiry right now.';
+                    setSubmitError(message);
+                  } finally {
+                    setIsSubmitting(false);
+                  }
+                }}
+                noValidate
+              >
+                <div className="bk-prog">
+                  {Array.from({ length: totalSteps }, (_, i) => i).map((i) => (
+                    <div className="bk-prog-item" key={`prog-${i}`}>
+                      <div key={`dot-${i}`} className={`bk-step-dot ${i === step ? 'act' : ''} ${i < step ? 'done' : ''}`}>{i + 1}</div>
+                      {i < totalSteps - 1 && <div key={`line-${i}`} className={`bk-step-line ${i < step ? 'done' : ''}`}></div>}
+                    </div>
+                  ))}
+                </div>
+
+                {BOOKING_OPTION_STEPS.map((stepConfig, stepIndex) => (
+                  <div className={`bk-form-step ${step === stepIndex ? 'on' : ''}`} key={stepConfig.id}>
+                    <div className="bk-q">
+                      {stepConfig.question}
+                      {stepConfig.isRequired && <span className="bk-required-mark">{BOOKING_CONTENT.requiredMarker}</span>}
+                    </div>
+                    <div className="bk-sub">{stepConfig.subtext}</div>
+                    <div className="bk-opts">
+                      {stepConfig.options.map((option, optionIndex) => (
+                        <button
+                          key={option.title}
+                          type="button"
+                          className={`bk-opt ${(selected[stepIndex] || []).includes(optionIndex) ? 'sel' : ''}`}
+                          onClick={() => toggleOption(stepIndex, optionIndex)}
+                          aria-pressed={(selected[stepIndex] || []).includes(optionIndex)}
+                        >
+                          <span className="opt-icon">0{optionIndex + 1}</span>
+                          <h4>{option.title}</h4>
+                          <p>{option.description}</p>
+                        </button>
+                      ))}
+                    </div>
+                    {stepConfig.showBudgetSelect && (
+                      <div className="bk-field" style={{ marginTop: '8px' }}>
+                        <label>Approximate Budget (optional)</label>
+                        <select value={form.budget} onChange={(e) => setFormField('budget', e.target.value)}>
+                          {BUDGET_OPTIONS.map((budgetOption, index) => (
+                            <option key={budgetOption} value={index === 0 ? '' : budgetOption}>
+                              {budgetOption}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
+                    <div className="bk-nav">
+                      {stepIndex > 0 ? (
+                        <button className="bk-back-btn" type="button" onClick={() => setStep(stepIndex - 1)}>
+                          <svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5H2M2 5L6 1M2 5l4 4"/></svg> {BOOKING_CONTENT.backLabel}
+                        </button>
+                      ) : (
+                        <div></div>
+                      )}
+                      <button className="btn-tr" type="button" onClick={() => setStep(stepIndex + 1)} disabled={!hasStepSelection(stepIndex)}>
+                        <span>{BOOKING_CONTENT.continueLabel}</span>
+                      </button>
+                    </div>
                   </div>
                 ))}
-              </div>
 
-              {BOOKING_OPTION_STEPS.map((stepConfig, stepIndex) => (
-                <div className={`bk-form-step ${step === stepIndex ? 'on' : ''}`} key={stepConfig.id}>
-                  <div className="bk-q">
-                    {stepConfig.question}
-                    {stepConfig.isRequired && <span className="bk-required-mark">{BOOKING_CONTENT.requiredMarker}</span>}
-                  </div>
-                  <div className="bk-sub">{stepConfig.subtext}</div>
-                  <div className="bk-opts">
-                    {stepConfig.options.map((option, optionIndex) => (
-                      <button
-                        key={option.title}
-                        type="button"
-                        className={`bk-opt ${(selected[stepIndex] || []).includes(optionIndex) ? 'sel' : ''}`}
-                        onClick={() => toggleOption(stepIndex, optionIndex)}
-                        aria-pressed={(selected[stepIndex] || []).includes(optionIndex)}
-                      >
-                        <span className="opt-icon">0{optionIndex + 1}</span>
-                        <h4>{option.title}</h4>
-                        <p>{option.description}</p>
-                      </button>
-                    ))}
-                  </div>
-                  {stepConfig.showBudgetSelect && (
-                    <div className="bk-field" style={{ marginTop: '8px' }}>
-                      <label>Approximate Budget (optional)</label>
-                      <select value={form.budget} onChange={(e) => setFormField('budget', e.target.value)}>
-                        {BUDGET_OPTIONS.map((budgetOption, index) => (
-                          <option key={budgetOption} value={index === 0 ? '' : budgetOption}>
-                            {budgetOption}
-                          </option>
-                        ))}
-                      </select>
+                <div className={`bk-form-step ${isOnContactStep ? 'on' : ''}`}>
+                  <div className="bk-q">How do we reach you?<span className="bk-required-mark">{BOOKING_CONTENT.requiredMarker}</span></div>
+                  <div className="bk-sub">We'll send a personal reply — not a template, not a bot.</div>
+                  {CONTACT_FIELDS.map((field) => (
+                    <div className="bk-field" key={field.key}>
+                      <label>{field.label}{field.required && <span className="bk-required-mark">{BOOKING_CONTENT.requiredMarker}</span>}</label>
+                      {field.multiline ? (
+                        <textarea
+                          rows={4}
+                          placeholder={field.placeholder}
+                          value={form[field.key]}
+                          onChange={(e) => setFormField(field.key, e.target.value)}
+                        ></textarea>
+                      ) : (
+                        <input
+                          type={field.type || 'text'}
+                          placeholder={field.placeholder}
+                          value={form[field.key]}
+                          className={
+                            (field.key === 'name' || field.key === 'email' || field.key === 'location') && getContactFieldError(field.key)
+                              ? 'bk-input-invalid'
+                              : ''
+                          }
+                          aria-invalid={
+                            field.key === 'name' || field.key === 'email' || field.key === 'location'
+                              ? Boolean(getContactFieldError(field.key))
+                              : false
+                          }
+                          required={field.required}
+                          onChange={(e) => setFormField(field.key, e.target.value)}
+                          onBlur={() => {
+                            if (field.key === 'name' || field.key === 'email' || field.key === 'location') {
+                              markContactFieldTouched(field.key);
+                            }
+                          }}
+                        />
+                      )}
+                      {(field.key === 'name' || field.key === 'email' || field.key === 'location') && getContactFieldError(field.key) && (
+                        <p className="bk-field-error">{getContactFieldError(field.key)}</p>
+                      )}
                     </div>
+                  ))}
+                  <div className="bk-field">
+                    <label>How did you find us?</label>
+                    <select value={form.source} onChange={(e) => setFormField('source', e.target.value)}>
+                      <option value="">Select one</option>
+                      {SOURCE_OPTIONS.map((sourceOption) => (
+                        <option key={sourceOption} value={sourceOption}>{sourceOption}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="bk-nav"><button className="bk-back-btn" type="button" onClick={() => setStep(optionStepCount - 1)}><svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5H2M2 5L6 1M2 5l4 4"/></svg> {BOOKING_CONTENT.backLabel}</button><button className="btn-tr" type="submit" disabled={isSubmitting}><span>{isSubmitting ? 'Sending...' : BOOKING_CONTENT.submitLabel}</span></button></div>
+                  {!isContactStepComplete && (
+                    <p className="bk-form-hint">{BOOKING_CONTENT.contactHint}</p>
                   )}
-                  <div className="bk-nav">
-                    {stepIndex > 0 ? (
-                      <button className="bk-back-btn" type="button" onClick={() => setStep(stepIndex - 1)}>
-                        <svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5H2M2 5L6 1M2 5l4 4"/></svg> {BOOKING_CONTENT.backLabel}
-                      </button>
-                    ) : (
-                      <div></div>
-                    )}
-                    <button className="btn-tr" type="button" onClick={() => setStep(stepIndex + 1)} disabled={!hasStepSelection(stepIndex)}>
-                      <span>{BOOKING_CONTENT.continueLabel}</span>
+                </div>
+
+              </form>
+
+              {submitError && (
+                <div className="bk-submit-overlay" role="alert" aria-live="assertive">
+                  <div className="bk-submit-error-panel">
+                    <div className="bk-submit-error-icon" aria-hidden="true">
+                      <svg width="30" height="30" viewBox="0 0 24 24" role="presentation" focusable="false">
+                        <path d="M12 2 22 20H2L12 2Zm0 6.2a1 1 0 0 0-1 1v4.9a1 1 0 1 0 2 0V9.2a1 1 0 0 0-1-1Zm0 10a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Z" fill="currentColor"/>
+                      </svg>
+                    </div>
+                    <p className="bk-submit-error">{submitError}</p>
+                    <button className="bk-submit-error-dismiss" type="button" onClick={() => setSubmitError('')}>
+                      Dismiss
                     </button>
                   </div>
                 </div>
-              ))}
-
-              <div className={`bk-form-step ${isOnContactStep ? 'on' : ''}`}>
-                <div className="bk-q">How do we reach you?<span className="bk-required-mark">{BOOKING_CONTENT.requiredMarker}</span></div>
-                <div className="bk-sub">We'll send a personal reply — not a template, not a bot.</div>
-                {CONTACT_FIELDS.map((field) => (
-                  <div className="bk-field" key={field.key}>
-                    <label>{field.label}{field.required && <span className="bk-required-mark">{BOOKING_CONTENT.requiredMarker}</span>}</label>
-                    {field.multiline ? (
-                      <textarea
-                        rows={4}
-                        placeholder={field.placeholder}
-                        value={form[field.key]}
-                        onChange={(e) => setFormField(field.key, e.target.value)}
-                      ></textarea>
-                    ) : (
-                      <input
-                        type={field.type || 'text'}
-                        placeholder={field.placeholder}
-                        value={form[field.key]}
-                        className={
-                          (field.key === 'name' || field.key === 'email' || field.key === 'location') && getContactFieldError(field.key)
-                            ? 'bk-input-invalid'
-                            : ''
-                        }
-                        aria-invalid={
-                          field.key === 'name' || field.key === 'email' || field.key === 'location'
-                            ? Boolean(getContactFieldError(field.key))
-                            : false
-                        }
-                        required={field.required}
-                        onChange={(e) => setFormField(field.key, e.target.value)}
-                        onBlur={() => {
-                          if (field.key === 'name' || field.key === 'email' || field.key === 'location') {
-                            markContactFieldTouched(field.key);
-                          }
-                        }}
-                      />
-                    )}
-                    {(field.key === 'name' || field.key === 'email' || field.key === 'location') && getContactFieldError(field.key) && (
-                      <p className="bk-field-error">{getContactFieldError(field.key)}</p>
-                    )}
-                  </div>
-                ))}
-                <div className="bk-field">
-                  <label>How did you find us?</label>
-                  <select value={form.source} onChange={(e) => setFormField('source', e.target.value)}>
-                    <option value="">Select one</option>
-                    {SOURCE_OPTIONS.map((sourceOption) => (
-                      <option key={sourceOption} value={sourceOption}>{sourceOption}</option>
-                    ))}
-                  </select>
-                </div>
-                <div className="bk-nav"><button className="bk-back-btn" type="button" onClick={() => setStep(optionStepCount - 1)}><svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5H2M2 5L6 1M2 5l4 4"/></svg> {BOOKING_CONTENT.backLabel}</button><button className="btn-tr" type="submit" disabled={isSubmitting}><span>{isSubmitting ? 'Sending...' : BOOKING_CONTENT.submitLabel}</span></button></div>
-                {!isContactStepComplete && (
-                  <p className="bk-form-hint">{BOOKING_CONTENT.contactHint}</p>
-                )}
-                {submitError && (
-                  <p className="bk-submit-error">{submitError}</p>
-                )}
-              </div>
-            </form>
+              )}
+            </div>
           )}
 
           {submitted && (

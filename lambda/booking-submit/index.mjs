@@ -465,7 +465,7 @@ export const handler = async (event) => {
     console.error('Booking submit error:', error);
 
     return jsonResponse(500, {
-      message: 'Internal server error while sending booking enquiry.'
+      message: 'Internal server error while sending booking enquiry. Please try again in sometime.'
     });
   }
 };
