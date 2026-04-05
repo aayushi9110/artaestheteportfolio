@@ -10,7 +10,6 @@
   padding: 140px 60px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   position: relative;
   overflow: hidden;
 }
@@ -59,7 +58,7 @@
   font-weight: 300;
   font-size: 1.1rem;
   line-height: 1.88;
-  color: rgba(245, 239, 228, 0.5);
+  color: var(--cream);
   margin-bottom: 20px;
   max-width: 90%;
 }
@@ -72,7 +71,7 @@
 }
 
 .bfaq-item {
-  border-top: 1px solid rgba(245, 239, 228, 0.08);
+  border-top: 1px solid var(--taupe-grey);
   padding-top: 18px;
 }
 
@@ -80,7 +79,7 @@
   font-size: 1rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(245, 239, 228, 0.6);
+  color: var(--cream);
   margin-bottom: 6px;
   font-weight: 400;
 }
@@ -88,7 +87,7 @@
 .bfaq-item p {
   font-size: 1.1rem;
   font-weight: 300;
-  color: rgba(245, 239, 228, 0.35);
+  color: var(--warm);
   line-height: 1.7;
 }
 
