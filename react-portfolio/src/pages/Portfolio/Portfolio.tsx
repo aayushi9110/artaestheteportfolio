@@ -208,9 +208,6 @@ const Portfolio = () => {
                     <button className="btn-tr" onClick={() => navigate(getStoryPath(item))}>
                       <span>View Case Study</span>
                     </button>
-                    <button className="pf-quick-view" onClick={() => setActiveItem(item)}>
-                      Quick View
-                    </button>
                   </div>
                 </div>
               ))}
