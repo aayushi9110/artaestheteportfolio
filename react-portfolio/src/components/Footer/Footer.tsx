@@ -1,6 +1,18 @@
 import { Link } from 'react-router-dom';
 import './Footer.css';
 
+const serviceLinks = [
+  { label: 'Interior Design', to: '/process' },
+  { label: 'Virtual Consultation', to: '/virtual' },
+  { label: 'Fine Art Curation', to: '/portfolio' },
+  { label: 'Book Consultation', to: '/book' },
+];
+
+const contactLinks = [
+  { label: 'a.art.aesthete@gmail.com', href: 'mailto:a.art.aesthete@gmail.com' },
+  { label: '+1(856)-283-5980', href: 'tel:+18562835980' },
+];
+
 const socialLinks = [
   {
     name: 'Instagram',
@@ -69,19 +81,29 @@ const Footer = () => {
         </div>
         <div className="ft-col">
           <h5>Services</h5>
-          <ul>
-            <li><span>Interior Design</span></li>
-            <li><span>Virtual Consultation</span></li>
-            <li><span>Fine Art Curation</span></li>
-            <li><span>Book Consultation</span></li>
+          <ul className="ft-link-list">
+            {serviceLinks.map((service) => (
+              <li key={service.label}>
+                <Link to={service.to} className="ft-list-link ft-service-link" aria-label={`Explore ${service.label}`}>
+                  {service.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="ft-col">
           <h5>Contact</h5>
-          <ul>
-            <li><a href="mailto:a.art.aesthete@gmail.com">a.art.aesthete@gmail.com</a></li>
-            <li><a href="tel:+18562835980">+1(856)-283-5980</a></li>
-            <li><span>New Jersey · New York · Bay Area · California · Mumbai, India</span></li>
+          <ul className="ft-link-list">
+            {contactLinks.map((contact) => (
+              <li key={contact.label}>
+                <a href={contact.href} className="ft-list-link ft-service-link">
+                  {contact.label}
+                </a>
+              </li>
+            ))}
+            <li>
+              <span className="ft-list-text">New Jersey · New York · Bay Area · California · Mumbai, India</span>
+            </li>
           </ul>
         </div>
       </div>

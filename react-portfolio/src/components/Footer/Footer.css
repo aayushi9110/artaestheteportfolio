@@ -142,23 +142,24 @@
   margin-bottom: 12px;
 }
 
-.ft-col ul {
+.ft-link-list {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.ft-col ul li {
+.ft-link-list li {
   margin-bottom: 8px;
 }
 
-.ft-col ul a,
-.ft-col ul span,
-.ft-col ul button {
+.ft-list-link,
+.ft-list-text,
+.ft-link-list button {
   font-weight: 300;
   font-size: 0.94rem;
   color: var(--sand);
   opacity: 0.8;
   text-decoration: none;
-  cursor: default;
   background: none;
   border: none;
   font-family: "Jost", sans-serif;
@@ -166,9 +167,43 @@
   padding: 0;
 }
 
-.ft-col ul a {
+.ft-list-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   cursor: none;
-  transition: color 0.3s;
+  transition: color 0.28s ease, transform 0.28s ease, opacity 0.28s ease;
+}
+
+.ft-list-text {
+  display: inline-flex;
+  line-height: 1.6;
+}
+
+.ft-service-link {
+  position: relative;
+}
+
+.ft-service-link::after {
+  content: '\2192';
+  font-size: 0.82rem;
+  color: var(--gold);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.ft-service-link:hover,
+.ft-service-link:focus-visible {
+  color: var(--gold);
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+.ft-service-link:hover::after,
+.ft-service-link:focus-visible::after {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .ft-col ul a:hover,

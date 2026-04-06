@@ -13,7 +13,9 @@
     "generate:portfolio-pdf": "npm run generate:portfolio-html && vite preview --host 127.0.0.1 --port 4173 & PREVIEW_PID=$!; sleep 3; \"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless=new --disable-gpu --virtual-time-budget=30000 --print-to-pdf=\"$PWD/dist/Art-Aesthete-Portfolio-Top10.pdf\" \"http://127.0.0.1:4173/portfolio-top10-source.html\"; kill $PREVIEW_PID"
   },
   "dependencies": {
+    "html2canvas": "^1.4.1",
     "html2pdf.js": "^0.14.0",
+    "jspdf": "^4.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.0"
