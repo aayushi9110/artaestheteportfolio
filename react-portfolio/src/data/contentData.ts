@@ -20,8 +20,8 @@ export const CONTENT = {
     ] as MetricItem[],
   },
   about: {
-    kicker: '--My Story',
-    heading: '--My Story',
+    kicker: 'My Story',
+    heading: 'My Story',
     lead: '',
     storyParagraphs: [
       'Hi, I am Aayushi Shah. I set out to find rooms that felt honest - spaces that did not pretend to be something they were not.',

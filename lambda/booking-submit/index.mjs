@@ -135,12 +135,14 @@ const checkRateLimit = ({ key, maxRequests, windowMs, minIntervalMs = 0 }) => {
 };
 
 const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+const isValidPhone = (phone) => /^[+]?[(]?[0-9\s().-]{7,}$/.test(phone);
 
 const validatePayload = (payload) => {
   const data = payload ?? {};
 
   const name = getSafeString(data.name);
   const email = getSafeString(data.email);
+  const phone = getSafeString(data.phone);
   const location = getSafeString(data.location);
 
   const errors = [];
@@ -151,6 +153,10 @@ const validatePayload = (payload) => {
 
   if (!isValidEmail(email)) {
     errors.push('A valid email is required.');
+  }
+
+  if (!isValidPhone(phone)) {
+    errors.push('A valid phone number is required.');
   }
 
   if (location.length < 2) {
@@ -179,6 +185,7 @@ const validatePayload = (payload) => {
       budget: getSafeString(data.budget),
       name,
       email,
+      phone,
       location,
       details: getSafeString(data.details),
       source: getSafeString(data.source),
@@ -233,6 +240,7 @@ const buildEmailContent = (payload) => {
   const safe = {
     name: escapeHtml(payload.name),
     email: escapeHtml(payload.email),
+    phone: escapeHtml(payload.phone || 'Not provided'),
     location: escapeHtml(payload.location),
     budget: escapeHtml(payload.budget || 'Not provided'),
     details: escapeHtml(payload.details || 'Not provided'),
@@ -251,6 +259,7 @@ const buildEmailContent = (payload) => {
     '',
     `Name: ${safe.name}`,
     `Email: ${safe.email}`,
+    `Phone: ${safe.phone}`,
     `Location: ${safe.location}`,
     '',
     'Project Types:',
@@ -289,6 +298,7 @@ const buildEmailContent = (payload) => {
             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse: collapse;">
               ${renderHtmlDetailRow('Name', safe.name)}
               ${renderHtmlDetailRow('Email', `<a href="mailto:${safe.email}" style="color:#8b5e3c; text-decoration:none;">${safe.email}</a>`)}
+              ${renderHtmlDetailRow('Phone', safe.phone)}
               ${renderHtmlDetailRow('Location', safe.location)}
               ${renderHtmlDetailRow('Budget', safe.budget)}
               ${renderHtmlDetailRow('How They Found You', safe.source)}

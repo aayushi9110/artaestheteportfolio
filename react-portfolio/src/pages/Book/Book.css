@@ -2,16 +2,22 @@
 .book-page {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.88fr 1.12fr;
+  transition: grid-template-columns 0.35s ease;
+}
+
+.book-page.questionnaire-active {
+  grid-template-columns: 0.62fr 1.38fr;
 }
 
 .book-l {
   background: var(--dark);
-  padding: 140px 60px 20px;
+  padding: 128px 42px 20px;
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: hidden;
+  transition: padding 0.35s ease;
 }
 
 .book-l::before {
@@ -56,48 +62,87 @@
 
 .book-l-c p {
   font-weight: 300;
-  font-size: 1.1rem;
-  line-height: 1.88;
+  font-size: 1rem;
+  line-height: 1.72;
   color: var(--cream);
-  margin-bottom: 20px;
-  max-width: 90%;
+  margin-bottom: 18px;
+  max-width: 100%;
+  transition: max-width 0.35s ease, font-size 0.35s ease, line-height 0.35s ease;
 }
 
 .book-faq {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  margin-top: 36px;
+  gap: 12px;
+  margin-top: 28px;
+  transition: gap 0.35s ease, margin-top 0.35s ease;
 }
 
 .bfaq-item {
   border-top: 1px solid var(--taupe-grey);
-  padding-top: 18px;
+  padding-top: 12px;
+  transition: padding-top 0.35s ease;
 }
 
 .bfaq-item h5 {
-  font-size: 1rem;
+  font-size: 0.88rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--cream);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   font-weight: 400;
+  transition: font-size 0.35s ease, margin-bottom 0.35s ease;
 }
 
 .bfaq-item p {
-  font-size: 1.1rem;
+  font-size: 0.94rem;
   font-weight: 300;
   color: var(--warm);
-  line-height: 1.7;
+  line-height: 1.5;
+  transition: font-size 0.35s ease, line-height 0.35s ease;
 }
 
 .book-r {
   background: var(--warm);
-  padding: 140px 60px;
+  padding: 124px 52px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow-y: auto;
+  transition: padding 0.35s ease;
+}
+
+.book-page.questionnaire-active .book-l {
+  padding: 116px 26px 18px;
+}
+
+.book-page.questionnaire-active .book-l-c p {
+  max-width: 100%;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.book-page.questionnaire-active .book-faq {
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.book-page.questionnaire-active .bfaq-item {
+  padding-top: 9px;
+}
+
+.book-page.questionnaire-active .bfaq-item h5 {
+  font-size: 0.78rem;
+  margin-bottom: 3px;
+}
+
+.book-page.questionnaire-active .bfaq-item p {
+  font-size: 0.82rem;
+  line-height: 1.42;
+}
+
+.book-page.questionnaire-active .book-r {
+  padding: 112px 56px;
 }
 
 .bk-form-wrap {
@@ -207,16 +252,32 @@
   margin-left: 6px;
 }
 
+.bk-question-group {
+  margin-bottom: 24px;
+  margin-bottom: 18px;
+}
+
+.bk-question-title {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--dark);
+}
+
 .bk-opts {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 32px;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.bk-question-group .bk-opts {
+  margin-bottom: 8px;
 }
 
 .bk-opt {
   border: 1.5px solid var(--sand);
-  padding: 16px 18px;
+  padding: 10px 12px;
   background: transparent;
   cursor: none;
   text-align: left;
@@ -236,23 +297,23 @@
 }
 
 .bk-opt .opt-icon {
-  font-size: 1.8rem;
-  margin-bottom: 8px;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
   display: block;
 }
 
 .bk-opt h4 {
   font-weight: 400;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   color: var(--dark);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .bk-opt p {
   font-weight: 300;
-  font-size: 1.1rem;
+  font-size: 0.88rem;
   color: var(--taupe-grey);
-  line-height: 1.5;
+  line-height: 1.35;
 }
 
 .bk-field {
@@ -260,6 +321,14 @@
   flex-direction: column;
   gap: 5px;
   margin-bottom: 18px;
+}
+
+.bk-inline-comment {
+  margin-bottom: 0;
+}
+
+.bk-category-comment {
+  margin-top: 6px;
 }
 
 .bk-field label {
@@ -282,9 +351,9 @@
 .bk-field select {
   background: var(--linen);
   border: 1px solid var(--sand);
-  padding: 10px 20px;
+  padding: 9px 14px;
   font-family: "Jost", sans-serif;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 300;
   color: var(--dark);
   outline: none;
@@ -316,7 +385,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 28px;
 }
 
 .bk-back-btn {
@@ -462,6 +531,10 @@
     min-height: auto;
   }
 
+  .book-page.questionnaire-active {
+    grid-template-columns: 1fr;
+  }
+
   .book-l {
     padding: 100px 36px 60px;
     min-height: 50vh;
@@ -469,6 +542,12 @@
 
   .book-r {
     padding: 60px 36px 80px;
+  }
+
+  .book-page.questionnaire-active .book-l,
+  .book-page.questionnaire-active .book-r {
+    padding-left: 36px;
+    padding-right: 36px;
   }
 }
 

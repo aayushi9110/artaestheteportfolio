@@ -4,10 +4,10 @@ import {
   BOOKING_CONTENT,
   BOOKING_FAQS,
   BOOKING_OPTION_STEPS,
-  BUDGET_OPTIONS,
   CONTACT_FIELD_ERRORS,
   CONTACT_FIELDS,
   SOURCE_OPTIONS,
+  type BookingQuestion,
   type BookingFormValues
 } from './bookingData.ts';
 import './Book.css';
@@ -16,6 +16,7 @@ const INITIAL_FORM_STATE: BookingFormValues = {
   budget: '',
   name: '',
   email: '',
+  phone: '',
   location: '',
   details: '',
   source: ''
@@ -28,6 +29,7 @@ type BookingSubmissionPayload = {
   budget: string;
   name: string;
   email: string;
+  phone: string;
   location: string;
   details: string;
   source: string;
@@ -49,58 +51,141 @@ const Book = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
-  const [selected, setSelected] = useState<Record<number, number[]>>({});
-  const [contactTouched, setContactTouched] = useState<Record<'name' | 'email' | 'location', boolean>>({
+  const [isFormInteracting, setIsFormInteracting] = useState(false);
+  const [questionSelections, setQuestionSelections] = useState<Record<number, number[]>>({});
+  const [questionComments, setQuestionComments] = useState<Record<number, string>>({});
+  const [categoryComments, setCategoryComments] = useState<Record<number, string>>({});
+  const [contactTouched, setContactTouched] = useState<Record<'name' | 'email' | 'phone' | 'location', boolean>>({
     name: false,
     email: false,
+    phone: false,
     location: false
   });
 
   const [form, setForm] = useState<BookingFormValues>(INITIAL_FORM_STATE);
 
-  const toggleOption = (stepIndex: number, optionIndex: number) => {
-    setSelected((prev) => {
-      const currentSelections = prev[stepIndex] || [];
+  const toggleQuestionOption = (questionId: number, optionIndex: number, selectionMode: 'single' | 'multiple' = 'single') => {
+    setQuestionSelections((prev) => {
+      const currentSelections = prev[questionId] || [];
       const isAlreadySelected = currentSelections.includes(optionIndex);
+
+      if (selectionMode === 'single') {
+        return {
+          ...prev,
+          [questionId]: isAlreadySelected ? [] : [optionIndex]
+        };
+      }
 
       return {
         ...prev,
-        [stepIndex]: isAlreadySelected
+        [questionId]: isAlreadySelected
           ? currentSelections.filter((item) => item !== optionIndex)
           : [...currentSelections, optionIndex]
       };
     });
   };
 
+  const setQuestionComment = (questionId: number, value: string) => {
+    setQuestionComments((prev) => ({ ...prev, [questionId]: value }));
+  };
+
+  const setCategoryComment = (stepId: number, value: string) => {
+    setCategoryComments((prev) => ({ ...prev, [stepId]: value }));
+  };
+
   const setFormField = <K extends keyof BookingFormValues>(field: K, value: BookingFormValues[K]) => {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
-  const hasStepSelection = (stepIndex: number) => (selected[stepIndex] || []).length > 0;
+  const getQuestionSelectionTitles = (question: BookingQuestion) => {
+    return (questionSelections[question.id] || [])
+      .map((optionIndex) => question.options[optionIndex]?.title)
+      .filter((title): title is string => Boolean(title));
+  };
+
+  const isQuestionAnswered = (question: BookingQuestion) => getQuestionSelectionTitles(question).length > 0;
+
+  const isStepComplete = (stepIndex: number) => {
+    const stepConfig = BOOKING_OPTION_STEPS[stepIndex];
+    if (!stepConfig) {
+      return false;
+    }
+
+    return stepConfig.questions.every((question) => isQuestionAnswered(question));
+  };
+
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
-  const isContactStepComplete = form.name.trim().length > 1 && isEmailValid && form.location.trim().length > 1;
+  const isPhoneValid = /^[+]?[(]?[0-9\s().-]{7,}$/.test(form.phone.trim());
+  const isContactStepComplete = form.name.trim().length > 1 && isEmailValid && isPhoneValid && form.location.trim().length > 1;
   const bookingApiUrl = import.meta.env.VITE_BOOKING_API_URL?.trim() || '';
   const bookingApiKey = import.meta.env.VITE_BOOKING_API_KEY?.trim() || '';
   const requestTimeoutMs = Number(import.meta.env.VITE_BOOKING_REQUEST_TIMEOUT_MS || '15000');
   const optionStepCount = BOOKING_OPTION_STEPS.length;
   const totalSteps = optionStepCount + 1;
   const isOnContactStep = step === optionStepCount;
+  const hasQuestionnaireResponses =
+    Object.keys(questionSelections).length > 0 ||
+    Object.values(questionComments).some((value) => value.trim().length > 0) ||
+    Object.values(categoryComments).some((value) => value.trim().length > 0) ||
+    step > 0;
+  const isQuestionnaireActive = isFormInteracting || hasQuestionnaireResponses || isOnContactStep;
 
-  const getSelectedOptionTitles = (stepIndex: number) => {
-    return (selected[stepIndex] || [])
-      .map((optionIndex) => BOOKING_OPTION_STEPS[stepIndex]?.options[optionIndex]?.title)
-      .filter((title): title is string => Boolean(title));
+  const getQuestionById = (questionId: number) => {
+    for (const section of BOOKING_OPTION_STEPS) {
+      const found = section.questions.find((question) => question.id === questionId);
+      if (found) {
+        return found;
+      }
+    }
+    return null;
+  };
+
+  const getQuestionSelectionsById = (questionId: number) => {
+    const question = getQuestionById(questionId);
+    if (!question) {
+      return [];
+    }
+
+    return getQuestionSelectionTitles(question);
+  };
+
+  const buildQuestionnaireSummary = () => {
+    return BOOKING_OPTION_STEPS.map((section) => {
+      const questionBlocks = section.questions.map((question) => {
+        const selections = getQuestionSelectionTitles(question);
+        const comment = (questionComments[question.id] || '').trim();
+
+        const lines = [
+          `Q${question.id}. ${question.prompt}`,
+          `Selected: ${selections.length > 0 ? selections.join(', ') : 'Not answered'}`
+        ];
+
+        if (question.allowComment && comment) {
+          lines.push(`Comment: ${comment}`);
+        }
+
+        return lines.join('\n');
+      });
+
+      const categoryComment = (categoryComments[section.id] || '').trim();
+      if (categoryComment) {
+        questionBlocks.push(`Category Comment: ${categoryComment}`);
+      }
+
+      return [`${section.category}`, ...questionBlocks].join('\n\n');
+    }).join('\n\n--------------------\n\n');
   };
 
   const buildBookingPayload = (): BookingSubmissionPayload => ({
-    projectTypes: getSelectedOptionTitles(0),
-    spaces: getSelectedOptionTitles(1),
-    aesthetics: getSelectedOptionTitles(2),
-    budget: form.budget,
+    projectTypes: getQuestionSelectionsById(1),
+    spaces: getQuestionSelectionsById(3),
+    aesthetics: getQuestionSelectionsById(5),
+    budget: getQuestionSelectionsById(13).join(', '),
     name: form.name.trim(),
     email: form.email.trim(),
+    phone: form.phone.trim(),
     location: form.location.trim(),
-    details: form.details.trim(),
+    details: [buildQuestionnaireSummary(), form.details.trim()].filter(Boolean).join('\n\nAdditional Contact Notes:\n'),
     source: form.source,
     submittedAt: new Date().toISOString(),
     pagePath: window.location.pathname,
@@ -159,11 +244,11 @@ const Book = () => {
     }
   };
 
-  const markContactFieldTouched = (field: 'name' | 'email' | 'location') => {
+  const markContactFieldTouched = (field: 'name' | 'email' | 'phone' | 'location') => {
     setContactTouched((prev) => ({ ...prev, [field]: true }));
   };
 
-  const getContactFieldError = (field: 'name' | 'email' | 'location') => {
+  const getContactFieldError = (field: 'name' | 'email' | 'phone' | 'location') => {
     if (!contactTouched[field]) {
       return '';
     }
@@ -176,6 +261,10 @@ const Book = () => {
       return CONTACT_FIELD_ERRORS.email;
     }
 
+    if (field === 'phone' && !isPhoneValid) {
+      return CONTACT_FIELD_ERRORS.phone;
+    }
+
     if (field === 'location' && form.location.trim().length <= 1) {
       return CONTACT_FIELD_ERRORS.location;
     }
@@ -185,7 +274,7 @@ const Book = () => {
 
   return (
     <div id="pg-book" className="pg on">
-      <div className="book-page">
+      <div className={`book-page ${isQuestionnaireActive ? 'questionnaire-active' : ''}`}>
         <div className="book-l">
           <div className="book-l-c">
             <span className="sec-label gold">{BOOKING_CONTENT.sectionLabel}</span>
@@ -205,10 +294,22 @@ const Book = () => {
           {!submitted && (
             <div className="bk-form-wrap">
               <form
+                onFocusCapture={() => setIsFormInteracting(true)}
+                onPointerDownCapture={() => setIsFormInteracting(true)}
+                onBlurCapture={(event) => {
+                  const nextFocusedElement = event.relatedTarget;
+                  if (nextFocusedElement instanceof Node && event.currentTarget.contains(nextFocusedElement)) {
+                    return;
+                  }
+
+                  if (!hasQuestionnaireResponses && !isOnContactStep) {
+                    setIsFormInteracting(false);
+                  }
+                }}
                 onSubmit={async (event) => {
                   event.preventDefault();
                   if (!isContactStepComplete) {
-                    setContactTouched({ name: true, email: true, location: true });
+                    setContactTouched({ name: true, email: true, phone: true, location: true });
                     return;
                   }
 
@@ -239,35 +340,52 @@ const Book = () => {
                 {BOOKING_OPTION_STEPS.map((stepConfig, stepIndex) => (
                   <div className={`bk-form-step ${step === stepIndex ? 'on' : ''}`} key={stepConfig.id}>
                     <div className="bk-q">
-                      {stepConfig.question}
-                      {stepConfig.isRequired && <span className="bk-required-mark">{BOOKING_CONTENT.requiredMarker}</span>}
+                      {stepConfig.category}
+                      <span className="bk-required-mark">{BOOKING_CONTENT.requiredMarker}</span>
                     </div>
                     <div className="bk-sub">{stepConfig.subtext}</div>
-                    <div className="bk-opts">
-                      {stepConfig.options.map((option, optionIndex) => (
-                        <button
-                          key={option.title}
-                          type="button"
-                          className={`bk-opt ${(selected[stepIndex] || []).includes(optionIndex) ? 'sel' : ''}`}
-                          onClick={() => toggleOption(stepIndex, optionIndex)}
-                          aria-pressed={(selected[stepIndex] || []).includes(optionIndex)}
-                        >
-                          <span className="opt-icon">0{optionIndex + 1}</span>
-                          <h4>{option.title}</h4>
-                          <p>{option.description}</p>
-                        </button>
-                      ))}
-                    </div>
-                    {stepConfig.showBudgetSelect && (
-                      <div className="bk-field" style={{ marginTop: '8px' }}>
-                        <label>Approximate Budget (optional)</label>
-                        <select value={form.budget} onChange={(e) => setFormField('budget', e.target.value)}>
-                          {BUDGET_OPTIONS.map((budgetOption, index) => (
-                            <option key={budgetOption} value={index === 0 ? '' : budgetOption}>
-                              {budgetOption}
-                            </option>
+                    {stepConfig.questions.map((question) => (
+                      <div className="bk-question-group" key={question.id}>
+                        <p className="bk-question-title">
+                          {question.id}. {question.prompt}
+                        </p>
+                        <div className="bk-opts">
+                          {question.options.map((option, optionIndex) => (
+                            <button
+                              key={option.title}
+                              type="button"
+                              className={`bk-opt ${(questionSelections[question.id] || []).includes(optionIndex) ? 'sel' : ''}`}
+                              onClick={() => toggleQuestionOption(question.id, optionIndex, question.selectionMode || 'single')}
+                              aria-pressed={(questionSelections[question.id] || []).includes(optionIndex)}
+                            >
+                              <span className="opt-icon">{String(optionIndex + 1).padStart(2, '0')}</span>
+                              <h4>{option.title}</h4>
+                              <p>{option.description}</p>
+                            </button>
                           ))}
-                        </select>
+                        </div>
+                        {question.allowComment && (
+                          <div className="bk-field bk-inline-comment">
+                            <label>Optional detail</label>
+                            <input
+                              type="text"
+                              placeholder={question.commentPlaceholder || 'Add details'}
+                              value={questionComments[question.id] || ''}
+                              onChange={(e) => setQuestionComment(question.id, e.target.value)}
+                            />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                    {stepConfig.categoryCommentLabel && (
+                      <div className="bk-field bk-category-comment">
+                        <label>{stepConfig.categoryCommentLabel}</label>
+                        <textarea
+                          rows={4}
+                          placeholder={stepConfig.categoryCommentPlaceholder || 'Add context'}
+                          value={categoryComments[stepConfig.id] || ''}
+                          onChange={(e) => setCategoryComment(stepConfig.id, e.target.value)}
+                        ></textarea>
                       </div>
                     )}
                     <div className="bk-nav">
@@ -278,7 +396,7 @@ const Book = () => {
                       ) : (
                         <div></div>
                       )}
-                      <button className="btn-tr" type="button" onClick={() => setStep(stepIndex + 1)} disabled={!hasStepSelection(stepIndex)}>
+                      <button className="btn-tr" type="button" onClick={() => setStep(stepIndex + 1)} disabled={!isStepComplete(stepIndex)}>
                         <span>{BOOKING_CONTENT.continueLabel}</span>
                       </button>
                     </div>
@@ -304,25 +422,25 @@ const Book = () => {
                           placeholder={field.placeholder}
                           value={form[field.key]}
                           className={
-                            (field.key === 'name' || field.key === 'email' || field.key === 'location') && getContactFieldError(field.key)
+                            (field.key === 'name' || field.key === 'email' || field.key === 'phone' || field.key === 'location') && getContactFieldError(field.key)
                               ? 'bk-input-invalid'
                               : ''
                           }
                           aria-invalid={
-                            field.key === 'name' || field.key === 'email' || field.key === 'location'
+                            field.key === 'name' || field.key === 'email' || field.key === 'phone' || field.key === 'location'
                               ? Boolean(getContactFieldError(field.key))
                               : false
                           }
                           required={field.required}
                           onChange={(e) => setFormField(field.key, e.target.value)}
                           onBlur={() => {
-                            if (field.key === 'name' || field.key === 'email' || field.key === 'location') {
+                            if (field.key === 'name' || field.key === 'email' || field.key === 'phone' || field.key === 'location') {
                               markContactFieldTouched(field.key);
                             }
                           }}
                         />
                       )}
-                      {(field.key === 'name' || field.key === 'email' || field.key === 'location') && getContactFieldError(field.key) && (
+                      {(field.key === 'name' || field.key === 'email' || field.key === 'phone' || field.key === 'location') && getContactFieldError(field.key) && (
                         <p className="bk-field-error">{getContactFieldError(field.key)}</p>
                       )}
                     </div>
