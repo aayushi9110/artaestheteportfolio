@@ -135,7 +135,7 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
           { title: 'As soon as possible (ready to start yesterday).', description: 'High urgency and immediate momentum.' },
           { title: 'Within 3-6 months.', description: 'Short-term execution window.' },
           { title: 'Within 6-12 months.', description: 'Moderate timeline with phased planning.' },
-          { title: 'Tied to a specific date.', description: 'Driven by a fixed event or deadline.' }
+          { title: 'Tied to a specific date. ', description: 'Driven by a fixed event or deadline.' }
         ]
       }
     ]
