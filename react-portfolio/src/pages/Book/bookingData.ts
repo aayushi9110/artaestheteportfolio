@@ -90,16 +90,29 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
     questions: [
       {
         id: 1,
-        prompt: 'What is the primary driver for this project? (Select all that apply)',
-        selectionMode: 'multiple',
-        allowComment: true,
-        commentPlaceholder: 'Other (optional): add any specific driver not listed above.',
+        prompt: 'What did you just move into - or what are you about to move into?',
+        selectionMode: 'single',
         options: [
-          { title: 'Lack of functionality or flow in daily life.', description: 'Current layout does not support routines smoothly.' },
-          { title: 'Outdated aesthetics that no longer reflect my style.', description: 'The current look feels disconnected from your taste.' },
-          { title: 'Space feels cluttered, uninviting, or uncomfortable.', description: 'The room lacks comfort, order, or emotional warmth.' },
-          { title: 'Preparing for a new life stage (family growth, empty nest).', description: 'Life changes require the space to adapt.' },
-          { title: 'Other', description: 'Use the comment box if your driver is different.' }
+          { title: 'A studio', description: 'Compact single-space home.' },
+          { title: 'A one-bedroom', description: 'One-bedroom apartment or condo.' },
+          { title: 'A two-bedroom', description: 'Two-bedroom apartment or condo.' },
+          { title: 'A three-bedroom or larger', description: 'Larger apartment, condo, or house.' },
+          { title: 'A brownstone (full floor or more)', description: 'Townhouse or full-floor brownstone setup.' },
+          { title: "I'm furnishing a pied-a-terre or second home", description: 'Part-time or secondary residence.' },
+          { title: "I'm an interior designer / architect / realtor furnishing for a client", description: 'Trade or partner project for a client.' }
+        ]
+      },
+      {
+        id: 15,
+        prompt: 'Roughly how big is the space?',
+        selectionMode: 'single',
+        options: [
+          { title: 'Under 600 sq ft', description: 'Compact footprint.' },
+          { title: '600-900 sq ft', description: 'Small-to-medium space.' },
+          { title: '900-1,300 sq ft', description: 'Comfortable medium-size layout.' },
+          { title: '1,300-2,000 sq ft', description: 'Large primary residence footprint.' },
+          { title: 'Over 2,000 sq ft', description: 'Expansive multi-zone layout.' },
+          { title: 'Not sure yet', description: 'No exact measurements available yet.' }
         ]
       },
       {
@@ -111,6 +124,19 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
           { title: 'The Hub', description: 'High-energy, social, and ready for guests.' },
           { title: 'The Showpiece', description: 'Visually stunning and ready for wow moments.' },
           { title: 'The Workhorse', description: 'Highly organized, durable, and practical for daily life.' }
+        ]
+      },
+      {
+        id: 16,
+        prompt: "Be honest. What's the one thing you refuse to compromise on?",
+        selectionMode: 'single',
+        options: [
+          { title: 'A great sofa', description: 'Comfort and quality seating is the top priority.' },
+          { title: 'A beautiful bed', description: 'Sleep quality and a strong bedroom anchor come first.' },
+          { title: 'Real art on the walls', description: 'Authentic art is non-negotiable.' },
+          { title: "Lighting that doesn't feel like a rental", description: 'Layered, elevated lighting is essential.' },
+          { title: "A dining table I'd actually host at", description: 'Hosting-ready dining matters most.' },
+          { title: 'Hidden storage everywhere', description: 'Clean surfaces and concealed storage are critical.' }
         ]
       },
       {
@@ -127,15 +153,27 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
       },
       {
         id: 4,
-        prompt: 'What is your desired timeline for completion?',
+        prompt: 'When do you want it finished?',
         selectionMode: 'single',
-        allowComment: true,
-        commentPlaceholder: 'Specific date (optional): holiday, move-in, event, or milestone.',
         options: [
-          { title: 'As soon as possible (ready to start yesterday).', description: 'High urgency and immediate momentum.' },
-          { title: 'Within 3-6 months.', description: 'Short-term execution window.' },
-          { title: 'Within 6-12 months.', description: 'Moderate timeline with phased planning.' },
-          { title: 'Tied to a specific date. ', description: 'Driven by a fixed event or deadline.' }
+          { title: 'ASAP - within 6 weeks', description: 'Fast-track timeline with immediate start expectations.' },
+          { title: 'Within the next 2 months', description: 'Near-term completion target.' },
+          { title: 'Sometime in the next 3-6 months', description: 'Flexible medium-term window.' },
+          { title: 'No rush, exploring options', description: 'Discovery-first pace without a hard deadline.' },
+          { title: 'Already moved in, currently unhappy with how it looks', description: 'Needs a refresh after moving in.' }
+        ]
+      },
+      {
+        id: 17,
+        prompt: 'What feels right for the furniture, lighting, art, and rugs?',
+        selectionMode: 'single',
+        options: [
+          { title: 'Under $25K - I want to be smart about it', description: 'Cost-conscious with strong impact priorities.' },
+          { title: '$25K-$50K', description: 'Balanced investment with flexibility.' },
+          { title: '$50K-$100K', description: 'Premium scope with broader sourcing range.' },
+          { title: '$100K-$200K', description: 'High-end furnishing and layered detailing.' },
+          { title: '$200K+', description: 'Top-tier scope with full customization potential.' },
+          { title: "Not sure yet - that's part of why I'm here", description: 'Open to guidance on realistic planning.' }
         ]
       }
     ]
@@ -168,16 +206,6 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
           { title: 'Moody', description: 'Navy, charcoal, forest green, and deep plums.' },
           { title: 'Vibrant', description: 'Jewel tones, pops of bright color, and high contrast.' }
         ]
-      },
-      {
-        id: 7,
-        prompt: 'How do you feel about existing pieces?',
-        selectionMode: 'single',
-        options: [
-          { title: 'Fresh Start', description: 'A completely new look with no existing furniture required.' },
-          { title: 'Selective Mix', description: 'Design around a few key heirlooms or art pieces.' },
-          { title: 'Heavy Integration', description: 'Keep most current furniture and refresh around it.' }
-        ]
       }
     ]
   },
@@ -186,16 +214,6 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
     category: 'Art & Collections',
     subtext: 'Help us understand your current collection and desired art presence.',
     questions: [
-      {
-        id: 8,
-        prompt: 'What is the status of your art collection?',
-        selectionMode: 'single',
-        options: [
-          { title: 'Established collection', description: 'Needs professional placement and lighting support.' },
-          { title: 'Growing collection', description: 'Have a few pieces and want to acquire more.' },
-          { title: 'Starting from scratch', description: 'Need guidance sourcing and selecting pieces.' }
-        ]
-      },
       {
         id: 9,
         prompt: 'How should art function in your home?',
@@ -233,47 +251,6 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
           { title: 'Casual', description: 'Standing room, appetizers, and natural flow.' },
           { title: 'Large Scale', description: 'Parties of 15+ with flexible seating.' },
           { title: 'Rarely', description: 'Primarily for immediate household use.' }
-        ]
-      },
-      {
-        id: 12,
-        prompt: 'Any specific lifestyle must-haves? (Select all that apply)',
-        selectionMode: 'multiple',
-        options: [
-          { title: 'High-durability/stain-resistant fabrics', description: 'Kid and pet-friendly performance.' },
-          { title: 'Dedicated home office or Zoom-ready background', description: 'Professional and camera-ready zones.' },
-          { title: 'Advanced smart-home/AV integration', description: 'Seamless connected living experience.' },
-          { title: 'Sustainable/eco-friendly material sourcing', description: 'Environmentally conscious choices.' }
-        ]
-      }
-    ]
-  },
-  {
-    id: 4,
-    category: 'Budget & Expectations',
-    subtext: 'Align investment philosophy and collaboration style from the start.',
-    categoryCommentLabel: 'Comment (optional) - Budget & Process Clarifications',
-    categoryCommentPlaceholder: 'Share budget guardrails, priorities, and how involved you want to be.',
-    questions: [
-      {
-        id: 13,
-        prompt: 'Which investment philosophy best describes you?',
-        selectionMode: 'single',
-        options: [
-          { title: 'Investment-focused', description: 'Bespoke, luxurious, and long-term value.' },
-          { title: 'Premium Quality', description: 'High-quality brands with selective custom elements.' },
-          { title: 'Balanced Approach', description: 'Mix of high-impact splurges and smart saves.' },
-          { title: 'Value-Conscious', description: 'Effective changes with strict cost focus.' }
-        ]
-      },
-      {
-        id: 14,
-        prompt: 'How involved do you want to be in the design process?',
-        selectionMode: 'single',
-        options: [
-          { title: 'The Collaborator', description: 'Review every sample and participate in each decision.' },
-          { title: 'The Approver', description: 'Review 2-3 options and make the final call.' },
-          { title: 'The Visionary', description: 'Trust the designer to deliver a complete concept.' }
         ]
       }
     ]
@@ -322,7 +299,7 @@ export const CONTACT_FIELDS: ContactField[] = [
   {
     key: 'location',
     label: 'Location / City',
-    placeholder: 'New York, London, Sydney...',
+    placeholder: 'New York, San Francisco, ...',
     type: 'text',
     required: true
   },

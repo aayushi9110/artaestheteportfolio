@@ -180,7 +180,7 @@ const Book = () => {
     projectTypes: getQuestionSelectionsById(1),
     spaces: getQuestionSelectionsById(3),
     aesthetics: getQuestionSelectionsById(5),
-    budget: getQuestionSelectionsById(13).join(', '),
+    budget: getQuestionSelectionsById(17).join(', '),
     name: form.name.trim(),
     email: form.email.trim(),
     phone: form.phone.trim(),

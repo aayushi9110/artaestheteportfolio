@@ -9,10 +9,10 @@ export const CONTENT = {
     logoAlt: 'Art Aesthete logo',
   },
   home: {
-    punchline: 'Your space, your story, beautifully told',
-    heroTitleLines: ['Where Spaces', 'Become', 'Living Art'],
+    punchline: 'Editorial furnishing for your home',
+    heroTitleLines: ['Plans. Pieces. Polish'],
     heroDescription:
-      'We design interiors that feel as extraordinary as the people who inhabit them. Every detail is intentional. Every room tells a story.',
+      'Empty to Finished. In Six Weeks. A curated, editorial approach to furnishing your home.',
     stats: [
       { value: '51+', label: 'Projects Completed' },
       { value: '30+', label: 'Spaces Styled' },
@@ -21,12 +21,22 @@ export const CONTENT = {
   },
   about: {
     kicker: 'My Story',
-    heading: 'My Story',
+    heading: 'Hi, I’m Aayushi.',
     lead: '',
-    storyParagraphs: [
-      'Hi, I am Aayushi Shah. I set out to find rooms that felt honest - spaces that did not pretend to be something they were not.',
-      'Most people decorate their homes. I believe you should curate them. A decorated room fills space. A curated one commands it.',
-      'Art Aesthete exists for the homeowner who is done settling for fine and is ready for a space that actually moves them.',
+    storyParagraphs: [`Most furniture in this city is bought on the wrong Saturday by the right people. I know — I sold it to them. For 7 years.
+At Crate & Barrel, then West Elm, then BoConcept. From the floor, I watched a particular ritual repeat itself a thousand times: someone closes on their first apartment, spends Saturday in a daze, walks out with a sectional that looked right under fluorescent lights and depressing under their actual ones. Goes home. Scrolls Pinterest until 2 a.m. Starts again next weekend.
+There's a better way to do this. I just hadn't seen anyone bother to build it.
+So I did.
+This studio furnishes newly-renovated condos, family homes, and apartments. Six to ten weeks, empty to finished. Flat fees, real trade discounts, and the same catalogs the AD-100 firms shop too — minus the nine-month timeline. The result is editorial. Magazine-good, but yours, not somebody else's.
+
+If you just bought a place-
+You're not going crazy. The Pinterest board, the rug you keep returning, the chairs that looked great until they arrived — that's the apartment fighting back. It's not a taste problem. It's a sequencing problem. You need someone who can hold the whole room in their head while you go back to your actual job. That's the job.
+
+If you're a designer, architect, or realtor-
+You know the moment. The renovation wraps, the client hugs you, then asks the question you dread: what now? You don't want to spend the next nine months furnishing for a 12% markup. I do. White-label, co-branded, or quietly behind the scenes — I make your finished project actually finish.
+
+If the rooms in your head and the rooms in your apartment haven't met yet — let's introduce them.
+— Aayushi`,
     ],
   },
   pdf: {

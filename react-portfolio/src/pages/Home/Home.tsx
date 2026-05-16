@@ -176,8 +176,8 @@ const Home = () => {
         </div>
         <div className="ph-content rr">
           <span className="sec-label">Philosophy</span>
-          <h2>Art is not <em>decoration</em>.<br/>It is conversation.</h2>
-          <p>Founded by creative director Aayushi Shah, Art Aesthete was born from the belief that the spaces we inhabit shape who we are. We bring together painters, architects, and curators under one vision.</p>
+          <h2>Find your <em>furnishing direction</em>.<br/>It is conversation.</h2>
+          <p>Eight questions, three minutes. We'll send back a personalized style brief, a furniture direction, and a price range for your space — same day. </p>
           <p>Every project begins not with a brief, but with a story — yours. We listen, we feel, we translate emotion into form, texture, and light. The result is never just a beautiful room. It is a place where you recognise yourself.</p>
           <div style={{marginTop: '32px'}}>
             <Link to="/about" className="btn-ghost">My Story <span className="circ"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg></span></Link>
@@ -326,8 +326,8 @@ const Home = () => {
 
       <div className="cta-strip">
         <div style={{position: 'relative', zIndex: 1}}>
-          <h2>Ready to transform your space?</h2>
-          <p>Every remarkable interior begins with a single conversation.</p>
+          <h2>Ready to furnish?</h2>
+          <p>Tell us about your space. We respond within 48 hours.</p>
         </div>
         <Link to="/book" className="btn-lt" style={{position: 'relative', zIndex: 1}}>
           <span>Book a Consultation</span>
