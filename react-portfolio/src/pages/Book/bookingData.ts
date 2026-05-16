@@ -244,7 +244,7 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
       },
       {
         id: 11,
-        prompt: 'How do you prefer to entertain?',
+        prompt: 'Anything you want me to know about the place, the people, or the project?',
         selectionMode: 'single',
         options: [
           { title: 'Intimate', description: 'Seated dinners for 4-6 people.' },

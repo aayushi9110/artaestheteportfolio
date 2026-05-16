@@ -49,8 +49,9 @@ const Book = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showTradeEnd, setShowTradeEnd] = useState(false);
   const [isFormInteracting, setIsFormInteracting] = useState(false);
   const [questionSelections, setQuestionSelections] = useState<Record<number, number[]>>({});
   const [questionComments, setQuestionComments] = useState<Record<number, string>>({});
@@ -68,6 +69,15 @@ const Book = () => {
     setQuestionSelections((prev) => {
       const currentSelections = prev[questionId] || [];
       const isAlreadySelected = currentSelections.includes(optionIndex);
+
+      // Special logic: If first question and last option (trade)
+      if (questionId === 1 && optionIndex === 6 && !isAlreadySelected) {
+        setShowTradeEnd(true);
+        return {
+          ...prev,
+          [questionId]: [optionIndex]
+        };
+      }
 
       if (selectionMode === 'single') {
         return {
@@ -291,7 +301,17 @@ const Book = () => {
           </div>
         </div>
         <div className="book-r">
-          {!submitted && (
+          {!submitted && !showTradeEnd && (
+                      {showTradeEnd && (
+                        <div className="trade-end-screen">
+                          <h2>You're in the right place.</h2>
+                          <p>The Trade Program is for architects, designers, and realtors furnishing on behalf of a client. White-label, co-branded, or quietly behind-the-scenes — six-week turnaround, 10–15% referral commission.<br/>Let's skip the quiz and just talk.</p>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem' }}>
+                            <a className="btn-tr" href="https://calendly.com/your-calendly-link" target="_blank" rel="noopener noreferrer">Book a 20-min intro call →</a>
+                            <a className="btn-tr" href="mailto:your@email.com">Email me directly →</a>
+                          </div>
+                        </div>
+                      )}
             <div className="bk-form-wrap">
               <form
                 onFocusCapture={() => setIsFormInteracting(true)}
