@@ -49,7 +49,7 @@ const Book = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
-  const [submitError, setSubmitError] = useState('');
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showTradeEnd, setShowTradeEnd] = useState(false);
   const [isFormInteracting, setIsFormInteracting] = useState(false);
@@ -302,16 +302,6 @@ const Book = () => {
         </div>
         <div className="book-r">
           {!submitted && !showTradeEnd && (
-                      {showTradeEnd && (
-                        <div className="trade-end-screen">
-                          <h2>You're in the right place.</h2>
-                          <p>The Trade Program is for architects, designers, and realtors furnishing on behalf of a client. White-label, co-branded, or quietly behind-the-scenes — six-week turnaround, 10–15% referral commission.<br/>Let's skip the quiz and just talk.</p>
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem' }}>
-                            <a className="btn-tr" href="https://calendly.com/your-calendly-link" target="_blank" rel="noopener noreferrer">Book a 20-min intro call →</a>
-                            <a className="btn-tr" href="mailto:your@email.com">Email me directly →</a>
-                          </div>
-                        </div>
-                      )}
             <div className="bk-form-wrap">
               <form
                 onFocusCapture={() => setIsFormInteracting(true)}
@@ -478,28 +468,35 @@ const Book = () => {
                   {!isContactStepComplete && (
                     <p className="bk-form-hint">{BOOKING_CONTENT.contactHint}</p>
                   )}
-                </div>
-
-              </form>
-
-              {submitError && (
-                <div className="bk-submit-overlay" role="alert" aria-live="assertive">
-                  <div className="bk-submit-error-panel">
-                    <div className="bk-submit-error-icon" aria-hidden="true">
-                      <svg width="30" height="30" viewBox="0 0 24 24" role="presentation" focusable="false">
-                        <path d="M12 2 22 20H2L12 2Zm0 6.2a1 1 0 0 0-1 1v4.9a1 1 0 1 0 2 0V9.2a1 1 0 0 0-1-1Zm0 10a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Z" fill="currentColor"/>
-                      </svg>
+                  {submitError && (
+                    <div className="bk-submit-overlay" role="alert" aria-live="assertive">
+                      <div className="bk-submit-error-panel">
+                        <div className="bk-submit-error-icon" aria-hidden="true">
+                          <svg width="30" height="30" viewBox="0 0 24 24" role="presentation" focusable="false">
+                            <path d="M12 2 22 20H2L12 2Zm0 6.2a1 1 0 0 0-1 1v4.9a1 1 0 1 0 2 0V9.2a1 1 0 0 0-1-1Zm0 10a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Z" fill="currentColor"/>
+                          </svg>
+                        </div>
+                        <p className="bk-submit-error">{submitError}</p>
+                        <button className="bk-submit-error-dismiss" type="button" onClick={() => setSubmitError(null)}>
+                          Dismiss
+                        </button>
+                      </div>
                     </div>
-                    <p className="bk-submit-error">{submitError}</p>
-                    <button className="bk-submit-error-dismiss" type="button" onClick={() => setSubmitError('')}>
-                      Dismiss
-                    </button>
-                  </div>
+                  )}
                 </div>
-              )}
+              </form>
             </div>
           )}
-
+          {showTradeEnd && (
+            <div className="trade-end-screen">
+              <h2>You're in the right place.</h2>
+              <p>The Trade Program is for architects, designers, and realtors furnishing on behalf of a client. White-label, co-branded, or quietly behind-the-scenes — six-week turnaround, 10–15% referral commission.<br/>Let's skip the quiz and just talk.</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem' }}>
+                <a className="btn-tr" href="https://calendly.com/your-calendly-link" target="_blank" rel="noopener noreferrer">Book a 20-min intro call →</a>
+                <a className="btn-tr" href="mailto:your@email.com">Email me directly →</a>
+              </div>
+            </div>
+          )}
           {submitted && (
             <div className="bk-success" style={{ display: 'block' }}>
               <div className="check">✓</div>

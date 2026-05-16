@@ -170,17 +170,17 @@ const Home = () => {
         </div>
       </div>
 
-      <section className="philosophy" id="about-strip">
+      <section className="Whats and Hows" id="about-strip">
         <div className="ph-img rl">
           <img src={HOME_STUDIO_IMAGE_URL} alt="Studio" loading="lazy"/>
         </div>
         <div className="ph-content rr">
-          <span className="sec-label">Philosophy</span>
+          <span className="sec-label">Whats and Hows</span>
           <h2>Find your <em>furnishing direction</em>.<br/> </h2>
           <p>Eight questions, two minutes. We'll send back a personalized style brief, a furniture direction, and a price range for your space — same day. </p>
           <p>Every project begins not with a brief, but with a story — yours. We listen, we feel, we translate emotion into form, texture, and light. The result is never just a beautiful room. It is a place where you recognise yourself.</p>
           <div style={{marginTop: '32px'}}>
-            <Link to="/about" className="btn-ghost">My Story <span className="circ"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg></span></Link>
+            <Link to="/book" className="btn-ghost">Take the Quiz <span className="circ"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg></span></Link>
           </div>
         </div>
       </section>
@@ -244,8 +244,8 @@ const Home = () => {
 
       <section className="svc-prev">
         <div className="svc-hdr">
-          <span className="sec-label gold">What We Offer</span>
-          <h2>Craft at every <em>scale</em></h2>
+          <span className="sec-label gold">Services Section</span>
+          <h2><span style={{ color: 'var(--gold)' }}>Four ways</span> to work with us.</h2>
         </div>
         <div className="svc-grid">
           <div className="svc-card reveal" data-lbl="View">
@@ -256,14 +256,8 @@ const Home = () => {
                 <polyline points="9 22 9 12 15 12 15 22"/>
               </svg>
             </div>
-            <h3>Interior Design</h3>
-            <p>Full-service residential and commercial design — from concept boards to final installation. We craft environments that feel lived-in, luminous, and entirely yours.</p>
-            <div className="mode-pills">
-              <span className="mp">In-Person</span>
-              <span className="mp">Home Visit</span>
-              <span className="mp">Full Project</span>
-            </div>
-            <Link to="/process" className="svc-lnk">Learn more →</Link>
+              <h3>The Plan</h3>
+              <p>Space planning, furniture layout, and a finished sourcing list. For owners who want a designer's eye but want to do their own shopping. Two weeks. Flat fee from $2,500.</p>
           </div>
           <div className="svc-card reveal" style={{transitionDelay: '0.12s'}} data-lbl="Explore">
             <div className="svc-n">02</div>
@@ -273,14 +267,8 @@ const Home = () => {
                 <path d="M8 21h8M12 17v4"/>
               </svg>
             </div>
-            <h3>Virtual Consultation</h3>
-            <p>World-class design guidance from anywhere on earth — 3D walkthroughs, digital mood boards, and curated shopping lists delivered seamlessly online.</p>
-            <div className="mode-pills">
-              <span className="mp">Video Call</span>
-              <span className="mp">E-Design</span>
-              <span className="mp">Global</span>
-            </div>
-            <Link to="/virtual" className="svc-lnk">See full process →</Link>
+              <h3>The Furnishing</h3>
+              <p>Full turnkey. From floor plan to installed and styled, sourced through our trade accounts. Six to ten weeks. Packages from $4,500.</p>
           </div>
           <div className="svc-card reveal" style={{transitionDelay: '0.24s'}} data-lbl="Curate">
             <div className="svc-n">03</div>
@@ -290,14 +278,19 @@ const Home = () => {
                 <path d="M3 9h18M9 21V9"/>
               </svg>
             </div>
-            <h3>Fine Art Curation</h3>
-            <p>We source, commission, and place original artworks — paintings, sculptures, and textile works — that anchor a space with soul and intention.</p>
-            <div className="mode-pills">
-              <span className="mp">Original Works</span>
-              <span className="mp">Commission</span>
-              <span className="mp">Placement</span>
+              <h3>The Refresh</h3>
+              <p>A second wind for finished homes. New textiles, art, lighting, and accessories — restyled in a single install day. One week. From $3,200.</p>
             </div>
-            <Link to="/portfolio" className="svc-lnk">View art gallery →</Link>
+            <div className="svc-card reveal" style={{transitionDelay: '0.36s'}} data-lbl="Trade">
+              <div className="svc-n">04</div>
+              <div className="svc-ico">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+                  <path d="M4 20V8l8-4 8 4v12"/>
+                  <path d="M8 20v-6h8v6"/>
+                </svg>
+              </div>
+              <h3>The Trade Program</h3>
+              <p>For architects, designers, and realtors who need their finished projects furnished — fast. White-label or co-branded, six-week turnaround, 10–15% referral commission. By introduction.</p>
           </div>
         </div>
       </section>
