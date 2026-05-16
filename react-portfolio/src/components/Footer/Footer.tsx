@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 import './Footer.css';
 
 const serviceLinks = [
-  { label: 'Interior Design', to: '/process' },
-  { label: 'Virtual Consultation', to: '/virtual' },
-  { label: 'Fine Art Curation', to: '/portfolio' },
-  { label: 'Book Consultation', to: '/book' },
+  { label: 'The Plan', to: '/service/the-plan' },
+  { label: 'The Furnishing', to: '/service/the-furnishing' },
+  { label: 'The Refresh', to: '/service/the-refresh' },
+  { label: 'The Trade Program', to: '/service/the-trade-program' },
+  { label: 'Take the Quiz', to: '/book' },
 ];
 
 const contactLinks = [

@@ -22,7 +22,6 @@ const Header = () => {
     pathname.startsWith('/project/');
   const isProcessActive = pathname === '/process';
   const isAboutActive = pathname === '/about';
-  const isVirtualActive = pathname === '/virtual';
   const isBookActive = pathname === '/book';
   const logoSrc = isSubPage && !isStuck ? '/images/logos/artAesthetewh.png' : '/images/logos/artAesthete.png';
 
@@ -87,7 +86,6 @@ const Header = () => {
           <li><Link to="/portfolio" className={isPortfolioActive ? 'active' : ''} onClick={() => goTo('/portfolio')}>Portfolio</Link></li>
           <li><Link to="/process" className={isProcessActive ? 'active' : ''} onClick={() => goTo('/process')}>How We Work</Link></li>
           <li><Link to="/about" className={isAboutActive ? 'active' : ''} onClick={() => goTo('/about')}>About</Link></li>
-          <li><Link to="/virtual" className={isVirtualActive ? 'active' : ''} onClick={() => goTo('/virtual')}>Virtual Consult</Link></li>
         </ul>
         {!isBookPage && (
           <button className={`n-book ${isBookActive ? 'active' : ''}`.trim()} onClick={() => goTo('/book')}>
@@ -112,7 +110,6 @@ const Header = () => {
           <Link to="/portfolio" className={isPortfolioActive ? 'active' : ''} onClick={() => goTo('/portfolio')}>Portfolio</Link>
           <Link to="/process" className={isProcessActive ? 'active' : ''} onClick={() => goTo('/process')}>How We Work</Link>
           <Link to="/about" className={isAboutActive ? 'active' : ''} onClick={() => goTo('/about')}>About</Link>
-          <Link to="/virtual" className={isVirtualActive ? 'active' : ''} onClick={() => goTo('/virtual')}>Virtual Consult</Link>
           {!isBookPage && <button className={isBookActive ? 'active' : ''} onClick={() => goTo('/book')}>Book Consultation</button>}
           <button onClick={closeMobileMenu}>✕</button>
         </div>
