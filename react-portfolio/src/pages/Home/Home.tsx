@@ -248,7 +248,7 @@ const Home = () => {
           <h2><span style={{ color: 'var(--gold)' }}>Four ways</span> to work with us.</h2>
         </div>
         <div className="svc-grid">
-          <div className="svc-card reveal" data-lbl="View">
+          <Link to="/service/the-plan" className="svc-card reveal" style={{ textDecoration: 'none', color: 'inherit' }} data-lbl="View">
             <div className="svc-n">01</div>
             <div className="svc-ico">
               <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
@@ -257,9 +257,9 @@ const Home = () => {
               </svg>
             </div>
               <h3>The Plan</h3>
-              <p>Space planning, furniture layout, and a finished sourcing list. For owners who want a designer's eye but want to do their own shopping. Two weeks. Flat fee from $2,500.</p>
-          </div>
-          <div className="svc-card reveal" style={{transitionDelay: '0.12s'}} data-lbl="Explore">
+                <p>Space planning, furniture layout, and a finished sourcing list. For owners who want a designer's eye but want to do their own shopping. Two weeks.</p>
+          </Link>
+          <Link to="/service/the-furnishing" className="svc-card reveal" style={{transitionDelay: '0.12s', textDecoration: 'none', color: 'inherit'}} data-lbl="Explore">
             <div className="svc-n">02</div>
             <div className="svc-ico">
               <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
@@ -268,9 +268,9 @@ const Home = () => {
               </svg>
             </div>
               <h3>The Furnishing</h3>
-              <p>Full turnkey. From floor plan to installed and styled, sourced through our trade accounts. Six to ten weeks. Packages from $4,500.</p>
-          </div>
-          <div className="svc-card reveal" style={{transitionDelay: '0.24s'}} data-lbl="Curate">
+                <p>Full turnkey. From floor plan to installed and styled, sourced through our trade accounts. Six to ten weeks.</p>
+          </Link>
+          <Link to="/service/the-refresh" className="svc-card reveal" style={{transitionDelay: '0.24s', textDecoration: 'none', color: 'inherit'}} data-lbl="Curate">
             <div className="svc-n">03</div>
             <div className="svc-ico">
               <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
@@ -279,9 +279,9 @@ const Home = () => {
               </svg>
             </div>
               <h3>The Refresh</h3>
-              <p>A second wind for finished homes. New textiles, art, lighting, and accessories — restyled in a single install day. One week. From $3,200.</p>
-            </div>
-            <div className="svc-card reveal" style={{transitionDelay: '0.36s'}} data-lbl="Trade">
+              <p>A second wind for finished homes. New textiles, art, lighting, and accessories — restyled in a single install day. One week.</p>
+            </Link>
+            <Link to="/service/the-trade-program" className="svc-card reveal" style={{transitionDelay: '0.36s', textDecoration: 'none', color: 'inherit'}} data-lbl="Trade">
               <div className="svc-n">04</div>
               <div className="svc-ico">
                 <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
@@ -291,7 +291,7 @@ const Home = () => {
               </div>
               <h3>The Trade Program</h3>
               <p>For architects, designers, and realtors who need their finished projects furnished — fast. White-label or co-branded, six-week turnaround, 10–15% referral commission. By introduction.</p>
-          </div>
+            </Link>
         </div>
       </section>
 

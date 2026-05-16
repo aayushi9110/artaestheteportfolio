@@ -85,7 +85,7 @@ const Header = () => {
         </Link>
         <ul className="n-links">
           <li><Link to="/portfolio" className={isPortfolioActive ? 'active' : ''} onClick={() => goTo('/portfolio')}>Portfolio</Link></li>
-          <li><Link to="/process" className={isProcessActive ? 'active' : ''} onClick={() => goTo('/process')}>Process</Link></li>
+          <li><Link to="/process" className={isProcessActive ? 'active' : ''} onClick={() => goTo('/process')}>How We Work</Link></li>
           <li><Link to="/about" className={isAboutActive ? 'active' : ''} onClick={() => goTo('/about')}>About</Link></li>
           <li><Link to="/virtual" className={isVirtualActive ? 'active' : ''} onClick={() => goTo('/virtual')}>Virtual Consult</Link></li>
         </ul>
@@ -110,7 +110,7 @@ const Header = () => {
         <div id="mob-nav">
           <Link to="/" className={isHomeActive ? 'active' : ''} onClick={() => goTo('/')}>Home</Link>
           <Link to="/portfolio" className={isPortfolioActive ? 'active' : ''} onClick={() => goTo('/portfolio')}>Portfolio</Link>
-          <Link to="/process" className={isProcessActive ? 'active' : ''} onClick={() => goTo('/process')}>Process</Link>
+          <Link to="/process" className={isProcessActive ? 'active' : ''} onClick={() => goTo('/process')}>How We Work</Link>
           <Link to="/about" className={isAboutActive ? 'active' : ''} onClick={() => goTo('/about')}>About</Link>
           <Link to="/virtual" className={isVirtualActive ? 'active' : ''} onClick={() => goTo('/virtual')}>Virtual Consult</Link>
           {!isBookPage && <button className={isBookActive ? 'active' : ''} onClick={() => goTo('/book')}>Book Consultation</button>}

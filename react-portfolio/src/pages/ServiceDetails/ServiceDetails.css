@@ -1,0 +1,358 @@
+#pg-service-detail {
+  min-height: 100vh;
+  padding: 64px 32px 44px;
+}
+
+.service-detail-container {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.service-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: var(--cream);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 24px;
+  transition: opacity 0.3s ease;
+}
+
+.service-back-btn:hover {
+  opacity: 0.7;
+}
+
+.service-back-btn svg {
+  width: 12px;
+  height: 8px;
+}
+
+.sd-hero {
+  margin-bottom: 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 26px;
+}
+
+.sd-hero h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 300;
+  color: #2c1f14;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.sd-subhead {
+  font-size: 1.1rem;
+  color: #2c1f14;
+  line-height: 1.5;
+  max-width: 600px;
+  font-weight: 300;
+}
+
+.sd-body {
+  padding: 12px 0 0;
+}
+
+.sd-body-content {
+  color: #2c1f14;
+  line-height: 1.65;
+}
+
+.sd-body-content > p {
+  font-size: 1.05rem;
+  margin-bottom: 16px;
+  color: #2c1f14;
+  line-height: 1.68;
+  font-weight: 400;
+}
+
+.sd-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 14px;
+  position: sticky;
+  top: 78px;
+  z-index: 4;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(250, 247, 242, 0.9);
+  border: 1px solid rgba(44, 31, 20, 0.12);
+}
+
+.sd-tab {
+  border: 1px solid rgba(44, 31, 20, 0.24);
+  background: rgba(255, 255, 255, 0.55);
+  color: #2c1f14;
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+}
+
+.sd-tab.active {
+  border-color: var(--gold);
+  background: rgba(217, 201, 168, 0.32);
+  color: #2c1f14;
+}
+
+.sd-panel {
+  min-height: 260px;
+}
+
+.sd-section {
+  margin-bottom: 22px;
+  padding: 16px 18px;
+  border: 1px solid rgba(44, 31, 20, 0.14);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  background: rgba(250, 247, 242, 0.28);
+}
+
+.sd-section h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--gold);
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+.sd-section h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #2c1f14;
+  margin-bottom: 6px;
+}
+
+.sd-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sd-list li {
+  font-size: 1.05rem;
+  color: #2c1f14;
+  margin-bottom: 8px;
+  padding-left: 24px;
+  position: relative;
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+.sd-list li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.faq-item {
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-bottom: none;
+  border-left: 2px solid rgba(217, 201, 168, 0.72);
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 10px;
+}
+
+.faq-item h3 {
+  margin-bottom: 12px;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.faq-item p {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.05rem;
+  color: var(--gold);
+  line-height: 1.5;
+  margin: 0;
+  font-weight: 400;
+}
+
+.sd-faq-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sd-faq-toggle {
+  border: 1px solid rgba(217, 201, 168, 0.72);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.14);
+  padding: 10px 12px;
+}
+
+.sd-faq-toggle summary {
+  cursor: pointer;
+  color: var(--gold);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  list-style: none;
+}
+
+.sd-faq-toggle summary::-webkit-details-marker {
+  display: none;
+}
+
+.sd-faq-toggle summary::after {
+  content: "+";
+  float: right;
+  color: var(--gold);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.sd-faq-toggle[open] summary::after {
+  content: "-";
+}
+
+.sd-faq-toggle p {
+  margin-top: 8px;
+}
+
+.sd-table-wrapper {
+  overflow-x: auto;
+  margin: 12px 0 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.sd-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.05rem;
+  color: #2c1f14;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.sd-table thead {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sd-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--gold);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.05rem;
+}
+
+.sd-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sd-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.sd-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.sd-table-note {
+  font-size: 1rem;
+  color: #2c1f14;
+  font-style: italic;
+  margin: 8px 0 0 0;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.sd-cta-section {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sd-cta-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.sd-cta-buttons button {
+  flex: 1;
+  min-width: 240px;
+}
+
+@media (max-width: 768px) {
+  #pg-service-detail {
+    padding: 48px 18px 30px;
+  }
+
+  .sd-hero h1 {
+    font-size: clamp(1.6rem, 3vw, 2rem);
+  }
+
+  .sd-tabs {
+    top: 66px;
+    padding: 6px;
+  }
+
+  .sd-tab {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+  }
+
+  .sd-section h2 {
+    font-size: 1.4rem;
+  }
+
+  .sd-list li {
+    padding-left: 20px;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+
+  .sd-section {
+    padding: 12px 12px;
+    margin-bottom: 16px;
+  }
+
+  .sd-panel {
+    min-height: 0;
+  }
+
+  .sd-table {
+    font-size: 0.9rem;
+  }
+
+  .sd-table th,
+  .sd-table td {
+    padding: 10px 10px;
+  }
+
+  .sd-cta-buttons {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .sd-cta-buttons button {
+    min-width: 100%;
+    flex: none;
+  }
+}

@@ -24,7 +24,7 @@ nav.stuck {
   font-size: 1.45rem;
   font-weight: 400;
   letter-spacing: 0.09em;
-  color: var(--dark);
+  color: #2c1f14;
   text-decoration: none;
   cursor: pointer;
   padding: 8px 14px 9px;
@@ -82,7 +82,7 @@ nav.stuck .n-logo:hover .n-logo-mark {
   font-size: 0.8rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--dark);
+  color: #2c1f14;
   text-decoration: none;
   position: relative;
   font-weight: 400;
@@ -171,7 +171,7 @@ nav.stuck .n-logo:hover .n-logo-mark {
   display: block;
   width: 22px;
   height: 1.5px;
-  background: var(--dark);
+  background: #2c1f14;
   transition: all 0.35s;
 }
 
@@ -181,7 +181,7 @@ nav.stuck .n-logo:hover .n-logo-mark {
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--dark);
+  background: rgba(250, 247, 242, 0.98);
   z-index: 499;
   display: flex;
   flex-direction: column;
@@ -195,7 +195,7 @@ nav.stuck .n-logo:hover .n-logo-mark {
   font-family: "Cormorant Garamond", serif;
   font-size: 2rem;
   font-weight: 300;
-  color: var(--cream);
+  color: #2c1f14;
   text-decoration: none;
   background: none;
   border: none;
@@ -216,11 +216,11 @@ nav.stuck .n-logo:hover .n-logo-mark {
 }
 
 nav.subpage:not(.stuck) .n-logo {
-  color: var(--linen);
+  color: #2c1f14;
 }
 
 nav.subpage:not(.stuck) .n-logo span {
-  color: var(--linen);
+  color: #2c1f14;
 }
 
 nav.subpage:not(.stuck) .n-logo:hover {
@@ -235,11 +235,11 @@ nav.subpage:not(.stuck) .n-logo:hover .byaayushi {
 }
 
 nav.subpage:not(.stuck) .n-links a {
-  color: var(--linen);
+  color: #2c1f14;
 }
 
 nav.subpage:not(.stuck) .n-links a::after {
-  background: var(--linen);
+  background: #2c1f14;
 }
 
 nav.subpage:not(.stuck) .n-links a:hover {
