@@ -348,65 +348,67 @@ const Book = () => {
                 </div>
 
                 {BOOKING_OPTION_STEPS.map((stepConfig, stepIndex) => (
-                  <div className={`bk-form-step ${step === stepIndex ? 'on' : ''}`} key={stepConfig.id}>
+                  <div className={`bk-form-step bk-form-step-questions ${step === stepIndex ? 'on' : ''}`} key={stepConfig.id}>
                     <div className="bk-q">
                       {stepConfig.category}
                       <span className="bk-required-mark">{BOOKING_CONTENT.requiredMarker}</span>
                     </div>
                     <div className="bk-sub">{stepConfig.subtext}</div>
-                    {stepConfig.questions.map((question) => {
-                      const selectionMode = question.selectionMode || 'single';
-                      const selectionHint = selectionMode === 'multiple' ? 'Select all that apply' : 'Select one option';
+                    <div className="bk-question-scroll">
+                      {stepConfig.questions.map((question) => {
+                        const selectionMode = question.selectionMode || 'single';
+                        const selectionHint = selectionMode === 'multiple' ? 'Select all that apply' : 'Select one option';
 
-                      return (
-                      <div className="bk-question-group" key={question.id}>
-                        <p className="bk-question-title">
-                          {question.id}. {question.prompt}
-                        </p>
-                        <p className="bk-question-hint">{selectionHint}</p>
-                        <div className="bk-opts" data-mode={selectionMode}>
-                          {question.options.map((option, optionIndex) => (
-                            <button
-                              key={option.title}
-                              type="button"
-                              className={`bk-opt ${selectionMode === 'multiple' ? 'is-multiple' : 'is-single'} ${(questionSelections[question.id] || []).includes(optionIndex) ? 'sel' : ''}`}
-                              onClick={() => toggleQuestionOption(question.id, optionIndex, question.selectionMode || 'single')}
-                              aria-pressed={(questionSelections[question.id] || []).includes(optionIndex)}
-                            >
-                              <span className="bk-opt-meta">
-                                <span className="bk-opt-control" aria-hidden="true" />
-                                <span className="opt-icon">{String(optionIndex + 1).padStart(2, '0')}</span>
-                              </span>
-                              <h4>{option.title}</h4>
-                              <p>{option.description}</p>
-                            </button>
-                          ))}
-                        </div>
-                        {question.allowComment && (
-                          <div className="bk-field bk-inline-comment">
-                            <label>Optional detail</label>
-                            <input
-                              type="text"
-                              placeholder={question.commentPlaceholder || 'Add details'}
-                              value={questionComments[question.id] || ''}
-                              onChange={(e) => setQuestionComment(question.id, e.target.value)}
-                            />
+                        return (
+                        <div className="bk-question-group" key={question.id}>
+                          <p className="bk-question-title">
+                            {question.id}. {question.prompt}
+                          </p>
+                          <p className="bk-question-hint">{selectionHint}</p>
+                          <div className="bk-opts" data-mode={selectionMode}>
+                            {question.options.map((option, optionIndex) => (
+                              <button
+                                key={option.title}
+                                type="button"
+                                className={`bk-opt ${selectionMode === 'multiple' ? 'is-multiple' : 'is-single'} ${(questionSelections[question.id] || []).includes(optionIndex) ? 'sel' : ''}`}
+                                onClick={() => toggleQuestionOption(question.id, optionIndex, question.selectionMode || 'single')}
+                                aria-pressed={(questionSelections[question.id] || []).includes(optionIndex)}
+                              >
+                                <span className="bk-opt-meta">
+                                  <span className="bk-opt-control" aria-hidden="true" />
+                                  <span className="opt-icon">{String(optionIndex + 1).padStart(2, '0')}</span>
+                                </span>
+                                <h4>{option.title}</h4>
+                                <p>{option.description}</p>
+                              </button>
+                            ))}
                           </div>
-                        )}
-                      </div>
-                      );
-                    })}
-                    {stepConfig.categoryCommentLabel && (
-                      <div className="bk-field bk-category-comment">
-                        <label>{stepConfig.categoryCommentLabel}</label>
-                        <textarea
-                          rows={4}
-                          placeholder={stepConfig.categoryCommentPlaceholder || 'Add context'}
-                          value={categoryComments[stepConfig.id] || ''}
-                          onChange={(e) => setCategoryComment(stepConfig.id, e.target.value)}
-                        ></textarea>
-                      </div>
-                    )}
+                          {question.allowComment && (
+                            <div className="bk-field bk-inline-comment">
+                              <label>Optional detail</label>
+                              <input
+                                type="text"
+                                placeholder={question.commentPlaceholder || 'Add details'}
+                                value={questionComments[question.id] || ''}
+                                onChange={(e) => setQuestionComment(question.id, e.target.value)}
+                              />
+                            </div>
+                          )}
+                        </div>
+                        );
+                      })}
+                      {stepConfig.categoryCommentLabel && (
+                        <div className="bk-field bk-category-comment">
+                          <label>{stepConfig.categoryCommentLabel}</label>
+                          <textarea
+                            rows={4}
+                            placeholder={stepConfig.categoryCommentPlaceholder || 'Add context'}
+                            value={categoryComments[stepConfig.id] || ''}
+                            onChange={(e) => setCategoryComment(stepConfig.id, e.target.value)}
+                          ></textarea>
+                        </div>
+                      )}
+                    </div>
                     <div className="bk-nav">
                       {stepIndex > 0 ? (
                         <button className="bk-back-btn" type="button" onClick={() => setStep(stepIndex - 1)}>
