@@ -2,7 +2,7 @@ import { SESv2Client, SendEmailCommand } from '@aws-sdk/client-sesv2';
 
 const ses = new SESv2Client({ region: process.env.AWS_REGION || 'us-east-1' });
 
-const REQUIRED_ENV_VARS = ['SES_FROM_EMAIL', 'SES_TO_EMAIL', 'CORS_ALLOW_ORIGIN'];
+const REQUIRED_ENV_VARS = ['SES_FROM_EMAIL', 'SES_TO_EMAIL'];
 
 const parsePositiveInt = (value, fallback) => {
   const parsed = Number.parseInt(String(value ?? ''), 10);
@@ -17,13 +17,39 @@ const RATE_LIMIT_MAX_KEYS = parsePositiveInt(process.env.RATE_LIMIT_MAX_KEYS, 15
 
 const rateLimitStore = new Map();
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': process.env.CORS_ALLOW_ORIGIN || 'null',
+const parseAllowedOrigins = () => {
+  const raw = typeof process.env.CORS_ALLOW_ORIGIN === 'string' ? process.env.CORS_ALLOW_ORIGIN : '';
+  const list = raw
+    .split(',')
+    .map((item) => item.trim())
+    .filter(Boolean);
+
+  return list.length > 0 ? list : ['*'];
+};
+
+const ALLOWED_ORIGINS = parseAllowedOrigins();
+
+const getAllowedOriginForRequest = (event) => {
+  const requestOrigin = getHeaderValue(event?.headers, 'origin');
+
+  if (!requestOrigin) {
+    return ALLOWED_ORIGINS.includes('*') ? '*' : ALLOWED_ORIGINS[0] || 'null';
+  }
+
+  if (ALLOWED_ORIGINS.includes('*')) {
+    return '*';
+  }
+
+  return ALLOWED_ORIGINS.includes(requestOrigin) ? requestOrigin : 'null';
+};
+
+const buildCorsHeaders = (event) => ({
+  'Access-Control-Allow-Origin': getAllowedOriginForRequest(event),
   'Access-Control-Allow-Headers': 'Content-Type,x-api-key',
   'Access-Control-Allow-Methods': 'OPTIONS,POST',
   Vary: 'Origin',
   'Content-Type': 'application/json'
-};
+});
 
 const getSafeArray = (value) =>
   Array.isArray(value)
@@ -229,6 +255,22 @@ const toTextList = (items) => {
   return items.map((item) => `  - ${item}`).join('\n');
 };
 
+const maskEmail = (email) => {
+  const safeEmail = getSafeString(email).toLowerCase();
+  const [localPart, domainPart] = safeEmail.split('@');
+
+  if (!localPart || !domainPart) {
+    return 'invalid-email';
+  }
+
+  const localMasked =
+    localPart.length <= 2
+      ? `${localPart[0] || '*'}*`
+      : `${localPart.slice(0, 2)}***`;
+
+  return `${localMasked}@${domainPart}`;
+};
+
 const renderHtmlDetailRow = (label, value) => `
   <tr>
     <td style="padding: 10px 0; width: 170px; vertical-align: top; color: #6b7280; font-weight: 600;">${label}</td>
@@ -370,13 +412,13 @@ const sendBookingEmail = async (payload) => {
     }
   });
 
-  await ses.send(command);
+  return ses.send(command);
 };
 
-const jsonResponse = (statusCode, body, extraHeaders = {}) => ({
+const jsonResponse = (event, statusCode, body, extraHeaders = {}) => ({
   statusCode,
   headers: {
-    ...corsHeaders,
+    ...buildCorsHeaders(event),
     ...extraHeaders
   },
   body: JSON.stringify(body)
@@ -397,10 +439,19 @@ const getHttpMethod = (event) => {
 const isOptionsRequest = (event) => getHttpMethod(event).toUpperCase() === 'OPTIONS';
 
 export const handler = async (event) => {
+  console.log('[booking-submit] Incoming request', {
+    method: getHttpMethod(event),
+    path: getSafeString(event?.rawPath) || getSafeString(event?.path),
+    origin: getHeaderValue(event?.headers, 'origin') || 'not-provided',
+    hasBody: Boolean(event?.body),
+    isBase64Encoded: Boolean(event?.isBase64Encoded)
+  });
+
   if (isOptionsRequest(event)) {
+    console.log('[booking-submit] OPTIONS preflight handled');
     return {
       statusCode: 204,
-      headers: corsHeaders,
+      headers: buildCorsHeaders(event),
       body: ''
     };
   }
@@ -418,6 +469,7 @@ export const handler = async (event) => {
 
     if (!ipLimit.allowed) {
       return jsonResponse(
+        event,
         429,
         {
           message: 'Too many requests. Please wait before submitting again.'
@@ -428,21 +480,38 @@ export const handler = async (event) => {
       );
     }
 
-    const rawBody = typeof event?.body === 'string' ? event.body : '';
+    const rawBody =
+      typeof event?.body === 'string'
+        ? event.isBase64Encoded
+          ? Buffer.from(event.body, 'base64').toString('utf8')
+          : event.body
+        : event?.body && typeof event.body === 'object'
+          ? JSON.stringify(event.body)
+          : '';
     let payload = {};
 
     try {
       payload = rawBody ? JSON.parse(rawBody) : {};
     } catch {
-      return jsonResponse(400, {
+      return jsonResponse(event, 400, {
         message: 'Invalid JSON body.'
       });
     }
 
     const { isValid, errors, normalized } = validatePayload(payload);
 
+    console.log('[booking-submit] Payload validation result', {
+      isValid,
+      errorCount: errors.length,
+      projectTypesCount: normalized.projectTypes.length,
+      spacesCount: normalized.spaces.length,
+      aestheticsCount: normalized.aesthetics.length,
+      email: maskEmail(normalized.email)
+    });
+
     if (!isValid) {
-      return jsonResponse(400, {
+      console.warn('[booking-submit] Validation failed', { errors });
+      return jsonResponse(event, 400, {
         message: 'Validation failed',
         errors
       });
@@ -455,7 +524,12 @@ export const handler = async (event) => {
     });
 
     if (!emailLimit.allowed) {
+      console.warn('[booking-submit] Rate limited by email', {
+        email: maskEmail(normalized.email),
+        retryAfterSeconds: emailLimit.retryAfterSeconds
+      });
       return jsonResponse(
+        event,
         429,
         {
           message: 'Too many enquiries from this email. Please try again later.'
@@ -466,15 +540,30 @@ export const handler = async (event) => {
       );
     }
 
-    await sendBookingEmail(normalized);
+    console.log('[booking-submit] Sending email via SES', {
+      from: maskEmail(process.env.SES_FROM_EMAIL || ''),
+      to: maskEmail(process.env.SES_TO_EMAIL || ''),
+      replyTo: maskEmail(normalized.email),
+      awsRegion: process.env.AWS_REGION || 'us-east-1'
+    });
 
-    return jsonResponse(200, {
+    const sesResponse = await sendBookingEmail(normalized);
+
+    console.log('[booking-submit] SES send success', {
+      messageId: getSafeString(sesResponse?.MessageId) || 'not-returned'
+    });
+
+    return jsonResponse(event, 200, {
       message: 'Booking enquiry sent successfully.'
     });
   } catch (error) {
-    console.error('Booking submit error:', error);
+    console.error('[booking-submit] Handler error', {
+      name: error instanceof Error ? error.name : 'UnknownError',
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined
+    });
 
-    return jsonResponse(500, {
+    return jsonResponse(event, 500, {
       message: 'Internal server error while sending booking enquiry. Please try again in sometime.'
     });
   }
