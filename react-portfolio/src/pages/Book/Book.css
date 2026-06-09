@@ -267,6 +267,10 @@
   margin: 0 0 8px;
 }
 
+.bk-question-group + .bk-question-group .bk-question-title {
+  margin: 60px 0 8px;
+}
+
 .bk-question-hint {
   margin: -2px 0 10px;
   font-size: 0.78rem;
@@ -675,6 +679,37 @@
   .book-page.questionnaire-active .book-r {
     padding-left: 36px;
     padding-right: 36px;
+  }
+}
+
+@media (max-height: 820px) and (min-width: 1101px) {
+  .book-l {
+    padding: 96px 34px 24px;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .book-page.questionnaire-active .book-l {
+    padding: 88px 24px 20px;
+  }
+
+  .book-faq {
+    margin-top: 18px;
+    gap: 8px;
+  }
+
+  .bfaq-item {
+    padding-top: 8px;
+  }
+
+  .bfaq-item h5 {
+    font-size: 0.8rem;
+  }
+
+  .bfaq-item p {
+    font-size: 0.84rem;
+    line-height: 1.4;
   }
 }
 

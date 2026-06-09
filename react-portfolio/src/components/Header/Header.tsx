@@ -13,6 +13,7 @@ const Header = () => {
   const [isStuck, setIsStuck] = useState(() => isHomePage || isBookPage || window.innerWidth <= STUCK_BREAKPOINT || window.scrollY > 50);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isSubPage = location.pathname !== '/';
+  const isHowWeWorkPage = pathname === '/process';
   const isHomeActive = pathname === '/';
   const isPortfolioActive =
     pathname === '/portfolio' ||
@@ -23,7 +24,8 @@ const Header = () => {
   const isProcessActive = pathname === '/process';
   const isAboutActive = pathname === '/about';
   const isBookActive = pathname === '/book';
-  const logoSrc = isSubPage && !isStuck ? '/images/logos/artAesthetewh.png' : '/images/logos/artAesthete.png';
+  const useLightLogoMark = isSubPage && !isStuck && !isHowWeWorkPage;
+  const logoSrc = useLightLogoMark ? '/images/logos/artAesthetewh.png' : '/images/logos/artAesthete.png';
 
   useEffect(() => {
     if (isHomePage) {
@@ -73,7 +75,7 @@ const Header = () => {
 
   return (
     <>
-      <nav id="nav" className={`${isStuck ? 'stuck' : ''} ${isSubPage ? 'subpage' : ''}`.trim()}>
+      <nav id="nav" className={`${isStuck ? 'stuck' : ''} ${isSubPage ? 'subpage' : ''} ${isHowWeWorkPage ? 'process-page' : ''}`.trim()}>
         <Link to="/" className={`n-logo ${isHomeActive ? 'active' : ''}`.trim()} onClick={() => goTo('/')}> 
           <img className="n-logo-mark" src={logoSrc} alt="Logo" style={{height: '32px', marginRight: '8px', verticalAlign: 'middle'}} />
           Art 

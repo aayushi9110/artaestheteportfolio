@@ -8,6 +8,9 @@ const ABOUT_CONTENT = CONTENT.about;
 const HERO_CONTENT = CONTENT.home;
 const aboutHeadingParts = ABOUT_CONTENT.heading.split(', ');
 const aboutLeadParts = ABOUT_CONTENT.lead.split('. ');
+const aboutLeadPrimary = (aboutLeadParts[0] ?? '').trim();
+const aboutLeadSecondary = (aboutLeadParts[1] ?? '').replace('.', '').trim();
+const hasAboutLead = aboutLeadPrimary.length > 0 || aboutLeadSecondary.length > 0;
 
 const renderMetricValue = (value: string, plusClassName: string) => {
   const hasPlus = value.endsWith('+');
@@ -77,7 +80,13 @@ const About = () => {
           <div className="ab-intro">
             <div className="ab-intro-txt reveal">
               <span className="sec-label">The Beginning</span>
-              <h2>{aboutLeadParts[0]}<br/><em>{(aboutLeadParts[1] ?? '').replace('.', '')}</em></h2> 
+              {hasAboutLead && (
+                <h2>
+                  {aboutLeadPrimary}
+                  {aboutLeadPrimary && aboutLeadSecondary ? <br/> : null}
+                  {aboutLeadSecondary ? <em>{aboutLeadSecondary}</em> : null}
+                </h2>
+              )}
               {ABOUT_CONTENT.storyParagraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}

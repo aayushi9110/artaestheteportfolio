@@ -215,17 +215,9 @@ nav.stuck .n-logo:hover .n-logo-mark {
   margin-top: 20px;
 }
 
-nav.subpage:not(.stuck) .n-logo {
-  color: #2c1f14;
-}
-
-nav.subpage:not(.stuck) .n-logo span {
-  color: #2c1f14;
-}
-
 nav.subpage:not(.stuck) .n-logo:hover {
   color: var(--gold);
-  background: rgba(44, 31, 20, 0.42);
+  background: rgba(245, 239, 228, 0.12);
   backdrop-filter: blur(6px);
 }
 
@@ -234,12 +226,33 @@ nav.subpage:not(.stuck) .n-logo:hover .byaayushi {
   color: var(--gold);
 }
 
+nav.subpage:not(.stuck) .n-logo {
+  color: var(--linen);
+}
+
+nav.subpage:not(.stuck) .byaayushi {
+  color: var(--linen);
+  opacity: 0.75;
+}
+
+nav.process-page.subpage:not(.stuck) .n-logo,
+nav.process-page.subpage:not(.stuck) .n-logo span,
+nav.process-page.subpage:not(.stuck) .byaayushi,
+nav.process-page.subpage:not(.stuck) .n-links a {
+  color: var(--dark);
+}
+
+nav.process-page.subpage:not(.stuck) .n-links a::after,
+nav.process-page.subpage:not(.stuck) .n-ham span {
+  background: var(--dark);
+}
+
 nav.subpage:not(.stuck) .n-links a {
-  color: #2c1f14;
+  color: var(--linen);
 }
 
 nav.subpage:not(.stuck) .n-links a::after {
-  background: #2c1f14;
+  background: var(--linen);
 }
 
 nav.subpage:not(.stuck) .n-links a:hover {
@@ -248,7 +261,7 @@ nav.subpage:not(.stuck) .n-links a:hover {
 
 nav.subpage:not(.stuck) .n-links a.active {
   color: var(--gold);
-  background: rgba(245, 239, 228, 0.18);
+  background: rgba(245, 239, 228, 0.12);
   backdrop-filter: blur(8px);
 }
 
@@ -259,11 +272,6 @@ nav.subpage:not(.stuck) .n-links a.active::after {
 
 nav.subpage:not(.stuck) .n-ham span {
   background: var(--linen);
-}
-
-nav.subpage:not(.stuck) .byaayushi {
-  color: var(--linen);
-  opacity: 0.75;
 }
 
 #mob-nav a:first-child {
