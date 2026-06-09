@@ -354,21 +354,29 @@ const Book = () => {
                       <span className="bk-required-mark">{BOOKING_CONTENT.requiredMarker}</span>
                     </div>
                     <div className="bk-sub">{stepConfig.subtext}</div>
-                    {stepConfig.questions.map((question) => (
+                    {stepConfig.questions.map((question) => {
+                      const selectionMode = question.selectionMode || 'single';
+                      const selectionHint = selectionMode === 'multiple' ? 'Select all that apply' : 'Select one option';
+
+                      return (
                       <div className="bk-question-group" key={question.id}>
                         <p className="bk-question-title">
                           {question.id}. {question.prompt}
                         </p>
-                        <div className="bk-opts">
+                        <p className="bk-question-hint">{selectionHint}</p>
+                        <div className="bk-opts" data-mode={selectionMode}>
                           {question.options.map((option, optionIndex) => (
                             <button
                               key={option.title}
                               type="button"
-                              className={`bk-opt ${(questionSelections[question.id] || []).includes(optionIndex) ? 'sel' : ''}`}
+                              className={`bk-opt ${selectionMode === 'multiple' ? 'is-multiple' : 'is-single'} ${(questionSelections[question.id] || []).includes(optionIndex) ? 'sel' : ''}`}
                               onClick={() => toggleQuestionOption(question.id, optionIndex, question.selectionMode || 'single')}
                               aria-pressed={(questionSelections[question.id] || []).includes(optionIndex)}
                             >
-                              <span className="opt-icon">{String(optionIndex + 1).padStart(2, '0')}</span>
+                              <span className="bk-opt-meta">
+                                <span className="bk-opt-control" aria-hidden="true" />
+                                <span className="opt-icon">{String(optionIndex + 1).padStart(2, '0')}</span>
+                              </span>
                               <h4>{option.title}</h4>
                               <p>{option.description}</p>
                             </button>
@@ -386,7 +394,8 @@ const Book = () => {
                           </div>
                         )}
                       </div>
-                    ))}
+                      );
+                    })}
                     {stepConfig.categoryCommentLabel && (
                       <div className="bk-field bk-category-comment">
                         <label>{stepConfig.categoryCommentLabel}</label>
@@ -406,8 +415,11 @@ const Book = () => {
                       ) : (
                         <div></div>
                       )}
-                      <button className="btn-tr" type="button" onClick={() => setStep(stepIndex + 1)} disabled={!isStepComplete(stepIndex)}>
+                      <button className="btn-tr bk-next-btn" type="button" onClick={() => setStep(stepIndex + 1)} disabled={!isStepComplete(stepIndex)}>
                         <span>{BOOKING_CONTENT.continueLabel}</span>
+                        <svg width="18" height="12" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                          <path d="M2 5H12M12 5L8 1M12 5l-4 4"/>
+                        </svg>
                       </button>
                     </div>
                   </div>

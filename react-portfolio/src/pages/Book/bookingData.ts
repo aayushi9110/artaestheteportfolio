@@ -51,7 +51,7 @@ export const BOOKING_CONTENT = {
   introHeadingEmphasis: 'story',
   introBody:
     "Tell us about your space, your vision, and what you're hoping to feel when you walk through the door. We'll take it from there.",
-  continueLabel: 'Continue ->',
+  continueLabel: 'Continue',
   backLabel: 'Back',
   submitLabel: 'Send My Enquiry ->',
   requiredMarker: '*',
@@ -103,7 +103,7 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
         ]
       },
       {
-        id: 15,
+        id: 2,
         prompt: 'Roughly how big is the space?',
         selectionMode: 'single',
         options: [
@@ -116,7 +116,7 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
         ]
       },
       {
-        id: 2,
+        id: 3,
         prompt: 'What is the vibe of your ultimate outcome?',
         selectionMode: 'single',
         options: [
@@ -127,7 +127,7 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
         ]
       },
       {
-        id: 16,
+        id: 4,
         prompt: "Be honest. What's the one thing you refuse to compromise on?",
         selectionMode: 'single',
         options: [
@@ -140,7 +140,7 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
         ]
       },
       {
-        id: 3,
+        id: 5,
         prompt: 'Who primarily uses this space?',
         selectionMode: 'multiple',
         options: [
@@ -152,7 +152,7 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
         ]
       },
       {
-        id: 4,
+        id: 6,
         prompt: 'When do you want it finished?',
         selectionMode: 'single',
         options: [
@@ -164,7 +164,7 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
         ]
       },
       {
-        id: 17,
+        id: 7,
         prompt: 'What feels right for the furniture, lighting, art, and rugs?',
         selectionMode: 'single',
         options: [
@@ -186,7 +186,7 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
     categoryCommentPlaceholder: 'Clarify nuances, references, materials you love, or details to avoid.',
     questions: [
       {
-        id: 5,
+        id: 8,
         prompt: 'Which aesthetic resonates most with your personal brand?',
         selectionMode: 'single',
         options: [
@@ -197,7 +197,7 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
         ]
       },
       {
-        id: 6,
+        id: 9,
         prompt: 'Regarding color, are you typically:',
         selectionMode: 'single',
         options: [
@@ -215,7 +215,7 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
     subtext: 'Help us understand your current collection and desired art presence.',
     questions: [
       {
-        id: 9,
+        id: 10,
         prompt: 'How should art function in your home?',
         selectionMode: 'single',
         options: [
@@ -232,7 +232,7 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
     subtext: 'Prioritize daily performance, entertaining style, and must-have features.',
     questions: [
       {
-        id: 10,
+        id: 11,
         prompt: 'What is your #1 functional pain point?',
         selectionMode: 'single',
         options: [
@@ -243,7 +243,7 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
         ]
       },
       {
-        id: 11,
+        id: 12,
         prompt: 'Anything you want me to know about the place, the people, or the project?',
         selectionMode: 'single',
         options: [
