@@ -179,7 +179,7 @@ const Home = () => {
           <h2>Find your <em>furnishing direction</em>.<br/> </h2>
           <p>Eight questions, two minutes. We'll send back a personalized style brief, a furniture direction, and a price range for your space — same day. </p>
           <p>Every project begins not with a brief, but with a story — yours. We listen, we feel, we translate emotion into form, texture, and light. The result is never just a beautiful room. It is a place where you recognise yourself.</p>
-          <div style={{marginTop: '32px'}}>
+          <div className="ph-cta-wrap">
             <Link to="/book" className="btn-ghost">Take the Quiz <span className="circ"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg></span></Link>
           </div>
         </div>

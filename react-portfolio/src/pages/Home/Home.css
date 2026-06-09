@@ -423,7 +423,7 @@
   flex-direction: column;
   justify-content: center;
   padding: clamp(36px, 5vh, 56px) clamp(34px, 5vw, 68px);
-  padding-left: 12%;
+  padding-left: 50px;
   position: relative;
   top: 0;
   height: 100%;
@@ -431,9 +431,9 @@
 }
 
 .ph-content::before {
-  content: '"';
+  content: '';
   position: relative;
-  left: -7%;
+  left: 92%;
   font-family: "Cormorant Garamond", serif;
   font-size: clamp(4.4rem, 7vw, 6.5rem);
   font-weight: 300;
@@ -462,7 +462,13 @@
   font-size: 1rem;
   line-height: 1.7;
   color: var(--taupe-grey);
-  margin-bottom: 13px;
+  margin-top: 28px;
+}
+
+.ph-cta-wrap {
+  margin: 50px 0 15px 0;
+  display: flex;
+  justify-content: center;
 }
 
 .port-prev {
@@ -687,7 +693,7 @@
 
 .svc-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 2px;
 }
 
@@ -706,9 +712,8 @@
 .brand-marq-wrap {
   width: 100%;
   overflow: hidden;
-  border-top: 1px solid rgba(44, 31, 20, 0.1);
-  border-bottom: 1px solid rgba(44, 31, 20, 0.1);
-  padding: 18px 0;
+  margin-bottom: 25px;
+  padding: 5px 0;
 }
 
 .brand-marq-track {
@@ -804,10 +809,10 @@
 
 .tc blockquote {
   font-family: "Cormorant Garamond", serif;
-  font-size: 1.06rem;
+  font-size: 1.16rem;
   font-style: italic;
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.35;
   color: var(--dark);
   margin-bottom: 20px;
 }
@@ -821,8 +826,8 @@
 }
 
 .tc-av {
-  width: 34px;
-  height: 34px;
+  width: 43px;
+  height: 43px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
@@ -849,13 +854,13 @@
 
 .tc-name {
   font-weight: 400;
-  font-size: 0.8rem;
+  font-size: 1.16rem;
   color: var(--dark);
 }
 
 .tc-loc {
   font-weight: 300;
-  font-size: 0.7rem;
+  font-size: 1rem;
   color: var(--taupe);
 }
 

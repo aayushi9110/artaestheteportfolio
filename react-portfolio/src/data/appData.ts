@@ -21,7 +21,7 @@ export const RESOURCES = {
 		],
 		testimonials: [
 			{
-				quote: "She helped us design our home — she gave us a place we finally feel like ourselves in. Every object chosen with care, every corner considered.",
+				quote: "Aayushi helped us design our home — she gave us a place we finally feel like ourselves in. Every object chosen with care, every corner considered.",
 				name: 'Patty K.',
 				location: 'Madison, Manhattan',
 				photoUrl: '/images/home/testimonials_placeholder.svg',
