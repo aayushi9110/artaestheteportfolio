@@ -14,7 +14,7 @@
 
 .book-l {
   background: var(--dark);
-  padding: 128px 42px 20px;
+  padding: 128px 42px 50px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -107,7 +107,7 @@
 
 .book-r {
   background: var(--warm);
-  padding: 124px 52px;
+  padding: 124px 52px 50px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -117,7 +117,7 @@
 }
 
 .book-page.questionnaire-active .book-l {
-  padding: 116px 56px 18px;
+  padding: 116px 56px 50px;
 }
 
 .book-page.questionnaire-active .book-l-c p {
@@ -709,14 +709,14 @@
 
 @media (max-height: 820px) and (min-width: 1101px) {
   .book-l {
-    padding: 96px 34px 24px;
+    padding: 124px 34px 50px;
     overflow-y: auto;
     overscroll-behavior-y: contain;
     -webkit-overflow-scrolling: touch;
   }
 
   .book-page.questionnaire-active .book-l {
-    padding: 88px 24px 20px;
+    padding: 88px 24px 50px;
   }
 
   .book-faq {

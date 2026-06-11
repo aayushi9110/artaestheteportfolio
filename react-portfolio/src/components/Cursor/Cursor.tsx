@@ -12,10 +12,15 @@ const Cursor = () => {
     };
 
     const handleMouseEnter = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.closest('button, a, [data-cursor]')) {
+      const target = e.target;
+      if (!(target instanceof Element)) {
+        return;
+      }
+
+      const interactiveTarget = target.closest('button, a, [data-cursor]');
+      if (interactiveTarget) {
         setIsHovering(true);
-        const label = target.getAttribute('data-cursor') || 'View';
+        const label = interactiveTarget.getAttribute('data-cursor') || 'View';
         setText(label);
       }
     };

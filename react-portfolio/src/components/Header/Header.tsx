@@ -8,32 +8,29 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const pathname = location.pathname;
-  const isHomePage = pathname === '/';
-  const isBookPage = pathname === '/book';
-  const [isStuck, setIsStuck] = useState(() => isHomePage || isBookPage || window.innerWidth <= STUCK_BREAKPOINT || window.scrollY > 50);
+  const normalizedPathname = pathname.replace(/\/+$/, '') || '/';
+  const isHomePage = normalizedPathname === '/';
+  const isBookPage = normalizedPathname === '/book';
+  const shouldForceStuck = isHomePage || isBookPage;
+  const [isStuck, setIsStuck] = useState(() => shouldForceStuck || window.innerWidth <= STUCK_BREAKPOINT || window.scrollY > 50);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const isSubPage = location.pathname !== '/';
-  const isHowWeWorkPage = pathname === '/process';
-  const isHomeActive = pathname === '/';
+  const isSubPage = normalizedPathname !== '/';
+  const isHowWeWorkPage = normalizedPathname === '/process';
+  const isHomeActive = normalizedPathname === '/';
   const isPortfolioActive =
-    pathname === '/portfolio' ||
-    pathname.startsWith('/interior-story/') ||
-    pathname.startsWith('/fine-art-story/') ||
-    pathname.startsWith('/case-study/') ||
-    pathname.startsWith('/project/');
-  const isProcessActive = pathname === '/process';
-  const isAboutActive = pathname === '/about';
-  const isBookActive = pathname === '/book';
+    normalizedPathname === '/portfolio' ||
+    normalizedPathname.startsWith('/interior-story/') ||
+    normalizedPathname.startsWith('/fine-art-story/') ||
+    normalizedPathname.startsWith('/case-study/') ||
+    normalizedPathname.startsWith('/project/');
+  const isProcessActive = normalizedPathname === '/process';
+  const isAboutActive = normalizedPathname === '/about';
+  const isBookActive = normalizedPathname === '/book';
   const useLightLogoMark = isSubPage && !isStuck && !isHowWeWorkPage;
   const logoSrc = useLightLogoMark ? '/images/logos/artAesthetewh.png' : '/images/logos/artAesthete.png';
 
   useEffect(() => {
-    if (isHomePage) {
-      setIsStuck(true);
-      return;
-    }
-
-    if (isBookPage) {
+    if (shouldForceStuck) {
       setIsStuck(true);
       return;
     }
@@ -51,7 +48,7 @@ const Header = () => {
       window.removeEventListener('scroll', updateStuckState);
       window.removeEventListener('resize', updateStuckState);
     };
-  }, [isBookPage, isHomePage]);
+  }, [shouldForceStuck]);
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
