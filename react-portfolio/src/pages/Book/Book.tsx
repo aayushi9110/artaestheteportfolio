@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   BOOKING_CONTENT,
   BOOKING_FAQS,
@@ -47,11 +47,13 @@ type BookingApiResponse = {
 
 const Book = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isTradeAudience = new URLSearchParams(location.search).get('audience') === 'trade';
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showTradeEnd, setShowTradeEnd] = useState(false);
+  const [showTradeEnd, setShowTradeEnd] = useState(isTradeAudience);
   const [isFormInteracting, setIsFormInteracting] = useState(false);
   const [questionSelections, setQuestionSelections] = useState<Record<number, number[]>>({});
   const [questionComments, setQuestionComments] = useState<Record<number, string>>({});
@@ -65,19 +67,14 @@ const Book = () => {
 
   const [form, setForm] = useState<BookingFormValues>(INITIAL_FORM_STATE);
 
+  useEffect(() => {
+    setShowTradeEnd(isTradeAudience);
+  }, [isTradeAudience]);
+
   const toggleQuestionOption = (questionId: number, optionIndex: number, selectionMode: 'single' | 'multiple' = 'single') => {
     setQuestionSelections((prev) => {
       const currentSelections = prev[questionId] || [];
       const isAlreadySelected = currentSelections.includes(optionIndex);
-
-      // Special logic: If first question and last option (trade)
-      if (questionId === 1 && optionIndex === 6 && !isAlreadySelected) {
-        setShowTradeEnd(true);
-        return {
-          ...prev,
-          [questionId]: [optionIndex]
-        };
-      }
 
       if (selectionMode === 'single') {
         return {

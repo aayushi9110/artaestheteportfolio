@@ -98,8 +98,7 @@ export const BOOKING_OPTION_STEPS: BookingOptionStep[] = [
           { title: 'A two-bedroom', description: 'Two-bedroom apartment or condo.' },
           { title: 'A three-bedroom or larger', description: 'Larger apartment, condo, or house.' },
           { title: 'A brownstone (full floor or more)', description: 'Townhouse or full-floor brownstone setup.' },
-          { title: "I'm furnishing a pied-a-terre or second home", description: 'Part-time or secondary residence.' },
-          { title: "I'm an interior designer / architect / realtor furnishing for a client", description: 'Trade or partner project for a client.' }
+          { title: "I'm furnishing a pied-a-terre or second home", description: 'Part-time or secondary residence.' }
         ]
       },
       {

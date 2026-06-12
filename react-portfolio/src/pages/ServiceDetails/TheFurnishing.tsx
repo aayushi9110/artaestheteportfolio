@@ -9,15 +9,14 @@ const TheFurnishing = () => {
   return (
     <div id="pg-service-detail" className="pg on">
       <div className="service-detail-container">
-        <button className="service-back-btn" onClick={() => navigate(-1)}>
-          <svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M12 5H2M2 5L6 1M2 5l4 4"/>
-          </svg>
-          Back
-        </button>
-
         <section className="sd-hero">
           <div className="sd-hero-content">
+            <button className="service-back-btn" onClick={() => navigate(-1)}>
+              <svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M12 5H2M2 5L6 1M2 5l4 4"/>
+              </svg>
+              Back
+            </button>
             <h1>Empty rooms to finished home. </h1>
             <p className="sd-subhead">Full turnkey furnishing for newly-renovated condos, co-ops, and brownstones in Manhattan and Brooklyn.</p>
           </div>
@@ -25,7 +24,9 @@ const TheFurnishing = () => {
 
         <section className="sd-body">
           <div className="sd-body-content">
-            <p>This is the studio's main work, and it's what we do best. From the day you hand over the keys to the day you host your first dinner, we run the whole thing — plan, source, procure, install, style. You make decisions when they're real decisions. Everything else, we handle.</p>
+            <div className="sd-body-intro">
+              <p>This is the studio's main work, and it's what we do best. From the day you hand over the keys to the day you host your first dinner, we run the whole thing — plan, source, procure, install, style. You make decisions when they're real decisions. Everything else, we handle.</p>
+            </div>
 
             <div className="sd-tabs" role="tablist" aria-label="The Furnishing sections">
               <button className={`sd-tab ${activeTab === 'process' ? 'active' : ''}`} type="button" onClick={() => setActiveTab('process')}>Process</button>

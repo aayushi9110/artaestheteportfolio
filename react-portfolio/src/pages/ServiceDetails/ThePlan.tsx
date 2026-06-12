@@ -9,15 +9,14 @@ const ThePlan = () => {
   return (
     <div id="pg-service-detail" className="pg on">
       <div className="service-detail-container">
-        <button className="service-back-btn" onClick={() => navigate(-1)}>
-          <svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M12 5H2M2 5L6 1M2 5l4 4"/>
-          </svg>
-          Back
-        </button>
-
         <section className="sd-hero">
           <div className="sd-hero-content">
+            <button className="service-back-btn" onClick={() => navigate(-1)}>
+              <svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M12 5H2M2 5L6 1M2 5l4 4"/>
+              </svg>
+              Back
+            </button>
             <h1>A real plan. You do the shopping.</h1>
             <p className="sd-subhead">For owners who want a designer's eye but enjoy the hunt — or who want to spread the spend over time.</p>
           </div>
@@ -25,8 +24,10 @@ const ThePlan = () => {
 
         <section className="sd-body">
           <div className="sd-body-content">
-            <p>Some people love sourcing. The hours on 1stDibs. The swatches in the mail. The Saturday at the D&D Building. If that's you, The Plan is the right way to work together.</p>
-            <p>You get the architecture of the room — drawn, scaled, sourced, ready to execute. We just don't pull out the credit card for you.</p>
+            <div className="sd-body-intro">
+              <p>Some people love sourcing. The hours on 1stDibs. The swatches in the mail. The Saturday at the D&D Building. If that's you, The Plan is the right way to work together.</p>
+              <p>You get the architecture of the room — drawn, scaled, sourced, ready to execute. We just don't pull out the credit card for you.</p>
+            </div>
 
             <div className="sd-tabs" role="tablist" aria-label="The Plan sections">
               <button className={`sd-tab ${activeTab === 'included' ? 'active' : ''}`} type="button" onClick={() => setActiveTab('included')}>What's Included</button>

@@ -9,15 +9,14 @@ const TheRefresh = () => {
   return (
     <div id="pg-service-detail" className="pg on">
       <div className="service-detail-container">
-        <button className="service-back-btn" onClick={() => navigate(-1)}>
-          <svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M12 5H2M2 5L6 1M2 5l4 4"/>
-          </svg>
-          Back
-        </button>
-
         <section className="sd-hero">
           <div className="sd-hero-content">
+            <button className="service-back-btn" onClick={() => navigate(-1)}>
+              <svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M12 5H2M2 5L6 1M2 5l4 4"/>
+              </svg>
+              Back
+            </button>
             <h1>You already moved in. You're not in love. Let's fix it.</h1>
             <p className="sd-subhead">A second wind for finished homes — textiles, lighting, art, and styling, restyled in a single install day.</p>
           </div>
@@ -25,8 +24,10 @@ const TheRefresh = () => {
 
         <section className="sd-body">
           <div className="sd-body-content">
-            <p>The bones are there. The sofa stays. So does the dining table. But the rooms feel flat — like a furniture catalog without the editor's pass.</p>
-            <p>The Refresh is the editor's pass. We come in, edit what's there, swap what isn't working, and add what's missing — usually textiles, lighting, art, drapery, and the styling details that separate "moved in" from "finished."</p>
+            <div className="sd-body-intro">
+              <p>The bones are there. The sofa stays. So does the dining table. But the rooms feel flat — like a furniture catalog without the editor's pass.</p>
+              <p>The Refresh is the editor's pass. We come in, edit what's there, swap what isn't working, and add what's missing — usually textiles, lighting, art, drapery, and the styling details that separate "moved in" from "finished."</p>
+            </div>
 
             <div className="sd-tabs" role="tablist" aria-label="The Refresh sections">
               <button className={`sd-tab ${activeTab === 'overview' ? 'active' : ''}`} type="button" onClick={() => setActiveTab('overview')}>Overview</button>

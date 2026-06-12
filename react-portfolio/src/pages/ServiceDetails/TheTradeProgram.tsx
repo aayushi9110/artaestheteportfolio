@@ -9,15 +9,14 @@ const TheTradeProgram = () => {
   return (
     <div id="pg-service-detail" className="pg on">
       <div className="service-detail-container">
-        <button className="service-back-btn" onClick={() => navigate(-1)}>
-          <svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M12 5H2M2 5L6 1M2 5l4 4" />
-          </svg>
-          Back
-        </button>
-
         <section className="sd-hero">
           <div className="sd-hero-content">
+            <button className="service-back-btn" onClick={() => navigate(-1)}>
+              <svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M12 5H2M2 5L6 1M2 5l4 4" />
+              </svg>
+              Back
+            </button>
             <h1>You finished the renovation. Let us finish the rooms.</h1>
             <p className="sd-subhead">Furnishing partnerships for architects, interior designers, and realtors in NYC.</p>
           </div>
@@ -25,9 +24,11 @@ const TheTradeProgram = () => {
 
         <section className="sd-body">
           <div className="sd-body-content">
-            <p>You know the moment. The dust settles. The client hugs you. Then: what now?</p>
-            <p>You've spent eighteen months on the millwork. You don't want the next nine on a sectional.</p>
-            <p>The Trade Program is the handoff. We furnish your finished project — white-label, co-branded, or quietly behind the scenes — on a six-week clock, at trade pricing, with your client relationship intact.</p>
+            <div className="sd-body-intro">
+              <p>You know the moment. The dust settles. The client hugs you. Then: what now?</p>
+              <p>You've spent eighteen months on the millwork. You don't want the next nine on a sectional.</p>
+              <p>The Trade Program is the handoff. We furnish your finished project — white-label, co-branded, or quietly behind the scenes — on a six-week clock, at trade pricing, with your client relationship intact.</p>
+            </div>
 
             <div className="sd-tabs" role="tablist" aria-label="The Trade Program sections">
               <button className={`sd-tab ${activeTab === 'overview' ? 'active' : ''}`} type="button" onClick={() => setActiveTab('overview')}>Overview</button>
