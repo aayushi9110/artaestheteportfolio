@@ -199,8 +199,6 @@ real key. The repo's `.gitignore` sits one level up at the git root and ignores 
 
 Mention these rather than silently fixing them unless asked:
 
-- `src/pages/Portfolio.tsx` is a dead, pre-refactor copy of `src/pages/Portfolio/Portfolio.tsx`
-  with placeholder `src: '.'` images. Nothing imports it.
 - `Art Aesthete.html` at the repo root is the original static mockup the React app was ported from;
   it is not built or served.
 - `/book?audience=trade` is reached by a `<button>` in `Header.tsx`, not a link. It is a
