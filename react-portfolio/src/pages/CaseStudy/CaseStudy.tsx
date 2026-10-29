@@ -156,6 +156,11 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
+    // showPrev/NextExpandedImage are intentionally omitted. They update state only
+    // through the functional setState form, so they close over nothing but
+    // totalImages, which is already a dependency. Listing them would re-attach the
+    // keydown listener on every render with no behavioural difference.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [expandedImageIndex, totalImages]);
 
   useEffect(() => {
@@ -184,6 +189,9 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
 
     window.addEventListener('keydown', handleCarouselArrowKeys);
     return () => window.removeEventListener('keydown', handleCarouselArrowKeys);
+    // Same as above: showPrev/NextImage only call setActiveImageIndex(prev => …),
+    // so there is no stale closure to fix here.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalImages, expandedImageIndex]);
 
   const goToImage = (index: number) => {

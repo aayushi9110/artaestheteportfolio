@@ -3,7 +3,12 @@ import { createRoot, hydrateRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
-const container = document.getElementById('root')!
+const container = document.getElementById('root')
+
+if (!container) {
+  throw new Error('index.html is missing <div id="root">; cannot mount the app')
+}
+
 const tree = (
   <React.StrictMode>
     <App />

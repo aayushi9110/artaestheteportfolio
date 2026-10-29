@@ -94,5 +94,5 @@ const AppShell = () => {
   );
 };
 
-export { ScrollToTop, PDF_PREVIEW_PATH };
+export { ScrollToTop };
 export default AppShell;

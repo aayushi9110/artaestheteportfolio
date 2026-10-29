@@ -35,10 +35,10 @@ npm run test:smoke # build + drive real Chrome over every route
 **`npm run verify` is the pre-deploy gate — the site autodeploys on push, so run it first.**
 See `TESTING.md` for the full layer-by-layer breakdown and how to run each file individually.
 
-`npm run lint` is currently **broken** — ESLint 8 is installed but no `.eslintrc*` exists, so the
-script exits 1 with "couldn't find a configuration file". It is deliberately excluded from
-`npm run verify`. Don't add an ESLint config as a side effect of another task; if asked
-to fix linting, note that ESLint 9 would want a flat `eslint.config.js`.
+`npm run lint` works and is clean. `.eslintrc.cjs` targets the installed ESLint 8 line
+(@typescript-eslint 5, react-hooks 4, react-refresh 0.3) — moving to ESLint 9 would mean a flat
+`eslint.config.js` and newer plugins. The script runs with `--max-warnings 0`, so a warning
+fails it. It is not part of `npm run verify`; run it alongside.
 
 `generate:portfolio-pdf` hardcodes the macOS Chrome path and port 4173. It is macOS-only by design.
 

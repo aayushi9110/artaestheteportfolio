@@ -7,7 +7,7 @@ import { PROJECTS } from '../../src/pages/CaseStudy/caseStudyData.ts';
 describe('CaseStudy', () => {
   const renderCaseStudy = (
     id: string,
-    showInteriorView: boolean = true,
+    showInteriorView = true,
     initialEntries?: string[]
   ) => {
     const entries = initialEntries || [`/interior-story/${id}`];
@@ -170,9 +170,4 @@ describe('CaseStudy', () => {
       unmount();
     });
   });
-
-;;
-
-;
-
 });
