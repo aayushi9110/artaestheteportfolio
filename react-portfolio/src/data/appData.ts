@@ -28,14 +28,14 @@ export const RESOURCES = {
 			},
 			{
 				quote: "The virtual consultation was shockingly thorough. Over a video call, Aayushi helped us designing our living room — and the actual result was even more beautiful than we imagined.",
-				name: 'Kaninka Sinha.',
+				name: 'Kaninka Sinha',
 				location: 'Palo Alto, California',
 				photoUrl: '/images/home/testimonials_placeholder.svg',
 			},
 			{
 				quote: "Aayushi understood exactly what I couldn't articulate. The warmth, the textures, the light — it feels like the house has always been this way.",
 				name: 'Lisa C.',
-				location: 'San Franciso, California',
+				location: 'San Francisco, California',
 				photoUrl: '/images/home/testimonials_placeholder.svg',
 			},
 		],
