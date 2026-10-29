@@ -10,11 +10,12 @@ This suite is that check.
 npm run verify
 ```
 
-It typechecks, runs all 235 tests, builds, then drives a real Chrome over every route of
+It typechecks, runs all 309 tests, builds, then drives a real Chrome over every route of
 the built site and fails loudly if anything is blank, throws, logs an error, or 404s an
 asset. Exit code is `1` on any failure, so it gates CI and git hooks.
 
-Takes about **1m50s**: 52s of tests, then 21 live browser checks (15 desktop + 6 mobile).
+Takes about **2m**: ~55s of tests, a pre-render build, then 21 live browser checks
+(15 desktop + 6 mobile).
 
 ```
 ✗ Home (/) [desktop]
@@ -26,7 +27,7 @@ Takes about **1m50s**: 52s of tests, then 21 live browser checks (15 desktop + 6
 
 ---
 
-**Current state:** 12 test files, 235 tests, all passing. Verified stable across three
+**Current state:** 13 test files, 309 tests, all passing. Verified stable across three
 consecutive full runs, and verified to actually *fail* — a deliberately corrupted bundle
 was caught on every route with exit code 1.
 
@@ -37,7 +38,7 @@ was caught on every route with exit code 1.
 | # | Layer | Command | Time | Catches |
 |---|-------|---------|------|---------|
 | 1 | Typecheck | `npm run typecheck` | ~3s | Type errors, unused imports, bad props |
-| 2 | Data & asset integrity | `npm run test:unit` | ~12s | Missing images, dead data references, PDF drift |
+| 2 | Data, assets & hydration | `npm run test:unit` | ~5s | Missing images, dead data references, PDF drift, non-deterministic SSR |
 | 3 | Components & pages | `npm run test:components` / `npm run test:pages` | ~6s / ~50s | Broken logic, form validation, routing, redirects |
 | 4 | **Live smoke test** | `npm run test:smoke` | ~50s | **Blank pages, runtime crashes, 404 assets, missing shell** |
 
@@ -72,6 +73,7 @@ npm run test:pages          # tests/pages   — routing, Portfolio, CaseStudy, B
 npx vitest run tests/unit/data-integrity.test.ts
 npx vitest run tests/unit/case-study-data.test.ts
 npx vitest run tests/unit/pdf-parity.test.tsx
+npx vitest run tests/unit/hydration.test.tsx
 npx vitest run tests/components/Header.test.tsx
 npx vitest run tests/components/Footer.test.tsx
 npx vitest run tests/components/Cursor.test.tsx
@@ -131,6 +133,17 @@ asserts both select **the same projects in the same order**. It also verifies ev
 image in the generated HTML exists on disk, the TOC paginates past 7 projects, and that
 `CONTENT.home.stats` still has exactly 3 entries — the preview indexes `stats[0..2]`
 with no guard and would crash on fewer.
+
+### `tests/unit/hydration.test.tsx` — 74 tests
+The site is pre-rendered to static HTML at build time and then hydrated, so the markup
+the server produces must match what the client would produce. Anything non-deterministic
+across the two — `Math.random()`, `Date.now()`, a `window` read during render — shows a
+visitor a hydration error and a visible flash as React discards the server HTML.
+
+Renders every route twice and diffs it, and asserts each route emits a `<main>`, exactly
+one `<h1>`, crawlable `<a href>` links, real project titles, and never the loading screen
+or the PDF libraries. This is the cheap version of the check; the smoke test confirms it
+for real in Chrome, where a mismatch surfaces as React error #418/#423.
 
 ### `tests/components/Header.test.tsx` — 41 tests
 The header has the most conditional logic in the app. Covers trailing-slash
@@ -273,6 +286,10 @@ the page degrades past visually. Reproduce with `--headed`.
 **Tests hang after a `CaseStudy` change**
 That page uses `setInterval`/`setTimeout` for auto-slide. Any test touching it must
 `vi.useRealTimers()` in `afterEach`.
+
+**A route renders blank or logs React error #418 / #423 after a deploy**
+That is a hydration mismatch — almost always the hosting rewrite rule serving the wrong
+pre-rendered document for a path. See `DEPLOYMENT.md`; it is the first thing to check.
 
 **Tests pass alone but fail in the full suite**
 Worker starvation, not a real bug. `tests/setup.ts` sets RTL's `asyncUtilTimeout` to 8s

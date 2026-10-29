@@ -4,15 +4,21 @@ Marketing and portfolio site for an interior-design + fine-art studio. React 18 
 built with Vite 7, routed with React Router 6. No backend in this repo: the only network call is
 the booking form POST to an external API Gateway endpoint.
 
+**The site is pre-rendered.** `npm run build` runs `scripts/prerender.mts`, which renders every
+public route to its own static HTML file and then hydrates on the client — so crawlers and AI
+agents get the real text, links and alt attributes rather than an empty `<div id="root">`.
+Anything you add must render on the server: see "Server rendering" below.
+
 The same case-study data drives three surfaces — the live site, an in-browser PDF preview route,
 and a Node script that emits print-ready HTML. Changing the data changes all three.
 
 ## Commands
 
 ```bash
-npm run dev                      # Vite dev server
+npm run dev                      # Vite dev server (empty root, client-rendered)
 npm run dev:pdf                  # dev server opened straight to /portfolio-pdf-preview
-npm run build                    # tsc --noEmit, then vite build  ← the real gate
+npm run build                    # typecheck → client build → SSR build → pre-render  ← the real gate
+npm run build:spa                # plain tsc && vite build, no pre-rendering (debugging only)
 npm run preview                  # serve dist/
 npm run generate:portfolio-html  # dist/portfolio-top10-source.html via scripts/generatePortfolioPdf.mts
 npm run generate:portfolio-pdf   # the above + headless Chrome → dist/Art-Aesthete-Portfolio-Top10.pdf
@@ -40,8 +46,15 @@ to fix linting, note that ESLint 9 would want a flat `eslint.config.js`.
 
 ```
 src/
-  main.tsx                 StrictMode root
-  App.tsx                  router, lazy routes, ScrollToTop, 2s splash
+  main.tsx                 hydrateRoot when #root has children, else createRoot
+  App.tsx                  client entry: BrowserRouter + ScrollToTop + AppShell
+  AppShell.tsx             the <Routes> tree, shared by the client and the prerenderer
+  entry-server.tsx         server renderer (StaticRouter + renderToString)
+  seo/
+    siteConfig.ts          canonical facts: origin, brand, areaServed
+    routes.ts              per-route title/description/image; project routes from PROJECTS
+    structuredData.ts      JSON-LD builders
+    useDocumentMeta.ts     keeps <head> correct across client-side navigation
   index.css                design tokens + shared utility classes (see below)
   data/
     appData.ts             RESOURCES (images, logos, testimonials); re-exports PROJECTS
@@ -50,6 +63,8 @@ src/
   pages/<Name>/            Name.tsx + Name.css (+ colocated *Data.ts)
   types/                   ambient .d.ts (html2pdf)
 scripts/
+  prerender.mts            SSG: renders every route to dist/<route>/index.html,
+                           injects per-route <head> + JSON-LD, writes sitemap/llms.txt
   generatePortfolioPdf.mts Node-side PDF HTML generator
   portfolioPdfTemplate.css styles for that generated HTML
 tests/
@@ -92,9 +107,38 @@ image-picking logic twice, against the same `PROJECTS`/`RESOURCES`/`CONTENT`. A 
 almost always belongs in the other. Their styles are separate on purpose:
 `PortfolioPdfPreview.css` for the preview, `scripts/portfolioPdfTemplate.css` for the output.
 
+## Server rendering
+
+`AppShell.tsx` holds the `<Routes>` tree and is rendered by **both** `App.tsx`
+(`BrowserRouter`, in the browser) and `entry-server.tsx` (`StaticRouter`, at build time).
+Keep those two trees identical or hydration breaks.
+
+Rules that follow from being pre-rendered:
+
+- **Content routes are imported eagerly** in `AppShell.tsx`. A `lazy()` content route would
+  hydrate as `<Loader />` over pre-rendered markup and mismatch. Only
+  `/portfolio-pdf-preview` stays lazy — it pulls in jspdf/html2canvas/html2pdf and touches
+  `window` at import time, so it must never enter the server bundle, and it is excluded
+  from pre-rendering (it gets an empty-root `noindex` shell instead).
+- **Never read `window`, `document`, `localStorage` or `matchMedia` during render** or at
+  module top level — only inside `useEffect` or an event handler. `Header.tsx` initialises
+  `isStuck` from `shouldForceStuck` and computes the real viewport state in its effect for
+  exactly this reason.
+- **Never render anything non-deterministic.** `Math.random()`, `Date.now()` and
+  `new Date()` differ between build and browser. `Portfolio.tsx` renders the stable data
+  order first and shuffles in a `useEffect` after mount.
+- **Don't gate content behind state that starts empty.** Tab panels in
+  `src/pages/ServiceDetails/` stay in the DOM with `hidden={activeTab !== '…'}` plus
+  `.sd-tabpanel { display: contents }`, so every tab's copy is in the static HTML.
+- Adding a route means adding it to `src/seo/routes.ts` (title, description, OG image) and
+  to `tests/routes.ts`. The prerenderer, sitemap.xml and llms.txt all read the former.
+
+See `DEPLOYMENT.md` for the Amplify rewrite rule this requires — the default SPA rewrite
+breaks pre-rendering.
+
 ## Routing
 
-Routes live in `AppShell` in `App.tsx`. `/case-study/:id` and `/project/:id` are legacy paths kept
+Routes live in `AppShell.tsx`. `/case-study/:id` and `/project/:id` are legacy paths kept
 alive by `StoryRouteResolver`, which looks up `storyType` and `<Navigate replace>`s to the right
 story route — keep them working. `InteriorStory` and `FineArtStory` are thin wrappers over
 `CaseStudy`; the fine-art variant passes `showInteriorView={false}` to drop the before/after slider.
@@ -102,7 +146,9 @@ story route — keep them working. `InteriorStory` and `FineArtStory` are thin w
 `/portfolio-pdf-preview` deliberately renders without `Header`, `Footer`, and `Cursor` (the
 `isPdfPreviewRoute` checks in `AppShell`). Anything added to the shell needs the same guard.
 
-New pages are lazy (`const X = lazy(() => import(...))`) and fall back to `<Loader />`.
+New content pages are imported **eagerly** in `AppShell.tsx` so they pre-render and hydrate
+cleanly — don't reach for `lazy()` unless the page pulls in a browser-only dependency, in
+which case it also needs to be excluded from pre-rendering like `/portfolio-pdf-preview`.
 
 ## Styling
 
@@ -157,8 +203,9 @@ Mention these rather than silently fixing them unless asked:
   with placeholder `src: '.'` images. Nothing imports it.
 - `Art Aesthete.html` at the repo root is the original static mockup the React app was ported from;
   it is not built or served.
-- `index.html` ships Google Analytics with a literal `GA_MEASUREMENT_ID` placeholder.
-- `App.tsx` gates the whole app behind a fixed 2-second `setTimeout` splash, so every cold load
-  costs two seconds before the router mounts.
-- `Portfolio.tsx` shuffles the "All" tab with `Math.random()` in a `useMemo`, so ordering differs
-  per mount — intentional, but don't write tests or snapshots against it.
+- `/book?audience=trade` is reached by a `<button>` in `Header.tsx`, not a link. It is a
+  same-page view toggle and is deliberately not in the sitemap.
+- `Portfolio.tsx` shuffles the "All" tab after mount, so ordering differs per visit —
+  intentional, but don't write tests or snapshots against the shuffled order.
+- There is still no catch-all 404 route in `AppShell.tsx`; an unknown path renders the shell
+  with an empty body.
