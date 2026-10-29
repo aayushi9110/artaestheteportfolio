@@ -1,0 +1,43 @@
+# Art Aesthete — https://www.byaayushi.com
+# All crawlers and AI agents are welcome. AI assistants are explicitly allowed:
+# being readable by them is the point.
+
+User-agent: *
+Allow: /
+Disallow: /portfolio-pdf-preview
+
+# Named explicitly so a future blanket rule does not silently exclude them.
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://www.byaayushi.com/sitemap.xml
