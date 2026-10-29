@@ -463,3 +463,14 @@
     padding: 0 20px;
   }
 }
+
+/* Tab panels stay in the DOM so crawlers and AI agents can read every tab's
+   content, not just the one that happens to be active. `display: contents`
+   keeps the wrapper out of layout so the visual result is unchanged. */
+.sd-tabpanel {
+  display: contents;
+}
+
+.sd-tabpanel[hidden] {
+  display: none;
+}

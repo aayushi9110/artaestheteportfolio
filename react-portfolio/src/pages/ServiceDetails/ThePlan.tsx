@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './ServiceDetails.css';
 
 const ThePlan = () => {
@@ -7,7 +7,7 @@ const ThePlan = () => {
   const [activeTab, setActiveTab] = useState<'included' | 'scope' | 'fit' | 'faq'>('included');
 
   return (
-    <div id="pg-service-detail" className="pg on">
+    <main id="pg-service-detail" className="pg on">
       <div className="service-detail-container">
         <section className="sd-hero">
           <div className="sd-hero-content">
@@ -37,8 +37,7 @@ const ThePlan = () => {
             </div>
 
             <div className="sd-section sd-panel">
-              {activeTab === 'included' && (
-                <>
+              <div className="sd-tabpanel" hidden={activeTab !== 'included'}>
                   <h2>What's included</h2>
                   <ul className="sd-list">
                     <li>A measured site visit and a 90-minute discovery call</li>
@@ -48,11 +47,9 @@ const ThePlan = () => {
                     <li>A complete sourcing list — every piece, every brand, every link, every price, every alternate</li>
                     <li>One 30-minute review call once you've started ordering</li>
                   </ul>
-                </>
-              )}
+              </div>
 
-              {activeTab === 'scope' && (
-                <>
+              <div className="sd-tabpanel" hidden={activeTab !== 'scope'}>
                   <h2>Scope and timeline</h2>
                   <p>We don't place orders. We don't track deliveries. We don't show up on install day. That's The Furnishing.</p>
                   <p><strong>Timeline:</strong> Two weeks from discovery to delivered plan.</p>
@@ -62,11 +59,9 @@ const ThePlan = () => {
                     <li>2BR</li>
                     <li>3BR or larger</li>
                   </ul>
-                </>
-              )}
+              </div>
 
-              {activeTab === 'fit' && (
-                <>
+              <div className="sd-tabpanel" hidden={activeTab !== 'fit'}>
                   <h2>Fit check</h2>
                   <h3>Right for you if</h3>
                   <ul className="sd-list">
@@ -79,11 +74,9 @@ const ThePlan = () => {
                     <li>You haven't slept since closing</li>
                     <li>The thought of comparing eight rug options makes you want to lie down</li>
                   </ul>
-                </>
-              )}
+              </div>
 
-              {activeTab === 'faq' && (
-                <>
+              <div className="sd-tabpanel" hidden={activeTab !== 'faq'}>
                   <h2>FAQ</h2>
                   <div className="sd-faq-stack">
                     <details className="sd-faq-toggle" open>
@@ -99,19 +92,18 @@ const ThePlan = () => {
                       <p>No. The list is a starting point. You can deviate freely — we just won't be there to course-correct.</p>
                     </details>
                   </div>
-                </>
-              )}
+              </div>
             </div>
 
             <div className="sd-cta-section">
-              <button className="btn-dk" onClick={() => navigate('/book')}>
+              <Link to="/book" className="btn-dk" style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}>
                 <span>Start with The Plan →</span>
-              </button>
+              </Link>
             </div>
           </div>
         </section>
       </div>
-    </div>
+    </main>
   );
 };
 

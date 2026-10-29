@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { PROJECTS } from '../../data/appData.ts';
 import './Portfolio.css';
 
@@ -36,14 +36,23 @@ const shuffleItems = (items: GalleryItem[]) => {
 };
 
 const Portfolio = () => {
-  const navigate = useNavigate();
   const [tab, setTab] = useState<'all' | 'interiors' | 'fineart'>('all');
   const [activeItem, setActiveItem] = useState<GalleryItem | null>(null);
   const [featuredIndex, setFeaturedIndex] = useState(0);
   const [isFeaturedHovered, setIsFeaturedHovered] = useState(false);
   const touchStartX = useRef<number | null>(null);
 
-  const mixedAllItems = useMemo(() => shuffleItems(allPortfolioItems), []);
+  // The "All" tab is deliberately shuffled per visit, but Math.random() cannot
+  // agree between the pre-render and the browser — it would hydrate as a text
+  // mismatch. So render the stable data order first, then shuffle once mounted:
+  // the pre-rendered HTML stays deterministic and the shuffle still happens.
+  const [shuffledAllItems, setShuffledAllItems] = useState<GalleryItem[] | null>(null);
+
+  useEffect(() => {
+    setShuffledAllItems(shuffleItems(allPortfolioItems));
+  }, []);
+
+  const mixedAllItems = shuffledAllItems ?? allPortfolioItems;
 
   const featuredItems = tab === 'all' ? mixedAllItems : tab === 'interiors' ? interiorItems : fineArtItems;
   const previousFeaturedIndex = featuredItems.length
@@ -116,18 +125,20 @@ const Portfolio = () => {
   }, []);
 
   return (
-    <div id="pg-portfolio" className="pg on">
+    <main id="pg-portfolio" className="pg on">
       <div className="gall-hero">
-        <div
+        <img
           className="gall-hero-img"
-          style={{ backgroundImage: `url(${featuredItems[featuredIndex]?.imageUrl || interiorItems[0]?.imageUrl || ''})` }}
-        ></div>
+          src={featuredItems[featuredIndex]?.imageUrl || interiorItems[0]?.imageUrl || ''}
+          alt={featuredItems[featuredIndex]?.title || 'Portfolio hero'}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0, left: 0, zIndex: -1 }}
+        />
         <div className="gall-hero-c">
-          <button className="page-back" onClick={() => navigate('/')}>
+          <Link to="/" className="page-back" style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}>
             <svg width="13" height="9" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M12 5H2M2 5L6 1M2 5l4 4"/>
             </svg> Back
-          </button>
+          </Link>
           {/* <span className="sec-label gold gall-loc">Selected Works</span> */}
           <h1>A curated collection<br/>of <em>spaces & stories</em></h1>
         </div>
@@ -205,9 +216,9 @@ const Portfolio = () => {
                   <h3>{item.title}</h3>
                   <p>{item.summary}</p>
                   <div className="pf-carousel-actions">
-                    <button className="btn-tr" onClick={() => navigate(getStoryPath(item))}>
+                    <Link to={getStoryPath(item)} className="btn-tr" style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}>
                       <span>View Case Study</span>
-                    </button>
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -267,20 +278,19 @@ const Portfolio = () => {
               <span className="gall-lightbox-cat">{activeItem.categoryLabel}</span>
               <h3>{activeItem.title}</h3>
               <p>{activeItem.summary}</p>
-              <button
+              <Link
+                to={getStoryPath(activeItem)}
                 className="btn-tr"
-                onClick={() => {
-                  navigate(getStoryPath(activeItem));
-                  setActiveItem(null);
-                }}
+                style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}
+                onClick={() => setActiveItem(null)}
               >
                 <span>View Full Case Study</span>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
       )}
-    </div>
+    </main>
   );
 };
 

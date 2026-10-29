@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './ServiceDetails.css';
 
 const TheTradeProgram = () => {
@@ -7,7 +7,7 @@ const TheTradeProgram = () => {
   const [activeTab, setActiveTab] = useState<'overview' | 'models' | 'included' | 'pricing' | 'faq'>('overview');
 
   return (
-    <div id="pg-service-detail" className="pg on">
+    <main id="pg-service-detail" className="pg on">
       <div className="service-detail-container">
         <section className="sd-hero">
           <div className="sd-hero-content">
@@ -39,26 +39,21 @@ const TheTradeProgram = () => {
             </div>
 
             <div className="sd-section sd-panel">
-              {activeTab === 'overview' && (
-                <>
+              <div className="sd-tabpanel" hidden={activeTab !== 'overview'}>
                   <h2>What this solves</h2>
                   <p>When construction ends, furnishing often becomes the long tail. The Trade Program compresses that phase into a six-week delivery lane while keeping your client experience intact.</p>
-                </>
-              )}
+              </div>
 
-              {activeTab === 'models' && (
-                <>
+              <div className="sd-tabpanel" hidden={activeTab !== 'models'}>
                   <h2>Three ways to work together</h2>
                   <ul className="sd-list">
                     <li><strong>01 — White-label.</strong> We're invisible. Your client sees only your firm. We furnish under your brand, your processes, your reveal. You bill the client; we invoice you at net trade. Best for firms that want to add furnishing as a service line without hiring for it.</li>
                     <li><strong>02 — Co-branded.</strong> We work alongside you, named on the project. Your firm leads architecture and interiors; we lead FF&E. Best for design firms who want a trusted furnishing partner without the back-office load.</li>
                     <li><strong>03 — Referral.</strong> You hand the client off. We take it from there. You receive 10–15% commission on our design fee, paid at install. Best for architects and realtors who don't want furnishing on the books at all.</li>
                   </ul>
-                </>
-              )}
+              </div>
 
-              {activeTab === 'included' && (
-                <>
+              <div className="sd-tabpanel" hidden={activeTab !== 'included'}>
                   <h2>What you get, regardless of which</h2>
                   <ul className="sd-list">
                     <li>A six-week project window from kickoff to install</li>
@@ -67,18 +62,14 @@ const TheTradeProgram = () => {
                     <li>Your client treated like our own — same care, same hours, same install team</li>
                     <li>A no-poach clause: we don't pursue your client's future work without your introduction</li>
                   </ul>
-                </>
-              )}
+              </div>
 
-              {activeTab === 'pricing' && (
-                <>
+              <div className="sd-tabpanel" hidden={activeTab !== 'pricing'}>
                   <h2>Pricing</h2>
                   <p>Trade pricing varies by program. The conversation takes 20 minutes. We're discreet about it.</p>
-                </>
-              )}
+              </div>
 
-              {activeTab === 'faq' && (
-                <>
+              <div className="sd-tabpanel" hidden={activeTab !== 'faq'}>
                   <h2>FAQ</h2>
                   <div className="sd-faq-stack">
                     <details className="sd-faq-toggle">
@@ -94,19 +85,18 @@ const TheTradeProgram = () => {
                       <p>Yes. As a default, not an exception.</p>
                     </details>
                   </div>
-                </>
-              )}
+              </div>
             </div>
 
             <div className="sd-cta-section">
-              <button className="btn-dk" onClick={() => navigate('/book')}>
+              <Link to="/book" className="btn-dk" style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}>
                 <span>Book a 20-min intro call →</span>
-              </button>
+              </Link>
             </div>
           </div>
         </section>
       </div>
-    </div>
+    </main>
   );
 };
 

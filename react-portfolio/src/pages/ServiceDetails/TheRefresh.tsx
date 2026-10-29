@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './ServiceDetails.css';
 
 const TheRefresh = () => {
@@ -7,7 +7,7 @@ const TheRefresh = () => {
   const [activeTab, setActiveTab] = useState<'overview' | 'included' | 'investment' | 'fit' | 'faq'>('overview');
 
   return (
-    <div id="pg-service-detail" className="pg on">
+    <main id="pg-service-detail" className="pg on">
       <div className="service-detail-container">
         <section className="sd-hero">
           <div className="sd-hero-content">
@@ -38,8 +38,7 @@ const TheRefresh = () => {
             </div>
 
             <div className="sd-section sd-panel">
-              {activeTab === 'overview' && (
-                <>
+              <div className="sd-tabpanel" hidden={activeTab !== 'overview'}>
                   <h2>What The Refresh does</h2>
                   <p>We keep the strong foundation and transform the mood. This is a strategic edit, not a total reset.</p>
                   <ul className="sd-list">
@@ -47,11 +46,9 @@ const TheRefresh = () => {
                     <li>We replace what blocks visual flow or comfort</li>
                     <li>We layer in textiles, lighting, art, drapery, and styling accents</li>
                   </ul>
-                </>
-              )}
+              </div>
 
-              {activeTab === 'included' && (
-                <>
+              <div className="sd-tabpanel" hidden={activeTab !== 'included'}>
                   <h2>What's included</h2>
                   <ul className="sd-list">
                     <li>A 90-minute walk-through site visit</li>
@@ -60,11 +57,9 @@ const TheRefresh = () => {
                     <li>One install day with full styling</li>
                     <li>A two-week post-install polish window</li>
                   </ul>
-                </>
-              )}
+              </div>
 
-              {activeTab === 'investment' && (
-                <>
+              <div className="sd-tabpanel" hidden={activeTab !== 'investment'}>
                   <h2>Timeline and investment</h2>
                   <p><strong>Timeline:</strong> One week from walk-through to install day.</p>
                   <ul className="sd-list">
@@ -73,11 +68,9 @@ const TheRefresh = () => {
                     <li>3BR or larger</li>
                   </ul>
                   <p>Cost of new pieces is separate; we estimate the additional spend in the plan.</p>
-                </>
-              )}
+              </div>
 
-              {activeTab === 'fit' && (
-                <>
+              <div className="sd-tabpanel" hidden={activeTab !== 'fit'}>
                   <h2>Right for you if</h2>
                   <ul className="sd-list">
                     <li>You moved in six-plus months ago and the rooms still feel unresolved</li>
@@ -87,11 +80,9 @@ const TheRefresh = () => {
                   </ul>
                   <h3 style={{ marginTop: '14px' }}>What it isn't</h3>
                   <p>A full refurnishing. If the bones aren't right, you want The Furnishing.</p>
-                </>
-              )}
+              </div>
 
-              {activeTab === 'faq' && (
-                <>
+              <div className="sd-tabpanel" hidden={activeTab !== 'faq'}>
                   <h2>FAQ</h2>
                   <div className="sd-faq-stack">
                     <details className="sd-faq-toggle" open>
@@ -107,19 +98,18 @@ const TheRefresh = () => {
                       <p>If something has to go, we'll tell you. We're polite about it.</p>
                     </details>
                   </div>
-                </>
-              )}
+              </div>
             </div>
 
             <div className="sd-cta-section">
-              <button className="btn-dk" onClick={() => navigate('/book')}>
+              <Link to="/book" className="btn-dk" style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}>
                 <span>Book a Refresh walk-through →</span>
-              </button>
+              </Link>
             </div>
           </div>
         </section>
       </div>
-    </div>
+    </main>
   );
 };
 

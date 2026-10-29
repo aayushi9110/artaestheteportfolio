@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import {
   BOOKING_CONTENT,
   BOOKING_FAQS,
@@ -46,7 +46,6 @@ type BookingApiResponse = {
 };
 
 const Book = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const isTradeAudience = new URLSearchParams(location.search).get('audience') === 'trade';
   const [step, setStep] = useState(0);
@@ -280,12 +279,12 @@ const Book = () => {
   };
 
   return (
-    <div id="pg-book" className="pg on">
+    <main id="pg-book" className="pg on">
       <div className={`book-page ${isQuestionnaireActive ? 'questionnaire-active' : ''}`}>
         <div className="book-l">
           <div className="book-l-c">
             <span className="sec-label gold">{BOOKING_CONTENT.sectionLabel}</span>
-            <h2>{BOOKING_CONTENT.introHeadingLead} <em>{BOOKING_CONTENT.introHeadingEmphasis}</em></h2>
+            <h1>{BOOKING_CONTENT.introHeadingLead} <em>{BOOKING_CONTENT.introHeadingEmphasis}</em></h1>
             <p>{BOOKING_CONTENT.introBody}</p>
             <div className="book-faq">
               {BOOKING_FAQS.map((faq) => (
@@ -513,12 +512,12 @@ const Book = () => {
               <div className="check">✓</div>
               <h3>{BOOKING_CONTENT.successHeadingLead}<br/><em>{BOOKING_CONTENT.successHeadingEmphasis}</em></h3>
               <p>{BOOKING_CONTENT.successBody}</p>
-              <button className="btn-dk" onClick={() => navigate('/portfolio')}><span>{BOOKING_CONTENT.successCtaLabel}</span></button>
+              <Link to="/portfolio" className="btn-dk" style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}><span>{BOOKING_CONTENT.successCtaLabel}</span></Link>
             </div>
           )}
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

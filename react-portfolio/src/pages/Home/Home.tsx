@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { PROJECTS, RESOURCES } from '../../data/appData.ts';
 import { CONTENT } from '../../data/contentData.ts';
 import './Home.css';
@@ -47,8 +47,6 @@ const TestimonialAvatar = ({ name, photoUrl }: { name: string; photoUrl: string 
 };
 
 const Home = () => {
-  const navigate = useNavigate();
-
   const homeSelectedWorks = Object.entries(PROJECTS)
     .filter(([, project]) => project.isSelectedForHome)
     .sort(([, projectA], [, projectB]) => projectA.homeVisibilityPriority - projectB.homeVisibilityPriority)
@@ -111,16 +109,9 @@ const Home = () => {
     });
   };
 
-  const goProject = (id: string, type: 'interior' | 'art') => {
-    const targetPath = type === 'art' ? `/fine-art-story/${id}` : `/interior-story/${id}`;
-    navigate(targetPath);
-    window.requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-    });
-  };
 
   return (
-    <div id="pg-home" className="pg on">
+    <main id="pg-home" className="pg on">
       <section className="hero">
         <div className="hero-l">
           <span className="hero-punch">{HERO_CONTENT.punchline}</span>
@@ -200,13 +191,15 @@ const Home = () => {
         <div className="port-grid" id="hPortGrid">
           {homeSelectedWorks.map(({ id, project }) => {
             const cardType = project.storyType === 'fine-art' ? 'art' : 'interior';
+            const targetPath = project.storyType === 'fine-art' ? `/fine-art-story/${id}` : `/interior-story/${id}`;
             return (
-              <div
+              <Link
                 key={id}
+                to={targetPath}
                 className="pi"
                 data-cat={cardType}
                 data-proj={id}
-                onClick={() => goProject(id, cardType)}
+                style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
               >
                 <div className="pi-img">
                   <img src={project.heroImageUrl} alt={project.title} loading="lazy"/>
@@ -220,7 +213,7 @@ const Home = () => {
                     </svg>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
@@ -326,7 +319,7 @@ const Home = () => {
           <span>Book a Consultation</span>
         </Link>
       </div>
-    </div>
+    </main>
   );
 };
 

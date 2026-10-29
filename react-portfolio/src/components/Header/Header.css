@@ -120,6 +120,12 @@ nav.stuck .n-logo:hover .n-logo-mark {
 }
 
 .n-book {
+  /* Rendered as an <a> so crawlers can follow it; these keep it looking like the
+     button it replaced. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
   font-size: 0.9rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;

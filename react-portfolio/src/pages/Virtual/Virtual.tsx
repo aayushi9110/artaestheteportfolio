@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Virtual.css';
 
 const Virtual = () => {
-  const navigate = useNavigate();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -25,14 +24,14 @@ const Virtual = () => {
   }, []);
 
   return (
-    <div id="pg-virtual" className="pg on">
+    <main id="pg-virtual" className="pg on">
       <div className="vc-hero">
         <div className="vc-hero-c">
-          <button className="page-back" onClick={() => navigate('/')}>
+          <Link to="/" className="page-back" style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}>
             <svg width="13" height="9" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M12 5H2M2 5L6 1M2 5l4 4"/>
             </svg> Back
-          </button>
+          </Link>
           <span className="sec-label gold">Virtual Consultation</span>
           <h1>E-Design for every room,<br/><em>beautifully delivered</em></h1>
           <p>Complete, professional interior design — wherever you are in the world. Here is exactly what you receive.</p>
@@ -45,7 +44,7 @@ const Virtual = () => {
             <h2>Design without<br/><em>boundaries</em></h2>
             <p>Our virtual consultation service was built for clients who deserve world-class design regardless of location. Using digital tools, we deliver the same depth, care, and craft as an in-person project.</p>
             <p>Every virtual project is fully bespoke. You receive a comprehensive suite of deliverables, a dedicated designer, and ongoing support throughout the process. No template. No compromise.</p>
-            <div style={{ marginTop: '28px' }}><button className="btn-dk" onClick={() => navigate('/book')}><span>Get Started</span></button></div>
+            <div style={{ marginTop: '28px' }}><Link to="/book" className="btn-dk" style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}><span>Get Started</span></Link></div>
           </div>
           <div className="vc-intro-img rr"><img src="/images/home/visualConsult_landingpg.png" alt="Virtual Design" loading="lazy"/></div>
         </div>
@@ -85,8 +84,8 @@ const Virtual = () => {
 
       </div>
 
-      <div className="cta-strip"><div style={{ position: 'relative', zIndex: 1 }}><h2>Ready to begin your virtual project?</h2><p>We'll have your first moodboard within a week.</p></div><button className="btn-lt" onClick={() => navigate('/book')} style={{ position: 'relative', zIndex: 1 }}><span>Book a Consultation</span></button></div>
-    </div>
+      <div className="cta-strip"><div style={{ position: 'relative', zIndex: 1 }}><h2>Ready to begin your virtual project?</h2><p>We'll have your first moodboard within a week.</p></div><Link to="/book" className="btn-lt" style={{ position: 'relative', zIndex: 1, textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}><span>Book a Consultation</span></Link></div>
+    </main>
   );
 };
 

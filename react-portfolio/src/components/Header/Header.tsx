@@ -34,7 +34,10 @@ const Header = () => {
   const isBookPage = normalizedPathname === '/book';
   const isTradeProgramView = isBookPage && new URLSearchParams(search).get('audience') === 'trade';
   const shouldForceStuck = isHomePage || isBookPage;
-  const [isStuck, setIsStuck] = useState(() => shouldForceStuck || window.innerWidth <= STUCK_BREAKPOINT || window.scrollY > 50);
+  // Server-safe initial value: `window` does not exist during pre-rendering, and
+  // reading it here would also desync the first client render from the server's
+  // markup. The real viewport/scroll state is computed in the effect below.
+  const [isStuck, setIsStuck] = useState(shouldForceStuck);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isSubPage = normalizedPathname !== '/';
   const isHowWeWorkPage = normalizedPathname === '/process';
@@ -130,9 +133,13 @@ const Header = () => {
           <li><Link to="/about" className={isAboutActive ? 'active' : ''} onClick={() => goTo('/about')}>About</Link></li>
         </ul>
         {!isBookPage ? (
-          <button className={`n-book ${isBookActive ? 'active' : ''}`.trim()} onClick={() => goTo('/book')}>
+          <Link
+            to="/book"
+            className={`n-book ${isBookActive ? 'active' : ''}`.trim()}
+            onClick={closeMobileMenu}
+          >
             <span>Book Consultation</span>
-          </button>
+          </Link>
         ) : (
           <div className="n-book-wrap n-book-wrap-trade">
             <button

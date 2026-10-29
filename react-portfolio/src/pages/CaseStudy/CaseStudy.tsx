@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { PROJECTS, PROJECT_DETAIL_METRICS } from './caseStudyData.ts';
 import './CaseStudy.css';
 
@@ -8,8 +8,6 @@ type CaseStudyProps = {
 };
 
 const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
-  
-  const navigate = useNavigate();
   const { id } = useParams();
   const projectKey = id && PROJECTS[id] ? id : 'homeOffices';
   const project = PROJECTS[projectKey];
@@ -233,13 +231,18 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
   };
 
   return (
-    <div id="pg-case-study" className="pg on">
+    <main id="pg-case-study" className="pg on">
       <div className="cs-hero">
-        <div className="cs-hero-bg" style={{ backgroundImage: `url(${project.heroImageUrl})` }}></div>
+        <img
+          className="cs-hero-bg"
+          src={project.heroImageUrl}
+          alt={project.title}
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}
+        />
         <div className="cs-hero-c">
-          <button className="page-back" onClick={() => navigate('/portfolio')}>
+          <Link to="/portfolio" className="page-back" style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}>
             <svg width="13" height="9" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5H2M2 5L6 1M2 5l4 4"/></svg> Back to Portfolio
-          </button>
+          </Link>
           <h1>{project.title}</h1>
           <div className="cs-tagLabels">
             {project.tagLabels.map((tag) => <span key={tag} className="cs-tag">{tag}</span>)}
@@ -251,12 +254,12 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
         {showInteriorView && (
           <div className="cs-ba">
             <div className={`cs-ba-compare ${isAutoSliding ? 'auto-sliding' : ''}`}>
-              <img className="cs-ba-img" src={project.afterImageUrl} alt="After" loading="lazy" />
+              <img className="cs-ba-img" src={project.afterImageUrl} alt={`${project.title} after transformation${project.location ? ` in ${project.location}` : ''}`} loading="lazy" />
               <div
                 className="cs-ba-after"
                 style={{ clipPath: `inset(0 ${100 - comparePosition}% 0 0)` }}
               >
-                <img className="cs-ba-img" src={project.beforeImageUrl} alt="Before" loading="lazy" />
+                <img className="cs-ba-img" src={project.beforeImageUrl} alt={`${project.title} before transformation${project.location ? ` in ${project.location}` : ''}`} loading="lazy" />
               </div>
 
               <div className="cs-ba-divider" style={{ left: `${comparePosition}%` }} aria-hidden="true">
@@ -320,7 +323,7 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
                     <img
                       className="cs-carousel-image"
                       src={img}
-                      alt={`${project.title} - final result ${i + 1}`}
+                      alt={galleryCaptions[i] || `${project.title} — view ${i + 1}`}
                       loading={i === activeImageIndex ? 'eager' : 'lazy'}
                       onClick={() => setExpandedImageIndex(i)}
                     />
@@ -418,7 +421,7 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
             <img
               className="cs-lightbox-image"
               src={galleryUrls[expandedImageIndex]}
-              alt={`${project.title} - expanded final result ${expandedImageIndex + 1}`}
+              alt={galleryCaptions[expandedImageIndex] || `${project.title} — view ${expandedImageIndex + 1}`}
               onClick={(e) => e.stopPropagation()}
             />
             <div className="cs-lightbox-cap" onClick={(e) => e.stopPropagation()}>
@@ -428,10 +431,10 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
         )}
         <div className="cs-cta">
           <p>Inspired by this project?</p>
-          <button className="btn-tr" onClick={() => navigate('/book')}><span>Start Your Project</span></button>
+          <Link to="/book" className="btn-tr" style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}><span>Start Your Project</span></Link>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

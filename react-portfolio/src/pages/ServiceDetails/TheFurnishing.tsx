@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './ServiceDetails.css';
 
 const TheFurnishing = () => {
@@ -7,7 +7,7 @@ const TheFurnishing = () => {
   const [activeTab, setActiveTab] = useState<'process' | 'included' | 'packages' | 'addons' | 'faq'>('process');
 
   return (
-    <div id="pg-service-detail" className="pg on">
+    <main id="pg-service-detail" className="pg on">
       <div className="service-detail-container">
         <section className="sd-hero">
           <div className="sd-hero-content">
@@ -37,8 +37,7 @@ const TheFurnishing = () => {
             </div>
 
             <div className="sd-section sd-panel">
-              {activeTab === 'process' && (
-                <>
+              <div className="sd-tabpanel" hidden={activeTab !== 'process'}>
                   <h2>The process, six phases</h2>
                   <ul className="sd-list">
                     <li><strong>01 — Discovery.</strong> A site visit, a long conversation, a floor plan you can read. (Week 1)</li>
@@ -48,11 +47,9 @@ const TheFurnishing = () => {
                     <li><strong>05 — Install.</strong> One choreographed day. Furniture in, art hung, drapery installed, room styled. (Weeks 8–10)</li>
                     <li><strong>06 — Polish.</strong> A two-week reveal window. Anything off, we fix. (Weeks 10–12)</li>
                   </ul>
-                </>
-              )}
+              </div>
 
-              {activeTab === 'included' && (
-                <>
+              <div className="sd-tabpanel" hidden={activeTab !== 'included'}>
                   <h2>What's included</h2>
                   <ul className="sd-list">
                     <li>Discovery call and on-site visit</li>
@@ -64,11 +61,9 @@ const TheFurnishing = () => {
                     <li>Final styling pass</li>
                     <li>Two-week post-install fix window</li>
                   </ul>
-                </>
-              )}
+              </div>
 
-              {activeTab === 'packages' && (
-                <>
+              <div className="sd-tabpanel" hidden={activeTab !== 'packages'}>
                   <h2>Packages</h2>
                   <div className="sd-table-wrapper">
                     <table className="sd-table">
@@ -98,21 +93,17 @@ const TheFurnishing = () => {
                       </tbody>
                     </table>
                   </div>
-                </>
-              )}
+              </div>
 
-              {activeTab === 'addons' && (
-                <>
+              <div className="sd-tabpanel" hidden={activeTab !== 'addons'}>
                   <h2>Add-ons</h2>
                   <ul className="sd-list">
                     <li>Art curation</li>
                     <li>Styling day</li>
                   </ul>
-                </>
-              )}
+              </div>
 
-              {activeTab === 'faq' && (
-                <>
+              <div className="sd-tabpanel" hidden={activeTab !== 'faq'}>
                   <h2>FAQ</h2>
                   <div className="sd-faq-stack">
                     <details className="sd-faq-toggle" open>
@@ -136,24 +127,23 @@ const TheFurnishing = () => {
                       <p>Yes — we can phase the work by room. If that's the plan, The Plan is the right entry point.</p>
                     </details>
                   </div>
-                </>
-              )}
+              </div>
             </div>
 
             <div className="sd-cta-section">
               <div className="sd-cta-buttons">
-                <button className="btn-dk" onClick={() => navigate('/book')}>
+                <Link to="/book" className="btn-dk" style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}>
                   <span>Take the Furnishing Quiz →</span>
-                </button>
-                <button className="btn-tr" onClick={() => navigate('/book')}>
+                </Link>
+                <Link to="/book" className="btn-tr" style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}>
                   <span>Book a 20-min intro call →</span>
-                </button>
+                </Link>
               </div>
             </div>
           </div>
         </section>
       </div>
-    </div>
+    </main>
   );
 };
 

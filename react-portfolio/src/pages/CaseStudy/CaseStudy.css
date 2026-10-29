@@ -10,9 +10,8 @@
 .cs-hero-bg {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center;
   transition: transform 8s ease;
+  display: block;
 }
 
 .cs-hero-bg:hover {

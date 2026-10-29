@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { RESOURCES } from '../../data/appData.ts';
 import { CONTENT } from '../../data/contentData.ts';
 import './About.css';
@@ -25,8 +25,6 @@ const renderMetricValue = (value: string, plusClassName: string) => {
 };
 
 const About = () => {
-  const navigate = useNavigate();
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -47,14 +45,14 @@ const About = () => {
   }, []);
 
   return (
-    <div id="pg-about" className="pg on">
+    <main id="pg-about" className="pg on">
       <div className="ab-hero">
         <div className="ab-hero-c">
-          <button className="page-back" onClick={() => navigate('/')}>
+          <Link to="/" className="page-back" style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}>
             <svg width="13" height="9" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M12 5H2M2 5L6 1M2 5l4 4"/>
             </svg> Back
-          </button>
+          </Link>
           <span className="sec-label gold">{ABOUT_CONTENT.kicker}</span>
           <h1>{aboutHeadingParts[0]}, <br/><em>{aboutHeadingParts[1] ?? ''}</em></h1>
           <div className="ab-stats">
@@ -91,9 +89,9 @@ const About = () => {
                 <p key={paragraph}>{paragraph}</p>
               ))}
               <div style={{marginTop: '28px'}}>
-                <button className="btn-dk" onClick={() => navigate('/book')}>
+                <Link to="/book" className="btn-dk" style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}>
                   <span>Work With Us</span>
-                </button>
+                </Link>
               </div>
             </div>
             <div className="ab-intro-img ab-intro-img-portrait rr">
@@ -222,11 +220,11 @@ const About = () => {
           <h2>Curious about working together?</h2>
           <p>Tell us about your project and I'll be in touch within 24 hours.</p>
         </div>
-        <button className="btn-lt" style={{ position: 'relative', zIndex: 1 }} onClick={() => navigate('/book')}>
+        <Link to="/book" className="btn-lt" style={{ position: 'relative', zIndex: 1, textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}>
           <span>Start a Conversation</span>
-        </button>
+        </Link>
       </div>
-    </div>
+    </main>
   );
 };
 

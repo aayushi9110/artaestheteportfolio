@@ -1,18 +1,17 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Process.css';
 
 const Process = () => {
-  const navigate = useNavigate();
 
   return (
-    <div id="pg-process" className="pg on">
+    <main id="pg-process" className="pg on">
       <div className="how-hero">
-        <button className="page-back" onClick={() => navigate('/')}>
+        <Link to="/" className="page-back" style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}>
           <svg width="13" height="9" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5">
             <path d="M12 5H2M2 5L6 1M2 5l4 4"/>
           </svg>
           Back
-        </button>
+        </Link>
         <span className="sec-label gold">How We Work</span>
         <h1>Services built around your <em>timeline</em>.</h1>
         <p>Choose the level of support you need, from strategic planning to full turnkey delivery.</p>
@@ -55,12 +54,12 @@ const Process = () => {
         <div className="how-cta">
           <h2>Not sure where to start?</h2>
           <p>Take the quiz and we will guide you to the right service for your space.</p>
-          <button className="btn-lt" type="button" onClick={() => navigate('/book')}>
+          <Link to="/book" className="btn-lt" style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}>
             <span>Take the Quiz</span>
-          </button>
+          </Link>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
