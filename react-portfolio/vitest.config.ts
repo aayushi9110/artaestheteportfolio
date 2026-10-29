@@ -14,7 +14,9 @@ export default defineConfig({
     hookTimeout: 30_000,
     // jsdom + React in every worker is memory-hungry; uncapped parallelism on an
     // 11-core machine starves workers and turns slow tests into flaky failures.
-    poolOptions: { forks: { maxForks: 4, minForks: 1 } },
+    // (Vitest 5 removed `poolOptions`; these are the top-level replacements.)
+    maxWorkers: 4,
+    minWorkers: 1,
     coverage: {
       provider: 'v8',
       reportsDirectory: 'coverage',

@@ -305,9 +305,12 @@ describe('routing', () => {
     });
   });
 
-  describe('App.tsx file text guard', () => {
-    it('all route patterns from ALL_ROUTES appear in src/App.tsx', () => {
-      const appPath = resolve(__dirname, '../../src/App.tsx');
+  describe('AppShell.tsx file text guard', () => {
+    it('all route patterns from ALL_ROUTES appear in src/AppShell.tsx', () => {
+      // The <Routes> tree lives in AppShell so the client (BrowserRouter) and the
+      // prerenderer (StaticRouter) share one definition. App.tsx is just the
+      // client-side router wrapper.
+      const appPath = resolve(__dirname, '../../src/AppShell.tsx');
       const appContent = readFileSync(appPath, 'utf-8');
 
       // Extract all unique route patterns (not instance values like homeOffices)
@@ -324,10 +327,15 @@ describe('routing', () => {
       });
 
       routePatterns.forEach((pattern) => {
-        expect(appContent).toContain(
-          `path="${pattern}"`,
-          `Route pattern "${pattern}" not found in App.tsx`
-        );
+        // Most routes are written as a literal path="...", but /portfolio-pdf-preview
+        // is referenced through the PDF_PREVIEW_PATH constant (the shell also uses it
+        // to strip Header/Footer/Cursor), so accept the bare quoted string too.
+        const present =
+          appContent.includes(`path="${pattern}"`) ||
+          appContent.includes(`'${pattern}'`) ||
+          appContent.includes(`"${pattern}"`);
+
+        expect(present, `Route pattern "${pattern}" not found in AppShell.tsx`).toBe(true);
       });
     });
   });
