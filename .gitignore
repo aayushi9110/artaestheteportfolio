@@ -1,3 +1,11 @@
 node_modules/
 dist/
 coverage/
+
+# Local env files. VITE_* vars are inlined into the public JS bundle at build
+# time, so nothing secret belongs in them either way — the booking API key must
+# be enforced server-side in the Lambda / API Gateway, not trusted from the client.
+.env
+.env.local
+.env.*.local
+!.env.example
