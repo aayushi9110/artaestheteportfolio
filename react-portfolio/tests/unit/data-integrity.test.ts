@@ -1,8 +1,22 @@
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { PROJECTS, PROJECT_DETAIL_METRIC_DEFINITIONS } from '../../src/pages/CaseStudy/caseStudyData.ts';
 import { RESOURCES } from '../../src/data/appData.ts';
 import { CONTENT } from '../../src/data/contentData.ts';
+
+describe('robots.txt stays ASCII-only', () => {
+  // Amplify served robots.txt with no charset, so a single em dash rendered as
+  // "â€”" for every crawler. The header is fixed in customHttp.yml, but robots.txt
+  // is parsed byte-wise by crawlers, so keep the file itself pure ASCII.
+  it('contains no characters above U+007F', () => {
+    const robots = readFileSync(resolve(__dirname, '../../public/robots.txt'), 'utf8');
+    const offenders = [...robots]
+      .filter((character) => character.codePointAt(0)! > 127)
+      .map((character) => `${character} (U+${character.codePointAt(0)!.toString(16).toUpperCase()})`);
+
+    expect([...new Set(offenders)]).toEqual([]);
+  });
+});
 
 describe('Data Integrity Tests', () => {
   const PUBLIC_PATH = resolve(process.cwd(), 'public');
