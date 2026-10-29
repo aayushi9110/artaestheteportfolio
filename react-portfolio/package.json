@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "dev:pdf": "vite --open /portfolio-pdf-preview",
-    "build": "tsc && vite build",
+    "build": "tsx scripts/prerender.mts",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "generate:portfolio-html": "tsx scripts/generatePortfolioPdf.mts",
@@ -22,7 +22,8 @@
     "test:smoke": "npm run build && tsx tests/smoke/smoke.mts",
     "test:smoke:mobile": "npm run build && tsx tests/smoke/smoke.mts --mobile",
     "test:live": "tsx tests/smoke/smoke.mts --url",
-    "verify": "npm run typecheck && npm run test && npm run test:smoke:mobile"
+    "verify": "npm run typecheck && npm run test && npm run test:smoke:mobile",
+    "build:spa": "tsc && vite build"
   },
   "dependencies": {
     "html2canvas": "^1.4.1",
