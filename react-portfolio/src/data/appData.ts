@@ -1,4 +1,4 @@
-export { PROJECTS } from '../pages/CaseStudy/caseStudyData.ts';
+export { PROJECTS, PUBLISHED_PROJECTS, isProjectPublished } from '../pages/CaseStudy/caseStudyData.ts';
 export type { Deliverable, Project, StoryType } from '../pages/CaseStudy/caseStudyData.ts';
 
 export const RESOURCES = {

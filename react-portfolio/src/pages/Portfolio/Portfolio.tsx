@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { PROJECTS } from '../../data/appData.ts';
+import { PUBLISHED_PROJECTS } from '../../data/appData.ts';
 import './Portfolio.css';
 
 type GalleryItem = {
@@ -13,7 +13,7 @@ type GalleryItem = {
   summary: string;
 };
 
-const allPortfolioItems: GalleryItem[] = Object.entries(PROJECTS).map(([id, project]) => ({
+const allPortfolioItems: GalleryItem[] = Object.entries(PUBLISHED_PROJECTS).map(([id, project]) => ({
   id,
   storyType: project.storyType,
   imageUrl: project.heroImageUrl,

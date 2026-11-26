@@ -10,7 +10,7 @@
  * Project routes are derived from PROJECTS, never hard-coded, so adding a case
  * study automatically adds a pre-rendered page, a sitemap entry and an llms.txt line.
  */
-import { PROJECTS, type Project } from '../pages/CaseStudy/caseStudyData.ts';
+import { PUBLISHED_PROJECTS, type Project } from '../pages/CaseStudy/caseStudyData.ts';
 import { SITE } from './siteConfig.ts';
 
 export type RouteSeo = {
@@ -120,7 +120,7 @@ const STATIC_ROUTES: RouteSeo[] = [
 ];
 
 const projectRoutes = (): RouteSeo[] =>
-  Object.entries(PROJECTS).map(([id, project]) => ({
+  Object.entries(PUBLISHED_PROJECTS).map(([id, project]) => ({
     path: storyPathFor(id, project),
     title: `${project.title}${project.location ? ` — ${project.location}` : ''} | ${SITE.name}`,
     description: toDescription(project.overviewTextPrimary || project.overviewTitle || SITE.description),
@@ -150,7 +150,7 @@ export const seoForPathname = (pathname: string): RouteSeo | undefined => {
 
   const legacy = normalized.match(/^\/(?:case-study|project)\/(.+)$/);
   if (legacy) {
-    const project = PROJECTS[legacy[1]];
+    const project = PUBLISHED_PROJECTS[legacy[1]];
     if (project) return SEO_BY_PATH[storyPathFor(legacy[1], project)];
   }
 

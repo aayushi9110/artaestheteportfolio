@@ -12,7 +12,7 @@ import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-import { PROJECTS } from '../src/pages/CaseStudy/caseStudyData.ts';
+import { PUBLISHED_PROJECTS } from '../src/pages/CaseStudy/caseStudyData.ts';
 import { EXCLUDED_PATHS, SEO_ROUTES, storyPathFor, type RouteSeo } from '../src/seo/routes.ts';
 import { SITE, SITE_ORIGIN, absoluteUrl } from '../src/seo/siteConfig.ts';
 import {
@@ -96,7 +96,7 @@ const headTagsFor = (route: RouteSeo, appHtml: string): string => {
       breadcrumbLd([
         { name: 'Home', path: '/' },
         { name: 'Portfolio', path: '/portfolio' },
-        { name: PROJECTS[route.projectId].title, path: route.path },
+        { name: PUBLISHED_PROJECTS[route.projectId].title, path: route.path },
       ])
     );
   } else if (route.path === '/book') {
@@ -169,17 +169,17 @@ ${urls}
 const buildLlmsTxt = (routes: RouteSeo[]): string => {
   const pageRoutes = routes.filter((route) => !route.projectId);
   const interiorRoutes = routes.filter(
-    (route) => route.projectId && PROJECTS[route.projectId].storyType === 'interior'
+    (route) => route.projectId && PUBLISHED_PROJECTS[route.projectId].storyType === 'interior'
   );
   const fineArtRoutes = routes.filter(
-    (route) => route.projectId && PROJECTS[route.projectId].storyType === 'fine-art'
+    (route) => route.projectId && PUBLISHED_PROJECTS[route.projectId].storyType === 'fine-art'
   );
 
   const line = (route: RouteSeo) =>
     `- [${route.title.split(' | ')[0].split(' — ')[0]}](${absoluteUrl(route.path)}): ${route.description}`;
 
   const projectLine = (route: RouteSeo) => {
-    const project = PROJECTS[route.projectId!];
+    const project = PUBLISHED_PROJECTS[route.projectId!];
     const where = project.location ? ` (${project.location})` : '';
     return `- [${project.title}${where}](${absoluteUrl(route.path)}): ${route.description}`;
   };
@@ -272,7 +272,7 @@ const main = async () => {
   // link plus a meta refresh is a proper soft redirect, and the empty #root hydrates
   // cleanly instead of inheriting the home page's markup.
   let legacyCount = 0;
-  for (const [id, project] of Object.entries(PROJECTS)) {
+  for (const [id, project] of Object.entries(PUBLISHED_PROJECTS)) {
     const target = storyPathFor(id, project);
     for (const prefix of ['/case-study', '/project']) {
       const legacyPath = `${prefix}/${id}`;

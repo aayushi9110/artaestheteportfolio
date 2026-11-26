@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom';
-import { PROJECTS } from './data/appData.ts';
+import { PROJECTS, isProjectPublished } from './data/appData.ts';
 import { storyPathFor } from './seo/routes.ts';
 import { useDocumentMeta } from './seo/useDocumentMeta.ts';
 import Header from './components/Header';
@@ -33,6 +33,13 @@ const PortfolioPdfPreview = lazy(() => import('./pages/PortfolioPdfPreview/Portf
 
 const PDF_PREVIEW_PATH = '/portfolio-pdf-preview';
 
+/**
+ * Hidden projects (`isPublished: false`) are not pre-rendered, so their story URLs
+ * only reach the client through the SPA fallback. Send those visitors to the
+ * portfolio. The Amplify 301 does the same for crawlers.
+ */
+const UNPUBLISHED_STORY_TARGET = '/portfolio';
+
 function ScrollToTop() {
   const { pathname } = useLocation();
 
@@ -50,9 +57,18 @@ function ScrollToTop() {
 function StoryRouteResolver() {
   const { id = '' } = useParams();
   const project = PROJECTS[id];
+  if (project && !isProjectPublished(project)) return <Navigate to={UNPUBLISHED_STORY_TARGET} replace />;
   const target = project ? storyPathFor(id, project) : `/interior-story/${id}`;
 
   return <Navigate to={target} replace />;
+}
+
+function PublishedStory({ children }: { children: JSX.Element }) {
+  const { id = '' } = useParams();
+  const project = PROJECTS[id];
+  if (project && !isProjectPublished(project)) return <Navigate to={UNPUBLISHED_STORY_TARGET} replace />;
+
+  return children;
 }
 
 const AppShell = () => {
@@ -77,8 +93,8 @@ const AppShell = () => {
         <Route path="/service/the-refresh" element={<TheRefresh />} />
         <Route path="/service/the-trade-program" element={<TheTradeProgram />} />
         <Route path="/case-study/:id" element={<StoryRouteResolver />} />
-        <Route path="/interior-story/:id" element={<InteriorStory />} />
-        <Route path="/fine-art-story/:id" element={<FineArtStory />} />
+        <Route path="/interior-story/:id" element={<PublishedStory><InteriorStory /></PublishedStory>} />
+        <Route path="/fine-art-story/:id" element={<PublishedStory><FineArtStory /></PublishedStory>} />
         <Route path="/project/:id" element={<StoryRouteResolver />} />
         <Route
           path={PDF_PREVIEW_PATH}

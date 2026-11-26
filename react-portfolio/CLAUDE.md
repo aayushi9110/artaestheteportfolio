@@ -27,8 +27,8 @@ npm run generate:portfolio-pdf   # the above + headless Chrome → dist/Art-Aest
 ### Verification
 
 ```bash
-npm run verify     # typecheck → 235 tests → build → live browser smoke test (~1m50s)
-npm test           # vitest only, no browser (~52s)
+npm run verify     # typecheck → all vitest tests → build → live browser smoke test (~2m)
+npm test           # vitest only, no browser (~55s)
 npm run test:smoke # build + drive real Chrome over every route
 ```
 
@@ -88,13 +88,18 @@ is on; match the surrounding file.
 `homeOffices`, `cuppertinoHome`, `orangeSeriesPainting`). `src/data/appData.ts` re-exports it so
 pages import from `data/appData.ts` rather than reaching into the CaseStudy folder.
 
-Three flags on each `Project` decide where it appears:
+Four flags on each `Project` decide where it appears:
 
 | Field | Effect |
 | --- | --- |
 | `storyType` | `'interior'` → `/interior-story/:id`, `'fine-art'` → `/fine-art-story/:id`; also splits the Portfolio tabs |
 | `isSelectedForHome` + `homeVisibilityPriority` | selects and orders the home "Selected Works" grid (lower = earlier; `99` parks a project) |
 | `isSelectedForPdf` | selects the interior projects in the portfolio PDF |
+| `isPublished` | optional, default published. `false` hides the project everywhere — Portfolio, Home, sitemap, llms.txt, JSON-LD, both PDF renderers, pre-rendering — and its story and legacy URLs redirect to `/portfolio` |
+
+Listing surfaces read `PUBLISHED_PROJECTS`, never `PROJECTS` directly. `PROJECTS` stays the full
+record so a hidden project can be restored by flipping its flag. Hiding a project that was live
+also needs an Amplify 301 for its story URL (see `DEPLOYMENT.md`).
 
 To feature, reorder, or retire a project, edit these fields — do not reorder JSX or duplicate copy
 into a page.
@@ -176,10 +181,13 @@ timeout. Config (`VITE_BOOKING_API_URL`, optional `VITE_BOOKING_API_KEY`,
 `VITE_BOOKING_REQUEST_TIMEOUT_MS`) is typed in `src/vite-env.d.ts`; add any new var there too.
 Form copy, questions, and FAQs are data in `src/pages/Book/bookingData.ts` — edit those, not JSX.
 
-Note: `.env` and `.env.local` are **committed** and currently identical to `.env.example` (the
-API key is empty). Anything secret must not go in them as-is — raise it rather than committing a
-real key. The repo's `.gitignore` sits one level up at the git root and ignores only
-`node_modules/` and `dist/`.
+`.env` and `.env.local` are git-ignored (the `.gitignore` sits one level up at the git root);
+only `.env.example` is tracked. Every `VITE_*` value is inlined into the public bundle, so none
+of them is secret.
+
+The email addresses the form delivers to are not in this repo: they are `SES_FROM_EMAIL` /
+`SES_TO_EMAIL` on the `lambda/booking-submit` Lambda. A change to the payload shape needs the
+matching change in that Lambda's validation, deployed first.
 
 ## Conventions
 
@@ -205,5 +213,6 @@ Mention these rather than silently fixing them unless asked:
   same-page view toggle and is deliberately not in the sitemap.
 - `Portfolio.tsx` shuffles the "All" tab after mount, so ordering differs per visit —
   intentional, but don't write tests or snapshots against the shuffled order.
-- There is still no catch-all 404 route in `AppShell.tsx`; an unknown path renders the shell
-  with an empty body.
+- There is still no catch-all 404 route in `AppShell.tsx`. In production an unknown path gets
+  HTTP 404 from Amplify, but with the home page's HTML as the body; client-side, React then
+  renders the shell with an empty body.

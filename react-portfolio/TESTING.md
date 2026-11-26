@@ -10,7 +10,7 @@ This suite is that check.
 npm run verify
 ```
 
-It typechecks, runs all 309 tests, builds, then drives a real Chrome over every route of
+It typechecks, runs every vitest test, builds, then drives a real Chrome over every route of
 the built site and fails loudly if anything is blank, throws, logs an error, or 404s an
 asset. Exit code is `1` on any failure, so it gates CI and git hooks.
 
@@ -27,7 +27,7 @@ Takes about **2m**: ~55s of tests, a pre-render build, then 21 live browser chec
 
 ---
 
-**Current state:** 13 test files, 309 tests, all passing. Verified stable across three
+**Current state (2026-11-25):** 15 test files, 319 tests, all passing. Verified stable across three
 consecutive full runs, and verified to actually *fail* — a deliberately corrupted bundle
 was caught on every route with exit code 1.
 
@@ -74,11 +74,13 @@ npx vitest run tests/unit/data-integrity.test.ts
 npx vitest run tests/unit/case-study-data.test.ts
 npx vitest run tests/unit/pdf-parity.test.tsx
 npx vitest run tests/unit/hydration.test.tsx
+npx vitest run tests/unit/launch-checklist.test.tsx
 npx vitest run tests/components/Header.test.tsx
 npx vitest run tests/components/Footer.test.tsx
 npx vitest run tests/components/Cursor.test.tsx
 npx vitest run tests/components/Loader.test.tsx
 npx vitest run tests/pages/routing.test.tsx
+npx vitest run tests/pages/unpublished-project.test.tsx
 npx vitest run tests/pages/Portfolio.test.tsx
 npx vitest run tests/pages/CaseStudy.test.tsx
 npx vitest run tests/pages/Book.test.tsx
@@ -134,6 +136,18 @@ image in the generated HTML exists on disk, the TOC paginates past 7 projects, a
 `CONTENT.home.stats` still has exactly 3 entries — the preview indexes `stats[0..2]`
 with no guard and would crash on fewer.
 
+### `tests/unit/launch-checklist.test.tsx` — 4 tests
+The rebrand's launch checklist as tests. Renders every route and scans the
+markup, the visible text, every `<title>` and meta description, `index.html` and
+`robots.txt` for `BANNED_STRINGS`. Each rebrand release adds the wording it removes, so it
+can't come back. Also checks `src/data/servicesData.ts` (card order, one "Most popular", paths match ids).
+Prices there stay `null` until confirmed, because the repository is public.
+
+### `tests/pages/unpublished-project.test.tsx` — 5 tests
+Flips one real project to `isPublished: false` at runtime and drives the real `AppShell`:
+its `/fine-art-story`, `/interior-story`, `/case-study` and `/project` URLs must land on
+`/portfolio`, and published story pages must be unaffected.
+
 ### `tests/unit/hydration.test.tsx` — 74 tests
 The site is pre-rendered to static HTML at build time and then hydrated, so the markup
 the server produces must match what the client would produce. Anything non-deterministic
@@ -170,7 +184,7 @@ Every route in the manifest renders its expected marker. Legacy `/case-study/:id
 `/project/:id` still redirect to the right story type. `StoryRouteResolver` survives
 unknown ids, empty ids and URL-encoded ids.
 
-Includes a guard test that reads `src/App.tsx` as text and asserts every manifest path
+Includes a guard test that reads `src/AppShell.tsx` as text and asserts every manifest path
 literally appears in it — so deleting or renaming a route fails the suite.
 
 ### `tests/pages/Portfolio.test.tsx` — 12 tests
@@ -252,20 +266,18 @@ printf '#!/bin/sh\nnpm run verify\n' > .git/hooks/pre-push && chmod +x .git/hook
 Found while building this suite. None are fixed — they are documented by tests that
 assert current behaviour, so you decide when to address them.
 
-1. **No 404 route.** `src/App.tsx` has no catch-all `<Route path="*">`. An unknown URL
-   renders the header and footer with an empty page body — not an error, just a blank
-   middle. Covered by a test named so the gap is obvious.
+1. **No 404 route.** `src/AppShell.tsx` has no catch-all `<Route path="*">`. In production
+   Amplify answers an unknown URL with HTTP 404 and the home page's HTML; React then
+   client-renders the header and footer around an empty body. Covered by a test named so
+   the gap is obvious.
 2. **Duplicate home priority.** `homeOffices` and `mumbaiBedroomTwo` both have
    `homeVisibilityPriority: 8`. `Home.tsx` sorts on priority alone, so the tie resolves
    by data-file order, while `generatePortfolioPdf.mts` tie-breaks by title — the home
    grid and the PDF can order that pair differently. Give one a distinct priority.
 3. **`rel="noopener noreferrer"`.** Footer social links use `rel="noreferrer"` only.
    Harmless in modern browsers, worth tightening.
-4. **`npm run lint` is broken.** ESLint 8 is installed with no config file, so the
-   script exits 1. It is deliberately *not* part of `npm run verify` — adding a config
-   is a separate decision.
-5. **The 2s splash.** `App.tsx` blocks the router behind a fixed `setTimeout`, so every
-   smoke check pays 2 seconds. Removing it would cut the smoke run roughly in half.
+4. **`npm run lint` is not part of `npm run verify`.** It works and is clean (`.eslintrc.cjs`,
+   `--max-warnings 0`); run it alongside.
 
 ---
 

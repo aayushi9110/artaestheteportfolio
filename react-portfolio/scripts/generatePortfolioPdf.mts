@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { PROJECTS } from '../src/pages/CaseStudy/caseStudyData.ts';
+import { PUBLISHED_PROJECTS } from '../src/pages/CaseStudy/caseStudyData.ts';
 import { RESOURCES } from '../src/data/appData.ts';
 import { CONTENT } from '../src/data/contentData.ts';
 
@@ -27,7 +27,7 @@ type ProjectEntry = {
   isSelectedForPdf: boolean;
 };
 
-const projectEntries = Object.entries(PROJECTS).map(([id, project]) => ({
+const projectEntries = Object.entries(PUBLISHED_PROJECTS).map(([id, project]) => ({
   id,
   ...project,
 })) as ProjectEntry[];

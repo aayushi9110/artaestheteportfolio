@@ -31,6 +31,13 @@ export type Project = {
   overviewTextSecondary: string;
   galleryItems: GalleryItem[];
   detailMetrics?: ProjectDetailMetric[];
+  /**
+   * `false` hides the project everywhere: Portfolio, Home, sitemap, llms.txt,
+   * JSON-LD, the PDF, and pre-rendering. Its story URL then redirects to
+   * /portfolio. Omitted means published. Use this to retire a project without
+   * deleting its data, so it can be restored by flipping the flag back.
+   */
+  isPublished?: boolean;
 };
 
 const BOCONCEPT_OFFICE_REFERENCE_GALLERY_ITEM: GalleryItem[] = [
@@ -441,6 +448,16 @@ export const PROJECTS: Record<string, Project> = {
     galleryItems: ORANGE_SERIES_ART_GALLERY_ITEM
   }
 };
+
+export const isProjectPublished = (project: Project): boolean => project.isPublished !== false;
+
+/**
+ * Every project a visitor or crawler may see. Listing surfaces read this, never
+ * PROJECTS directly; PROJECTS stays the full record so hidden projects can be restored.
+ */
+export const PUBLISHED_PROJECTS: Record<string, Project> = Object.fromEntries(
+  Object.entries(PROJECTS).filter(([, project]) => isProjectPublished(project))
+);
 
 export type ProjectDetailMetricDefinition = {
   outputLabel: string;

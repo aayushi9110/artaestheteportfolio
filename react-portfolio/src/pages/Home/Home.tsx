@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { PROJECTS, RESOURCES } from '../../data/appData.ts';
+import { PUBLISHED_PROJECTS, RESOURCES } from '../../data/appData.ts';
 import { CONTENT } from '../../data/contentData.ts';
 import './Home.css';
 
@@ -47,7 +47,7 @@ const TestimonialAvatar = ({ name, photoUrl }: { name: string; photoUrl: string 
 };
 
 const Home = () => {
-  const homeSelectedWorks = Object.entries(PROJECTS)
+  const homeSelectedWorks = Object.entries(PUBLISHED_PROJECTS)
     .filter(([, project]) => project.isSelectedForHome)
     .sort(([, projectA], [, projectB]) => projectA.homeVisibilityPriority - projectB.homeVisibilityPriority)
     .map(([id, project]) => ({ id, project }));

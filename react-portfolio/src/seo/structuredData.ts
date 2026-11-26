@@ -6,7 +6,7 @@
  * phone number, price or rating — fabricated structured data is a liability,
  * and an omitted property is always allowed.
  */
-import { PROJECTS } from '../pages/CaseStudy/caseStudyData.ts';
+import { PUBLISHED_PROJECTS } from '../pages/CaseStudy/caseStudyData.ts';
 import { CONTENT } from '../data/contentData.ts';
 import { SITE, SITE_ORIGIN, absoluteUrl } from './siteConfig.ts';
 import { storyPathFor } from './routes.ts';
@@ -101,7 +101,7 @@ export const personLd = (): Json => ({
 });
 
 export const creativeWorkLd = (projectId: string): Json | undefined => {
-  const project = PROJECTS[projectId];
+  const project = PUBLISHED_PROJECTS[projectId];
   if (!project) return undefined;
 
   const path = storyPathFor(projectId, project);
@@ -182,8 +182,8 @@ export const portfolioCollectionLd = (): Json => ({
   isPartOf: { '@id': `${SITE_ORIGIN}/#business` },
   mainEntity: {
     '@type': 'ItemList',
-    numberOfItems: Object.keys(PROJECTS).length,
-    itemListElement: Object.entries(PROJECTS).map(([id, project], index) => ({
+    numberOfItems: Object.keys(PUBLISHED_PROJECTS).length,
+    itemListElement: Object.entries(PUBLISHED_PROJECTS).map(([id, project], index) => ({
       '@type': 'ListItem',
       position: index + 1,
       name: project.title,

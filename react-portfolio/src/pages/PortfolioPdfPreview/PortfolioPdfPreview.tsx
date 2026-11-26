@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { PROJECTS, RESOURCES } from '../../data/appData.ts';
+import { PUBLISHED_PROJECTS, RESOURCES } from '../../data/appData.ts';
 import { CONTENT } from '../../data/contentData.ts';
 import './PortfolioPdfPreview.css';
 
@@ -22,7 +22,7 @@ type ProjectEntry = {
 };
 
 const pickTopProjects = (): ProjectEntry[] => {
-  const entries = Object.entries(PROJECTS).map(([id, project]) => ({ id, ...project })) as ProjectEntry[];
+  const entries = Object.entries(PUBLISHED_PROJECTS).map(([id, project]) => ({ id, ...project })) as ProjectEntry[];
 
   return entries
     .filter((project) => project.storyType === 'interior' && project.isSelectedForPdf)

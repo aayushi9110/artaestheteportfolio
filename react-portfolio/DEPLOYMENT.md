@@ -89,7 +89,7 @@ errors (including hydration mismatches) and 404 assets.
 cd react-portfolio && npm run verify
 ```
 
-Typecheck → 309 tests → pre-render build → live Chrome smoke test over every route.
+Typecheck → all vitest tests → pre-render build → live Chrome smoke test over every route.
 See `TESTING.md`. **The site autodeploys on push, so run this first.**
 
 ## Custom headers
