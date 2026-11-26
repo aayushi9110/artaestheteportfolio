@@ -27,7 +27,7 @@ Takes about **2m**: ~55s of tests, a pre-render build, then 21 live browser chec
 
 ---
 
-**Current state (2026-11-25):** 15 test files, 319 tests, all passing. Verified stable across three
+**Current state (2026-11-25):** 16 test files, 322 tests, all passing. Verified stable across three
 consecutive full runs, and verified to actually *fail* — a deliberately corrupted bundle
 was caught on every route with exit code 1.
 
@@ -81,6 +81,7 @@ npx vitest run tests/components/Cursor.test.tsx
 npx vitest run tests/components/Loader.test.tsx
 npx vitest run tests/pages/routing.test.tsx
 npx vitest run tests/pages/unpublished-project.test.tsx
+npx vitest run tests/pages/app-shell.test.tsx
 npx vitest run tests/pages/Portfolio.test.tsx
 npx vitest run tests/pages/CaseStudy.test.tsx
 npx vitest run tests/pages/Book.test.tsx
@@ -147,6 +148,11 @@ Prices there stay `null` until confirmed, because the repository is public.
 Flips one real project to `isPublished: false` at runtime and drives the real `AppShell`:
 its `/fine-art-story`, `/interior-story`, `/case-study` and `/project` URLs must land on
 `/portfolio`, and published story pages must be unaffected.
+
+### `tests/pages/app-shell.test.tsx` — 3 tests
+The real `AppShell` at the URLs production serves. Amplify 301s every route to its
+trailing-slash form, so the bare `/portfolio-pdf-preview` shell (no header, no footer) must
+hold for `/portfolio-pdf-preview/` too, and ordinary routes keep both either way.
 
 ### `tests/unit/hydration.test.tsx` — 74 tests
 The site is pre-rendered to static HTML at build time and then hydrated, so the markup
@@ -217,7 +223,7 @@ For every route, in a real Chrome against the real build:
 - no `<img>` finished loading with `naturalWidth === 0`
 - header and footer are present — and *absent* on `/portfolio-pdf-preview`, which is
   intentionally bare
-- legacy URLs land on the expected path
+- legacy URLs land on the expected path (a trailing slash is accepted, since Amplify adds one)
 
 Analytics, Google Fonts and favicon noise is filtered out so the signal stays clean.
 

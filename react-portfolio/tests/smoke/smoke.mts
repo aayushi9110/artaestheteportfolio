@@ -122,8 +122,10 @@ async function checkRoute(page: Page, route: RouteCheck, viewport: string): Prom
     }
 
     if (route.redirectsTo) {
+      // Amplify 301s every directory route to its trailing-slash form, so
+      // /interior-story/x and /interior-story/x/ are the same destination.
       const landed = new URL(page.url()).pathname;
-      if (landed !== route.redirectsTo) {
+      if (landed.replace(/\/+$/, '') !== route.redirectsTo.replace(/\/+$/, '')) {
         routeFailures.push(`expected redirect to ${route.redirectsTo}, landed on ${landed}`);
       }
     }

@@ -73,7 +73,8 @@ function PublishedStory({ children }: { children: JSX.Element }) {
 
 const AppShell = () => {
   const { pathname } = useLocation();
-  const isPdfPreviewRoute = pathname === PDF_PREVIEW_PATH;
+  // Amplify serves every pre-rendered route with a trailing slash (/portfolio-pdf-preview/).
+  const isPdfPreviewRoute = pathname.replace(/\/+$/, '') === PDF_PREVIEW_PATH;
 
   useDocumentMeta(pathname);
 
