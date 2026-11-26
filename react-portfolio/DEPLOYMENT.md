@@ -11,7 +11,9 @@ dist/index.html                              /            (pre-rendered)
 dist/about/index.html                        /about        (pre-rendered)
 dist/service/the-plan/index.html             …             (pre-rendered)
 dist/interior-story/<projectId>/index.html   one per interior project
-dist/fine-art-story/<projectId>/index.html   one per fine-art project
+dist/fine-art-story/<projectId>/index.html   one per fine-art project — or, for a hidden
+                                             project (isPublished: false), a noindex soft
+                                             redirect to /portfolio
 dist/case-study/<id>/index.html              canonical soft redirect to the story page
 dist/project/<id>/index.html                 canonical soft redirect to the story page
 dist/portfolio-pdf-preview/index.html        empty-root shell, noindex (client-only)
@@ -41,6 +43,27 @@ A plain `200` rewrite would **not** work: it intercepts every path, so `/about` 
 served `dist/index.html` — the pre-rendered *home* page — and visitors would get home-page
 markup hydrating under the `/about` route. If anyone ever changes the type from `404-200`
 to `200`, that is the symptom.
+
+### Redirect rules for hidden projects
+
+Projects with `isPublished: false` (currently the three fine-art pieces) are not
+pre-rendered. Their old URLs get a `noindex` soft-redirect page to `/portfolio`, but
+search engines should see a real 301. Add this rule **above** the `/<*>` catch-all
+(rules are evaluated top to bottom):
+
+| Source | Target | Type |
+| --- | --- | --- |
+| `/fine-art-story/<*>` | `/portfolio` | 301 (redirect) |
+
+Verify after adding it:
+
+```bash
+curl -sSI https://www.byaayushi.com/fine-art-story/orangeSeriesPainting/ | grep -iE '^(HTTP|location)'
+# expect: HTTP/2 301 and location: …/portfolio
+```
+
+If a hidden project is restored (flag flipped back), delete this rule first, or its
+story page stays unreachable.
 
 ### Recommended change: point the fallback at `/app-shell.html`
 

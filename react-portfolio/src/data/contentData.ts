@@ -16,7 +16,6 @@ export const CONTENT = {
     stats: [
       { value: '51+', label: 'Projects Completed' },
       { value: '30+', label: 'Spaces Styled' },
-      { value: '55+', label: 'Art Pieces Commissioned' },
     ] as MetricItem[],
   },
   about: {

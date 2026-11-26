@@ -192,6 +192,32 @@
   z-index: 4;
 }
 
+.cs-ba-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: rgba(44, 31, 20, 0.72);
+  color: var(--cream);
+  padding: 6px 12px;
+  z-index: 4;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.cs-ba-hint.hide {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-ba-hint {
+    transition: none;
+  }
+}
+
 .cs-ba-lbl-left {
   left: 16px;
 }
@@ -209,6 +235,8 @@
   opacity: 0;
   cursor: ew-resize;
   z-index: 5;
+  /* Horizontal drags move the slider; vertical swipes still scroll the page. */
+  touch-action: pan-y;
 }
 
 .cs-ba-range::-webkit-slider-thumb {

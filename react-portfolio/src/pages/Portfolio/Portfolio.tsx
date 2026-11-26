@@ -23,8 +23,6 @@ const allPortfolioItems: GalleryItem[] = Object.entries(PUBLISHED_PROJECTS).map(
   summary: project.overviewTextPrimary,
 }));
 
-const interiorItems: GalleryItem[] = allPortfolioItems.filter((item) => item.storyType === 'interior');
-const fineArtItems: GalleryItem[] = allPortfolioItems.filter((item) => item.storyType === 'fine-art');
 
 const shuffleItems = (items: GalleryItem[]) => {
   const arr = [...items];
@@ -36,13 +34,12 @@ const shuffleItems = (items: GalleryItem[]) => {
 };
 
 const Portfolio = () => {
-  const [tab, setTab] = useState<'all' | 'interiors' | 'fineart'>('all');
   const [activeItem, setActiveItem] = useState<GalleryItem | null>(null);
   const [featuredIndex, setFeaturedIndex] = useState(0);
   const [isFeaturedHovered, setIsFeaturedHovered] = useState(false);
   const touchStartX = useRef<number | null>(null);
 
-  // The "All" tab is deliberately shuffled per visit, but Math.random() cannot
+  // The grid is deliberately shuffled per visit, but Math.random() cannot
   // agree between the pre-render and the browser — it would hydrate as a text
   // mismatch. So render the stable data order first, then shuffle once mounted:
   // the pre-rendered HTML stays deterministic and the shuffle still happens.
@@ -52,9 +49,7 @@ const Portfolio = () => {
     setShuffledAllItems(shuffleItems(allPortfolioItems));
   }, []);
 
-  const mixedAllItems = shuffledAllItems ?? allPortfolioItems;
-
-  const featuredItems = tab === 'all' ? mixedAllItems : tab === 'interiors' ? interiorItems : fineArtItems;
+  const featuredItems = shuffledAllItems ?? allPortfolioItems;
   const previousFeaturedIndex = featuredItems.length
     ? (featuredIndex - 1 + featuredItems.length) % featuredItems.length
     : -1;
@@ -86,10 +81,6 @@ const Portfolio = () => {
   }, []);
 
   useEffect(() => {
-    setFeaturedIndex(0);
-  }, [tab]);
-
-  useEffect(() => {
     if (isFeaturedHovered || featuredItems.length <= 1) {
       return;
     }
@@ -97,7 +88,7 @@ const Portfolio = () => {
       setFeaturedIndex((prev) => (prev + 1) % featuredItems.length);
     }, 5000);
     return () => window.clearInterval(id);
-  }, [isFeaturedHovered, tab, featuredItems.length]);
+  }, [isFeaturedHovered, featuredItems.length]);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -129,7 +120,7 @@ const Portfolio = () => {
       <div className="gall-hero">
         <img
           className="gall-hero-img"
-          src={featuredItems[featuredIndex]?.imageUrl || interiorItems[0]?.imageUrl || ''}
+          src={featuredItems[featuredIndex]?.imageUrl || allPortfolioItems[0]?.imageUrl || ''}
           alt={featuredItems[featuredIndex]?.title || 'Portfolio hero'}
           style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0, left: 0, zIndex: -1 }}
         />
@@ -144,12 +135,6 @@ const Portfolio = () => {
         </div>
       </div>
       <div className="gall-body">
-        <div className="gall-tabs">
-          <button className={`gtab ${tab === 'all' ? 'act' : ''}`} onClick={() => setTab('all')}>All</button>
-          <button className={`gtab ${tab === 'interiors' ? 'act' : ''}`} onClick={() => setTab('interiors')}>Interiors </button>
-          <button className={`gtab ${tab === 'fineart' ? 'act' : ''}`} onClick={() => setTab('fineart')}>Fine Art Gallery</button>
-        </div>
-
         <div
           className="pf-carousel"
           onMouseEnter={() => setIsFeaturedHovered(true)}
@@ -217,7 +202,7 @@ const Portfolio = () => {
                   <p>{item.summary}</p>
                   <div className="pf-carousel-actions">
                     <Link to={getStoryPath(item)} className="btn-tr" style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}>
-                      <span>View Case Study</span>
+                      <span>View Project</span>
                     </Link>
                   </div>
                 </div>
@@ -250,8 +235,8 @@ const Portfolio = () => {
         </div>
 
         <div className="gall-section on">
-          <div className={`gall-grid ${tab === 'fineart' ? 'art' : 'int'}`}>
-            {(tab === 'all' ? mixedAllItems : tab === 'interiors' ? interiorItems : fineArtItems).map((item) => (
+          <div className="gall-grid int">
+            {featuredItems.map((item) => (
               <div className="gi" key={`${item.title}-${item.imageUrl}`} onClick={() => setActiveItem(item)}>
                 <div className="gi-img"><img src={item.imageUrl} alt={item.title} loading="lazy"/></div>
                 <div className="gi-ov">
@@ -284,7 +269,7 @@ const Portfolio = () => {
                 style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}
                 onClick={() => setActiveItem(null)}
               >
-                <span>View Full Case Study</span>
+                <span>View Project</span>
               </Link>
             </div>
           </div>

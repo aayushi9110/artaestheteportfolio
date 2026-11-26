@@ -1,13 +1,13 @@
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { PUBLISHED_PROJECTS, RESOURCES } from '../../data/appData.ts';
 import { CONTENT } from '../../data/contentData.ts';
+import { storyPathFor } from '../../seo/routes.ts';
 import './Home.css';
 
 const MARQUEE_ITEMS = [
   'Interior Design',
   'Virtual Consultation',
-  'Fine Art Curation',
   'Color Consultancy',
   'Space Planning',
   'E-Design Packages',
@@ -93,22 +93,6 @@ const Home = () => {
     };
   }, []);
 
-  const fpHome = (filter: string, button: HTMLElement) => {
-    // Filter portfolio items
-    document.querySelectorAll('.pfb').forEach(btn => btn.classList.remove('act'));
-    button.classList.add('act');
-
-    const items = document.querySelectorAll('.pi');
-    items.forEach(item => {
-      const cat = item.getAttribute('data-cat');
-      if (filter === 'all' || cat === filter) {
-        (item as HTMLElement).style.display = 'block';
-      } else {
-        (item as HTMLElement).style.display = 'none';
-      }
-    });
-  };
-
 
   return (
     <main id="pg-home" className="pg on">
@@ -126,20 +110,15 @@ const Home = () => {
             <Link to="/process" className="btn-ghost">Our Process <span className="circ"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg></span></Link>
           </div>
           <div className="hero-stats">
-            <div className="hero-stat">
-              <span className="hero-stat-num">{renderMetricValue(HERO_CONTENT.stats[0].value, 'hero-stat-plus')}</span>
-              <span className="hero-stat-label">{HERO_CONTENT.stats[0].label}</span>
-            </div>
-            <div className="hero-stat-divider" aria-hidden="true" />
-            <div className="hero-stat">
-              <span className="hero-stat-num">{renderMetricValue(HERO_CONTENT.stats[1].value, 'hero-stat-plus')}</span>
-              <span className="hero-stat-label">{HERO_CONTENT.stats[1].label}</span>
-            </div>
-            <div className="hero-stat-divider" aria-hidden="true" />
-            <div className="hero-stat">
-              <span className="hero-stat-num">{renderMetricValue(HERO_CONTENT.stats[2].value, 'hero-stat-plus')}</span>
-              <span className="hero-stat-label">{HERO_CONTENT.stats[2].label}</span>
-            </div>
+            {HERO_CONTENT.stats.map((stat, index) => (
+              <Fragment key={stat.label}>
+                {index > 0 && <div className="hero-stat-divider" aria-hidden="true" />}
+                <div className="hero-stat">
+                  <span className="hero-stat-num">{renderMetricValue(stat.value, 'hero-stat-plus')}</span>
+                  <span className="hero-stat-label">{stat.label}</span>
+                </div>
+              </Fragment>
+            ))}
           </div>
           <div className="scroll-cue">
             <div className="sc-line"></div>
@@ -182,22 +161,15 @@ const Home = () => {
             <span className="sec-label">Selected Works</span>
             <h2>Spaces & <em>stories</em></h2>
           </div>
-          <div className="port-filt">
-            <button className="pfb act" onClick={(e) => fpHome('all', e.target as HTMLElement)}>All</button>
-            <button className="pfb" onClick={(e) => fpHome('interior', e.target as HTMLElement)}>Interiors</button>
-            <button className="pfb" onClick={(e) => fpHome('art', e.target as HTMLElement)}>Fine Art</button>
-          </div>
         </div>
         <div className="port-grid" id="hPortGrid">
           {homeSelectedWorks.map(({ id, project }) => {
-            const cardType = project.storyType === 'fine-art' ? 'art' : 'interior';
-            const targetPath = project.storyType === 'fine-art' ? `/fine-art-story/${id}` : `/interior-story/${id}`;
+            const targetPath = storyPathFor(id, project);
             return (
               <Link
                 key={id}
                 to={targetPath}
                 className="pi"
-                data-cat={cardType}
                 data-proj={id}
                 style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
               >

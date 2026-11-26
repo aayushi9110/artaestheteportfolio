@@ -39,7 +39,7 @@ const toDescription = (text: string, limit = 158): string => {
 const STATIC_ROUTES: RouteSeo[] = [
   {
     path: '/',
-    title: 'Art Aesthete — Interior Design & Fine Art Studio',
+    title: 'Art Aesthete — Interior Design & Styling Studio',
     description:
       'Editorial furnishing for your home. Art Aesthete takes newly-renovated condos, family homes and apartments from empty to finished in six to ten weeks.',
     image: '/images/home/Heroimages/heroStudioimage.webp',
@@ -55,9 +55,9 @@ const STATIC_ROUTES: RouteSeo[] = [
   },
   {
     path: '/portfolio',
-    title: 'Portfolio — Interior Design & Fine Art Projects | Art Aesthete',
+    title: 'Portfolio — Interior Design Projects | Art Aesthete',
     description:
-      'A curated collection of spaces and stories: interior design projects across New York, the Bay Area and Mumbai, alongside commissioned fine art.',
+      'A curated collection of spaces and stories: interior design projects across New York, the Bay Area and Mumbai.',
     image: '/images/WestElm/cuppertinoHome/CuppertinoAfterView.png',
     ogType: 'website',
   },

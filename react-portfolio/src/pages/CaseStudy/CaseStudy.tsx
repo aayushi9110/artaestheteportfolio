@@ -95,6 +95,33 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
     setComparePosition(value);
   };
 
+  // A native range input only drags from its thumb on iOS Safari, and the thumb
+  // here is invisible. Pointer events let a press anywhere on the image move the
+  // divider, for touch, mouse and pen alike; the input still handles keyboard
+  // and assistive tech through onChange.
+  const isComparePointerDown = useRef(false);
+
+  const moveCompareToPointer = (event: React.PointerEvent<HTMLInputElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    if (rect.width <= 0) return;
+    const percent = ((event.clientX - rect.left) / rect.width) * 100;
+    handleCompareChange(Math.min(100, Math.max(0, Math.round(percent))));
+  };
+
+  const handleComparePointerDown = (event: React.PointerEvent<HTMLInputElement>) => {
+    isComparePointerDown.current = true;
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+    moveCompareToPointer(event);
+  };
+
+  const handleComparePointerMove = (event: React.PointerEvent<HTMLInputElement>) => {
+    if (isComparePointerDown.current) moveCompareToPointer(event);
+  };
+
+  const handleComparePointerUp = () => {
+    isComparePointerDown.current = false;
+  };
+
   const galleryItems = project.galleryItems;
   const galleryUrls = galleryItems.map((galleryItem) => galleryItem.url);
   const galleryCaptions = galleryItems.map((galleryItem) => galleryItem.caption);
@@ -276,6 +303,9 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
 
               <div className="cs-ba-lbl cs-ba-lbl-left">Before</div>
               <div className="cs-ba-lbl cs-ba-lbl-right">After</div>
+              <div className={`cs-ba-hint ${hasInteracted ? 'hide' : ''}`.trim()} aria-hidden="true">
+                Drag to compare
+              </div>
 
               <input
                 className="cs-ba-range"
@@ -284,7 +314,10 @@ const CaseStudy = ({ showInteriorView = true }: CaseStudyProps) => {
                 max={100}
                 value={comparePosition}
                 onChange={(e) => handleCompareChange(Number(e.target.value))}
-                onPointerDown={markInteracted}
+                onPointerDown={handleComparePointerDown}
+                onPointerMove={handleComparePointerMove}
+                onPointerUp={handleComparePointerUp}
+                onPointerCancel={handleComparePointerUp}
                 onKeyDown={markInteracted}
                 aria-label="Before and after comparison slider"
               />

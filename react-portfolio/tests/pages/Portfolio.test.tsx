@@ -2,13 +2,11 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import Portfolio from '../../src/pages/Portfolio/Portfolio.tsx';
-import { PROJECTS } from '../../src/pages/CaseStudy/caseStudyData.ts';
+import { PROJECTS, PUBLISHED_PROJECTS, isProjectPublished } from '../../src/pages/CaseStudy/caseStudyData.ts';
 
 describe('Portfolio', () => {
-  // Count projects by storyType
-  const allProjects = Object.values(PROJECTS);
-  const interiorProjects = allProjects.filter((p) => p.storyType === 'interior');
-  const fineArtProjects = allProjects.filter((p) => p.storyType === 'fine-art');
+  const publishedProjects = Object.values(PUBLISHED_PROJECTS);
+  const hiddenProjects = Object.values(PROJECTS).filter((p) => !isProjectPublished(p));
 
   const renderPortfolio = () => {
     return render(
@@ -28,7 +26,7 @@ describe('Portfolio', () => {
     expect(container.querySelector('.gall-grid')).toBeInTheDocument();
   });
 
-  it('renders gallery items in "all" tab by default', async () => {
+  it('renders gallery items', async () => {
     const { container } = renderPortfolio();
 
     // Wait for IntersectionObserver to trigger reveal class
@@ -38,30 +36,37 @@ describe('Portfolio', () => {
     });
   });
 
-  it('switches to "interiors" tab and shows only interior projects', async () => {
-    const user = userEvent.setup();
+  it('shows every published project, and only interiors', async () => {
     const { container } = renderPortfolio();
 
-    const interiorsTab = screen.getByRole('button', { name: /Interiors/i });
-    await user.click(interiorsTab);
-
     await waitFor(() => {
-      const items = container.querySelectorAll('.gi');
-      expect(items.length).toBe(interiorProjects.length);
+      expect(container.querySelectorAll('.gi').length).toBe(publishedProjects.length);
     });
+    const titles = Array.from(container.querySelectorAll('.gi-title')).map((el) => el.textContent);
+    for (const hidden of hiddenProjects) expect(titles).not.toContain(hidden.title);
+    expect(publishedProjects.every((p) => p.storyType === 'interior')).toBe(true);
   });
 
-  it('switches to "fineart" tab and shows only fine-art projects', async () => {
-    const user = userEvent.setup();
+  it('has no filter tabs', () => {
     const { container } = renderPortfolio();
 
-    const fineArtTab = screen.getByRole('button', { name: /Fine Art Gallery/i });
-    await user.click(fineArtTab);
+    expect(container.querySelector('.gall-tabs')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /Fine Art/i })).not.toBeInTheDocument();
+  });
 
-    await waitFor(() => {
-      const items = container.querySelectorAll('.gi');
-      expect(items.length).toBe(fineArtProjects.length);
-    });
+  it('labels every project button "View Project"', () => {
+    const { container } = renderPortfolio();
+
+    const labels = Array.from(container.querySelectorAll('.pf-carousel-actions a')).map((a) => a.textContent);
+    expect(labels.length).toBe(publishedProjects.length);
+    expect(new Set(labels)).toEqual(new Set(['View Project']));
+    expect(container.textContent).not.toMatch(/Case Study/);
+  });
+
+  it('counts the carousel against published projects', () => {
+    renderPortfolio();
+
+    expect(screen.getByText(`1 / ${publishedProjects.length}`)).toBeInTheDocument();
   });
 
   describe('shuffle determinism', () => {
@@ -74,7 +79,7 @@ describe('Portfolio', () => {
 
         await waitFor(() => {
           const items = container.querySelectorAll('.gi');
-          expect(items.length).toBe(allProjects.length);
+          expect(items.length).toBe(publishedProjects.length);
         });
 
         // Extract the sorted list of visible item titles to verify it's a permutation
@@ -83,14 +88,14 @@ describe('Portfolio', () => {
         );
 
         // Should have same number of items as source
-        expect(itemTitles.length).toBe(allProjects.length);
+        expect(itemTitles.length).toBe(publishedProjects.length);
 
         // Should have no duplicates (permutation property)
         const uniqueTitles = new Set(itemTitles);
-        expect(uniqueTitles.size).toBe(allProjects.length);
+        expect(uniqueTitles.size).toBe(publishedProjects.length);
 
         // All titles should come from PROJECTS
-        const projectTitles = allProjects.map((p) => p.title);
+        const projectTitles = publishedProjects.map((p) => p.title);
         itemTitles.forEach((title) => {
           expect(projectTitles).toContain(title);
         });
@@ -213,30 +218,6 @@ describe('Portfolio', () => {
       await waitFor(() => {
         expect(container.querySelector('.gall-lightbox')).not.toBeInTheDocument();
       });
-    });
-  });
-
-  it('tab resets carousel to first item', async () => {
-    const user = userEvent.setup();
-    const { container } = renderPortfolio();
-
-    // Advance to second carousel item
-    const nextButton = container.querySelector('.pf-carousel-next');
-    await user.click(nextButton!);
-
-    await waitFor(() => {
-      const count = screen.getByText(new RegExp(/\d+ \/ \d+/));
-      expect(count.textContent).not.toContain('1 /');
-    });
-
-    // Switch to interiors tab
-    const interiorsTab = screen.getByRole('button', { name: /Interiors/i });
-    await user.click(interiorsTab);
-
-    // Should reset to first item
-    await waitFor(() => {
-      const count = screen.getByText(new RegExp(/\d+ \/ \d+/));
-      expect(count.textContent).toContain('1 /');
     });
   });
 });

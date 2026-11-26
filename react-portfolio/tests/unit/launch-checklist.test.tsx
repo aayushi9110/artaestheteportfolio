@@ -26,6 +26,14 @@ type BannedString = {
 
 const BANNED_STRINGS: BannedString[] = [
   { text: '8–16 weeks', removedIn: 'R0 (en-dash spelling; the hyphenated "8-16 weeks" goes in R1)' },
+  // R2: fine art hidden, project pages cleaned up.
+  { text: 'Approx Budget', removedIn: 'R2 (no page shows a budget)' },
+  { text: 'View Case Study', removedIn: 'R2 (every project button says "View Project")' },
+  { text: 'View Full Case Study', removedIn: 'R2 (every project button says "View Project")' },
+  { text: 'Fine Art Curation', removedIn: 'R2 (ticker; Art Curation stays only as a service add-on)' },
+  { text: 'Art Pieces Commissioned', removedIn: 'R2 (stat removed while fine art is hidden)' },
+  { text: 'Fine Art Gallery', removedIn: 'R2 (portfolio tab removed)' },
+  { text: 'Interior Design & Fine Art', removedIn: 'R2 (positioning is now "Interior Design & Styling")' },
 ];
 
 const repoFile = (relativePath: string) => readFileSync(resolve(__dirname, '../..', relativePath), 'utf8');

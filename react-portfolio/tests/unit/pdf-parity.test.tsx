@@ -13,7 +13,7 @@ import { resolve } from 'node:path';
 import { render } from '@testing-library/react';
 import { beforeAll, describe, expect, it } from 'vitest';
 import PortfolioPdfPreview from '../../src/pages/PortfolioPdfPreview/PortfolioPdfPreview.tsx';
-import { PROJECTS } from '../../src/pages/CaseStudy/caseStudyData.ts';
+import { PUBLISHED_PROJECTS } from '../../src/pages/CaseStudy/caseStudyData.ts';
 import { CONTENT } from '../../src/data/contentData.ts';
 import { RESOURCES } from '../../src/data/appData.ts';
 
@@ -55,8 +55,8 @@ describe('portfolio PDF: preview page vs. generator script', () => {
     expect(titlesFromGeneratedHtml(generatedHtml)).toEqual(titlesFromPreview());
   });
 
-  it('includes every interior project flagged isSelectedForPdf, and nothing else', () => {
-    const expected = Object.values(PROJECTS)
+  it('includes every published interior project flagged isSelectedForPdf, and nothing else', () => {
+    const expected = Object.values(PUBLISHED_PROJECTS)
       .filter((project) => project.storyType === 'interior' && project.isSelectedForPdf)
       .map((project) => project.title)
       .sort();
@@ -65,7 +65,7 @@ describe('portfolio PDF: preview page vs. generator script', () => {
   });
 
   it('orders by homeVisibilityPriority, tie-broken by title', () => {
-    const expected = Object.values(PROJECTS)
+    const expected = Object.values(PUBLISHED_PROJECTS)
       .filter((project) => project.storyType === 'interior' && project.isSelectedForPdf)
       .sort((a, b) =>
         a.homeVisibilityPriority !== b.homeVisibilityPriority
@@ -102,7 +102,7 @@ describe('portfolio PDF: preview page contract', () => {
 
   it('renders a case-study page per selected project plus the fixed front matter', () => {
     const { container } = render(<PortfolioPdfPreview />);
-    const selectedCount = Object.values(PROJECTS).filter(
+    const selectedCount = Object.values(PUBLISHED_PROJECTS).filter(
       (project) => project.storyType === 'interior' && project.isSelectedForPdf
     ).length;
 
@@ -114,7 +114,7 @@ describe('portfolio PDF: preview page contract', () => {
 
   it('paginates the table of contents past 7 projects', () => {
     const { container } = render(<PortfolioPdfPreview />);
-    const selectedCount = Object.values(PROJECTS).filter(
+    const selectedCount = Object.values(PUBLISHED_PROJECTS).filter(
       (project) => project.storyType === 'interior' && project.isSelectedForPdf
     ).length;
     const expectedTocPages = selectedCount > 7 ? 2 : 1;
@@ -122,10 +122,19 @@ describe('portfolio PDF: preview page contract', () => {
     expect(container.querySelectorAll('.toc-page')).toHaveLength(expectedTocPages);
   });
 
-  it('depends on exactly three home stats — fewer would crash the preview', () => {
-    // PortfolioPdfPreview.tsx indexes stats[0..2] directly with no guard, so this
-    // is a load-bearing assumption about CONTENT, not a style preference.
-    expect(CONTENT.home.stats).toHaveLength(3);
+  it('shows the same home stats in both renderers, however many there are', () => {
+    // Both renderers loop over CONTENT.home.stats, so adding or removing a stat
+    // must change both PDFs together and crash neither.
+    const { container } = render(<PortfolioPdfPreview />);
+    const previewLabels = Array.from(container.querySelectorAll('.home-stats > div > span')).map((el) => el.textContent);
+    const generatedLabels = [...generatedHtml.matchAll(/<div><strong>[^<]*<\/strong><span>([^<]*)<\/span><\/div>/g)].map(
+      (match) => match[1]
+    );
+    const expected = CONTENT.home.stats.map((stat) => stat.label);
+
+    expect(previewLabels).toEqual(expected);
+    expect(generatedLabels).toEqual(expected);
+    expect(expected).not.toContain('Art Pieces Commissioned');
   });
 
   it('has the brand assets both renderers hardcode', () => {

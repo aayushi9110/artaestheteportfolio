@@ -123,4 +123,13 @@ describe('Case Study Data Validation', () => {
       expect(issues).toEqual([]);
     });
   });
+
+  it('never shows an empty metric or a budget on a project page', () => {
+    for (const [projectId, metrics] of Object.entries(PROJECT_DETAIL_METRICS)) {
+      for (const metric of metrics) {
+        expect(metric.value.trim(), `${projectId}: "${metric.label}" is empty`).not.toBe('');
+        expect(metric.label, `${projectId} still shows a budget`).not.toMatch(/budget/i);
+      }
+    }
+  });
 });

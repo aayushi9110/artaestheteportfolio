@@ -1,9 +1,10 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { MemoryRouter, Routes, Route, useLocation, useParams, Navigate } from 'react-router-dom';
+import { MemoryRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { PROJECTS } from '../../src/pages/CaseStudy/caseStudyData.ts';
+import AppShell from '../../src/AppShell.tsx';
 import {
   PRIMARY_ROUTES,
   SERVICE_ROUTES,
@@ -25,17 +26,7 @@ const ThePlan = lazy(() => import('../../src/pages/ServiceDetails/ThePlan.tsx'))
 const TheFurnishing = lazy(() => import('../../src/pages/ServiceDetails/TheFurnishing.tsx'));
 const TheRefresh = lazy(() => import('../../src/pages/ServiceDetails/TheRefresh.tsx'));
 const TheTradeProgram = lazy(() => import('../../src/pages/ServiceDetails/TheTradeProgram.tsx'));
-const InteriorStory = lazy(() => import('../../src/pages/InteriorStory/InteriorStory.tsx'));
-const FineArtStory = lazy(() => import('../../src/pages/FineArtStory/FineArtStory.tsx'));
 const PortfolioPdfPreview = lazy(() => import('../../src/pages/PortfolioPdfPreview/PortfolioPdfPreview.tsx'));
-
-// Rebuild StoryRouteResolver logic here to match App.tsx
-function StoryRouteResolver() {
-  const { id = '' } = useParams();
-  const project = PROJECTS[id];
-  const target = project?.storyType === 'fine-art' ? `/fine-art-story/${id}` : `/interior-story/${id}`;
-  return <Navigate to={target} replace />;
-}
 
 // Helper component to capture location after navigation
 function LocationCapture() {
@@ -102,22 +93,25 @@ describe('routing', () => {
     });
   });
 
+  // Story and legacy routes go through the real AppShell, so publish guards and
+  // StoryRouteResolver are tested as shipped rather than as a copy.
+  const renderRealShell = (path: string) =>
+    render(
+      <MemoryRouter initialEntries={[path]}>
+        <AppShell />
+        <LocationCapture />
+      </MemoryRouter>
+    );
+
+  /** Amplify serves directory routes with a trailing slash; treat both as one. */
+  const samePath = (a: string) => a.replace(/\/+$/, '');
+
   describe('STORY_ROUTES', () => {
     it.each(STORY_ROUTES)('renders $name at path $path', async (route) => {
-      const { container } = render(
-        <MemoryRouter initialEntries={[route.path]}>
-          <TestAppShell>
-            <Routes>
-              <Route path="/interior-story/:id" element={<InteriorStory />} />
-              <Route path="/fine-art-story/:id" element={<FineArtStory />} />
-            </Routes>
-          </TestAppShell>
-        </MemoryRouter>
-      );
+      const { container } = renderRealShell(route.path);
 
       await waitFor(() => {
-        const marker = container.querySelector(route.marker);
-        expect(marker).toBeInTheDocument();
+        expect(container.querySelector(route.marker)).toBeInTheDocument();
       });
     });
   });
@@ -126,29 +120,14 @@ describe('routing', () => {
     it.each(LEGACY_REDIRECTS)(
       'redirects $name from $path to $redirectsTo',
       async (route) => {
-        const { container } = render(
-          <MemoryRouter initialEntries={[route.path]}>
-            <TestAppShell>
-              <Routes>
-                <Route path="/case-study/:id" element={<StoryRouteResolver />} />
-                <Route path="/project/:id" element={<StoryRouteResolver />} />
-                <Route path="/interior-story/:id" element={<InteriorStory />} />
-                <Route path="/fine-art-story/:id" element={<FineArtStory />} />
-              </Routes>
-              <LocationCapture />
-            </TestAppShell>
-          </MemoryRouter>
-        );
+        const { container } = renderRealShell(route.path);
 
         await waitFor(() => {
-          const locationOutput = screen.getByTestId('location-output');
-          expect(locationOutput.textContent).toBe(route.redirectsTo);
+          expect(samePath(screen.getByTestId('location-output').textContent ?? '')).toBe(samePath(route.redirectsTo!));
         });
 
-        // Also assert the marker appears
         await waitFor(() => {
-          const marker = container.querySelector(route.marker);
-          expect(marker).toBeInTheDocument();
+          expect(container.querySelector(route.marker)).toBeInTheDocument();
         });
       }
     );
@@ -174,100 +153,38 @@ describe('routing', () => {
   });
 
   describe('StoryRouteResolver edge cases', () => {
-    it('resolves homeOffices (interior) to /interior-story/homeOffices', async () => {
-      render(
-        <MemoryRouter initialEntries={['/case-study/homeOffices']}>
-          <TestAppShell>
-            <Routes>
-              <Route path="/case-study/:id" element={<StoryRouteResolver />} />
-              <Route path="/interior-story/:id" element={<InteriorStory />} />
-              <Route path="/fine-art-story/:id" element={<FineArtStory />} />
-            </Routes>
-            <LocationCapture />
-          </TestAppShell>
-        </MemoryRouter>
-      );
-
+    const landsOn = async (path: string, expected: string) => {
+      renderRealShell(path);
       await waitFor(() => {
-        const locationOutput = screen.getByTestId('location-output');
-        expect(locationOutput.textContent).toBe('/interior-story/homeOffices');
+        expect(screen.getByTestId('location-output').textContent).toBe(expected);
       });
+    };
+
+    it('resolves homeOffices (interior) to /interior-story/homeOffices', async () => {
+      await landsOn('/case-study/homeOffices', '/interior-story/homeOffices');
     });
 
-    it('resolves orangeSeriesPainting (fine-art) to /fine-art-story/orangeSeriesPainting', async () => {
-      render(
-        <MemoryRouter initialEntries={['/project/orangeSeriesPainting']}>
-          <TestAppShell>
-            <Routes>
-              <Route path="/project/:id" element={<StoryRouteResolver />} />
-              <Route path="/interior-story/:id" element={<InteriorStory />} />
-              <Route path="/fine-art-story/:id" element={<FineArtStory />} />
-            </Routes>
-            <LocationCapture />
-          </TestAppShell>
-        </MemoryRouter>
-      );
-
-      await waitFor(() => {
-        const locationOutput = screen.getByTestId('location-output');
-        expect(locationOutput.textContent).toBe('/fine-art-story/orangeSeriesPainting');
-      });
+    it('resolves a hidden project (orangeSeriesPainting) to /portfolio', async () => {
+      expect(PROJECTS.orangeSeriesPainting.isPublished).toBe(false);
+      await landsOn('/project/orangeSeriesPainting', '/portfolio');
     });
 
     it('handles unknown id by defaulting to interior story (fallback behavior)', async () => {
-      render(
-        <MemoryRouter initialEntries={['/case-study/doesNotExist']}>
-          <TestAppShell>
-            <Routes>
-              <Route path="/case-study/:id" element={<StoryRouteResolver />} />
-              <Route path="/interior-story/:id" element={<InteriorStory />} />
-              <Route path="/fine-art-story/:id" element={<FineArtStory />} />
-            </Routes>
-            <LocationCapture />
-          </TestAppShell>
-        </MemoryRouter>
-      );
-
-      await waitFor(() => {
-        const locationOutput = screen.getByTestId('location-output');
-        // Unknown id defaults to interior-story (not fine-art)
-        expect(locationOutput.textContent).toBe('/interior-story/doesNotExist');
-      });
+      // Unknown id defaults to interior-story (not fine-art)
+      await landsOn('/case-study/doesNotExist', '/interior-story/doesNotExist');
     });
 
-    it('handles empty id without crashing', async () => {
-      render(
-        <MemoryRouter initialEntries={['/case-study/']}>
-          <TestAppShell>
-            <Routes>
-              <Route path="/case-study/:id" element={<StoryRouteResolver />} />
-              <Route path="/interior-story/:id" element={<InteriorStory />} />
-            </Routes>
-          </TestAppShell>
-        </MemoryRouter>
-      );
-
-      // Should not throw; component should render
-      await waitFor(() => {
-        // Just verify no error occurred by waiting for the page to render
-        expect(screen.queryByTestId('loader')).not.toBeInTheDocument();
-      });
+    it('handles empty id without crashing', () => {
+      // "/case-study/" matches no route, so the shell renders around an empty body.
+      const { container } = renderRealShell('/case-study/');
+      expect(container.querySelector('nav#nav')).toBeInTheDocument();
     });
 
     it('handles URL-encoded characters in id without crashing', async () => {
-      render(
-        <MemoryRouter initialEntries={['/case-study/some%20id']}>
-          <TestAppShell>
-            <Routes>
-              <Route path="/case-study/:id" element={<StoryRouteResolver />} />
-              <Route path="/interior-story/:id" element={<InteriorStory />} />
-            </Routes>
-          </TestAppShell>
-        </MemoryRouter>
-      );
-
+      renderRealShell('/case-study/some%20id');
+      // React Router decodes the param, so either spelling is the same destination.
       await waitFor(() => {
-        expect(screen.queryByTestId('loader')).not.toBeInTheDocument();
+        expect(screen.getByTestId('location-output').textContent).toMatch(/^\/interior-story\/some(%20| )id$/);
       });
     });
   });

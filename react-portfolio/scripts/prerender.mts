@@ -12,7 +12,7 @@ import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-import { PUBLISHED_PROJECTS } from '../src/pages/CaseStudy/caseStudyData.ts';
+import { PROJECTS, PUBLISHED_PROJECTS, isProjectPublished } from '../src/pages/CaseStudy/caseStudyData.ts';
 import { EXCLUDED_PATHS, SEO_ROUTES, storyPathFor, type RouteSeo } from '../src/seo/routes.ts';
 import { SITE, SITE_ORIGIN, absoluteUrl } from '../src/seo/siteConfig.ts';
 import {
@@ -189,7 +189,7 @@ const buildLlmsTxt = (routes: RouteSeo[]): string => {
 > ${SITE.description}
 
 ${SITE.name} is the studio of ${SITE.founder}, covering interior design, furnishing and
-commissioned fine art. Projects run from empty to finished in roughly six to ten weeks,
+styling. Projects run from empty to finished in roughly six to ten weeks,
 on flat fees with trade pricing.
 
 ## Services
@@ -216,11 +216,7 @@ ${pageRoutes.map(line).join('\n')}
 ## Interior design projects
 
 ${interiorRoutes.map(projectLine).join('\n')}
-
-## Fine art
-
-${fineArtRoutes.map(projectLine).join('\n')}
-`;
+${fineArtRoutes.length ? `\n## Fine art\n\n${fineArtRoutes.map(projectLine).join('\n')}\n` : ''}`;
 };
 
 const main = async () => {
@@ -271,33 +267,50 @@ const main = async () => {
   // crawler (and the SPA fallback) needs something real at that address. A canonical
   // link plus a meta refresh is a proper soft redirect, and the empty #root hydrates
   // cleanly instead of inheriting the home page's markup.
-  let legacyCount = 0;
-  for (const [id, project] of Object.entries(PUBLISHED_PROJECTS)) {
-    const target = storyPathFor(id, project);
-    for (const prefix of ['/case-study', '/project']) {
-      const legacyPath = `${prefix}/${id}`;
-      const html = template
-        .replace(
-          /<title>[\s\S]*?<\/title>/,
-          [
-            `<title>${escapeAttr(`${project.title} | ${SITE.name}`)}</title>`,
-            `    <link rel="canonical" href="${escapeAttr(absoluteUrl(target))}" />`,
-            `    <meta http-equiv="refresh" content="0; url=${escapeAttr(target)}" />`,
-            `    <meta name="robots" content="noindex, follow" />`,
-          ].join('\n')
-        )
-        .replace(
-          '<div id="root"></div>',
-          `<div id="root"></div>\n    <noscript><p>This project has moved to <a href="${escapeAttr(target)}">${escapeAttr(project.title)}</a>.</p></noscript>`
-        );
+  const writeSoftRedirect = (fromPath: string, title: string, target: string, linkText: string, message: string) => {
+    const html = template
+      .replace(
+        /<title>[\s\S]*?<\/title>/,
+        [
+          `<title>${escapeAttr(title)}</title>`,
+          `    <link rel="canonical" href="${escapeAttr(absoluteUrl(target))}" />`,
+          `    <meta http-equiv="refresh" content="0; url=${escapeAttr(target)}" />`,
+          `    <meta name="robots" content="noindex, follow" />`,
+        ].join('\n')
+      )
+      .replace(
+        '<div id="root"></div>',
+        `<div id="root"></div>\n    <noscript><p>${escapeAttr(message)} <a href="${escapeAttr(target)}">${escapeAttr(linkText)}</a>.</p></noscript>`
+      );
 
-      const outputPath = outputPathFor(legacyPath);
-      mkdirSync(dirname(outputPath), { recursive: true });
-      writeFileSync(outputPath, html, 'utf8');
-      legacyCount += 1;
+    const outputPath = outputPathFor(fromPath);
+    mkdirSync(dirname(outputPath), { recursive: true });
+    writeFileSync(outputPath, html, 'utf8');
+  };
+
+  let legacyCount = 0;
+  let hiddenCount = 0;
+  for (const [id, project] of Object.entries(PROJECTS)) {
+    if (isProjectPublished(project)) {
+      const target = storyPathFor(id, project);
+      for (const prefix of ['/case-study', '/project']) {
+        writeSoftRedirect(`${prefix}/${id}`, `${project.title} | ${SITE.name}`, target, project.title, 'This project has moved to');
+        legacyCount += 1;
+      }
+      continue;
+    }
+
+    // A hidden project (isPublished: false) is not pre-rendered. Without a file its
+    // URLs would fall through to the host's fallback, which answers with the home
+    // page. Point its story URL and both legacy aliases at the portfolio instead:
+    // a safety net under the Amplify 301, and the only redirect the aliases get.
+    for (const fromPath of [storyPathFor(id, project), `/case-study/${id}`, `/project/${id}`]) {
+      writeSoftRedirect(fromPath, `Portfolio | ${SITE.name}`, '/portfolio', 'the portfolio', 'This project is no longer shown. See');
+      hiddenCount += 1;
     }
   }
   console.log(`      ${String(legacyCount).padStart(4)} legacy /case-study and /project aliases → canonical soft redirects`);
+  console.log(`      ${String(hiddenCount).padStart(4)} hidden-project URLs → soft redirects to /portfolio`);
 
   // Routes that are deliberately NOT pre-rendered still need a document, otherwise
   // the host falls back to dist/index.html — the pre-rendered HOME page — and the

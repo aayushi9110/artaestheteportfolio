@@ -11,9 +11,9 @@ export const SITE = {
   name: 'Art Aesthete',
   legalName: 'Art Aesthete',
   founder: 'Aayushi Shah',
-  tagline: 'Interior Design & Fine Art',
+  tagline: 'Interior Design & Styling',
   description:
-    'Art Aesthete is an interior design and fine art studio founded by Aayushi Shah, furnishing newly-renovated condos, family homes and apartments from empty to finished in six to ten weeks.',
+    'Art Aesthete is an interior design and styling studio founded by Aayushi Shah, furnishing newly-renovated condos, family homes and apartments from empty to finished in six to ten weeks.',
   logoPath: '/images/logos/artAesthete.png',
   defaultImagePath: '/images/home/Heroimages/heroStudioimage.webp',
   /** Places named in the site copy and project data. Do not add unstated locations. */

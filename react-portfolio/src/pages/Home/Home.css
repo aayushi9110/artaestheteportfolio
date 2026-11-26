@@ -566,12 +566,14 @@
   grid-row: span 2;
 }
 
+/* Cards 6 and 7 stack beside the tall card 5, mirroring cards 2-4 above, so
+   seven Selected Works fill rows 3-4 with no gap. */
 .pi:nth-child(6) {
-  grid-column: span 4;
+  grid-column: span 7;
 }
 
 .pi:nth-child(7) {
-  grid-column: span 3;
+  grid-column: span 7;
 }
 
 .pi-img {

@@ -27,7 +27,7 @@ Takes about **2m**: ~55s of tests, a pre-render build, then 21 live browser chec
 
 ---
 
-**Current state (2026-11-25):** 16 test files, 322 tests, all passing. Verified stable across three
+**Current state (2026-11-25):** 16 test files, 323 tests, all passing. Verified stable across three
 consecutive full runs, and verified to actually *fail* — a deliberately corrupted bundle
 was caught on every route with exit code 1.
 
@@ -134,10 +134,10 @@ what you approve stops matching what you send.
 This runs the real generator, parses its HTML, renders the real preview component, and
 asserts both select **the same projects in the same order**. It also verifies every
 image in the generated HTML exists on disk, the TOC paginates past 7 projects, and that
-`CONTENT.home.stats` still has exactly 3 entries — the preview indexes `stats[0..2]`
-with no guard and would crash on fewer.
+both renderers show the same `CONTENT.home.stats` (they loop over it, so adding or
+removing a stat is safe).
 
-### `tests/unit/launch-checklist.test.tsx` — 4 tests
+### `tests/unit/launch-checklist.test.tsx` — 11 tests
 The rebrand's launch checklist as tests. Renders every route and scans the
 markup, the visible text, every `<title>` and meta description, `index.html` and
 `robots.txt` for `BANNED_STRINGS`. Each rebrand release adds the wording it removes, so it
@@ -185,16 +185,19 @@ breaks the site feels broken. Covers position tracking, `data-cursor` labels wit
 ### `tests/components/Loader.test.tsx` — 10 tests
 Render, visibility, and timer cleanup.
 
-### `tests/pages/routing.test.tsx` — 23 tests
-Every route in the manifest renders its expected marker. Legacy `/case-study/:id` and
-`/project/:id` still redirect to the right story type. `StoryRouteResolver` survives
-unknown ids, empty ids and URL-encoded ids.
+### `tests/pages/routing.test.tsx` — 24 tests
+Every route in the manifest renders its expected marker. Story routes, legacy
+`/case-study/:id` and `/project/:id` redirects, and the `StoryRouteResolver` edge cases
+(unknown, empty and URL-encoded ids) run through the **real** `AppShell`, so the
+hidden-project guard is tested as shipped: hidden fine-art URLs must land on `/portfolio`.
 
 Includes a guard test that reads `src/AppShell.tsx` as text and asserts every manifest path
 literally appears in it — so deleting or renaming a route fails the suite.
 
-### `tests/pages/Portfolio.test.tsx` — 12 tests
-Tab filtering by `storyType`; carousel wrap-around at both ends; lightbox open/close.
+### `tests/pages/Portfolio.test.tsx` — 13 tests
+Shows exactly the published projects (no hidden fine art), has no filter tabs, labels every
+project button "View Project", and counts the carousel against published projects;
+carousel wrap-around at both ends; lightbox open/close.
 `Math.random` is stubbed so the shuffle is deterministic, and the real invariant is
 asserted: the shuffle is a **permutation** — nothing lost, nothing duplicated.
 

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { RESOURCES } from '../../data/appData.ts';
 import { CONTENT } from '../../data/contentData.ts';
@@ -56,20 +56,15 @@ const About = () => {
           <span className="sec-label gold">{ABOUT_CONTENT.kicker}</span>
           <h1>{aboutHeadingParts[0]}, <br/><em>{aboutHeadingParts[1] ?? ''}</em></h1>
           <div className="ab-stats">
-            <div className="ab-stat">
-              <span className="ab-stat-num">{renderMetricValue(HERO_CONTENT.stats[0].value, 'ab-stat-plus')}</span>
-              <span className="ab-stat-label">{HERO_CONTENT.stats[0].label}</span>
-            </div>
-            <div className="ab-stat-divider" aria-hidden="true" />
-            <div className="ab-stat">
-              <span className="ab-stat-num">{renderMetricValue(HERO_CONTENT.stats[1].value, 'ab-stat-plus')}</span>
-              <span className="ab-stat-label">{HERO_CONTENT.stats[1].label}</span>
-            </div>
-            <div className="ab-stat-divider" aria-hidden="true" />
-            <div className="ab-stat">
-              <span className="ab-stat-num">{renderMetricValue(HERO_CONTENT.stats[2].value, 'ab-stat-plus')}</span>
-              <span className="ab-stat-label">{HERO_CONTENT.stats[2].label}</span>
-            </div>
+            {HERO_CONTENT.stats.map((stat, index) => (
+              <Fragment key={stat.label}>
+                {index > 0 && <div className="ab-stat-divider" aria-hidden="true" />}
+                <div className="ab-stat">
+                  <span className="ab-stat-num">{renderMetricValue(stat.value, 'ab-stat-plus')}</span>
+                  <span className="ab-stat-label">{stat.label}</span>
+                </div>
+              </Fragment>
+            ))}
           </div>
         </div>
       </div>

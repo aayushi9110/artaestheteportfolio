@@ -16,7 +16,7 @@ const Loader = () => {
   return (
     <div id="loader">
       <div className="ld-logo">Art Aesthete</div>
-      <div className="ld-sub">Interior Design · Fine Art</div>
+      <div className="ld-sub">Interior Design · Styling</div>
       <div className="ld-bar">
         <div className="ld-fill"></div>
       </div>

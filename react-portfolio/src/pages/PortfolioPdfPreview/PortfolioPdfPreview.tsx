@@ -172,18 +172,12 @@ const PortfolioPdfPreview = () => {
             <p className="subtitle">{homeContent.heroDescription}</p>
 
             <div className="home-stats">
-              <div>
-                <strong>{renderMetricValue(homeContent.stats[0].value)}</strong>
-                <span>{homeContent.stats[0].label}</span>
-              </div>
-              <div>
-                <strong>{renderMetricValue(homeContent.stats[1].value)}</strong>
-                <span>{homeContent.stats[1].label}</span>
-              </div>
-              <div>
-                <strong>{renderMetricValue(homeContent.stats[2].value)}</strong>
-                <span>{homeContent.stats[2].label}</span>
-              </div>
+              {homeContent.stats.map((stat) => (
+                <div key={stat.label}>
+                  <strong>{renderMetricValue(stat.value)}</strong>
+                  <span>{stat.label}</span>
+                </div>
+              ))}
             </div>
           </div>
         </section>

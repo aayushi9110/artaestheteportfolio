@@ -29,7 +29,7 @@ describe('Loader', () => {
 
   it('renders subtitle text', () => {
     render(<Loader />);
-    expect(screen.getByText('Interior Design · Fine Art')).toBeInTheDocument();
+    expect(screen.getByText('Interior Design · Styling')).toBeInTheDocument();
   });
 
   it('renders progress bar', () => {

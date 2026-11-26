@@ -72,7 +72,7 @@ export const professionalServiceLd = (): Json => ({
     'Interior design',
     'Furniture specification',
     'Space planning',
-    'Fine art curation',
+    'Art curation',
     'Colour consultancy',
   ],
   makesOffer: SERVICES.map((service) => ({
@@ -177,7 +177,7 @@ export const portfolioCollectionLd = (): Json => ({
   '@id': `${SITE_ORIGIN}/portfolio#collection`,
   name: `Portfolio — ${SITE.name}`,
   description:
-    'Interior design projects across New York, the Bay Area and Mumbai, alongside commissioned fine art.',
+    'Interior design projects across New York, the Bay Area and Mumbai.',
   url: absoluteUrl('/portfolio'),
   isPartOf: { '@id': `${SITE_ORIGIN}/#business` },
   mainEntity: {

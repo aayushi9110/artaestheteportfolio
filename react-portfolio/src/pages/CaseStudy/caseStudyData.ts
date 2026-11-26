@@ -173,7 +173,6 @@ export const PROJECTS: Record<string, Project> = {
     overviewTextSecondary: 'A flexible retreat that powers your work and pampers your guests.',
     galleryItems: BOCONCEPT_OFFICE_REFERENCE_GALLERY_ITEM,
     detailMetrics: [
-      { label: 'Approx Budget', value: '$3,000 - $10,000' },
       { label: 'Timeline', value: '6 - 8 Weeks' },
       { label: 'Space Scope', value: 'Home office + guest storage wall' },
       { label: 'Floor Area', value: '300 sq ft' },
@@ -195,7 +194,6 @@ export const PROJECTS: Record<string, Project> = {
     overviewTextSecondary: 'A serene, light filled retreat designed for modern living with timeless ease.',
     galleryItems: WESTELM_CONTEMPORARY_LIVING_GALLERY_ITEM,
     detailMetrics: [
-      { label: 'Approx Budget', value: '$10,000 - $28,000' },
       { label: 'Timeline', value: '10 - 12 Weeks' },
       { label: 'Space Scope', value: 'Open-plan living and dining' },
       { label: 'Floor Area', value: '' },
@@ -217,7 +215,6 @@ export const PROJECTS: Record<string, Project> = {
     overviewTextSecondary: 'A serene, balanced interior designed for modern living with understated elegance.',
     galleryItems: WESTELM_MID_CENTURY_MODERN_GALLERY_ITEM,
     detailMetrics: [
-      { label: 'Approx Budget', value: '$4,000 - $10,000' },
       { label: 'Timeline', value: '8 - 10 Weeks' },
       { label: 'Space Scope', value: 'Combined living and dining room' },
       { label: 'Floor Area', value: '' },
@@ -239,7 +236,6 @@ export const PROJECTS: Record<string, Project> = {
     overviewTextSecondary: '- A serene pause in the middle of New York\'s endless motion.',
     galleryItems: ROCHEBOBOIS_DINING_GALLERY_ITEM,
     detailMetrics: [
-      { label: 'Approx Budget', value: '$9,000 - $25,000' },
       { label: 'Timeline', value: '7 - 9 Weeks' },
       { label: 'Space Scope', value: 'Dedicated dining room' },
       { label: 'Floor Area', value: '' },
@@ -261,7 +257,6 @@ export const PROJECTS: Record<string, Project> = {
     overviewTextSecondary: 'Warm, nostalgic, cozy, and timeless with a modern twist.',
     galleryItems: CUPPERTINO_HOME_GALLERY_ITEM,
     detailMetrics: [
-      { label: 'Approx Budget', value: '$20,000 - $54,000' },
       { label: 'Timeline', value: '10 - 14 Weeks' },
       { label: 'Space Scope', value: 'Family living room and dining room' },
       { label: 'Floor Area', value: '' },
@@ -283,7 +278,6 @@ export const PROJECTS: Record<string, Project> = {
     overviewTextSecondary: 'This room is a modern, open-concept living space with a blend of soft contemporary comfort, natural materials, and subtle curated accents. It feels bright, relaxed, and thoughtfully connected to the dining area beyond.',
     galleryItems: FOSTER_CITY_LIVING_DINING_GALLERY_ITEM,
     detailMetrics: [
-      { label: 'Approx Budget', value: '$14,000 - $24,000' },
       { label: 'Timeline', value: '9 - 11 Weeks' },
       { label: 'Space Scope', value: 'Open-concept living and dining' },
       { label: 'Floor Area', value: '' },
@@ -305,7 +299,6 @@ export const PROJECTS: Record<string, Project> = {
     overviewTextSecondary: 'Every detail supports a feeling of quiet luxury and lived-in ease.',
     galleryItems: WESTELM_SAN_FRAN_GALLERY_ITEM,
     detailMetrics: [
-      { label: 'Approx Budget', value: '$6,000 - $14,000' },
       { label: 'Timeline', value: '5 - 7 Weeks' },
       { label: 'Space Scope', value: 'Primary bedroom refresh' },
       { label: 'Floor Area', value: '' },
@@ -327,7 +320,6 @@ export const PROJECTS: Record<string, Project> = {
     overviewTextSecondary: 'Every detail works together to create a calm, curated first impression that feels both modern and soulful.',
     galleryItems: WESTELM_ENTRYWAY_GALLERY_ITEM,
     detailMetrics: [
-      { label: 'Approx Budget', value: '$1,000 - $3,000' },
       { label: 'Timeline', value: '2 - 4 Weeks' },
       { label: 'Space Scope', value: 'Entry vignette and first impression zone' },
       { label: 'Floor Area', value: '' },
@@ -349,7 +341,6 @@ export const PROJECTS: Record<string, Project> = {
     overviewTextSecondary: 'Soft textures and warm details deliver a polished, welcoming retreat with a minimal contemporary feel.',
     galleryItems: MUMBAI_BEDROOM_GALLERY_ITEM,
     detailMetrics: [
-      { label: 'Approx Budget', value: '$3,000 - $10,000' },
       { label: 'Timeline', value: '6 - 8 Weeks' },
       { label: 'Space Scope', value: 'Bedroom + media wall styling' },
       { label: 'Floor Area', value: '' },
@@ -371,7 +362,6 @@ export const PROJECTS: Record<string, Project> = {
     overviewTextSecondary: 'The result is a serene, intimate space that feels composed, practical, and deeply comfortable.',
     galleryItems: MUMBAI_BEDROOM_TWO_GALLERY_ITEM,
     detailMetrics: [
-      { label: 'Approx Budget', value: '$3,000 - $7,000' },
       { label: 'Timeline', value: '5 - 7 Weeks' },
       { label: 'Space Scope', value: 'Compact bedroom refresh' },
       { label: 'Floor Area', value: '' },
@@ -393,7 +383,6 @@ export const PROJECTS: Record<string, Project> = {
     overviewTextSecondary: 'The final design feels tailored and calm, with visual rhythm built through subtle contrast and texture.',
     galleryItems: MUMBAI_BEDROOM_THREE_GALLERY_ITEM,
     detailMetrics: [
-      { label: 'Approx Budget', value: '$3,000 - $10,000' },
       { label: 'Timeline', value: '6 - 8 Weeks' },
       { label: 'Space Scope', value: 'Bedroom with bespoke bedside styling' },
       { label: 'Floor Area', value: '' },
@@ -401,6 +390,8 @@ export const PROJECTS: Record<string, Project> = {
   },
   allpaintings: {
     storyType: 'fine-art',
+    // Hidden while the studio focuses on interiors; flip to restore.
+    isPublished: false,
     isSelectedForHome: false,
     isSelectedForPdf: false,
     homeVisibilityPriority: 99,
@@ -417,6 +408,8 @@ export const PROJECTS: Record<string, Project> = {
   },
   thinlineCharcoal: {
     storyType: 'fine-art',
+    // Hidden while the studio focuses on interiors; flip to restore.
+    isPublished: false,
     isSelectedForHome: true,
     isSelectedForPdf: true,
     homeVisibilityPriority: 1,
@@ -433,6 +426,8 @@ export const PROJECTS: Record<string, Project> = {
   },
   orangeSeriesPainting: {
     storyType: 'fine-art',
+    // Hidden while the studio focuses on interiors; flip to restore.
+    isPublished: false,
     isSelectedForHome: true,
     isSelectedForPdf: true,
     homeVisibilityPriority: 12,
@@ -466,16 +461,19 @@ export type ProjectDetailMetricDefinition = {
 };
 
 export const PROJECT_DETAIL_METRIC_DEFINITIONS: ProjectDetailMetricDefinition[] = [
-  { outputLabel: 'Approx Budget', aliases: ['approx budget', 'budget'], fallbackValue: '$25K - $120K' },
   { outputLabel: 'Timeline', aliases: ['timeline'], fallbackValue: '6 - 14 Weeks' },
   { outputLabel: 'Space Scope', aliases: ['space scope', 'scope'], fallbackValue: 'Single Room to Full Home' },
   { outputLabel: 'Floor Area', aliases: ['floor area', 'area'], fallbackValue: '250 - 2,500 sq ft' },
 ];
 
+/**
+ * Metrics as shown on a project page. A metric with no value (several projects
+ * have a blank Floor Area) is left out rather than rendered as an empty row.
+ */
 export const PROJECT_DETAIL_METRICS: Record<string, ProjectDetailMetric[]> = Object.fromEntries(
   Object.entries(PROJECTS).map(([projectId, project]) => [
     projectId,
-    project.detailMetrics ?? [],
+    (project.detailMetrics ?? []).filter((metric) => metric.value.trim() !== ''),
   ])
 );
 

@@ -37,7 +37,6 @@ export const SERVICE_ROUTES: RouteCheck[] = [
 
 export const STORY_ROUTES: RouteCheck[] = [
   { path: '/interior-story/homeOffices', name: 'Interior story', marker: '.cs-hero' },
-  { path: '/fine-art-story/orangeSeriesPainting', name: 'Fine-art story', marker: '.cs-hero' },
 ];
 
 /** Legacy URLs that must keep resolving — old links and shared PDFs point at them. */
@@ -49,10 +48,25 @@ export const LEGACY_REDIRECTS: RouteCheck[] = [
     redirectsTo: '/interior-story/homeOffices',
   },
   {
-    path: '/project/orangeSeriesPainting',
-    name: 'Legacy /project → fine-art',
+    path: '/project/homeOffices',
+    name: 'Legacy /project → interior',
     marker: '.cs-hero',
-    redirectsTo: '/fine-art-story/orangeSeriesPainting',
+    redirectsTo: '/interior-story/homeOffices',
+  },
+  // Fine art is hidden (isPublished: false). Its URLs must land on the portfolio,
+  // never on a dead page or the home page. In production the first one is an
+  // Amplify 301; the soft-redirect page written by the prerenderer backs it up.
+  {
+    path: '/fine-art-story/orangeSeriesPainting',
+    name: 'Hidden fine-art story → portfolio',
+    marker: '.gall-hero',
+    redirectsTo: '/portfolio',
+  },
+  {
+    path: '/project/orangeSeriesPainting',
+    name: 'Legacy /project for hidden fine art → portfolio',
+    marker: '.gall-hero',
+    redirectsTo: '/portfolio',
   },
 ];
 

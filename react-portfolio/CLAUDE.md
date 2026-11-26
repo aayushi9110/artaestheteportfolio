@@ -92,7 +92,7 @@ Four flags on each `Project` decide where it appears:
 
 | Field | Effect |
 | --- | --- |
-| `storyType` | `'interior'` → `/interior-story/:id`, `'fine-art'` → `/fine-art-story/:id`; also splits the Portfolio tabs |
+| `storyType` | `'interior'` → `/interior-story/:id`, `'fine-art'` → `/fine-art-story/:id`. All fine-art projects are currently hidden (`isPublished: false`), so the Portfolio has no tabs |
 | `isSelectedForHome` + `homeVisibilityPriority` | selects and orders the home "Selected Works" grid (lower = earlier; `99` parks a project) |
 | `isSelectedForPdf` | selects the interior projects in the portfolio PDF |
 | `isPublished` | optional, default published. `false` hides the project everywhere — Portfolio, Home, sitemap, llms.txt, JSON-LD, both PDF renderers, pre-rendering — and its story and legacy URLs redirect to `/portfolio` |
@@ -145,7 +145,8 @@ breaks pre-rendering.
 
 Routes live in `AppShell.tsx`. `/case-study/:id` and `/project/:id` are legacy paths kept
 alive by `StoryRouteResolver`, which looks up `storyType` and `<Navigate replace>`s to the right
-story route — keep them working. `InteriorStory` and `FineArtStory` are thin wrappers over
+story route — keep them working. Both story routes are wrapped in `PublishedStory`, and both
+it and `StoryRouteResolver` send a hidden project (`isPublished: false`) to `/portfolio`. `InteriorStory` and `FineArtStory` are thin wrappers over
 `CaseStudy`; the fine-art variant passes `showInteriorView={false}` to drop the before/after slider.
 
 `/portfolio-pdf-preview` deliberately renders without `Header`, `Footer`, and `Cursor` (the
@@ -211,7 +212,7 @@ Mention these rather than silently fixing them unless asked:
   it is not built or served.
 - `/book?audience=trade` is reached by a `<button>` in `Header.tsx`, not a link. It is a
   same-page view toggle and is deliberately not in the sitemap.
-- `Portfolio.tsx` shuffles the "All" tab after mount, so ordering differs per visit —
+- `Portfolio.tsx` shuffles the grid after mount, so ordering differs per visit —
   intentional, but don't write tests or snapshots against the shuffled order.
 - There is still no catch-all 404 route in `AppShell.tsx`. In production an unknown path gets
   HTTP 404 from Amplify, but with the home page's HTML as the body; client-side, React then
