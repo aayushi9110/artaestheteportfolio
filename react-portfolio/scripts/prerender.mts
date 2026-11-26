@@ -25,6 +25,7 @@ import {
   serviceLd,
 } from '../src/seo/structuredData.ts';
 import { BOOKING_FAQS } from '../src/pages/Book/bookingData.ts';
+import { SITE_FACTS } from '../src/data/servicesData.ts';
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(scriptDir, '..');
@@ -189,20 +190,20 @@ const buildLlmsTxt = (routes: RouteSeo[]): string => {
 > ${SITE.description}
 
 ${SITE.name} is the studio of ${SITE.founder}, covering interior design, furnishing and
-styling. Projects run from empty to finished in roughly six to ten weeks,
+styling. Projects run from empty to finished in five to twelve weeks depending on home size,
 on flat fees with trade pricing.
 
 ## Services
 
 - **The Plan** — a design plan you shop yourself: layouts, specifications and sourcing guidance.
 - **The Furnishing** — full turnkey furnishing for newly-renovated condos, co-ops and brownstones.
-- **The Refresh** — restyling a home you already live in, installed in a single day.
+- **The Refresh** — restyling a home you already live in: about a week from walk-through to a single install day.
 - **The Trade Program** — furnishing partnerships for architects, designers and realtors.
 - **Virtual Consultation (E-Design)** — remote design over video, anywhere in the United States.
 
 ## Where
 
-${SITE.areaServed.join(', ')}.
+${SITE_FACTS.serviceAreaSentence}
 
 ## Booking
 

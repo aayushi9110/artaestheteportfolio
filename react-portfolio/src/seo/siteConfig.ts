@@ -13,21 +13,15 @@ export const SITE = {
   founder: 'Aayushi Shah',
   tagline: 'Interior Design & Styling',
   description:
-    'Art Aesthete is an interior design and styling studio founded by Aayushi Shah, furnishing newly-renovated condos, family homes and apartments from empty to finished in six to ten weeks.',
+    'Art Aesthete is an interior design and styling studio founded by Aayushi Shah, furnishing newly-renovated condos, family homes and apartments from empty to finished in five to twelve weeks. In person in NYC & North NJ, virtually across the US.',
   logoPath: '/images/logos/artAesthete.png',
   defaultImagePath: '/images/home/Heroimages/heroStudioimage.webp',
-  /** Places named in the site copy and project data. Do not add unstated locations. */
-  areaServed: [
-    'New York City',
-    'Manhattan',
-    'Brooklyn',
-    'San Francisco',
-    'Palo Alto',
-    'Cupertino',
-    'Foster City',
-    'San Jose',
-    'Mumbai',
-  ],
+  /**
+   * Where the studio takes work: in person in NYC & North NJ, virtually across
+   * the US (see SITE_FACTS.serviceArea). Past projects elsewhere (Palo Alto,
+   * Mumbai, ...) stay on their own pages but are not a service area.
+   */
+  areaServed: ['New York City', 'North New Jersey', 'United States'],
 } as const;
 
 /** Absolute URL for a site-relative path, safe to put in canonical/OG tags. */

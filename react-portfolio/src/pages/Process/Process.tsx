@@ -30,7 +30,7 @@ const Process = () => {
             <div className="how-index">02</div>
             <h3>The Furnishing</h3>
             <p>Full turnkey furnishing from layout and sourcing to procurement, install day, and final styling.</p>
-            <div className="how-meta">Six to ten weeks</div>
+            <div className="how-meta">5–12 weeks, depending on home size</div>
             <Link to="/service/the-furnishing" className="how-link">View details →</Link>
           </article>
 

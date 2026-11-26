@@ -74,11 +74,11 @@ export const BOOKING_FAQS: BookingFaqItem[] = [
   },
   {
     question: 'Can I book a virtual consult?',
-    answer: 'Absolutely. I work with clients all across the States - location is never a barrier.'
+    answer: 'Yes. I work in person in NYC & North NJ, and virtually with clients anywhere in the US.'
   },
   {
     question: 'How long do projects take?',
-    answer: 'Virtual E-Design: 2-4 weeks. Full interior design: 8-16 weeks depending on scope.'
+    answer: 'Design Consult: 90 minutes. The Plan: 2 weeks. The Furnishing: 5–12 weeks, depending on home size. The Refresh: about 1 week, walk-through to install.'
   }
 ];
 

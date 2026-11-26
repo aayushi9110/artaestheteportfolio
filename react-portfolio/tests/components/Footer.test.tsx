@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Footer from '../../src/components/Footer/Footer.tsx';
 import { ALL_ROUTES, NAV_PATHS } from '../routes.ts';
+import { SITE_FACTS } from '../../src/data/servicesData.ts';
 
 const renderWithRouter = () => render(
   <MemoryRouter>
@@ -70,9 +71,10 @@ describe('Footer', () => {
       expect(phoneLink).toHaveAttribute('href', 'tel:+18562835980');
     });
 
-    it('renders location information', () => {
+    it('renders the service-area line from SITE_FACTS', () => {
       renderWithRouter();
-      expect(screen.getByText(/New Jersey.*New York.*Bay Area.*California.*Mumbai, India/)).toBeInTheDocument();
+      expect(screen.getByText(SITE_FACTS.serviceArea)).toBeInTheDocument();
+      expect(screen.queryByText(/Bay Area|Mumbai/)).not.toBeInTheDocument();
     });
   });
 

@@ -211,7 +211,7 @@ export const PROJECTS: Record<string, Project> = {
     beforeImageUrl: WESTELM_MID_CENTURY_MODERN_GALLERY_ITEM[0].url,
     afterImageUrl: WESTELM_MID_CENTURY_MODERN_GALLERY_ITEM[3].url,
     overviewTitle: 'Modern Minimalist with Scandinavian Warmth',
-    overviewTextPrimary: 'This Modern Minimalist living-dining space blends Scandinavian warmth with clean contemporary lines. Soft neutrals, natural wood, and airy sheer curtains create a calm, inviting atmosphere filled with natural light. The open layout connects the lounge and dining areas seamlessly, while organic textures, greenery, and sculptural lighting add depth and quiet sophistication..',
+    overviewTextPrimary: 'This Modern Minimalist living-dining space blends Scandinavian warmth with clean contemporary lines. Soft neutrals, natural wood, and airy sheer curtains create a calm, inviting atmosphere filled with natural light. The open layout connects the lounge and dining areas seamlessly, while organic textures, greenery, and sculptural lighting add depth and quiet sophistication.',
     overviewTextSecondary: 'A serene, balanced interior designed for modern living with understated elegance.',
     galleryItems: WESTELM_MID_CENTURY_MODERN_GALLERY_ITEM,
     detailMetrics: [
@@ -253,7 +253,7 @@ export const PROJECTS: Record<string, Project> = {
     beforeImageUrl: CUPPERTINO_HOME_GALLERY_ITEM[1].url,
     afterImageUrl: CUPPERTINO_HOME_GALLERY_ITEM[2].url,
     overviewTitle: 'Layered Contemporary and Scandinavian Influences for a family home',
-    overviewTextPrimary: 'Soft neutrals, warm woods, and curated textures create a space that feels both grounded and expressive. The mix of sculptural seating, modern artwork, and subtle vintage notes gives the room a layered personality - relaxed, inviting, and quietly sophisticated..',
+    overviewTextPrimary: 'Soft neutrals, warm woods, and curated textures create a space that feels both grounded and expressive. The mix of sculptural seating, modern artwork, and subtle vintage notes gives the room a layered personality - relaxed, inviting, and quietly sophisticated.',
     overviewTextSecondary: 'Warm, nostalgic, cozy, and timeless with a modern twist.',
     galleryItems: CUPPERTINO_HOME_GALLERY_ITEM,
     detailMetrics: [

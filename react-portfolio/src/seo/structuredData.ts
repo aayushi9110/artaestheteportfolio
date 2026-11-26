@@ -30,7 +30,7 @@ const SERVICES: { name: string; description: string; path: string }[] = [
   {
     name: 'The Refresh',
     description:
-      'Restyling for homes that are already lived in: textiles, lighting, art and styling, installed in a single day.',
+      'Restyling for homes that are already lived in: textiles, lighting, art and styling: about a week from walk-through to a single install day.',
     path: '/service/the-refresh',
   },
   {

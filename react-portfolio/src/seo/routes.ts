@@ -41,7 +41,7 @@ const STATIC_ROUTES: RouteSeo[] = [
     path: '/',
     title: 'Art Aesthete — Interior Design & Styling Studio',
     description:
-      'Editorial furnishing for your home. Art Aesthete takes newly-renovated condos, family homes and apartments from empty to finished in six to ten weeks.',
+      'Editorial furnishing for your home. Art Aesthete takes newly-renovated condos, family homes and apartments from empty to finished in five to twelve weeks, in person in NYC & North NJ and virtually across the US.',
     image: '/images/home/Heroimages/heroStudioimage.webp',
     ogType: 'website',
   },

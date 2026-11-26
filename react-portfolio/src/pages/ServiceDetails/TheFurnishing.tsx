@@ -120,7 +120,7 @@ const TheFurnishing = () => {
                     </details>
                     <details className="sd-faq-toggle">
                       <summary>Do you work outside NYC?</summary>
-                      <p>Yes, depends case-by-case.</p>
+                      <p>Yes. We work in person in NYC &amp; North NJ, and virtually anywhere in the US.</p>
                     </details>
                     <details className="sd-faq-toggle">
                       <summary>Can I pause and finish the apartment over time?</summary>

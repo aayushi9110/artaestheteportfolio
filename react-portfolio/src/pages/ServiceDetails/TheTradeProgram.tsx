@@ -27,7 +27,7 @@ const TheTradeProgram = () => {
             <div className="sd-body-intro">
               <p>You know the moment. The dust settles. The client hugs you. Then: what now?</p>
               <p>You've spent eighteen months on the millwork. You don't want the next nine on a sectional.</p>
-              <p>The Trade Program is the handoff. We furnish your finished project — white-label, co-branded, or quietly behind the scenes — on a six-week clock, at trade pricing, with your client relationship intact.</p>
+              <p>The Trade Program is the handoff. We furnish your finished project — white-label, co-branded, or quietly behind the scenes — on timelines that follow each package, at trade pricing, with your client relationship intact.</p>
             </div>
 
             <div className="sd-tabs" role="tablist" aria-label="The Trade Program sections">
@@ -41,7 +41,7 @@ const TheTradeProgram = () => {
             <div className="sd-section sd-panel">
               <div className="sd-tabpanel" hidden={activeTab !== 'overview'}>
                   <h2>What this solves</h2>
-                  <p>When construction ends, furnishing often becomes the long tail. The Trade Program compresses that phase into a six-week delivery lane while keeping your client experience intact.</p>
+                  <p>When construction ends, furnishing often becomes the long tail. The Trade Program compresses that phase into a dedicated delivery lane, on timelines that follow each package, while keeping your client experience intact.</p>
               </div>
 
               <div className="sd-tabpanel" hidden={activeTab !== 'models'}>
@@ -56,7 +56,7 @@ const TheTradeProgram = () => {
               <div className="sd-tabpanel" hidden={activeTab !== 'included'}>
                   <h2>What you get, regardless of which</h2>
                   <ul className="sd-list">
-                    <li>A six-week project window from kickoff to install</li>
+                    <li>Timelines that follow each package, from kickoff to install</li>
                     <li>Direct trade access to 30+ catalogs and vintage dealers</li>
                     <li>A signed scope at every phase, so nothing surprises you</li>
                     <li>Your client treated like our own — same care, same hours, same install team</li>

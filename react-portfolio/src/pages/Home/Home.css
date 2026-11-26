@@ -7,7 +7,9 @@
 
 .marq-track {
   display: flex;
-  animation: marqA 28s linear infinite;
+  /* Duration scales with track length (MARQUEE_COPIES in Home.tsx) to keep the
+     scroll speed at roughly 54px/s. */
+  animation: marqA 48s linear infinite;
   white-space: nowrap;
 }
 
@@ -955,7 +957,7 @@
 
 @media (max-width: 640px) {
   .marq-track {
-    animation-duration: 4s;
+    animation-duration: 7s;
   }
 
   .marq {

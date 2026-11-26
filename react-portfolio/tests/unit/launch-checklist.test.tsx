@@ -34,6 +34,21 @@ const BANNED_STRINGS: BannedString[] = [
   { text: 'Art Pieces Commissioned', removedIn: 'R2 (stat removed while fine art is hidden)' },
   { text: 'Fine Art Gallery', removedIn: 'R2 (portfolio tab removed)' },
   { text: 'Interior Design & Fine Art', removedIn: 'R2 (positioning is now "Interior Design & Styling")' },
+  // R1a: one set of numbers everywhere, and copy fixes.
+  { text: 'In Six Weeks', removedIn: 'R1a (The Furnishing is 5–12 weeks by home size)' },
+  { text: 'six to ten weeks', removedIn: 'R1a (The Furnishing is 5–12 weeks by home size)' },
+  { text: 'Six to ten weeks', removedIn: 'R1a (The Furnishing is 5–12 weeks by home size)' },
+  { text: 'six-week', removedIn: 'R1a (trade timelines follow each package)' },
+  { text: '8-16 weeks', removedIn: 'R1a (booking FAQ uses the per-service timelines)' },
+  { text: '48 hours', removedIn: 'R1a (reply time is "within 24 hours on weekdays")' },
+  { text: 'same day', removedIn: 'R1a (no same-day style-brief promise)' },
+  { text: 'case-by-case', removedIn: 'R1a (service area: in person NYC & North NJ, virtual across the US)' },
+  { text: 'all across the States', removedIn: 'R1a (service area: in person NYC & North NJ, virtual across the US)' },
+  { text: 'Bay Area · California', removedIn: 'R1a (footer service-area line)' },
+  { text: 'Whats and Hows', removedIn: 'R1a (now "What We Do & How")' },
+  { text: 'Brands We Have Worked With', removedIn: 'R1a (could read as a formal partnership)' },
+  { text: 'Color Consultancy', removedIn: 'R1a (dead ticker item, covered by The Plan)' },
+  { text: 'E-Design Packages', removedIn: 'R1a (dead ticker item, covered by The Plan)' },
 ];
 
 const repoFile = (relativePath: string) => readFileSync(resolve(__dirname, '../..', relativePath), 'utf8');
@@ -78,6 +93,17 @@ const sourcesContaining = (needle: string) =>
 describe('launch checklist: removed wording stays removed', () => {
   it.each(BANNED_STRINGS)('"$text" appears nowhere (removed in $removedIn)', ({ text }) => {
     expect(sourcesContaining(text)).toEqual([]);
+  });
+});
+
+describe('copy hygiene', () => {
+  it.each(RENDERED.map(({ path }) => path))('%s has no double periods in its visible text', (path) => {
+    const text = visibleText(RENDERED.find((entry) => entry.path === path)!.html);
+    // A real ellipsis ("...") is allowed; two periods after a letter are a typo.
+    const typos = [...text.matchAll(/[A-Za-z]\.\.(?!\.)/g)].map((match) =>
+      text.slice(Math.max(0, match.index! - 40), match.index! + 3)
+    );
+    expect(typos).toEqual([]);
   });
 });
 

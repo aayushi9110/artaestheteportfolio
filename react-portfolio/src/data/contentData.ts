@@ -12,7 +12,7 @@ export const CONTENT = {
     punchline: 'Editorial furnishing for your home',
     heroTitleLines: ['Plans. Pieces. Polish'],
     heroDescription:
-      'Empty to Finished. In Six Weeks. A curated, editorial approach to furnishing your home.',
+      'Empty to Finished. A curated, editorial approach to furnishing your home.',
     stats: [
       { value: '51+', label: 'Projects Completed' },
       { value: '30+', label: 'Spaces Styled' },
@@ -26,7 +26,7 @@ export const CONTENT = {
 At Crate & Barrel, then West Elm, then BoConcept. From the floor, I watched a particular ritual repeat itself a thousand times: someone closes on their first apartment, spends Saturday in a daze, walks out with a sectional that looked right under fluorescent lights and depressing under their actual ones. Goes home. Scrolls Pinterest until 2 a.m. Starts again next weekend.
 There's a better way to do this. I just hadn't seen anyone bother to build it.
 So I did.
-This studio furnishes newly-renovated condos, family homes, and apartments. Six to ten weeks, empty to finished. Flat fees, real trade discounts, and the same catalogs the AD-100 firms shop too — minus the nine-month timeline. The result is editorial. Magazine-good, but yours, not somebody else's.
+This studio furnishes newly-renovated condos, family homes, and apartments. Five to twelve weeks, empty to finished, depending on the size of the home. Flat fees, real trade discounts, and the same catalogs the AD-100 firms shop too — minus the nine-month timeline. The result is editorial. Magazine-good, but yours, not somebody else's.
 
 If you just bought a place-
 You're not going crazy. The Pinterest board, the rug you keep returning, the chairs that looked great until they arrived — that's the apartment fighting back. It's not a taste problem. It's a sequencing problem. You need someone who can hold the whole room in their head while you go back to your actual job. That's the job.

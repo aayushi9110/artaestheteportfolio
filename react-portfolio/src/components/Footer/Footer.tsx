@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { SITE_FACTS } from '../../data/servicesData.ts';
 import './Footer.css';
 
 const serviceLinks = [
@@ -103,7 +104,7 @@ const Footer = () => {
               </li>
             ))}
             <li>
-              <span className="ft-list-text">New Jersey · New York · Bay Area · California · Mumbai, India</span>
+              <span className="ft-list-text">{SITE_FACTS.serviceArea}</span>
             </li>
           </ul>
         </div>

@@ -130,7 +130,7 @@ const About = () => {
                 <div className="tl-yr">2021</div>
                 <div className="tl-content">
                   <h4>Interior Enters The Story</h4>
-                  <p>A client's blank dining room became the catalyst. I worked with some renowned brands in USA to find a piece that changed the entire energy of the home. Interior Design became a core service — and a defining one..</p>
+                  <p>A client's blank dining room became the catalyst. I worked with some renowned brands in USA to find a piece that changed the entire energy of the home. Interior Design became a core service — and a defining one.</p>
                   <span className="tl-tag">Interior Consultations </span>
                 </div>
               </div>
@@ -138,7 +138,7 @@ const About = () => {
                 <div className="tl-yr">2024</div>
                 <div className="tl-content">
                   <h4>The Signature </h4>
-                  <p>Years of moving through different worlds — Mumbai's layered, maximalist energy and America's clean, intentional restraint — gave me something no design school could: a perspective that lives between two aesthetics. I stopped trying to fit into one school of thought and started trusting the tension between them. Bold choices. Considered placement. Spaces that feel collected over a lifetime, not assembled overnight. That contrast became the Art Aesthete signature..</p>
+                  <p>Years of moving through different worlds — Mumbai's layered, maximalist energy and America's clean, intentional restraint — gave me something no design school could: a perspective that lives between two aesthetics. I stopped trying to fit into one school of thought and started trusting the tension between them. Bold choices. Considered placement. Spaces that feel collected over a lifetime, not assembled overnight. That contrast became the Art Aesthete signature.</p>
                   <span className="tl-tag">Two Worlds. One Eye</span>
                 </div>
               </div>
@@ -146,7 +146,7 @@ const About = () => {
                 <div className="tl-yr">2026</div>
                 <div className="tl-content">
                   <h4>Still Listening</h4>
-                  <p>New York was the next chapter — and it arrived with its own kind of gravity. I embedded myself in the city, working closely with major brands in corporate settings to deliver beautiful, curated homes to real people. That experience sharpened everything — the scale, the standard, the understanding that great design isn't a luxury, it's a language. Art Aesthete is now growing from that foundation, and the most ambitious chapters are still ahead..</p>
+                  <p>New York was the next chapter — and it arrived with its own kind of gravity. I embedded myself in the city, working closely with major brands in corporate settings to deliver beautiful, curated homes to real people. That experience sharpened everything — the scale, the standard, the understanding that great design isn't a luxury, it's a language. Art Aesthete is now growing from that foundation, and the most ambitious chapters are still ahead.</p>
                   <span className="tl-tag">From Instinct to Legacy.</span>
                 </div>
               </div>

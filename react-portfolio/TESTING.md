@@ -27,7 +27,7 @@ Takes about **2m**: ~55s of tests, a pre-render build, then 21 live browser chec
 
 ---
 
-**Current state (2026-11-25):** 16 test files, 323 tests, all passing. Verified stable across three
+**Current state (2026-11-25):** 16 test files, 358 tests, all passing. Verified stable across three
 consecutive full runs, and verified to actually *fail* — a deliberately corrupted bundle
 was caught on every route with exit code 1.
 
@@ -137,11 +137,12 @@ image in the generated HTML exists on disk, the TOC paginates past 7 projects, a
 both renderers show the same `CONTENT.home.stats` (they loop over it, so adding or
 removing a stat is safe).
 
-### `tests/unit/launch-checklist.test.tsx` — 11 tests
+### `tests/unit/launch-checklist.test.tsx` — 46 tests
 The rebrand's launch checklist as tests. Renders every route and scans the
 markup, the visible text, every `<title>` and meta description, `index.html` and
 `robots.txt` for `BANNED_STRINGS`. Each rebrand release adds the wording it removes, so it
-can't come back. Also checks `src/data/servicesData.ts` (card order, one "Most popular", paths match ids).
+can't come back. Also fails on a double period ("..", not a real "...") in any
+route's visible text. Also checks `src/data/servicesData.ts` (card order, one "Most popular", paths match ids).
 Prices there stay `null` until confirmed, because the repository is public.
 
 ### `tests/pages/unpublished-project.test.tsx` — 5 tests

@@ -8,11 +8,16 @@ import './Home.css';
 const MARQUEE_ITEMS = [
   'Interior Design',
   'Virtual Consultation',
-  'Color Consultancy',
-  'Space Planning',
-  'E-Design Packages',
   'Bespoke Styling',
 ];
+
+/**
+ * The ticker loops by sliding its track half its own width, so each half must be
+ * wider than the widest screen (2560px) or a gap scrolls across it. A short list
+ * needs many copies; the count must stay even so both halves are identical.
+ */
+const MARQUEE_COPIES = 8;
+const MARQUEE_TRACK = Array.from({ length: MARQUEE_COPIES }, () => MARQUEE_ITEMS).flat();
 
 const HOME_HERO_IMAGE_URL = RESOURCES.home.heroImageUrl;
 const HOME_STUDIO_IMAGE_URL = RESOURCES.home.studioImageUrl;
@@ -134,20 +139,20 @@ const Home = () => {
 
       <div className="marq">
         <div className="marq-track">
-          {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
+          {MARQUEE_TRACK.map((item, i) => (
             <span key={i} className="marq-item">{item}</span>
           ))}
         </div>
       </div>
 
-      <section className="Whats and Hows" id="about-strip">
+      <section className="what-we-do" id="about-strip">
         <div className="ph-img rl">
           <img src={HOME_STUDIO_IMAGE_URL} alt="Studio" loading="lazy"/>
         </div>
         <div className="ph-content rr">
-          <span className="sec-label">Whats and Hows</span>
+          <span className="sec-label">What We Do &amp; How</span>
           <h2>Find your <em>furnishing direction</em>.<br/> </h2>
-          <p>Eight questions, two minutes. We'll send back a personalized style brief, a furniture direction, and a price range for your space — same day. </p>
+          <p>Eight questions, two minutes. We'll send back a personalized style brief, a furniture direction, and a price range for your space.</p>
           <p>Every project begins not with a brief, but with a story — yours. We listen, we feel, we translate emotion into form, texture, and light. The result is never just a beautiful room. It is a place where you recognise yourself.</p>
           <div className="ph-cta-wrap">
             <Link to="/book" className="btn-ghost">Take the Quiz <span className="circ"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg></span></Link>
@@ -194,8 +199,8 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="brand-marq" aria-label="Brands we have worked with">
-        <span className="sec-label">Brands We Have Worked With</span>
+      <section className="brand-marq" aria-label="Brands we now source from">
+        <span className="sec-label">7 years inside the brands we now source from</span>
         <div className="brand-marq-wrap">
           <div className="brand-marq-track">
             {[...BRAND_LOGOS, ...BRAND_LOGOS, ...BRAND_LOGOS, ...BRAND_LOGOS].map((logo, i) => (
@@ -233,7 +238,7 @@ const Home = () => {
               </svg>
             </div>
               <h3>The Furnishing</h3>
-                <p>Full turnkey. From floor plan to installed and styled, sourced through our trade accounts. Six to ten weeks.</p>
+                <p>Full turnkey. From floor plan to installed and styled, sourced through our trade accounts. 5–12 weeks, depending on home size.</p>
           </Link>
           <Link to="/service/the-refresh" className="svc-card reveal" style={{transitionDelay: '0.24s', textDecoration: 'none', color: 'inherit'}} data-lbl="Curate">
             <div className="svc-n">03</div>
@@ -255,7 +260,7 @@ const Home = () => {
                 </svg>
               </div>
               <h3>The Trade Program</h3>
-              <p>For architects, designers, and realtors who need their finished projects furnished — fast. White-label or co-branded, six-week turnaround, 10–15% referral commission. By introduction.</p>
+              <p>For architects, designers, and realtors who need their finished projects furnished — fast. White-label or co-branded, timelines that follow each package, 10–15% referral commission. By introduction.</p>
             </Link>
         </div>
       </section>
@@ -285,7 +290,7 @@ const Home = () => {
       <div className="cta-strip">
         <div style={{position: 'relative', zIndex: 1}}>
           <h2>Ready to furnish?</h2>
-          <p>Tell us about your space. We respond within 48 hours.</p>
+          <p>Tell us about your space. We reply within 24 hours on weekdays.</p>
         </div>
         <Link to="/book" className="btn-lt" style={{position: 'relative', zIndex: 1}}>
           <span>Book a Consultation</span>
